@@ -1,0 +1,9 @@
+{
+    "emmet.includeLanguages": {
+        "php": "html"
+    },
+    "emmet.syntaxProfiles": {
+        "php": "html"
+    },
+    "emmet.showExpandedAbbreviation": "always",
+}
