@@ -1,10 +1,9 @@
 <?php
 
-/** Controlador principal.
- * No puede ser instanciado independientemente.
- * Debe ser heredado por una clase con `extends`.
+/** Controlador Base
+ * Se encarga de cargar y enviar datos a la vista.
  */
-abstract class Controlador
+class Controlador
 {
     protected function render($vista, $datos = [])
     {

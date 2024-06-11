@@ -5,16 +5,22 @@
         <h1 class="text-center py-4">Registro</h1>
 
         <form class="px-5" method="POST">
+            <?php if (isset($error)): ?>
+                <div class="py-2 text-danger text-center">
+                    <p1><?php echo $error; ?></p1>
+                </div>
+            <?php endif ?>
+
             <div class="form-group">
                 <label class="form-label" for="cedula">Cedula</label>
-                <input class="form-control" type="text" name="cedula" id="cedula" />
+                <input class="form-control" type="number" name="cedula" id="cedula" />
             </div>
 
             <br>
 
             <div class="form-group">
                 <label class="form-label" for="contrasena">Contraseña</label>
-                <input class="form-control" type="text" name="contrasena" id="contrasena" />
+                <input class="form-control" type="password" name="contraseña" id="contraseña" />
             </div>
 
             <input class="btn btn-primary my-4" type="submit" value="Enviar" />

@@ -8,14 +8,11 @@ $router = new Router;
 require_once "src/controlador/sesion.php";
 $router->agregarRuta("/sesion/login", [Sesion::class, "login"]);
 $router->agregarRuta("/sesion/registro", [Sesion::class, "registro"]);
+$router->agregarRuta("/sesion/cerrar", [Sesion::class, "cerrarSesion"]);
 
 // Panel de control
-require_once "src/controlador/panel.php";
-$router->agregarRuta("/panel", [Panel::class, "index"]);
-
-# Pagina de Error
-require_once "src/controlador/error.php";
-$router->agregarRuta("/error", [Error404::class, "index"]);
+require_once "src/controlador/usuario.php";
+$router->agregarRuta("/panel/usuarios", [Usuario::class, "index"]);
 
 // Pagina de inicio
 $router->redirigir("/", "/sesion/login");

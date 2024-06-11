@@ -8,7 +8,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-item nav-link active" aria-current="page" href="/sesion/login">Iniciar sesión</a>
+                    <?php if (isset($_SESSION["usuario"])): ?>
+                        <a class="nav-item nav-link active" href="/sesion/cerrar">Cerrar sesión</a>
+                    <?php else: ?>
+                        <a class="nav-item nav-link active" href="/sesion/login">Iniciar sesión</a>
+                    <?php endif ?>
                 </li>
             </ul>
         </div>

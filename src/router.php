@@ -17,7 +17,7 @@ class Router
 
     public function despachar()
     {
-        $uri = $_SERVER['REQUEST_URI'];
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
         $this->validar_ruta($uri);
         $callback = $this->rutas[$uri];
@@ -38,7 +38,9 @@ class Router
     protected function validar_ruta($uri)
     {
         if (!array_key_exists($uri, $this->rutas)) {
-            throw new Exception("Ruta no encontrada en: $uri");
+            http_response_code(404);
+            echo "Ruta no encontrada en: $uri";
+            exit;
         }
     }
 }
