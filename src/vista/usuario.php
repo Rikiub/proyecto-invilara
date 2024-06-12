@@ -11,14 +11,15 @@
     <?php foreach ($datos["usuarios"] as $user): ?>
         <tr>
             <td> <?php echo $user["cedula"]; ?> </td>
-            <td> <?php echo $user["contraseña"]; ?> </td>
             <td>
                 <form method="get">
                     <button class="btn btn-primary" name="id" value="<?php echo $user["cedula"] ?>">Modificar</button>
+                    <input type="hidden" name="accion" value="modificar">
                 </form>
 
                 <form method="get">
                     <button class="btn btn-danger" name="id" value="<?php echo $user["cedula"] ?>">Eliminar</button>
+                    <input type="hidden" name="accion" value="eliminar">
                 </form>
             </td>
         </tr>

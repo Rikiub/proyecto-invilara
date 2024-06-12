@@ -7,7 +7,7 @@ class Controlador
 {
     protected function render($vista, $datos = [])
     {
-        require_once "src/vista/componentes/base.php";
+        require_once "src/vista/componentes/header.php";
 
         extract($datos);
 

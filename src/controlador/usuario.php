@@ -7,22 +7,33 @@ require_once "src/modelo/usuario.php";
 
 class Usuario extends Controlador
 {
+    private $modelo;
+
     public function __construct()
     {
+        $this->modelo = new UsuarioModelo();
         session_start();
     }
 
     public function index()
     {
-        $modelo = new UsuarioModelo();
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
             $id = $_GET["id"];
+            $accion = $_GET["accion"];
+
+            switch ($accion) {
+                case "modificar":
+                    echo "'Modificar' necesita implementarse.";
+                    break;
+                case "eliminar":
+                    $this->modelo->eliminarUsuario($id);
+                    break;
+            }
         }
 
         $this->render(
             "usuario",
-            ["usuarios" => $modelo->obtenerUsuarios()]
+            ["usuarios" => $this->modelo->obtenerTodosUsuarios()]
         );
     }
 }

@@ -2,10 +2,8 @@
 
 require_once "src/config.php";
 
-/** Conexión y ayudante de base de datos.
- * Para obtener una instancia utilice:
- * 
- * > `BaseDatos::obtenerConexion`
+/** Conexión de base de datos.
+ * Es empleado por el `Modelo` y no deberia utilizarse directamente.
  */
 class BaseDatos
 {

@@ -3,7 +3,8 @@
 require_once "src/modelo/basedatos.php";
 
 /** Modelo Base
- *  Se encarga de darle forma a los datos y proporcionarlos al controlador.
+ * Se encarga de darle forma a los datos y proporcionarlos al controlador.
+ * Contiene metodos para manejar un CRUD de una base de datos sin necesidad de escribir consultas SQL.
  */
 class Modelo
 {
@@ -16,17 +17,17 @@ class Modelo
         $this->tabla = $tabla;
     }
 
-    protected function consultar($condicion = ""): array
+    protected function consultar(): array
     {
         $query = "SELECT * FROM {$this->tabla}";
-        if ($condicion) {
-            $query .= " WHERE $condicion";
-        }
-        $result = $this->pdo->query($query);
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    protected function insertar(array $datos)
+    protected function insertar(array $datos): void
     {
         $campos = implode(', ', array_keys($datos));
         $valores = implode(', ', array_map(function ($valor) {
@@ -34,20 +35,24 @@ class Modelo
         }, array_values($datos)));
 
         $query = "INSERT INTO {$this->tabla} ($campos) VALUES ($valores)";
-        $this->pdo->exec($query);
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
     }
 
-    protected function filaExiste(string $columna, string $valor): bool
+    protected function eliminar(string $columna, string $valor): bool
     {
-        $query = "SELECT {$columna} FROM {$this->tabla} WHERE {$columna} = :valor";
+        $sql = "DELETE FROM {$this->tabla} WHERE {$columna} = ?";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([$valor]);
+    }
+
+    protected function obtenerFila(string $columna, string $valor): array
+    {
+        $query = "SELECT * FROM {$this->tabla} WHERE {$columna} = {$valor}";
 
         $stmt = $this->pdo->prepare($query);
-        $stmt->execute([":valor" => $valor]);
+        $stmt->execute();
 
-        if ($stmt->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
