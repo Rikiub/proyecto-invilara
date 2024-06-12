@@ -1,14 +1,14 @@
 <?php
 
-require_once "src/modelo/basedatos.php";
+namespace Src\Modelo;
 
 /** Modelo Base
  * Se encarga de darle forma a los datos y proporcionarlos al controlador.
  * Contiene metodos para manejar un CRUD de una base de datos sin necesidad de escribir consultas SQL.
  */
-class Modelo
+class ModeloBase
 {
-    private PDO $pdo;
+    private \PDO $pdo;
     private string $tabla;
 
     protected function __construct($tabla)
@@ -24,7 +24,7 @@ class Modelo
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     protected function insertar(array $datos): void
@@ -53,6 +53,6 @@ class Modelo
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/lib/bootstrap/bootstrap.min.css">
     <script src="/lib/jquery/jquery-3.7.1.min.js" defer></script>
     <script src="/lib/bootstrap/bootstrap.bundle.min.js" defer></script>
-    <title>Proyecto INVILARA></title>
+    <title>Proyecto INVILARA</title>
 </head>
 
 <body>

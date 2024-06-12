@@ -1,4 +1,4 @@
 <?php
 
-require_once "src/rutas.php";
-$router->despachar();
+require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/src/rutas.php';

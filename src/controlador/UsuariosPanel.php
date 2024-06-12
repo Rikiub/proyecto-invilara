@@ -1,23 +1,22 @@
 <?php
 
-require_once "src/controlador/controlador.php";
+namespace Src\Controlador;
 
-require_once "src/modelo/modelo.php";
-require_once "src/modelo/usuario.php";
+use Src\Modelo\Usuarios;
 
-class Usuario extends Controlador
+class UsuariosPanel extends ControladorBase
 {
     private $modelo;
 
     public function __construct()
     {
-        $this->modelo = new UsuarioModelo();
+        $this->modelo = new Usuarios();
         session_start();
     }
 
     public function index()
     {
-        if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
+        if (isset($_GET["id"])) {
             $id = $_GET["id"];
             $accion = $_GET["accion"];
 

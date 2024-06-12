@@ -1,15 +1,16 @@
 <?php
 
-require_once "src/controlador/controlador.php";
-require_once "src/modelo/usuario.php";
+namespace Src\Controlador;
 
-class Login extends Controlador
+use Src\Modelo\Usuarios;
+
+class Login extends ControladorBase
 {
     private $modelo;
 
     public function __construct()
     {
-        $this->modelo = new UsuarioModelo();
+        $this->modelo = new Usuarios();
     }
 
     /**
