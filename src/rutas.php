@@ -7,8 +7,10 @@ use Src\Router;
 
 $router = new Router;
 
-// Login y Registro
+// Login
 $router->agregarRuta("/login", [Controlador\Login::class, "index"]);
+
+// Registro
 $router->agregarRuta("/registro", [Controlador\Registro::class, "index"]);
 
 // Pagina de inicio
