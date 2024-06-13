@@ -12,8 +12,8 @@ El proyecto utiliza un sistema de routing para cargar las paginas. Redirigira ca
 
 **Ejemplo:**
 
-- `https://proyecto-invilara.com/inicio-sesion` redirigira al controlador `[InicioSesion](https://github.com/Rikiub/proyecto-invilara/blob/f32ead9eb0598c31305c8e1dadb182488fdac082/src/Controlador/InicioSesion.php)`
-- `https://proyecto-invilara.com/panel/usuarios` redirigira al controlador `[UsuariosPanel](https://github.com/Rikiub/proyecto-invilara/blob/f32ead9eb0598c31305c8e1dadb182488fdac082/src/Controlador/UsuariosPanel.php)`
+- `https://proyecto-invilara.com/inicio-sesion` redirigira al controlador [InicioSesion](https://github.com/Rikiub/proyecto-invilara/blob/f32ead9eb0598c31305c8e1dadb182488fdac082/src/Controlador/InicioSesion.php)
+- `https://proyecto-invilara.com/panel/usuarios` redirigira al controlador [UsuariosPanel](https://github.com/Rikiub/proyecto-invilara/blob/f32ead9eb0598c31305c8e1dadb182488fdac082/src/Controlador/UsuariosPanel.php)
 
 Algo a tomar en cuenta es que el sistema esta estrictamente ligado a la **estructura de archivos**, es decir, si el proyecto esta en una **subcarpeta** y no en la **raiz**, fallara debido a que no encontrara los archivos.
 
