@@ -35,7 +35,9 @@ class Usuarios extends ModeloBase
 
     public function cerrarSesison(): void
     {
-        session_destroy();
+        if ($this->sesionIniciada()) {
+            session_destroy();
+        }
     }
 
     public function sesionIniciada(): bool

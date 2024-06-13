@@ -41,17 +41,21 @@ class ModeloBase
 
     protected function eliminar(string $columna, string $valor): bool
     {
-        $sql = "DELETE FROM {$this->tabla} WHERE {$columna} = ?";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([$valor]);
+        if ($this->obtenerFila($columna, $valor)) {
+            $sql = "DELETE FROM {$this->tabla} WHERE {$columna} = ?";
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([$valor]);
+        } else {
+            return false;
+        }
     }
 
     protected function obtenerFila(string $columna, string $valor): array
     {
-        $query = "SELECT * FROM {$this->tabla} WHERE {$columna} = {$valor}";
+        $query = "SELECT * FROM {$this->tabla} WHERE {$columna} = ?";
 
         $stmt = $this->pdo->prepare($query);
-        $stmt->execute();
+        $stmt->execute([$valor]);
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }

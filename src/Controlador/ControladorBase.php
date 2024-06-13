@@ -2,19 +2,19 @@
 
 namespace Src\Controlador;
 
-use Src\Config;
-
 /** Controlador Base
  * Se encarga de cargar y enviar datos a la vista.
  */
 class ControladorBase
 {
+    // Carpeta en donde se guardan las vistas.
+    const DIR_VISTA = "src/Vista/";
+
     protected function render($vista, $datos = [])
     {
-        require_once Config::DIR_VISTA . "componentes/header.php";
-
         extract($datos);
 
-        require_once Config::DIR_VISTA . "$vista.php";
+        require_once self::DIR_VISTA . "componentes/header.php";
+        require_once self::DIR_VISTA . "$vista.php";
     }
 }

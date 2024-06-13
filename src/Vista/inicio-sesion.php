@@ -19,7 +19,7 @@
             <br>
 
             <div class="form-group">
-                <label class="form-label" for="contrasena">Contraseña</label>
+                <label class="form-label" for="contraseña">Contraseña</label>
                 <input class="form-control" type="password" name="contraseña" id="contraseña" required />
             </div>
 

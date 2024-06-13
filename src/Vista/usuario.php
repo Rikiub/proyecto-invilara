@@ -5,23 +5,17 @@
 <table class="table">
     <tr>
         <th>Cedula</th>
-        <th>Contraseña</th>
     </tr>
 
     <?php foreach ($datos["usuarios"] as $user): ?>
-        <tr>
-            <td> <?php echo $user["cedula"]; ?> </td>
+        <tr name="fila-usuario">
+            <td name="cedula"> <?php echo $user["cedula"]; ?> </td>
             <td>
-                <form method="get">
-                    <button class="btn btn-primary" name="id" value="<?php echo $user["cedula"] ?>">Modificar</button>
-                    <input type="hidden" name="accion" value="modificar">
-                </form>
-
-                <form method="get">
-                    <button class="btn btn-danger" name="id" value="<?php echo $user["cedula"] ?>">Eliminar</button>
-                    <input type="hidden" name="accion" value="eliminar">
-                </form>
+                <button class="btn btn-primary" name="btn-modificar">Modificar</button>
+                <button class="btn btn-danger" name="btn-eliminar">Eliminar</button>
             </td>
         </tr>
     <?php endforeach; ?>
 </table>
+
+<script src="/src/vista/usuario.js"></script>

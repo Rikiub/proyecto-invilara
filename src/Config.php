@@ -8,6 +8,4 @@ class Config
     const BD_NAME = "invilara";
     const BD_USERNAME = "root";
     const BD_PASSWORD = "";
-
-    const DIR_VISTA = "src/Vista/";
 }

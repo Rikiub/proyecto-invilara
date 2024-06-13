@@ -16,7 +16,9 @@ class UsuariosPanel extends ControladorBase
 
     public function index()
     {
-        if (isset($_GET["id"])) {
+        if (isset($_GET["id"], $_GET["accion"])) {
+            // Manejar solicitudes GET y devolver respuesta AJAX.
+
             $id = $_GET["id"];
             $accion = $_GET["accion"];
 
@@ -25,14 +27,22 @@ class UsuariosPanel extends ControladorBase
                     echo "'Modificar' necesita implementarse.";
                     break;
                 case "eliminar":
-                    $this->modelo->eliminarUsuario($id);
+                    if ($this->modelo->eliminarUsuario($id)) {
+                        http_response_code(200);
+                        echo "Usuario $id eliminado con éxito";
+                    } else {
+                        http_response_code(400);
+                        echo "Usuario $id no encontrado";
+                    }
                     break;
             }
-        }
+        } else {
+            // Renderizar vista.
 
-        $this->render(
-            "usuario",
-            ["usuarios" => $this->modelo->obtenerTodosUsuarios()]
-        );
+            $this->render(
+                "usuario",
+                ["titulo" => "Usuarios", "usuarios" => $this->modelo->obtenerTodosUsuarios()]
+            );
+        }
     }
 }

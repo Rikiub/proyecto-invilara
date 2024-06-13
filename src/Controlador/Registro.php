@@ -29,11 +29,11 @@ class Registro extends ControladorBase
 
             if (!$error) {
                 $this->modelo->insertarUsuario($cedula, $contraseña);
-                header("Location: /login");
+                header("Location: /inicio-sesion");
                 exit;
             }
         }
 
-        $this->render("/registro", ["error" => $error]);
+        $this->render("/registro", ["titulo" => "Registro", "error" => $error]);
     }
 }
