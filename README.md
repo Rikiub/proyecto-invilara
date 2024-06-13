@@ -8,7 +8,7 @@
 
 ### 🚝 Routing
 
-El proyecto utiliza un sistema de routing para cargar las paginas. Redirigira cada controlador en base a la **URL** actual.
+El proyecto utiliza un sistema de **routing** para cargar las paginas. Redirigira cada **controlador** en base a la **URL** actual.
 
 **Ejemplo:**
 
