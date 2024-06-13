@@ -30,12 +30,23 @@ Algo a tomar en cuenta es que el sistema esta estrictamente ligado a la **estruc
 - `htdocs/` es el directorio **raiz** de **XAMPP**, por lo tanto, se sabe la **ruta exacta** de los archivos.
 - `htdocs/mi-proyecto` es un subdirectorio y no la **raiz** del proyecto, por lo tanto, no se sabe la **ruta exacta** de los archivos.
 
-### 🧰 XAMPP
+### 🔶 XAMPP
 
-En caso de usar **XAMPP**, se puede adaptar:
+En caso de usar **XAMPP**, debe:
 
-- Mueva **TODOS** archivos de la carpeta **htdocs** a otro lugar.
+- Mover **TODOS** los archivos de la carpeta **htdocs** a otro lugar.
 - Luego, mueva **TODOS** los archivos del repositorio a la carpeta **htdocs**.
+
+### 🐘 Laragon
+
+En caso de usar [Laragon](https://laragon.org/), debe:
+
+- Ejecutar el programa.
+- Deje la carpeta en el directorio `www`.
+- Ingrese al icono en la barra de tareas y entre en: `www > proyecto-invilara`
+- Se abrira una pestaña en su navegador y listo.
+
+Debe usar la version `Full` de **Laragon**, puede encontrarla [aquí](https://laragon.org/download/). 
 
 ## 📂 Estructura
 
