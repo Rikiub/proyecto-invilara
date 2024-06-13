@@ -14,7 +14,7 @@ class Usuarios extends ModeloBase
         if (!empty($usuario) && !empty($contraseña)) {
             $user = $this->sqlObtenerFila("cedula", $usuario);
 
-            if (!empty($user) && $contraseña == $user[0]["contraseña"]) {
+            if ($user && $contraseña == $user[0]["contraseña"]) {
                 return true;
             }
         }
