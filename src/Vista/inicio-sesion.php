@@ -28,6 +28,5 @@
                 <a class="btn btn-primary" href="/registro">Registro</a>
             </div>
         </form>
-
     </div>
 </article>

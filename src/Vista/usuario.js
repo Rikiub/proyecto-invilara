@@ -19,25 +19,3 @@ filas.forEach((fila) => {
         })
     })
 })
-
-
-/*
-jQuery(() => {
-    $("tr").each((index, element) => {
-        console.log(element)
-
-        $("#btn-eliminar").on("click", (e) => {
-            let btn = $(e.target)
-
-            $.ajax({
-                url: "/panel/usuarios",
-                method: "GET",
-                data: { "id": btn.val(), "accion": "eliminar" },
-                success: (msg) => {
-                    btn.closest("tr").remove()
-                },
-            })
-        })
-    })
-})
-*/

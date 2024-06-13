@@ -12,9 +12,9 @@ class Usuarios extends ModeloBase
     private function validarUsuario(string $usuario, string $contraseña): bool
     {
         if (!empty($usuario) && !empty($contraseña)) {
-            $user = $this->obtenerFila("cedula", $usuario);
+            $user = $this->sqlObtenerFila("cedula", $usuario);
 
-            if (!empty($user) && password_verify($contraseña, $user[0]["contraseña"])) {
+            if (!empty($user) && $contraseña == $user[0]["contraseña"]) {
                 return true;
             }
         }
@@ -47,22 +47,31 @@ class Usuarios extends ModeloBase
 
     public function insertarUsuario(string $usuario, string $contraseña)
     {
-        $contraseña = password_hash($contraseña, PASSWORD_DEFAULT);
-        $this->insertar(["cedula" => $usuario, "contraseña" => $contraseña]);
+        $this->sqlInsertar(["cedula" => $usuario, "contraseña" => $contraseña]);
+    }
+
+    public function actualizarUsuario(string $usuario_antiguo, string $usuario, string $contraseña)
+    {
+        throw new \Exception("'actualizar' no implementado.");
     }
 
     public function eliminarUsuario(string $usuario): bool
     {
-        return $this->eliminar("cedula", $usuario);
+        try {
+            $this->sqlEliminar("cedula", $usuario);
+            return true;
+        } catch (\Exception) {
+            return false;
+        }
     }
 
     public function obtenerTodosUsuarios(): array
     {
-        return $this->consultar();
+        return $this->sqlConsultar();
     }
 
     public function obtenerUsuario($usuario): array
     {
-        return $this->obtenerFila("cedula", $usuario);
+        return $this->sqlObtenerFila("cedula", $usuario);
     }
 }

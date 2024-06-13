@@ -7,7 +7,7 @@
         <th>Cedula</th>
     </tr>
 
-    <?php foreach ($datos["usuarios"] as $user): ?>
+    <?php foreach ($usuarios as $user): ?>
         <tr name="fila-usuario">
             <td name="cedula"> <?php echo $user["cedula"]; ?> </td>
             <td>

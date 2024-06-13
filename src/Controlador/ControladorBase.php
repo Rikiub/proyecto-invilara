@@ -13,6 +13,7 @@ class ControladorBase
     protected function render($vista, $datos = [])
     {
         extract($datos);
+        unset($datos);
 
         require_once self::DIR_VISTA . "componentes/header.php";
         require_once self::DIR_VISTA . "$vista.php";

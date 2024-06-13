@@ -25,7 +25,7 @@ class InicioSesion extends ControladorBase
         if (isset($_GET["cerrar"])) {
             $this->modelo->cerrarSesison();
 
-            // Redireccionar a la misma URL, pero sin parametros.
+            // Redireccionar a la misma URL, pero sin parametros GET.
             header("Location: " . parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
             exit;
         } elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
