@@ -1,10 +1,12 @@
-# Proyecto INVILARA
+# 🍏 Proyecto INVILARA
 
-## Requisitos
+## 📦 Requisitos
 
-> **PHP 8** como minimo para ejecutar el proyecto.
+### ⏫ Version PHP
 
-### Routing
+**PHP 8** como minimo.
+
+### 🚝 Routing
 
 El proyecto utiliza un sistema de routing para cargar las paginas. Redirigira cada controlador en base a la **URL** actual.
 
@@ -20,14 +22,14 @@ Algo a tomar en cuenta es que el sistema esta estrictamente ligado a la **estruc
 - `htdocs/` es el directorio **raiz** de **XAMPP**, por lo tanto, se sabe la **ruta exacta** de los archivos.
 - `htdocs/mi-proyecto` es un subdirectorio y no la **raiz** del proyecto, por lo tanto, no se sabe la **ruta exacta** de los archivos.
 
-### XAMPP
+### 🧰 XAMPP
 
 En caso de usar **XAMPP**, se puede adaptar:
 
 - Mueva **TODOS** archivos de la carpeta **htdocs** a otro lugar.
 - Luego, mueva **TODOS** los archivos del repositorio a la carpeta **htdocs**.
 
-## Estructura
+## 📂 Estructura
 
 - .vscode/ **(Configuración VSCode)**
 - assets/ **(Recursos para vistas: img/js/css)**
