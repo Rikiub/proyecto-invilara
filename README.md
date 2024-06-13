@@ -8,7 +8,7 @@ Necesita **PHP 8** como minimo.
 
 ### 📄 Base datos
 
-Debe importar el archivo [basedatos.sql]() en su **base de datos**.
+Debe importar el archivo [basedatos.sql](https://github.com/Rikiub/proyecto-invilara/blob/afcfc29864a820c34d72128fb46d219a4ae3b123/basedatos.sql) en su **base de datos**.
 
 ### 🚝 Router
 
