@@ -6,16 +6,20 @@
 
 **PHP 8** como minimo.
 
-### 🚝 Routing
+### 🚝 Router
 
-El proyecto utiliza un sistema de **routing** para cargar las paginas. Redirigira cada **controlador** en base a la **URL** actual.
+El proyecto utiliza un sistema de **routing** para cargar las vistas. Redirigira cada **URL** a un **controlador** junto a su **metodo** en base a la **ruta de la URL** actual. 
 
 **Ejemplo:**
 
 - `https://proyecto-invilara.com/inicio-sesion` redirigira al controlador [InicioSesion](https://github.com/Rikiub/proyecto-invilara/blob/f32ead9eb0598c31305c8e1dadb182488fdac082/src/Controlador/InicioSesion.php)
 - `https://proyecto-invilara.com/panel/usuarios` redirigira al controlador [UsuariosPanel](https://github.com/Rikiub/proyecto-invilara/blob/f32ead9eb0598c31305c8e1dadb182488fdac082/src/Controlador/UsuariosPanel.php)
 
-Algo a tomar en cuenta es que el sistema esta estrictamente ligado a la **estructura de archivos**, es decir, si el proyecto esta en una **subcarpeta** y no en la **raiz**, fallara debido a que no encontrara los archivos.
+Las **rutas** estan especificadas en el archivo [rutas.php](https://github.com/Rikiub/proyecto-invilara/blob/cb1530786982273b96594d43e83e772fa9d0820d/src/rutas.php).
+
+---
+
+Algo a tomar en cuenta es que el sistema esta estrictamente ligado a la **estructura de archivos**, es decir, si el proyecto esta en un **subdirectorio** y no en el directorio **raiz**, el sistema fallara debido a que no encontrara los archivos.
 
 **Ejemplo:**
 
