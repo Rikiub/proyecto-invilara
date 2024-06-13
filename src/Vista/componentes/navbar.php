@@ -9,9 +9,9 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <?php if (isset($_SESSION["usuario"])): ?>
-                        <a class="nav-item nav-link active" href="/login?cerrar=true">Cerrar sesión</a>
+                        <a class="nav-item nav-link active" href="/inicio-sesion?cerrar=true">Cerrar sesión</a>
                     <?php else: ?>
-                        <a class="nav-item nav-link active" href="/login">Iniciar sesión</a>
+                        <a class="nav-item nav-link active" href="/inicio-sesion">Iniciar sesión</a>
                     <?php endif ?>
                 </li>
             </ul>

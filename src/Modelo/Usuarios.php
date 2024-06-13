@@ -1,8 +1,8 @@
 <?php
 
-require_once "src/modelo/modelo.php";
+namespace Src\Modelo;
 
-class UsuarioModelo extends Modelo
+class Usuarios extends ModeloBase
 {
     public function __construct()
     {
@@ -12,9 +12,9 @@ class UsuarioModelo extends Modelo
     private function validarUsuario(string $usuario, string $contraseña): bool
     {
         if (!empty($usuario) && !empty($contraseña)) {
-            $usuario = $this->obtenerFila("cedula", $usuario);
+            $user = $this->obtenerFila("cedula", $usuario);
 
-            if (password_verify($contraseña, $usuario[0]["contraseña"])) {
+            if (!empty($user) && password_verify($contraseña, $user[0]["contraseña"])) {
                 return true;
             }
         }
@@ -35,7 +35,9 @@ class UsuarioModelo extends Modelo
 
     public function cerrarSesison(): void
     {
-        session_destroy();
+        if ($this->sesionIniciada()) {
+            session_destroy();
+        }
     }
 
     public function sesionIniciada(): bool

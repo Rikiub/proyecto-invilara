@@ -1,5 +1,7 @@
 <?php
 
+namespace Src;
+
 class Router
 {
     protected $rutas = [];
@@ -31,7 +33,7 @@ class Router
         } elseif (is_callable($callback)) {
             call_user_func($callback);
         } else {
-            throw new Exception("Argumentos invalidos.");
+            throw new \Exception("Argumentos invalidos.");
         }
     }
 
