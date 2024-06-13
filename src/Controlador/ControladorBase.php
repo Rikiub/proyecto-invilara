@@ -2,9 +2,7 @@
 
 namespace Src\Controlador;
 
-/** Controlador Base
- * Se encarga de cargar y enviar datos a la vista.
- */
+/** Se encarga de cargar y enviar datos a la vista. */
 class ControladorBase
 {
     // Carpeta en donde se guardan las vistas.

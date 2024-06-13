@@ -4,8 +4,8 @@ namespace Src\Modelo;
 
 use Src\Config;
 
-/** Conexión de base de datos.
- * Es empleado por el `Modelo` y no deberia utilizarse directamente.
+/** Conexión a base de datos.
+ * Es empleado por el `ModeloBase` y no deberia utilizarse directamente.
  */
 class BaseDatos
 {
