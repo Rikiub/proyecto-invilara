@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "name": "proyecto/invilara",
     "autoload": {
@@ -5,4 +6,13 @@
             "Src\\": "src/"
         }
     }
+=======
+{
+    "name": "proyecto/invilara",
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    }
+>>>>>>> 5e206712088dd0f3ef02dcb2763e737b7e75c6d6
 }
