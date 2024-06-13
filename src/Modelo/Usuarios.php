@@ -11,7 +11,7 @@ class Usuarios extends ModeloBase
 
     private function validarUsuario(string $usuario, string $contraseña): bool
     {
-        if (!empty($usuario) && !empty($contraseña)) {
+        if ($usuario && $contraseña) {
             $user = $this->sqlObtenerFila("cedula", $usuario);
 
             if ($user && $contraseña == $user[0]["contraseña"]) {

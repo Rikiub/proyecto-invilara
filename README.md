@@ -1,14 +1,18 @@
 # 🍏 Proyecto INVILARA
 
-## 📦 Requisitos
+## 📦 Guia de desarrollo
 
 ### ⏫ Version PHP
 
-**PHP 8** como minimo.
+Necesita **PHP 8** como minimo.
+
+### 📄 Base datos
+
+Debe importar el archivo [basedatos.sql]() en su **base de datos**.
 
 ### 🚝 Router
 
-El proyecto utiliza un sistema de **routing** para cargar las vistas. Redirigira cada **URL** a un **controlador** junto a su **metodo** en base a la **ruta de la URL** actual. 
+El proyecto utiliza un sistema de **routing** para cargar las vistas. Redirigira cada **URL** a un **controlador** + uno de sus **metodos** en base a la **ruta** actual. 
 
 **Ejemplo:**
 
