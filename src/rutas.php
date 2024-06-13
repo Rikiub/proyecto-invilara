@@ -19,5 +19,5 @@ $router->agregarRuta("/registro", Controlador\Registro::class, "index");
 // Panel de control
 $router->agregarRuta("/panel/usuarios", Controlador\UsuariosPanel::class, "index");
 
-# Iniciar router al usar `require`.
+# Iniciar router al importarse con `require`.
 $router->despachar();
