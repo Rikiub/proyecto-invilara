@@ -1,0 +1,8 @@
+{
+    "name": "proyecto/invilara",
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    }
+}
