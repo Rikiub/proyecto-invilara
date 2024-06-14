@@ -54,7 +54,7 @@ Debe usar la version `Full` de **Laragon** y puede encontrarla [aquí](https://l
     - .vscode/
         - *Configuración VSCode*
     - assets/
-        *Recursos para vistas: img/js/css*
+        - *Recursos para vistas: img/js/css*
     - lib/
         - *Librerias web externas*
     - src/
