@@ -1,6 +1,6 @@
-# 🍏 Proyecto INVILARA
+# Proyecto INVILARA
 
-## 📦 Guia de desarrollo
+## Guia de desarrollo
 
 ### ⏫ Version PHP
 
@@ -48,13 +48,25 @@ En caso de usar [Laragon](https://laragon.org/), debe:
 
 Debe usar la version `Full` de **Laragon** y puede encontrarla [aquí](https://laragon.org/download/). 
 
-## 📂 Estructura
+## Estructura de archivos
 
-- .vscode/ **(Configuración VSCode)**
-- assets/ **(Recursos para vistas: img/js/css)**
-- lib/ **(Librerias web externas)**
-- src/ **(Codigo PHP)**
-- vendor/ **(Autoloader generado por Composer)**
-- .htaccess **(Configuración Apache: Redirigir URLs al Front-controller)**
-- index.php **(Front-controller)**
-- jsconfig.json **(Configuración VSCode: Activar autocompletado JQuery)**
+- 📁 Carpetas
+    - .vscode/ **(Configuración VSCode)**
+    - assets/ **(Recursos para vistas: img/js/css)**
+    - lib/ **(Librerias web externas)**
+    - src/ **(Codigo PHP)**
+    - vendor/ **(Autoloader generado por Composer)**
+
+---
+
+- ❗ Esenciales
+    - .htaccess **(Configuración Apache: Redirigir URLs al Front-controller)**
+    - index.php **(Front-controller)**
+    - basedatos.sql **(Base de datos a importar)**
+
+---
+
+- 🔵 Opcionales
+    - composer.json **(Archivo generado por Composer)**
+    - jsconfig.json **(Configuración VSCode: Activar autocompletado para JQuery)**
+
