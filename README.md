@@ -34,8 +34,8 @@ Algo a tomar en cuenta es que el sistema esta estrictamente ligado a la **estruc
 
 En caso de usar [XAMPP](https://www.apachefriends.org/), debe:
 
-- Mover **TODOS** los archivos de la carpeta **htdocs** a otro lugar.
-- Luego, mueva **TODOS** los archivos del repositorio a la carpeta **htdocs**.
+- Mover **TODOS** los archivos de la carpeta `htdocs` a otro lugar.
+- Luego, mueva **TODOS** los archivos del repositorio a la carpeta `htdocs`.
 
 ### 🐘 Laragon
 
@@ -46,7 +46,7 @@ En caso de usar [Laragon](https://laragon.org/), debe:
 - Ingrese al icono en la barra de tareas y entre en: `www > proyecto-invilara`
 - Se abrira una pestaña en su navegador con la pagina web seleccionada.
 
-Debe usar la version `Full` de **Laragon** y puede encontrarla [aquí](https://laragon.org/download/). 
+Debe usar la version `Full` de **Laragon**, puede encontrarla [aquí](https://laragon.org/download/). 
 
 ## Estructura de archivos
 
