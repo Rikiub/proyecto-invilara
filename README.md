@@ -51,22 +51,32 @@ Debe usar la version `Full` de **Laragon** y puede encontrarla [aquí](https://l
 ## Estructura de archivos
 
 - 📁 Carpetas
-    - .vscode/ **(Configuración VSCode)**
-    - assets/ **(Recursos para vistas: img/js/css)**
-    - lib/ **(Librerias web externas)**
-    - src/ **(Codigo PHP)**
-    - vendor/ **(Autoloader generado por Composer)**
+    - .vscode/
+        - *Configuración VSCode*
+    - assets/
+        *Recursos para vistas: img/js/css*
+    - lib/
+        - *Librerias web externas*
+    - src/
+        - *Codigo PHP*
+    - vendor/ 
+        - *Autoloader generado por Composer*
 
 ---
 
 - ❗ Esenciales
-    - .htaccess **(Configuración Apache: Redirigir URLs al Front-controller)**
-    - index.php **(Front-controller)**
-    - basedatos.sql **(Base de datos a importar)**
+    - .htaccess
+        - *Configuración Apache: Redirigir URLs al Front-controller*
+    - index.php 
+        - *Front-controller*
+    - basedatos.sql
+        - *Base de datos a importar*
 
 ---
 
 - 🔵 Opcionales
-    - composer.json **(Archivo generado por Composer)**
-    - jsconfig.json **(Configuración VSCode: Activar autocompletado para JQuery)**
+    - composer.json
+        - *Archivo generado por Composer*
+    - jsconfig.json
+        - *Configuración VSCode: Activar autocompletado para JQuery*
 
