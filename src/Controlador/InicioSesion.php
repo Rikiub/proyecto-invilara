@@ -40,6 +40,6 @@ class InicioSesion extends ControladorBase
             }
         }
 
-        $this->render("/inicio-sesion", ["titulo" => "Inicio de sesion", "error" => $error]);
+        $this->vista("/inicio-sesion", ["titulo" => "Inicio de sesion", "error" => $error]);
     }
 }

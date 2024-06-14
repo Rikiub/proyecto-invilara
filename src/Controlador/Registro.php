@@ -34,6 +34,6 @@ class Registro extends ControladorBase
             }
         }
 
-        $this->render("/registro", ["titulo" => "Registro", "error" => $error]);
+        $this->vista("/registro", ["titulo" => "Registro", "error" => $error]);
     }
 }

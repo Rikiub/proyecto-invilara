@@ -39,7 +39,7 @@ class UsuariosPanel extends ControladorBase
         } else {
             // Renderizar vista.
 
-            $this->render(
+            $this->vista(
                 "usuario",
                 ["titulo" => "Usuarios", "usuarios" => $this->modelo->obtenerTodosUsuarios()]
             );
