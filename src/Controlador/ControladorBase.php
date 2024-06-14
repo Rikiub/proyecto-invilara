@@ -10,7 +10,7 @@ class ControladorBase
 
     /** Carga una vista y sus datos.
      * 
-     * Debe proporcionar el nombre de una vista EXISTENTE + Un array de variables. Por ejemplo, al usar en el controlador:
+     * Debe proporcionar el nombre de una vista EXISTENTE + Un array de sus variables. Por ejemplo, al usar en el controlador:
      * 
      * `$this->vista("/inicio-sesion", ["mi_dato" => "mi_valor"])`
      * 
