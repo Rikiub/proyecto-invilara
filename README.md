@@ -8,7 +8,7 @@ Necesita **PHP 8** como minimo.
 
 ### 📄 Base datos
 
-Debe importar el archivo [basedatos.sql](https://github.com/Rikiub/proyecto-invilara/blob/main/basedatos.sql) en su **base de datos**.
+Debe importar el archivo [invilara.sql](https://github.com/Rikiub/proyecto-invilara/blob/main/invilara.sql) en su **base de datos**.
 
 ### 🚝 Router
 

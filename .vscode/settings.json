@@ -6,4 +6,6 @@
         "php": "html"
     },
     "emmet.showExpandedAbbreviation": "always",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
 }

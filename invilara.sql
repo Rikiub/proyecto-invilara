@@ -16,23 +16,24 @@
 
 
 -- Volcando estructura de base de datos para invilara
+DROP DATABASE IF EXISTS `invilara`;
 CREATE DATABASE IF NOT EXISTS `invilara` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `invilara`;
 
 -- Volcando estructura para tabla invilara.usuario
+DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
   `cedula` int NOT NULL,
   `contraseña` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`cedula`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla invilara.usuario: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla invilara.usuario: ~3 rows (aproximadamente)
 DELETE FROM `usuario`;
 INSERT INTO `usuario` (`cedula`, `contraseña`) VALUES
 	(1, '1'),
 	(12, '12'),
-	(23, '23'),
-	(55, '55');
+	(12345, '12345');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
