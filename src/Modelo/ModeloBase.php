@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Modelo;
+require_once "src/Modelo/BaseDatos.php";
 
 /** Encargado de darle forma a los datos y proporcionarlos al controlador.
  * 

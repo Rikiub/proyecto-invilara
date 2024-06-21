@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Modelo;
+require_once "src/Modelo/ModeloBase.php";
 
 class Usuarios extends ModeloBase
 {

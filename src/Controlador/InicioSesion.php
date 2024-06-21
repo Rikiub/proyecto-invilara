@@ -1,8 +1,7 @@
 <?php
 
-namespace Src\Controlador;
-
-use Src\Modelo\Usuarios;
+require_once "src/Controlador/ControladorBase.php";
+require_once "src/Modelo/Usuarios.php";
 
 class InicioSesion extends ControladorBase
 {
@@ -40,6 +39,7 @@ class InicioSesion extends ControladorBase
             }
         }
 
+        // Mostrar vista
         $this->vista("/inicio-sesion", ["titulo" => "Inicio de sesion", "error" => $error]);
     }
 }

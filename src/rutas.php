@@ -1,23 +1,20 @@
 <?php
 
-namespace Src;
-
-use Src\Controlador;
-use Src\Router;
+require_once "src/Router.php";
 
 $router = new Router;
 
-// Pagina de inicio
-$router->agregarRuta("/", Controlador\InicioSesion::class, "index");
-
 // Inicio de sesion
-$router->agregarRuta("/inicio-sesion", Controlador\InicioSesion::class, "index");
+require_once "src/Controlador/InicioSesion.php";
+$router->agregarRuta("/inicio-sesion", InicioSesion::class, "index");
 
 // Registro
-$router->agregarRuta("/registro", Controlador\Registro::class, "index");
+require_once "src/Controlador/Registro.php";
+$router->agregarRuta("/registro", Registro::class, "index");
 
 // Panel de usuarios
-$router->agregarRuta("/panel/usuarios", Controlador\UsuariosPanel::class, "index");
+require_once "src/Controlador/UsuariosPanel.php";
+$router->agregarRuta("/panel/usuarios", UsuariosPanel::class, "index");
 
-# Iniciar router al importarse con `require`.
-$router->despachar();
+// Pagina de inicio
+$router->agregarRuta("/", InicioSesion::class, "index");

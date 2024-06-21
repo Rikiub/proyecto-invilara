@@ -1,13 +1,8 @@
 <?php
 
-namespace Src\Controlador;
-
 /** Encargado de cargar y enviar datos del modelo a la vista. */
 class ControladorBase
 {
-    // Carpeta en donde se ubican las vistas.
-    const DIR_VISTA = "src/Vista/";
-
     /** Carga una vista y sus datos.
      * 
      * Debe proporcionar el nombre de una vista EXISTENTE + Un array de sus variables. Por ejemplo, al usar en el controlador:
@@ -18,7 +13,7 @@ class ControladorBase
      */
     protected function vista(string $vista, array $datos = [])
     {
-        $vista = self::DIR_VISTA . "$vista.php";
+        $vista = "src/Vista/" . "$vista.php";
 
         if (!is_file($vista)) {
             throw new \Exception("El archivo de vista $vista no existe.");
@@ -27,7 +22,7 @@ class ControladorBase
         extract($datos);
         unset($datos);
 
-        require_once self::DIR_VISTA . "componentes/header.php";
+        require_once "src/Vista/" . "componentes/header.php";
         require_once $vista;
     }
 }

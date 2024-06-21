@@ -1,8 +1,7 @@
 <?php
 
-namespace Src\Controlador;
-
-use Src\Modelo\Usuarios;
+require_once "src/Controlador/ControladorBase.php";
+require_once "src/Modelo/Usuarios.php";
 
 class UsuariosPanel extends ControladorBase
 {

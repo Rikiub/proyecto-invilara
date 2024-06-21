@@ -1,11 +1,9 @@
 <?php
 
-namespace Src;
-
 class Config
 {
-    const BD_HOST = "localhost";
-    const BD_NAME = "invilara";
-    const BD_USERNAME = "root";
-    const BD_PASSWORD = "";
+    const DB_HOST = "localhost";
+    const DB_NAME = "invilara";
+    const DB_USERNAME = "root";
+    const DB_PASSWORD = "";
 }
