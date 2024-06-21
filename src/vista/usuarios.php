@@ -1,5 +1,5 @@
-<?php include "src/Vista/componentes/header.php" ?>
-<?php include "src/vista/componentes/navbar.php" ?>
+<?php include "src/vista/componentes/header.php"; ?>
+<?php include "src/vista/componentes/navbar.php"; ?>
 
 <h1>Usuarios</h1>
 
