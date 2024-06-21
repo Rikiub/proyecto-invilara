@@ -34,15 +34,16 @@ Algo a tomar en cuenta es que el sistema esta estrictamente ligado a la **estruc
 
 En caso de usar [XAMPP](https://www.apachefriends.org/), debe:
 
+- Ejecutar el programa.
 - Mover **TODOS** los archivos de la carpeta `htdocs` a otro lugar.
-- Luego, mueva **TODOS** los archivos del repositorio a la carpeta `htdocs`.
+- Luego, mover **TODOS** los archivos del repositorio al directorio `htdocs`.
 
 ### 🐘 Laragon
 
 En caso de usar [Laragon](https://laragon.org/), debe:
 
 - Ejecutar el programa.
-- Deje la carpeta en el directorio `www`.
+- Mover la carpeta del repositorio al directorio `www`.
 - Ingrese al icono en la barra de tareas y entre en: `www > proyecto-invilara`
 - Se abrira una pestaña en su navegador con la pagina web seleccionada.
 
