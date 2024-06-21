@@ -2,10 +2,12 @@
 
 require_once "src/Modelo/BaseDatos.php";
 
-/** Encargado de darle forma a los datos y proporcionarlos al controlador.
+/** Encargado de manejar la base de datos y proporcionar datos al controlador.
  * 
  * - Contiene metodos para manejar CRUD's de base de datos sin necesidad de escribir consultas SQL.
- * - Al instanciarse, debe especificarse el nombre de la tabla a consultar.
+ * - Al instanciarse, debe especificarse el nombre de la tabla a manipular en la base de datos.
+ * 
+ * `parent::__construct("nombre_tabla")`
  */
 class ModeloBase
 {

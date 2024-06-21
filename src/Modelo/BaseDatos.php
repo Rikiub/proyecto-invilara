@@ -3,7 +3,6 @@
 require_once "src/Config.php";
 
 /** Conexión a base de datos.
- * Es empleado por el `ModeloBase` y no deberia utilizarse directamente.
  */
 class BaseDatos
 {
