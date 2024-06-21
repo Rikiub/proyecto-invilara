@@ -32,7 +32,15 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 DELETE FROM `usuario`;
 INSERT INTO `usuario` (`cedula`, `contraseña`) VALUES
 	(1, '1'),
-	(12, '12'),
+	(15, '15'),
+	(76, '6'),
+	(89, '89'),
+	(111, '111'),
+	(123, '123'),
+	(1212, '1212'),
+	(1313, '1313'),
+	(1414, '1414'),
+	(1515, '1515'),
 	(12345, '12345');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
