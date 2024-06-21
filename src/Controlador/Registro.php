@@ -1,38 +1,28 @@
 <?php
 
-require_once "src/Controlador/ControladorBase.php";
-require_once "src/Modelo/Usuarios.php";
+require_once "src/modelo/usuarios.php";
 
-class Registro extends ControladorBase
-{
-    private $modelo;
+$modelo = new Usuarios();
 
-    public function __construct()
-    {
-        $this->modelo = new Usuarios();
+$error = null;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $cedula = $_POST["cedula"];
+    $contraseña = $_POST["contraseña"];
+
+    if ($modelo->obtenerUsuario($cedula)) {
+        $error = "El usuario ya existe.";
+    } elseif (!$contraseña) {
+        $error = "Debe proporcionar una contraseña.";
     }
 
-    public function index()
-    {
-        $error = null;
+    if (!$error) {
+        $modelo->insertarUsuario($cedula, $contraseña);
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $cedula = $_POST["cedula"];
-            $contraseña = $_POST["contraseña"];
-
-            if ($this->modelo->obtenerUsuario($cedula)) {
-                $error = "El usuario ya existe.";
-            } elseif (!$contraseña) {
-                $error = "Debe proporcionar una contraseña.";
-            }
-
-            if (!$error) {
-                $this->modelo->insertarUsuario($cedula, $contraseña);
-                header("Location: /inicio-sesion");
-                exit;
-            }
-        }
-
-        $this->vista("/registro", ["titulo" => "Registro", "error" => $error]);
+        require_once "src/controlador/usuarios.php";
+        exit;
     }
 }
+
+// Mostrar vista
+require_once "src/vista/registro.php";

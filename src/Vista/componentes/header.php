@@ -11,7 +11,3 @@
 </head>
 
 <body>
-    <?php $vista; ?>
-</body>
-
-</html>

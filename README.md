@@ -10,45 +10,6 @@ Necesita **PHP 8** como minimo.
 
 Debe importar el archivo [invilara.sql](https://github.com/Rikiub/proyecto-invilara/blob/main/invilara.sql) en su **base de datos**.
 
-### 🚝 Router
-
-El proyecto utiliza un sistema de **routing** para cargar las vistas. Redirigira cada **URL** a un **controlador** + uno de sus **metodos** en base a la **ruta** actual. 
-
-**Ejemplo:**
-
-- `https://proyecto-invilara.com/inicio-sesion` redirigira al controlador [InicioSesion](https://github.com/Rikiub/proyecto-invilara/blob/main/src/Controlador/InicioSesion.php)
-- `https://proyecto-invilara.com/panel/usuarios` redirigira al controlador [UsuariosPanel](https://github.com/Rikiub/proyecto-invilara/blob/main/src/Controlador/UsuariosPanel.php)
-
-Las **rutas** estan especificadas en el archivo [rutas.php](https://github.com/Rikiub/proyecto-invilara/blob/main/src/rutas.php)
-
----
-
-Algo a tomar en cuenta es que el sistema esta estrictamente ligado a la **estructura de archivos**, es decir, si el proyecto esta en un **subdirectorio** y no en el directorio **raiz**, el sistema fallara debido a que no encontrara los archivos.
-
-**Ejemplo:**
-
-- `htdocs/` es el directorio **raiz** de **XAMPP**, por lo tanto, se sabe la **ruta exacta** de los archivos.
-- `htdocs/mi-proyecto` es un subdirectorio y no la **raiz** del proyecto, por lo tanto, no se sabe la **ruta exacta** de los archivos.
-
-### 🔶 XAMPP
-
-En caso de usar [XAMPP](https://www.apachefriends.org/), debe:
-
-- Ejecutar el programa.
-- Mover **TODOS** los archivos de la carpeta `htdocs` a otro lugar.
-- Luego, mover **TODOS** los archivos del repositorio al directorio `htdocs`.
-
-### 🐘 Laragon
-
-En caso de usar [Laragon](https://laragon.org/), debe:
-
-- Ejecutar el programa.
-- Mover la carpeta del repositorio al directorio `www`.
-- Ingrese al icono en la barra de tareas y entre en: `www > proyecto-invilara`
-- Se abrira una pestaña en su navegador con la pagina web seleccionada.
-
-Debe usar la version `Full` de **Laragon**, puede encontrarla [aquí](https://laragon.org/download/). 
-
 ## Estructura de archivos
 
 - 📁 Carpetas
@@ -60,24 +21,18 @@ Debe usar la version `Full` de **Laragon**, puede encontrarla [aquí](https://la
         - *Librerias web externas*
     - src/
         - *Codigo PHP*
-    - vendor/ 
-        - *Autoloader generado por Composer*
 
 ---
 
 - ❗ Esenciales
-    - .htaccess
-        - *Configuración Apache: Redirigir URLs al Front-controller*
     - index.php 
         - *Front-controller*
-    - basedatos.sql
+    - invilara.sql
         - *Base de datos a importar*
 
 ---
 
 - 🔵 Opcionales
-    - composer.json
-        - *Archivo generado por Composer*
     - jsconfig.json
         - *Configuración VSCode: Activar autocompletado para JQuery*
 

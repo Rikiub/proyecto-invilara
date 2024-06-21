@@ -1,4 +1,5 @@
-<?php include "src/vista/componentes/navbar.php"; ?>
+<?php include "src/Vista/componentes/header.php" ?>
+<?php include "src/vista/componentes/navbar.php" ?>
 
 <article class="card mx-auto m-5" style="width: 25rem;">
     <div class="card-body">
@@ -25,7 +26,7 @@
 
             <div class="my-4 d-flex justify-content-between">
                 <input class="btn btn-primary" type="submit" value="Enviar" />
-                <a class="btn btn-primary" href="/registro">Registro</a>
+                <a class="btn btn-primary" href="?pagina=registro">Registro</a>
             </div>
         </form>
     </div>

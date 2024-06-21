@@ -1,4 +1,5 @@
-<?php include "src/vista/componentes/navbar.php"; ?>
+<?php include "src/Vista/componentes/header.php" ?>
+<?php include "src/vista/componentes/navbar.php" ?>
 
 <article class="card mx-auto m-5" style="width: 25rem;">
     <div class="card-body">

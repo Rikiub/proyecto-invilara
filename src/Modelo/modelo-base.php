@@ -1,6 +1,6 @@
 <?php
 
-require_once "src/Modelo/BaseDatos.php";
+require_once "src/modelo/base-datos.php";
 
 /** Encargado de manejar la base de datos y proporcionar datos al controlador.
  * 

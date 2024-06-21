@@ -6,7 +6,7 @@ filas.forEach((fila) => {
 
     boton.addEventListener("click", () => {
         $.ajax({
-            url: "/panel/usuarios",
+            url: "src/controlador/usuarios.php",
             method: "GET",
             data: { "id": cedula.innerHTML, "accion": "eliminar" },
             success: (msg) => {
