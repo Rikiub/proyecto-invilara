@@ -1,0 +1,11 @@
+.accordion-no-icon {
+    .accordion-button::after {
+        background-image: none;
+        width: 0;
+    }
+
+    .accordion-button:not(.collapsed)::after {
+        background-image: none;
+        width: 0;
+    }
+}

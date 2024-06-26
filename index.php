@@ -1,4 +1,3 @@
 <?php
 
-require "vendor/autoload.php";
-require "src/rutas.php";
+require_once "src/front.php";
