@@ -5,7 +5,7 @@
     <div class="card-body">
         <h1 class="text-center py-4">Registro</h1>
 
-        <form class="px-5" method="POST">
+        <form class="px-5" method="post">
             <?php if (isset($error)): ?>
                 <div class="py-2 text-danger text-center">
                     <p1><?php echo $error; ?></p1>

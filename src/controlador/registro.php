@@ -6,7 +6,7 @@ $modelo = new Usuarios();
 
 $error = null;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST["cedula"], $_POST["contraseña"])) {
     $cedula = $_POST["cedula"];
     $contraseña = $_POST["contraseña"];
 
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!$error) {
         $modelo->insertarUsuario($cedula, $contraseña);
 
-        require_once "src/controlador/usuarios.php";
+        header("Location: ?ruta=usuarios");
         exit;
     }
 }

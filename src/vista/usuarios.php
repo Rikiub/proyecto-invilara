@@ -1,28 +1,38 @@
 <?php include "src/vista/componentes/header.php"; ?>
 <?php include "src/vista/componentes/navbar.php"; ?>
 
-<h1>Usuarios</h1>
+<div class="container">
+    <h1>Usuarios</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Cedula</th>
-            <th>Contraseña</th>
-        </tr>
-    </thead>
+    <a href="?ruta=registro" class="btn btn-primary px-3 py-2 my-3">Crear</a>
 
-    <tbody>
-        <?php foreach ($usuarios as $user): ?>
-            <tr name="fila-usuario">
-                <td name="cedula"> <?php echo $user["cedula"]; ?> </td>
-                <td name="cedula"> <?php echo $user["contraseña"]; ?> </td>
-                <td>
-                    <button class="btn btn-primary" name="btn-modificar">Modificar</button>
-                    <button class="btn btn-danger" name="btn-eliminar">Eliminar</button>
-                </td>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Cedula</th>
+                <th>Contraseña</th>
+                <th>Acciones</th>
             </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+        </thead>
 
-<script src="src/vista/usuarios.js"></script>
+        <tbody>
+            <?php foreach ($usuarios as $user): ?>
+                <tr>
+                    <td> <?php echo $user["cedula"]; ?> </td>
+                    <td> <?php echo $user["contraseña"]; ?> </td>
+                    <td class="d-flex">
+                        <form method="post">
+                            <input type="hidden" name="id" value="<?php echo $user["cedula"] ?>">
+                            <button name="accion" value="modificar" class="btn btn-primary">Modificar</button>
+                        </form>
+
+                        <form method="post">
+                            <input type="hidden" name="id" value="<?php echo $user["cedula"] ?>">
+                            <button name="accion" value="eliminar" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>

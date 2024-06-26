@@ -26,7 +26,7 @@
 
             <div class="my-4 d-flex justify-content-between">
                 <input class="btn btn-primary" type="submit" value="Enviar" />
-                <a class="btn btn-primary" href="?pagina=registro">Registro</a>
+                <a class="btn btn-primary" href="?ruta=registro">Registro</a>
             </div>
         </form>
     </div>
