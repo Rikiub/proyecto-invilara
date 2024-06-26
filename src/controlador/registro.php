@@ -10,14 +10,14 @@ if (isset($_POST["cedula"], $_POST["contraseña"])) {
     $cedula = $_POST["cedula"];
     $contraseña = $_POST["contraseña"];
 
-    if ($modelo->obtenerUsuario($cedula)) {
+    if ($modelo->obtenerUno($cedula)) {
         $error = "El usuario ya existe.";
     } elseif (!$contraseña) {
         $error = "Debe proporcionar una contraseña.";
     }
 
     if (!$error) {
-        $modelo->insertarUsuario($cedula, $contraseña);
+        $modelo->insertar($cedula, $contraseña);
 
         header("Location: ?ruta=usuarios");
         exit;

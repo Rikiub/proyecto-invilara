@@ -15,7 +15,7 @@ if (isset($_POST["id"], $_POST["accion"])) {
             // echo "'Modificar' necesita implementarse.";
             break;
         case "eliminar":
-            if ($modelo->eliminarUsuario($id)) {
+            if ($modelo->eliminar($id)) {
                 // echo "Usuario $id eliminado con éxito";
             } else {
                 // echo "Usuario $id no encontrado";
@@ -25,6 +25,6 @@ if (isset($_POST["id"], $_POST["accion"])) {
 }
 
 // Mostrar vista
-$usuarios = $modelo->obtenerTodosUsuarios();
+$usuarios = $modelo->obtenerTodos();
 require_once "src/vista/usuarios.php";
 

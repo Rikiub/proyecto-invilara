@@ -4,17 +4,14 @@ require_once "src/modelo/modelo-base.php";
 
 class Usuarios extends ModeloBase
 {
-    public function __construct()
-    {
-        parent::__construct("usuario");
-    }
+    private $tabla = "usuario";
 
-    private function validarUsuario(string $usuario, string $contraseña): bool
+    public function iniciarSesion(string $cedula, string $contraseña): bool
     {
-        if ($usuario && $contraseña) {
-            $user = $this->sqlObtenerFila("cedula", $usuario);
+        if ($cedula && $contraseña) {
+            $user = $this->obtenerUno($cedula);
 
-            if ($user && $contraseña == $user[0]["contraseña"]) {
+            if ($user && $user[0]["contraseña"] == $contraseña) {
                 return true;
             }
         }
@@ -22,56 +19,52 @@ class Usuarios extends ModeloBase
         return false;
     }
 
-    public function iniciarSesion(string $usuario, string $contraseña): bool
+    public function insertar(string|int $cedula, string $contraseña): bool
     {
-        if ($this->validarUsuario($usuario, $contraseña)) {
-            session_start();
-            $_SESSION["usuario"] = $usuario;
-            return true;
-        } else {
-            return false;
-        }
+        $sql = "INSERT INTO {$this->tabla} (cedula, contraseña) VALUES (:cedula, :contrasena)";
+        $stmt = $this->pdo->prepare($sql);
+
+        // No usen caracteres especiales para los `bindParam` como la Ñ, dara error de codificación.
+        $stmt->bindParam(":cedula", $cedula, PDO::PARAM_INT);
+        $stmt->bindParam(":contrasena", $contraseña);
+
+        return $stmt->execute();
     }
 
-    public function cerrarSesison(): void
+    public function actualizar(string $cedula_antiguo, string $cedula, string $contraseña): bool
     {
-        if ($this->sesionIniciada()) {
-            session_destroy();
-        }
+        throw new \Exception("'actualizar' no ha sido implementado.");
     }
 
-    public function sesionIniciada(): bool
+    public function eliminar(string $cedula): bool
     {
-        return isset($_SESSION["usuario"]);
-    }
+        $sql = "DELETE FROM {$this->tabla} WHERE cedula = ?";
+        $stmt = $this->pdo->prepare($sql);
 
-    public function insertarUsuario(string $usuario, string $contraseña)
-    {
-        $this->sqlInsertar(["cedula" => $usuario, "contraseña" => $contraseña]);
-    }
-
-    public function actualizarUsuario(string $usuario_antiguo, string $usuario, string $contraseña)
-    {
-        throw new \Exception("'actualizar' no implementado.");
-    }
-
-    public function eliminarUsuario(string $usuario): bool
-    {
         try {
-            $this->sqlEliminar("cedula", $usuario);
+            $stmt->execute([$cedula]);
             return true;
         } catch (\Exception) {
             return false;
         }
     }
 
-    public function obtenerTodosUsuarios(): array
+    public function obtenerTodos(): array
     {
-        return $this->sqlConsultar();
+        $sql = "SELECT * FROM {$this->tabla}";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function obtenerUsuario($usuario): array
+    public function obtenerUno($cedula): array
     {
-        return $this->sqlObtenerFila("cedula", $usuario);
+        $sql = "SELECT * FROM {$this->tabla} WHERE cedula = ?";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$cedula]);
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

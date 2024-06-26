@@ -15,7 +15,7 @@
                     <a href="?ruta=/inicio-sesion" class="text-decoration-none">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed">
-                                Inicio
+                                Inicio de sesión
                             </button>
                         </h2>
                     </a>

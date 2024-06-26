@@ -1,5 +1,7 @@
 <?php
 
+// Este es el fron-controller
+
 $controlador = $_GET["ruta"] ?? "inicio-sesion";
 $controlador = "src/controlador/" . $controlador . ".php";
 

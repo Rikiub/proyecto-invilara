@@ -6,14 +6,7 @@ $modelo = new Usuarios();
 
 $error = null;
 
-if (isset($_GET["cerrar"])) {
-    $modelo->cerrarSesison();
-
-    /* Redirigir al mismo controlador, pero sin parametros GET. */
-    $uri = $_SERVER["REQUEST_URI"];
-    $uri = strtok($uri, "?");
-    header("Location: " . $uri);
-} elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cedula = $_POST["cedula"];
     $contraseña = $_POST["contraseña"];
 
