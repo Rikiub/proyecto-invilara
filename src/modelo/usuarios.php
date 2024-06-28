@@ -24,7 +24,7 @@ class Usuarios extends ModeloBase
         $sql = "INSERT INTO {$this->tabla} (cedula, contraseña) VALUES (:cedula, :contrasena)";
         $stmt = $this->pdo->prepare($sql);
 
-        // No usen caracteres especiales para los `bindParam` como la Ñ, dara error de codificación.
+        // No usen caracteres especiales para los `bindParam`, como la Ñ, dara error de codificación.
         $stmt->bindParam(":cedula", $cedula, PDO::PARAM_INT);
         $stmt->bindParam(":contrasena", $contraseña);
 

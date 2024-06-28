@@ -1,6 +1,8 @@
-# Proyecto INVILARA
+<h1 align=center>
+    🍏 Proyecto INVILARA
+</h1>
 
-## Guia de desarrollo
+## Requisitos
 
 ### ⏫ Version PHP
 
@@ -18,7 +20,7 @@ Debe importar el archivo [invilara.sql](invilara.sql) en su **base de datos**.
     - assets/
         - *Recursos para las vistas: img/js/css*
     - lib/
-        - *Librerias web externas: Bootstrap/JQuery*
+        - *Librerias web externas: Bootstrap/jQuery*
     - src/
         - *Codigo fuente PHP*
 
@@ -38,5 +40,12 @@ Debe importar el archivo [invilara.sql](invilara.sql) en su **base de datos**.
 
 ---
 
-- Si quieres agregar imagenes, colocalas en la carpeta [assets](assets).
-- Si quieres usar tu propio CSS, coloca tu codigo en el archivo [styles.css](assets/styles.css), este se cargara automaticamente entre todas las vistas.
+## Modo de trabajo
+
+- Todo el codigo de la pagina web DEBE estar en la carpeta [src](src/).
+    - Tomalo en cuenta a la hora de usar `require` en PHP.
+- Cada vista DEBE importar el componente [header.php](src/vista/componentes/header.php) con `require_once`.
+    - Este componente se comparte entre TODAS las vistas y maneja el CSS y JS necesarios para su funcionamiento.
+- Cada libreria externa (Bootstrap/jQuery) DEBE estar en la carpeta [lib](lib/) y DEBE importarse UNICAMENTE en el archivo [header.php](src/vista/componentes/header.php)
+- Si quiere agregar imagenes DEBE colocarlas en la carpeta [assets](assets/).
+- Si quiere usar su propio CSS DEBE colocar su codigo en el archivo [styles.css](assets/styles.css).
