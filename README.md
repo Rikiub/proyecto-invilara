@@ -38,5 +38,5 @@ Debe importar el archivo [invilara.sql](invilara.sql) en su **base de datos**.
 
 ---
 
-- Si quieres agregar imagenes, guardala en la carpeta [assets](assets).
-- Si quieres usar tu propio CSS, coloca tu codigo en el archivo [styles.css](assets/styles.css).
+- Si quieres agregar imagenes, colocalas en la carpeta [assets](assets).
+- Si quieres usar tu propio CSS, coloca tu codigo en el archivo [styles.css](assets/styles.css), este se cargara automaticamente entre todas las vistas.
