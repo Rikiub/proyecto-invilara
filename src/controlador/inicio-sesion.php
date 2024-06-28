@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contraseña = $_POST["contraseña"];
 
     if ($modelo->iniciarSesion($cedula, $contraseña)) {
-        require_once "src/controlador/usuarios.php";
+        header("Location: ?ruta=usuarios");
         exit;
     } else {
         $error = "Cedula o contraseña invalida";

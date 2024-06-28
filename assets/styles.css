@@ -1,3 +1,8 @@
+/*
+Todo el CSS que quieras usar en la pagina DEBE colocarse en este archivo.
+El archivo `src/vista/componentes/header.php` lo carga automaticamente.
+*/
+
 .accordion-no-icon {
     .accordion-button::after {
         background-image: none;

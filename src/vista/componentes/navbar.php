@@ -11,6 +11,7 @@
             </div>
 
             <div class="offcanvas-body accordion">
+                <!-- Para agregar nuevas secciones copia este fragmento y cambia el `href` con la nueva pagina. -->
                 <div class="accordion-item accordion-no-icon">
                     <a href="?ruta=/inicio-sesion" class="text-decoration-none">
                         <h2 class="accordion-header">
@@ -20,6 +21,7 @@
                         </h2>
                     </a>
                 </div>
+                <!-- Final de la sección-->
 
                 <div class="accordion-item accordion-no-icon">
                     <h2 class="accordion-header">
