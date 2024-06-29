@@ -11,7 +11,7 @@
     <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="lib/jquery/jquery-3.7.1.min.js"></script>
 
-    <link rel="icon" href="assets/logo.png">
+    <link rel="icon" href="assets/favicon.png">
     <link rel="stylesheet" href="assets/styles.css">
 
     <title><?php echo $titulo ?? "Proyecto INVILARA" ?></title>
