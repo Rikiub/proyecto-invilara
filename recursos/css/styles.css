@@ -1,0 +1,8 @@
+/*
+Todo el CSS que quieras usar en la pagina DEBE colocarse en este archivo.
+El archivo `vista/componentes/encabezado.php` lo carga automaticamente.
+*/
+
+.navbar-gradient {
+    background-image: linear-gradient(225deg, green 0, #ffa701 10%, #ff8430 20%, #ff703b 30%, #ff5c42 40%, #f94646 50%, #e43148 60%, #d01c4b 70%, #be044d 80%, #ae0050 90%, red 100%);
+}
