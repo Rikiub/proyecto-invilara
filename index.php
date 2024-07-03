@@ -12,7 +12,8 @@ $controlador = "controlador/" . $pagina . ".php";
 if (is_file($controlador)) {
     require_once $controlador;
 } else {
-    echo "Pagina no encontrada";
+    // Redireccionar a la pagina de error.
+    require_once "vista/404.php";
 }
 
 ?>

@@ -1,12 +1,12 @@
 <?php require_once "vista/componentes/encabezado.php"; ?>
 <?php require_once "vista/componentes/barra.php"; ?>
 
-<div class="container" id="crud">
+<main class="container" id="crud">
 	<h1>Solicitantes</h1>
 
-	<button class="btn btn-outline-primary" value="insertar">Registrar</button>
+	<button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
 
-	<table class="table">
+	<table class="table table-hover table-responsive">
 		<thead>
 			<tr>
 				<th>Cedula</th>
@@ -18,7 +18,7 @@
 			</tr>
 		</thead>
 
-		<tbody>
+		<tbody class="table-group-divider">
 			<?php foreach ($datos as $d): ?>
 				<tr>
 					<td><?php echo $d["cedula"] ?></td>
@@ -34,7 +34,7 @@
 			<?php endforeach ?>
 		</tbody>
 	</table>
-</div>
+</main>
 
 
 

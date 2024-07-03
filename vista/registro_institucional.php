@@ -1,7 +1,7 @@
 <?php require_once "vista/componentes/encabezado.php"; ?>
 <?php require_once 'vista/componentes/barra.php'; ?>
 
-<div class="container">
+<main class="container">
 	<h1>Institucionales</h1>
 
 	<div class="py-3">
@@ -26,7 +26,7 @@
 
 		<tbody id="resultadoconsulta"></tbody>
 	</table>
-</div>
+</main>
 
 
 
