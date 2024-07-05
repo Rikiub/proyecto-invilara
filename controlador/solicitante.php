@@ -1,6 +1,6 @@
 <?php
 
-require_once "modelo/registro_solicitante.php";
+require_once "modelo/solicitante.php";
 
 $modelo = new Registro();
 
@@ -37,6 +37,6 @@ if (isset($_POST["accion"])) {
 }
 
 $datos = $modelo->consultar();
-require_once "vista/registro_solicitante.php";
+require_once "vista/solicitante.php";
 
 ?>

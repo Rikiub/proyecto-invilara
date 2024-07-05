@@ -21,7 +21,7 @@ Asignen la dirección de su controlador con "?pagina=<nombre_controlador>"
 
                 <hr class="border border-white">
 
-                <a class="nav-link" href="?pagina=registro_solicitante">Gestionar Solicitantes</a>
+                <a class="nav-link" href="?pagina=solicitante">Gestionar Solicitantes</a>
 
                 <hr class="border border-white">
 

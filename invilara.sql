@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 05, 2024 at 04:40 AM
+-- Generation Time: Jul 05, 2024 at 05:33 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -180,6 +180,24 @@ CREATE TABLE `solicitud_institucional_director` (
   `estatus` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `cedula` int NOT NULL,
+  `contraseña` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `usuario`
+--
+
+INSERT INTO `usuario` (`cedula`, `contraseña`) VALUES
+(1, '1');
+
 --
 -- Indexes for dumped tables
 --
@@ -249,6 +267,12 @@ ALTER TABLE `solicitud_institucional`
 --
 ALTER TABLE `solicitud_institucional_director`
   ADD PRIMARY KEY (`nro_control`) USING BTREE;
+
+--
+-- Indexes for table `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`cedula`);
 
 --
 -- AUTO_INCREMENT for dumped tables
