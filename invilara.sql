@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 05, 2024 at 05:33 AM
+-- Generation Time: Jul 05, 2024 at 05:43 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -116,6 +116,13 @@ CREATE TABLE `solicitante` (
   `correo` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `telefono` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `solicitante`
+--
+
+INSERT INTO `solicitante` (`cedula`, `id_comunidad`, `nombre`, `correo`, `telefono`) VALUES
+(31492771, NULL, 'Carlos', 'hola@gmail.com', 414);
 
 -- --------------------------------------------------------
 
