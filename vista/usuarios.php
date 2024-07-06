@@ -15,7 +15,7 @@
             </tr>
         </thead>
 
-        <tbody>
+        <tbody class="table-group-divider">
             <?php foreach ($usuarios as $user): ?>
                 <tr>
                     <td> <?php echo $user["cedula"]; ?> </td>

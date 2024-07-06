@@ -38,7 +38,7 @@
 
 
 <!-- MODAL EDITOR -->
-<div class="modal modal-lg" id="modal" tabindex="-1">
+<div class="modal modal-lg fade" id="modal" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content p-3">
 			<div class="modal-header">
