@@ -22,6 +22,8 @@ Asignen la dirección de su controlador con "?pagina=<nombre_controlador>"
                 <hr class="border border-white">
 
                 <a class="nav-link" href="?pagina=ciudadano">Gestionar Ciudadanos</a>
+				<a class="nav-link" href="?pagina=parroquia">Gestionar Parroquias</a>
+				<a class="nav-link" href="?pagina=comunidad">Gestionar Comunidades</a>
 				<a class="nav-link" href="?pagina=gerencia">Gestionar Gerencias</a>
 
                 <hr class="border border-white">

@@ -2,26 +2,27 @@
 <?php require_once "vista/componentes/barra.php"; ?>
 
 <main class="container" id="crud">
-    <h1>Gerencias de Asignacion</h1>
+    <h1>Comunidad</h1>
 
     <button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
 
     <table class="table table-hover table-responsive">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Nombre del Gerente</th>
+                <th>Nombre de la Comunidad</th>
+                <th>Direccion</th>
+                <th>Tipo</th>
                 <th>Acciones</th>
             </tr>
         </thead>
 
         <tbody class="table-group-divider">
-            <?php foreach ($datos as $d): ?>
+            <?php foreach ($datos as $d) : ?>
                 <tr>
-                    <td><?php echo $d["id"] ?></td>
                     <td><?php echo $d["nombre"] ?></td>
-                    <td><?php echo $d["nombre_gerente"] ?></td>
+                    <td><?php echo $d["direccion"] ?></td>
+                    <td><?php echo $d["tipo"] ?></td>
+
 
                     <td>
                         <button class="btn btn-outline-warning" value="modificar">Modificar</button>
@@ -46,31 +47,31 @@
 
             <form id="formulario" class="modal-body">
                 <div class="row">
-                    <label class="form-label col">ID
-                        <input class="form-control" type="text" name="id">
-                    </label>
-
-                    <label class="form-label col">Nombre
+                    <label class="form-label col">Nombre de la Comunidad
                         <input class="form-control" type="text" name="nombre" required />
                     </label>
 
-                </div>
-
-                <div class="row">
-                    <label class="form-label col">Nombre del Gerente
-                        <input class="form-control" type="text" name="nombre_gerente" required />
+                    <label class="form-label col">Direccion de la Comunidad
+                        <input class="form-control" type="text" name="direccion" required />
                     </label>
 
-
+                    <label class="form-label col">Tipo de Comunidad
+                        <input class="form-control" type="text" name="tipo" required />
+                    </label>
                 </div>
 
                 <div class="modal-footer my-4">
                     <input type="hidden" name="accion">
                     <button class="btn btn-primary px-5 py-2" type="submit">Procesar</button>
                 </div>
+
             </form>
         </div>
+
+
+
     </div>
+</div>
 </div>
 
 <script src="recursos/js/crud.js"></script>

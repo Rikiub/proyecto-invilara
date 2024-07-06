@@ -2,7 +2,7 @@
 <?php require_once "vista/componentes/barra.php"; ?>
 
 <main class="container" id="crud">
-    <h1>Gerencias de Asignacion</h1>
+    <h1>Registro de Parroquias</h1>
 
     <button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
 
@@ -10,8 +10,8 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
-                <th>Nombre del Gerente</th>
+                <th>Nombre de la parroquia</th>
+                <th>Nombre del Municipio</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -21,7 +21,7 @@
                 <tr>
                     <td><?php echo $d["id"] ?></td>
                     <td><?php echo $d["nombre"] ?></td>
-                    <td><?php echo $d["nombre_gerente"] ?></td>
+                    <td><?php echo $d["nombre_municipio"] ?></td>
 
                     <td>
                         <button class="btn btn-outline-warning" value="modificar">Modificar</button>
@@ -50,19 +50,26 @@
                         <input class="form-control" type="text" name="id">
                     </label>
 
-                    <label class="form-label col">Nombre
+                    <label class="form-label col">Nombre de la Parroquia:
                         <input class="form-control" type="text" name="nombre" required />
                     </label>
 
+                    <label>Seleccione el Municipio de localidad</label>
+                    <select class="form-select" type="text" name="nombre_municipio">
+                        <option value="Andres Eloy Blanco">Andres Eloy Blanco</option>
+                        <option value="Crespo">Crespo</option>
+                        <option value="Iribarren">Iribarren</option>
+                        <option value="Jimenez">Jimenez</option>
+                        <option value="Moràn">Moràn</option>
+                        <option value="Palavecino">Palavecino</option>
+                        <option value="Simon Planas">Simon Planas</option>
+                        <option value="Torres">Torres</option>
+                        <option value="Urdaneta">Urdaneta</option>
+                    </select>
                 </div>
 
-                <div class="row">
-                    <label class="form-label col">Nombre del Gerente
-                        <input class="form-control" type="text" name="nombre_gerente" required />
-                    </label>
 
 
-                </div>
 
                 <div class="modal-footer my-4">
                     <input type="hidden" name="accion">
