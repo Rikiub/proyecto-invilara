@@ -2,21 +2,23 @@
 
 require_once "modelo/base_datos.php";
 
-class Registro extends BaseDatos
+class director extends BaseDatos
 {
-	private $tabla = "solicitante";
+	private $tabla = "director";
 
 	private $cedula;
 	private $nombre;
 	private $correo;
-	private $telefono;
 	private $direccion;
+	private $telefono;
+
 
 	// Getter
 	public function set_cedula($valor)
 	{
 		$this->cedula = $valor;
 	}
+
 	public function set_nombre($valor)
 	{
 		$this->nombre = $valor;
@@ -25,13 +27,13 @@ class Registro extends BaseDatos
 	{
 		$this->correo = $valor;
 	}
-	public function set_telefono($valor)
-	{
-		$this->telefono = $valor;
-	}
 	public function set_direccion($valor)
 	{
 		$this->direccion = $valor;
+	}
+	public function set_telefono($valor)
+	{
+		$this->telefono = $valor;
 	}
 
 	// Setter
@@ -47,14 +49,15 @@ class Registro extends BaseDatos
 	{
 		return $this->correo;
 	}
-	public function get_telefono()
-	{
-		return $this->telefono;
-	}
 	public function get_direccion()
 	{
 		return $this->direccion;
 	}
+	public function get_telefono()
+	{
+		return $this->telefono;
+	}
+
 
 	public function insertar()
 	{
@@ -67,15 +70,15 @@ class Registro extends BaseDatos
 				cedula,
 				nombre,
 				correo,
-				telefono,
-				direccion
+				direccion,
+				telefono
 			)
 			VALUES (
 				'{$this->cedula}',
 				'{$this->nombre}',
 				'{$this->correo}',
-				'{$this->telefono}',
-				'{$this->direccion}'
+				'{$this->direccion}',
+				'{$this->telefono}'
 			)"
 		);
 	}
@@ -91,8 +94,9 @@ class Registro extends BaseDatos
 				cedula = '{$this->cedula}',
 				nombre = '{$this->nombre}',
 				correo = '{$this->correo}',
-				telefono = '{$this->telefono}',
-				direccion = '{$this->direccion}'
+				direccion = '{$this->direccion}',
+				telefono = '{$this->telefono}'
+				
 			WHERE
 				cedula = '{$this->cedula}'
 			"
@@ -120,9 +124,9 @@ class Registro extends BaseDatos
 		return $result;
 	}
 
-	public function obtenerUno($cedula)
+	public function obtenerUno($id)
 	{
-		$stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE cedula='$cedula'");
+		$stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE cedula='$id'");
 		$fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $fila;
 	}

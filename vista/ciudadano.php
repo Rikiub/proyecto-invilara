@@ -2,7 +2,7 @@
 <?php require_once "vista/componentes/barra.php"; ?>
 
 <main class="container" id="crud">
-	<h1>Solicitantes</h1>
+	<h1>Ciudadano</h1>
 
 	<button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
 
@@ -13,7 +13,6 @@
 				<th>Nombre</th>
 				<th>Correo</th>
 				<th>Teléfono</th>
-				<th>Direccion</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
@@ -25,7 +24,7 @@
 					<td><?php echo $d["nombre"] ?></td>
 					<td><?php echo $d["correo"] ?></td>
 					<td><?php echo $d["telefono"] ?></td>
-					<td><?php echo $d["direccion"] ?></td>
+
 					<td>
 						<button class="btn btn-outline-warning" value="modificar">Modificar</button>
 						<button class="btn btn-outline-danger" value="eliminar">Eliminar</button>
@@ -64,12 +63,10 @@
 
 				<div class="row">
 					<label class="form-label col">Teléfono
-						<input class="form-control" type="tel" maxlength="8" name="telefono" required />
+						<input class="form-control" type="tel" maxlength="12" name="telefono" required />
 					</label>
 
-					<label class="form-label col">Dirección
-						<input class="form-control" type="text" name="direccion" required />
-					</label>
+
 				</div>
 
 				<div class="modal-footer my-4">

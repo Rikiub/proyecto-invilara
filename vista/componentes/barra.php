@@ -21,11 +21,11 @@ Asignen la dirección de su controlador con "?pagina=<nombre_controlador>"
 
                 <hr class="border border-white">
 
-                <a class="nav-link" href="?pagina=solicitante">Gestionar Solicitantes</a>
+                <a class="nav-link" href="?pagina=ciudadano">Gestionar Ciudadanos</a>
+                <a class="nav-link" href="?pagina=director">Gestionar Directores</a>
 
                 <hr class="border border-white">
 
-                <a class="nav-link" href="?pagina=#">Gestionar Solicitudes 1x10</a>
                 <a class="nav-link" href="?pagina=#">Gestionar Solicitudes Generales</a>
 
                 <a class="nav-link" href="?pagina=registro_institucional">Gestionar Solicitudes Institucionales</a>

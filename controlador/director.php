@@ -1,8 +1,8 @@
 <?php
 
-require_once "modelo/solicitante.php";
+require_once "modelo/director.php";
 
-$modelo = new Registro();
+$modelo = new director();
 
 if (isset($_POST["accion"])) {
 	$accion = $_POST["accion"];
@@ -16,8 +16,9 @@ if (isset($_POST["accion"])) {
 			$modelo->set_cedula($_POST["cedula"]);
 			$modelo->set_nombre($_POST["nombre"]);
 			$modelo->set_correo($_POST["correo"]);
-			$modelo->set_telefono($_POST["telefono"]);
 			$modelo->set_direccion($_POST["direccion"]);
+			$modelo->set_telefono($_POST["telefono"]);
+
 
 			if ($accion == "insertar") {
 				$modelo->insertar();
@@ -37,6 +38,6 @@ if (isset($_POST["accion"])) {
 }
 
 $datos = $modelo->consultar();
-require_once "vista/solicitante.php";
+require_once "vista/director.php";
 
 ?>
