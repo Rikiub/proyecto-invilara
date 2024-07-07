@@ -2,7 +2,7 @@
 
 require_once "modelo/base_datos.php";
 
-class Registro extends BaseDatos
+class Institucional extends BaseDatos
 {
 	private $tabla = "ciudadano";
 
@@ -10,7 +10,7 @@ class Registro extends BaseDatos
 	private $nombre;
 	private $correo;
 	private $telefono;
-	
+
 
 	// Getter
 	public function set_cedula($valor)
@@ -29,7 +29,7 @@ class Registro extends BaseDatos
 	{
 		$this->telefono = $valor;
 	}
-	
+
 
 	// Setter
 	public function get_cedula()
@@ -48,7 +48,7 @@ class Registro extends BaseDatos
 	{
 		return $this->telefono;
 	}
-	
+
 
 	public function insertar()
 	{

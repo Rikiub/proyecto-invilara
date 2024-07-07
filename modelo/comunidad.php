@@ -6,14 +6,17 @@ class Comunidad extends BaseDatos
 {
     private $tabla = "comunidad";
 
-
+    private $id;
     private $nombre;
     private $direccion;
     private $tipo;
 
 
     // Setter
-
+    public function set_id($valor)
+    {
+        $this->id = $valor;
+    }
     public function set_nombre($valor)
     {
         $this->nombre = $valor;
@@ -27,8 +30,11 @@ class Comunidad extends BaseDatos
         $this->tipo = $valor;
     }
 
-
     // Getter
+    public function get_id()
+    {
+        return $this->id;
+    }
     public function get_nombre()
     {
         return $this->nombre;
@@ -42,9 +48,6 @@ class Comunidad extends BaseDatos
         return $this->tipo;
     }
 
-
-
-
     public function insertar()
     {
         if (!empty($this->obtenerUno($this->nombre))) {
@@ -53,11 +56,13 @@ class Comunidad extends BaseDatos
 
         $this->conexion()->query(
             "INSERT INTO {$this->tabla} (
+                id,
 				nombre,
 				direccion,
 				tipo
 			)
 			VALUES (
+                '{$this->id}',
 				'{$this->nombre}',
 				'{$this->direccion}',
 				'{$this->tipo}'
@@ -67,32 +72,32 @@ class Comunidad extends BaseDatos
 
     public function modificar()
     {
-        if (empty($this->obtenerUno($this->nombre))) {
+        if (empty($this->obtenerUno($this->id))) {
             throw new Exception("No existe");
         }
 
         $this->conexion()->query(
             "UPDATE {$this->tabla} SET 
+                id = '{$this->id}',
 				nombre = '{$this->nombre}',
 				direccion = '{$this->direccion}',
 				tipo = '{$this->tipo}'
-		
 			WHERE
-				nombre = '{$this->nombre}'
+				id = '{$this->id}'
 			"
         );
     }
 
     public function eliminar()
     {
-        if (empty($this->obtenerUno($this->nombre))) {
+        if (empty($this->obtenerUno($this->id))) {
             throw new Exception("No existe");
         }
 
         $this->conexion()->query(
             "DELETE FROM {$this->tabla}
 			WHERE
-				nombre = '{$this->nombre}'
+				id = '{$this->id}'
 			"
         );
     }
@@ -103,9 +108,9 @@ class Comunidad extends BaseDatos
         return $result;
     }
 
-    public function obtenerUno($nombre)
+    public function obtenerUno($id)
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE nombre='$nombre'");
+        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE id='$id'");
         $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $fila;
     }

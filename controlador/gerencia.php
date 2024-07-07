@@ -2,7 +2,7 @@
 
 require_once "modelo/gerencia.php";
 
-$modelo = new gerente();
+$modelo = new Gerente();
 
 if (isset($_POST["accion"])) {
     $accion = $_POST["accion"];

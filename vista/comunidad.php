@@ -2,14 +2,15 @@
 <?php require_once "vista/componentes/barra.php"; ?>
 
 <main class="container" id="crud">
-    <h1>Comunidad</h1>
+    <h1>Comunidades</h1>
 
     <button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
 
     <table class="table table-hover table-responsive">
         <thead>
             <tr>
-                <th>Nombre de la Comunidad</th>
+                <th>ID</th>
+                <th>Nombre</th>
                 <th>Direccion</th>
                 <th>Tipo</th>
                 <th>Acciones</th>
@@ -17,12 +18,12 @@
         </thead>
 
         <tbody class="table-group-divider">
-            <?php foreach ($datos as $d) : ?>
+            <?php foreach ($datos as $d): ?>
                 <tr>
+                    <td><?php echo $d["id"] ?></td>
                     <td><?php echo $d["nombre"] ?></td>
                     <td><?php echo $d["direccion"] ?></td>
                     <td><?php echo $d["tipo"] ?></td>
-
 
                     <td>
                         <button class="btn btn-outline-warning" value="modificar">Modificar</button>
@@ -47,15 +48,19 @@
 
             <form id="formulario" class="modal-body">
                 <div class="row">
-                    <label class="form-label col">Nombre de la Comunidad
+                    <label class="form-label col">ID
+                        <input class="form-control" type="text" name="id" required />
+                    </label>
+
+                    <label class="form-label col">Nombre
                         <input class="form-control" type="text" name="nombre" required />
                     </label>
 
-                    <label class="form-label col">Direccion de la Comunidad
+                    <label class="form-label col">Direccion
                         <input class="form-control" type="text" name="direccion" required />
                     </label>
 
-                    <label class="form-label col">Tipo de Comunidad
+                    <label class="form-label col">Tipo
                         <input class="form-control" type="text" name="tipo" required />
                     </label>
                 </div>
@@ -64,14 +69,9 @@
                     <input type="hidden" name="accion">
                     <button class="btn btn-primary px-5 py-2" type="submit">Procesar</button>
                 </div>
-
             </form>
         </div>
-
-
-
     </div>
-</div>
 </div>
 
 <script src="recursos/js/crud.js"></script>

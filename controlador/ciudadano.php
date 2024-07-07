@@ -2,7 +2,7 @@
 
 require_once "modelo/ciudadano.php";
 
-$modelo = new Registro();
+$modelo = new Institucional();
 
 if (isset($_POST["accion"])) {
 	$accion = $_POST["accion"];

@@ -2,7 +2,7 @@
 
 require_once "modelo/base_datos.php";
 
-class director extends BaseDatos
+class Director extends BaseDatos
 {
 	private $tabla = "director";
 

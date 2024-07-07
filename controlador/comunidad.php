@@ -2,14 +2,12 @@
 
 require_once "modelo/comunidad.php";
 
-$modelo = new comunidad();
+$modelo = new Comunidad();
 
 if (isset($_POST["accion"])) {
     $accion = $_POST["accion"];
 
-    $modelo->set_nombre($_POST['nombre']);
-    $modelo->set_direccion($_POST['direccion']);
-    $modelo->set_tipo($_POST['tipo']);
+    $modelo->set_id($_POST['id']);
 
     try {
         if ($accion == "eliminar") {
@@ -18,7 +16,6 @@ if (isset($_POST["accion"])) {
             $modelo->set_nombre($_POST['nombre']);
             $modelo->set_direccion($_POST['direccion']);
             $modelo->set_tipo($_POST['tipo']);
-
 
             if ($accion == "insertar") {
                 $modelo->insertar();

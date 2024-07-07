@@ -2,7 +2,7 @@
 
 require_once "modelo/parroquia.php";
 
-$modelo = new parroquia();
+$modelo = new Parroquia();
 
 if (isset($_POST["accion"])) {
     $accion = $_POST["accion"];

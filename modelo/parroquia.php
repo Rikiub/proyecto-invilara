@@ -2,7 +2,7 @@
 
 require_once "modelo/base_datos.php";
 
-class parroquia extends BaseDatos
+class Parroquia extends BaseDatos
 {
     private $tabla = "parroquia";
 

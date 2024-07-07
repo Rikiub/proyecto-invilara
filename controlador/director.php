@@ -2,7 +2,7 @@
 
 require_once "modelo/director.php";
 
-$modelo = new director();
+$modelo = new Director();
 
 if (isset($_POST["accion"])) {
 	$accion = $_POST["accion"];

@@ -23,14 +23,4 @@
     </button>
 </figure>
 
-<h3 class="text-center text-success py-5">INVILARA: Atención al ciudadano</h3>
-
-
-
-<style>
-    body {
-        background-image: url("recursos/img/fondo.jpg");
-        background-color: rgba(0, 0, 0, 0.5);
-        background-blend-mode: darken;
-    }
-</style>
+<h3 class="text-center py-5">INVILARA: Atención al ciudadano</h3>

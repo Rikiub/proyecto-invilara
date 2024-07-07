@@ -2,7 +2,7 @@
 <?php require_once "vista/componentes/barra.php"; ?>
 
 <main class="container" id="crud">
-    <h1>Registro de Parroquias</h1>
+    <h1>Parroquias</h1>
 
     <button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
 
@@ -10,8 +10,8 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre de la parroquia</th>
-                <th>Nombre del Municipio</th>
+                <th>Parroquia</th>
+                <th>Municipio</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -49,27 +49,27 @@
                     <label class="form-label col">ID
                         <input class="form-control" type="text" name="id">
                     </label>
+                </div>
 
-                    <label class="form-label col">Nombre de la Parroquia:
+                <div class="row">
+                    <label class="form-label col">Parroquia
                         <input class="form-control" type="text" name="nombre" required />
                     </label>
 
-                    <label>Seleccione el Municipio de localidad</label>
-                    <select class="form-select" type="text" name="nombre_municipio">
-                        <option value="Andres Eloy Blanco">Andres Eloy Blanco</option>
-                        <option value="Crespo">Crespo</option>
-                        <option value="Iribarren">Iribarren</option>
-                        <option value="Jimenez">Jimenez</option>
-                        <option value="Moràn">Moràn</option>
-                        <option value="Palavecino">Palavecino</option>
-                        <option value="Simon Planas">Simon Planas</option>
-                        <option value="Torres">Torres</option>
-                        <option value="Urdaneta">Urdaneta</option>
-                    </select>
+                    <label class="form-label col">Municipio
+                        <select class="form-select" name="nombre_municipio">
+                            <option value="Andres Eloy Blanco">Andres Eloy Blanco</option>
+                            <option value="Crespo">Crespo</option>
+                            <option value="Iribarren">Iribarren</option>
+                            <option value="Jimenez">Jimenez</option>
+                            <option value="Morán">Moràn</option>
+                            <option value="Palavecino">Palavecino</option>
+                            <option value="Simon Planas">Simon Planas</option>
+                            <option value="Torres">Torres</option>
+                            <option value="Urdaneta">Urdaneta</option>
+                        </select>
+                    </label>
                 </div>
-
-
-
 
                 <div class="modal-footer my-4">
                     <input type="hidden" name="accion">

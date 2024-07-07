@@ -2,7 +2,7 @@
 <?php require_once "vista/componentes/barra.php"; ?>
 
 <main class="container" id="crud">
-	<h1>Ciudadano</h1>
+	<h1>Ciudadanos</h1>
 
 	<button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
 
@@ -51,7 +51,9 @@
 					<label class="form-label col">Cedula
 						<input class="form-control" type="text" name="cedula" required />
 					</label>
+				</div>
 
+				<div class="row">
 					<label class="form-label col">Nombre
 						<input class="form-control" type="text" name="nombre" required />
 					</label>
@@ -59,14 +61,10 @@
 					<label class="form-label col">Correo
 						<input class="form-control" type="email" name="correo" required />
 					</label>
-				</div>
 
-				<div class="row">
 					<label class="form-label col">Teléfono
 						<input class="form-control" type="tel" maxlength="12" name="telefono" required />
 					</label>
-
-
 				</div>
 
 				<div class="modal-footer my-4">

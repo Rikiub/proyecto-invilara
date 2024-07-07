@@ -2,7 +2,7 @@
 <?php require_once "vista/componentes/barra.php"; ?>
 
 <main class="container" id="crud">
-    <h1>Gerencias de Asignacion</h1>
+    <h1>Gerencias de asignación</h1>
 
     <button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
 
@@ -10,8 +10,8 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
-                <th>Nombre del Gerente</th>
+                <th>Gerencia</th>
+                <th>Nombre del gerente</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -46,9 +46,7 @@
 
             <form id="formulario" class="modal-body">
                 <div class="row">
-                    <label class="form-label col">ID
-                        <input class="form-control" type="text" name="id">
-                    </label>
+                    <input class="form-control" type="hidden" name="id">
 
                     <label class="form-label col">Nombre
                         <input class="form-control" type="text" name="nombre" required />
@@ -57,11 +55,9 @@
                 </div>
 
                 <div class="row">
-                    <label class="form-label col">Nombre del Gerente
+                    <label class="form-label col">Nombre del gerente
                         <input class="form-control" type="text" name="nombre_gerente" required />
                     </label>
-
-
                 </div>
 
                 <div class="modal-footer my-4">

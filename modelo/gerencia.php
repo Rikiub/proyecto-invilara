@@ -2,7 +2,7 @@
 
 require_once "modelo/base_datos.php";
 
-class gerente extends BaseDatos
+class Gerente extends BaseDatos
 {
     private $tabla = "gerencia";
 
