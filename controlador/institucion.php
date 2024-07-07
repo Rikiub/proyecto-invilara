@@ -1,24 +1,24 @@
 <?php
 
-require_once "modelo/director.php";
+require_once "modelo/institucion.php";
 
-$modelo = new Director();
+$modelo = new Institucion();
 
 if (isset($_POST["accion"])) {
 	$accion = $_POST["accion"];
 
-	$modelo->set_cedula($_POST['cedula']);
-
 	try {
+		$modelo->set_id($_POST["id"]);
+
 		if ($accion == "eliminar") {
 			$modelo->eliminar();
 		} else {
-			$modelo->set_cedula($_POST["cedula"]);
+			$modelo->set_id_parroquia($_POST["id_parroquia"]);
 			$modelo->set_nombre($_POST["nombre"]);
+			$modelo->set_nombre_director($_POST["nombre_director"]);
 			$modelo->set_correo($_POST["correo"]);
-			$modelo->set_direccion($_POST["direccion"]);
 			$modelo->set_telefono($_POST["telefono"]);
-
+			$modelo->set_direccion($_POST["direccion"]);
 
 			if ($accion == "insertar") {
 				$modelo->insertar();
@@ -38,6 +38,6 @@ if (isset($_POST["accion"])) {
 }
 
 $datos = $modelo->consultar();
-require_once "vista/director.php";
+require_once "vista/institucion.php";
 
 ?>

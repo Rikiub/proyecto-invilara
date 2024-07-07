@@ -46,15 +46,16 @@
 
             <form id="formulario" class="modal-body">
                 <div class="row">
-                    <input class="form-control" type="hidden" name="id">
+                    <label>ID
+                        <input class="form-control" type="number" name="id">
+                    </label>
+                </div>
 
+                <div class="row">
                     <label class="form-label col">Nombre
                         <input class="form-control" type="text" name="nombre" required />
                     </label>
 
-                </div>
-
-                <div class="row">
                     <label class="form-label col">Nombre del gerente
                         <input class="form-control" type="text" name="nombre_gerente" required />
                     </label>

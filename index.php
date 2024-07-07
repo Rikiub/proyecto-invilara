@@ -12,7 +12,7 @@ $controlador = "controlador/" . $pagina . ".php";
 if (is_file($controlador)) {
     require_once $controlador;
 } else {
-    // Redireccionar a la pagina de error.
+    // Redireccionar a pagina de error.
     require_once "vista/404.php";
 }
 

@@ -49,9 +49,11 @@
             <form id="formulario" class="modal-body">
                 <div class="row">
                     <label class="form-label col">ID
-                        <input class="form-control" type="text" name="id" required />
+                        <input class="form-control" type="number" name="id" required />
                     </label>
+                </div>
 
+                <div class="row">
                     <label class="form-label col">Nombre
                         <input class="form-control" type="text" name="nombre" required />
                     </label>

@@ -2,7 +2,7 @@
 
 require_once "modelo/usuarios.php";
 
-$modelo = new Usuarios();
+$modelo = new Usuario();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cedula = $_POST["cedula"];

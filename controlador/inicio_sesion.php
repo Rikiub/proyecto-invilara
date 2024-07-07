@@ -1,8 +1,8 @@
 <?php
 
-require_once "modelo/usuarios.php";
+require_once "modelo/usuario.php";
 
-$modelo = new Usuarios();
+$modelo = new Usuario();
 
 $error = null;
 
@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Mostrar vista
+$barra_simple = true;
 require_once "vista/inicio_sesion.php";
 
 ?>

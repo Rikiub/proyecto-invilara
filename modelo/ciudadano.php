@@ -2,7 +2,7 @@
 
 require_once "modelo/base_datos.php";
 
-class Institucional extends BaseDatos
+class Ciudadano extends BaseDatos
 {
 	private $tabla = "ciudadano";
 
@@ -25,11 +25,10 @@ class Institucional extends BaseDatos
 	{
 		$this->correo = $valor;
 	}
-	public function set_telefono($valor)
+	public function set_telefono()
 	{
-		$this->telefono = $valor;
+		$this->telefono;
 	}
-
 
 	// Setter
 	public function get_cedula()

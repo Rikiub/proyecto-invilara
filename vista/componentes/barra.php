@@ -5,34 +5,89 @@ Asignen la dirección de su controlador con "?pagina=<nombre_controlador>"
 
 <nav data-bs-theme="dark" class="navbar mb-5 inv-gradient">
     <div class="container-fluid mx-2">
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu-navbar" aria-expanded="false">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <?php if (isset($barra_simple)): ?>
+            <div></div>
+        <?php else: ?>
+            <button class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#barra-lateral">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <?php endif ?>
 
         <label class="navbar-brand">
             INVILARA
             <img src="recursos/img/invilara-logo.png" alt="Logo" class="mx-2" width="30px">
         </label>
-
-        <div class="collapse navbar-collapse fw-bold" id="menu-navbar">
-            <div class="navbar-nav my-3">
-                <a class="nav-link" href="?pagina=inicio_sesion">Cerrar sesión</a>
-                <a class="nav-link" href="?pagina=principal">Volver a principal</a>
-
-                <hr class="border border-white">
-
-                <a class="nav-link" href="?pagina=ciudadano">Gestionar Ciudadanos</a>
-                <a class="nav-link" href="?pagina=parroquia">Gestionar Parroquias</a>
-                <a class="nav-link" href="?pagina=comunidad">Gestionar Comunidades</a>
-                <a class="nav-link" href="?pagina=gerencia">Gestionar Gerencias</a>
-
-                <hr class="border border-white">
-
-                <a class="nav-link" href="?pagina=#">Gestionar Solicitudes 1x10</a>
-                <a class="nav-link" href="?pagina=#">Gestionar Solicitudes Generales</a>
-
-                <a class="nav-link" href="?pagina=registro_institucional">Gestionar Solicitudes Institucionales</a>
-            </div>
-        </div>
     </div>
 </nav>
+
+
+
+<?php if (!isset($barra_simple)): ?>
+    <aside class="offcanvas offcanvas-start inv-gradient" tabindex="-1" id="barra-lateral">
+        <header class="offcanvas-header">
+            <h5 class="offcanvas-title">Menu</h5>
+            <button class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </header>
+
+        <div class="offcanvas-body">
+            <article class="list-group">
+                <a class="list-group-item list-group-item-action" href="?pagina=principal">
+                    Inicio
+                </a>
+
+                <a class="list-group-item list-group-item-action" href="?pagina=inicio_sesion">
+                    Cerrar sesión
+                </a>
+            </article>
+
+            <hr>
+
+            <article class="list-group">
+                <a class="list-group-item list-group-item-action" href="?pagina=parroquia">
+                    Parroquias
+                </a>
+
+                <a class="list-group-item list-group-item-action" href="?pagina=ciudadano">
+                    Ciudadanos
+                </a>
+
+                <a class="list-group-item list-group-item-action" href="?pagina=comunidad">
+                    Comunidades
+                </a>
+
+                <a class="list-group-item list-group-item-action" href="?pagina=institucion">
+                    Instituciones
+                </a>
+
+                <a class="list-group-item list-group-item-action" href="?pagina=gerencia">
+                    Gerencias
+                </a>
+            </article>
+
+            <hr>
+
+            <article class="list-group">
+                <button data-bs-toggle="collapse" data-bs-target="#solicitudes"
+                    class="list-group-item list-group-item-action active text-center fs-5">
+                    Solicitudes
+                </button>
+
+                <section class="collapse" id="solicitudes">
+                    <div class="list-group list-group-flush">
+                        <a class="list-group-item list-group-item-action" href="?pagina=solicitud_1x10">
+                            1x10
+                        </a>
+
+                        <a class="list-group-item list-group-item-action" href="?pagina=solicitud_general">
+                            Generales
+                        </a>
+
+                        <a class="list-group-item list-group-item-action" href="?pagina=solicitud_institucional">
+                            Institucionales
+                        </a>
+                    </div>
+                </section>
+            </article>
+        </div>
+    </aside>
+<?php endif ?>

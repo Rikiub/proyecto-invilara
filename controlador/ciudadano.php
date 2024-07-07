@@ -2,7 +2,7 @@
 
 require_once "modelo/ciudadano.php";
 
-$modelo = new Institucional();
+$modelo = new Ciudadano();
 
 if (isset($_POST["accion"])) {
 	$accion = $_POST["accion"];
@@ -16,7 +16,7 @@ if (isset($_POST["accion"])) {
 			$modelo->set_cedula($_POST["cedula"]);
 			$modelo->set_nombre($_POST["nombre"]);
 			$modelo->set_correo($_POST["correo"]);
-			$modelo->set_telefono($_POST["telefono"]);
+			$modelo->set_correo($_POST["telefono"]);
 
 
 			if ($accion == "insertar") {

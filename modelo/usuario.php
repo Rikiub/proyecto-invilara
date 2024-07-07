@@ -2,7 +2,7 @@
 
 require_once "modelo/base_datos.php";
 
-class Usuarios extends BaseDatos
+class Usuario extends BaseDatos
 {
     private $tabla = "usuario";
 
