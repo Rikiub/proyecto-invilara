@@ -10,6 +10,7 @@ class Ciudadano extends BaseDatos
 	private $nombre;
 	private $correo;
 	private $telefono;
+	private $direccion;
 
 
 	// Getter
@@ -25,9 +26,13 @@ class Ciudadano extends BaseDatos
 	{
 		$this->correo = $valor;
 	}
-	public function set_telefono()
+	public function set_telefono($valor)
 	{
-		$this->telefono;
+		$this->telefono = $valor;
+	}
+	public function set_direccion($valor)
+	{
+		$this->direccion = $valor;
 	}
 
 	// Setter
@@ -47,6 +52,10 @@ class Ciudadano extends BaseDatos
 	{
 		return $this->telefono;
 	}
+	public function get_direccion()
+	{
+		return $this->direccion;
+	}
 
 
 	public function insertar()
@@ -60,13 +69,15 @@ class Ciudadano extends BaseDatos
 				cedula,
 				nombre,
 				correo,
-				telefono
+				telefono,
+				direccion
 			)
 			VALUES (
 				'{$this->cedula}',
 				'{$this->nombre}',
 				'{$this->correo}',
-				'{$this->telefono}'
+				'{$this->telefono}',
+				'{$this->direccion}'
 			)"
 		);
 	}
@@ -82,13 +93,12 @@ class Ciudadano extends BaseDatos
 				cedula = '{$this->cedula}',
 				nombre = '{$this->nombre}',
 				correo = '{$this->correo}',
-				telefono = '{$this->telefono}'
-		
+				telefono = '{$this->telefono}',
+				direccion = '{$this->direccion}'
 			WHERE
 				cedula = '{$this->cedula}'
 			"
 		);
-
 	}
 
 	public function eliminar()

@@ -7,17 +7,16 @@ $modelo = new Ciudadano();
 if (isset($_POST["accion"])) {
 	$accion = $_POST["accion"];
 
-	$modelo->set_cedula($_POST['cedula']);
-
 	try {
+		$modelo->set_cedula($_POST['cedula']);
+
 		if ($accion == "eliminar") {
 			$modelo->eliminar();
 		} else {
-			$modelo->set_cedula($_POST["cedula"]);
 			$modelo->set_nombre($_POST["nombre"]);
 			$modelo->set_correo($_POST["correo"]);
-			$modelo->set_correo($_POST["telefono"]);
-
+			$modelo->set_telefono($_POST["telefono"]);
+			$modelo->set_direccion($_POST["direccion"]);
 
 			if ($accion == "insertar") {
 				$modelo->insertar();

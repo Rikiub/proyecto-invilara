@@ -13,6 +13,7 @@
 				<th>Nombre</th>
 				<th>Correo</th>
 				<th>Teléfono</th>
+				<th>Dirección</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
@@ -24,6 +25,7 @@
 					<td><?php echo $d["nombre"] ?></td>
 					<td><?php echo $d["correo"] ?></td>
 					<td><?php echo $d["telefono"] ?></td>
+					<td><?php echo $d["direccion"] ?></td>
 
 					<td>
 						<button class="btn btn-outline-warning" value="modificar">Modificar</button>
@@ -63,7 +65,13 @@
 					</label>
 
 					<label class="form-label col">Teléfono
-						<input class="form-control" type="tel" maxlength="12" name="telefono" required />
+						<input class="form-control" type="tel" name="telefono" required />
+					</label>
+				</div>
+
+				<div class="row">
+					<label class="form-label col">Dirección
+						<input class="form-control" type="text" name="direccion" required />
 					</label>
 				</div>
 
