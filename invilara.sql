@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 07, 2024 at 10:28 PM
+-- Generation Time: Jul 07, 2024 at 10:43 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -82,6 +82,7 @@ CREATE TABLE `gerencia` (
 --
 
 INSERT INTO `gerencia` (`id`, `nombre`, `nombre_gerente`) VALUES
+(1, 'Administración de herramientas', 'Francisco Gomez'),
 (5, 'Administración de bienes', 'Rodrigo Torres');
 
 -- --------------------------------------------------------
@@ -194,6 +195,13 @@ CREATE TABLE `solicitud_institucional` (
   `estatus` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
+--
+-- Dumping data for table `solicitud_institucional`
+--
+
+INSERT INTO `solicitud_institucional` (`nro_control`, `nro_oficio`, `id_institucion`, `id_comunidad`, `id_gerencia`, `fecha`, `problematica`, `instrucciones`, `observacion`, `estatus`) VALUES
+('1', '1', 1, 1, 1, '2024-07-07', 'Problema a solucionar.', 'Instrucciones para resolver la problemática.', '', 'En programación');
+
 -- --------------------------------------------------------
 
 --
@@ -280,9 +288,9 @@ ALTER TABLE `solicitud_general`
 --
 ALTER TABLE `solicitud_institucional`
   ADD PRIMARY KEY (`nro_control`) USING BTREE,
-  ADD KEY `solicitud_institucional_gerencia_FK` (`id_gerencia`),
   ADD KEY `solicitud_institucional_institucion_FK` (`id_institucion`),
-  ADD KEY `solicitud_institucional_comunidad_FK` (`id_comunidad`);
+  ADD KEY `solicitud_institucional_comunidad_FK` (`id_comunidad`),
+  ADD KEY `solicitud_institucional_gerencia_FK` (`id_gerencia`);
 
 --
 -- Indexes for table `usuario`
@@ -363,7 +371,7 @@ ALTER TABLE `solicitud_general`
 --
 ALTER TABLE `solicitud_institucional`
   ADD CONSTRAINT `solicitud_institucional_comunidad_FK` FOREIGN KEY (`id_comunidad`) REFERENCES `comunidad` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `solicitud_institucional_gerencia_FK` FOREIGN KEY (`id_gerencia`) REFERENCES `gerencia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `solicitud_institucional_gerencia_FK` FOREIGN KEY (`id_gerencia`) REFERENCES `gerencia` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `solicitud_institucional_institucion_FK` FOREIGN KEY (`id_institucion`) REFERENCES `institucion` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
