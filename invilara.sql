@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 07, 2024 at 10:43 PM
+-- Generation Time: Jul 07, 2024 at 10:44 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -371,7 +371,7 @@ ALTER TABLE `solicitud_general`
 --
 ALTER TABLE `solicitud_institucional`
   ADD CONSTRAINT `solicitud_institucional_comunidad_FK` FOREIGN KEY (`id_comunidad`) REFERENCES `comunidad` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `solicitud_institucional_gerencia_FK` FOREIGN KEY (`id_gerencia`) REFERENCES `gerencia` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `solicitud_institucional_gerencia_FK` FOREIGN KEY (`id_gerencia`) REFERENCES `gerencia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `solicitud_institucional_institucion_FK` FOREIGN KEY (`id_institucion`) REFERENCES `institucion` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
