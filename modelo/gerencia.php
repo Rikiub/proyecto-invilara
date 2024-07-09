@@ -9,6 +9,7 @@ class Gerente extends BaseDatos
     private $id;
     private $nombre;
     private $nombre_gerente;
+    private $direccion;
 
 
     // Getter
@@ -23,6 +24,10 @@ class Gerente extends BaseDatos
     public function set_nombre_gerente($valor)
     {
         $this->nombre_gerente = $valor;
+    }
+    public function set_direccion($valor)
+    {
+        $this->direccion = $valor;
     }
 
 
@@ -39,7 +44,10 @@ class Gerente extends BaseDatos
     {
         return $this->nombre_gerente;
     }
-
+    public function get_direccion()
+    {
+        return $this->direccion;
+    }
 
     public function insertar()
     {
@@ -49,15 +57,14 @@ class Gerente extends BaseDatos
 
         $this->conexion()->query(
             "INSERT INTO {$this->tabla} (
-				id,
 				nombre,
-				nombre_gerente
-				
+				nombre_gerente,
+                direccion
 			)
 			VALUES (
-				'{$this->id}',
 				'{$this->nombre}',
-				'{$this->nombre_gerente}'
+				'{$this->nombre_gerente}',
+                '{$this->direccion}'
 			)"
         );
     }
@@ -72,8 +79,8 @@ class Gerente extends BaseDatos
             "UPDATE {$this->tabla} SET 
 				id = '{$this->id}',
 				nombre = '{$this->nombre}',
-				nombre_gerente = '{$this->nombre_gerente}'
-		
+				nombre_gerente = '{$this->nombre_gerente}',
+                direccion = '{$this->direccion}'
 			WHERE
 				id = '{$this->id}'
 			"

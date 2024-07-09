@@ -9,7 +9,6 @@
     <table class="table table-hover table-responsive">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Parroquia</th>
                 <th>Municipio</th>
                 <th>Acciones</th>
@@ -19,7 +18,7 @@
         <tbody class="table-group-divider">
             <?php foreach ($datos as $d): ?>
                 <tr>
-                    <td><?php echo $d["id"] ?></td>
+                    <td class="d-none"><?php echo $d["id"] ?></td>
                     <td><?php echo $d["nombre"] ?></td>
                     <td><?php echo $d["nombre_municipio"] ?></td>
 
@@ -45,11 +44,7 @@
             </div>
 
             <form id="formulario" class="modal-body">
-                <div class="row">
-                    <label class="form-label col">ID
-                        <input class="form-control" type="number" name="id">
-                    </label>
-                </div>
+                <input type="hidden" name="id">
 
                 <div class="row">
                     <label class="form-label col">Parroquia

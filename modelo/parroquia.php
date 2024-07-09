@@ -49,12 +49,10 @@ class Parroquia extends BaseDatos
 
         $this->conexion()->query(
             "INSERT INTO {$this->tabla} (
-				id,
 				nombre,
 				nombre_municipio
 			)
 			VALUES (
-				'{$this->id}',
 				'{$this->nombre}',
 				'{$this->nombre_municipio}'
 			)"

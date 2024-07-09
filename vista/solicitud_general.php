@@ -10,9 +10,9 @@
 		<thead>
 			<tr>
 				<th>Nº Control</th>
-				<th>ID Gerencia</th>
-				<th>ID Comunidad</th>
-				<th>Cedula Solicitante</th>
+				<th>Gerencia</th>
+				<th>Comunidad</th>
+				<th>Cedula solicitante</th>
 				<th>Fecha</th>
 				<th>Problematica</th>
 				<th>Estatus</th>
@@ -54,17 +54,17 @@
 						<input class="form-control" type="number" name="nro_control" required />
 					</label>
 
-					<label class="form-label col">ID Gerencia
+					<label class="form-label col">Gerencia
 						<input class="form-control" type="number" name="id_gerencia" required />
 					</label>
 
-					<label class="form-label col">ID Comunidad
+					<label class="form-label col">Comunidad
 						<input class="form-control" type="number" name="id_comunidad" required />
 					</label>
 				</div>
 
 				<div class="row">
-					<label class="form-label col">Cedula del solicitante
+					<label class="form-label col">Cedula solicitante
 						<input class="form-control" type="text" name="cedula_solicitante" required />
 					</label>
 

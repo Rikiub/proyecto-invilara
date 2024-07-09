@@ -56,13 +56,11 @@ class Comunidad extends BaseDatos
 
         $this->conexion()->query(
             "INSERT INTO {$this->tabla} (
-                id,
 				nombre,
 				direccion,
 				tipo
 			)
 			VALUES (
-                '{$this->id}',
 				'{$this->nombre}',
 				'{$this->direccion}',
 				'{$this->tipo}'

@@ -82,7 +82,6 @@ class Institucion extends BaseDatos
 
         $this->conexion()->query(
             "INSERT INTO {$this->tabla} (
-				id,
                 id_parroquia,
                 nombre,
                 nombre_director,
@@ -91,7 +90,6 @@ class Institucion extends BaseDatos
                 direccion
 			)
 			VALUES (
-				'{$this->id}',
                 '{$this->id_parroquia}',
                 '{$this->nombre}',
                 '{$this->nombre_director}',

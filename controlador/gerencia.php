@@ -16,7 +16,7 @@ if (isset($_POST["accion"])) {
             $modelo->set_id($_POST["id"]);
             $modelo->set_nombre($_POST["nombre"]);
             $modelo->set_nombre_gerente($_POST["nombre_gerente"]);
-
+            $modelo->set_direccion($_POST["direccion"]);
 
             if ($accion == "insertar") {
                 $modelo->insertar();

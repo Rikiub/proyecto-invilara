@@ -11,9 +11,9 @@
 			<tr>
 				<th>Nº Control</th>
 				<th>Nº Oficio</th>
-				<th>ID Institucion</th>
-				<th>ID Comunidad</th>
-				<th>ID Gerencia</th>
+				<th>Institucion</th>
+				<th>Comunidad</th>
+				<th>Gerencia</th>
 				<th>Fecha</th>
 				<th>Problematica</th>
 				<th>Instrucciones</th>
@@ -69,15 +69,15 @@
 				</div>
 
 				<div class="row">
-					<label class="form-label col">ID Institucion
+					<label class="form-label col">Institucion
 						<input class="form-control" type="text" name="id_institucion" required />
 					</label>
 
-					<label class="form-label col">ID Comunidad
+					<label class="form-label col">Comunidad
 						<input class="form-control" type="text" name="id_comunidad" required />
 					</label>
 
-					<label class="form-label col">ID Gerencia
+					<label class="form-label col">Gerencia
 						<input class="form-control" type="text" name="id_gerencia" required />
 					</label>
 				</div>

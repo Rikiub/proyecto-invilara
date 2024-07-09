@@ -9,13 +9,12 @@
 	<table class="table table-hover table-responsive">
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th>ID Parroquia</th>
 				<th>Nombre</th>
-				<th>Nombre del director</th>
+				<th>Director</th>
+				<th>Parroquia</th>
+				<th>Dirección</th>
 				<th>Correo</th>
 				<th>Teléfono</th>
-				<th>Dirección</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
@@ -23,13 +22,13 @@
 		<tbody class="table-group-divider">
 			<?php foreach ($datos as $d): ?>
 				<tr>
-					<td><?php echo $d["id"] ?></td>
-					<td><?php echo $d["id_parroquia"] ?></td>
+					<td class="d-none"><?php echo $d["id"] ?></td>
 					<td><?php echo $d["nombre"] ?></td>
 					<td><?php echo $d["nombre_director"] ?></td>
+					<td><?php echo $d["id_parroquia"] ?></td>
+					<td><?php echo $d["direccion"] ?></td>
 					<td><?php echo $d["correo"] ?></td>
 					<td><?php echo $d["telefono"] ?></td>
-					<td><?php echo $d["direccion"] ?></td>
 
 					<td>
 						<button class="btn btn-outline-warning" value="modificar">Modificar</button>
@@ -53,23 +52,25 @@
 			</div>
 
 			<form id="formulario" class="modal-body">
-				<div class="row">
-					<label class="form-label col">ID
-						<input class="form-control" type="number" name="id" required />
-					</label>
-
-					<label class="form-label col">ID Parroquia
-						<input class="form-control" type="number" name="id_parroquia" required />
-					</label>
-				</div>
+				<input type="hidden" name="id" />
 
 				<div class="row">
 					<label class="form-label col">Nombre
 						<input class="form-control" type="text" name="nombre" required />
 					</label>
 
-					<label class="form-label col">Nombre del director
+					<label class="form-label col">Director
 						<input class="form-control" type="text" name="nombre_director" required />
+					</label>
+				</div>
+
+				<div class="row">
+					<label class="form-label col">Parroquia
+						<input class="form-control" type="number" name="id_parroquia" required />
+					</label>
+
+					<label class="form-label col">Dirección
+						<input class="form-control" type="text" name="direccion" required />
 					</label>
 				</div>
 
@@ -80,10 +81,6 @@
 
 					<label class="form-label col">Teléfono
 						<input class="form-control" type="tel" name="telefono" required />
-					</label>
-
-					<label class="form-label col">Dirección
-						<input class="form-control" type="text" name="direccion" required />
 					</label>
 				</div>
 
