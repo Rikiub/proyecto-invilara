@@ -13,14 +13,14 @@
             <?php endif ?>
 
             <div class="row">
-                <label class="form-label" for="cedula">Cedula
+                <label class="form-label">Cedula
                     <input class="form-control" type="number" name="cedula" required>
                 </label>
             </div>
 
             <div class="row">
-                <label class="form-label" for="contraseña">Contraseña
-                    <input class="form-control" type="password" name="contraseña" required />
+                <label class="form-label">Contraseña
+                    <input class="form-control" type="password" name="contrasena" required />
                 </label>
             </div>
 

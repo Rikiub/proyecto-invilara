@@ -6,12 +6,25 @@ class Usuario extends BaseDatos
 {
     private $tabla = "usuario";
 
-    public function iniciarSesion($cedula, $contraseña)
-    {
-        if ($cedula && $contraseña) {
-            $user = $this->obtenerUno($cedula);
+    private $cedula;
+    private $contrasena;
 
-            if ($user && $user[0]["contraseña"] == $contraseña) {
+    // Setter
+    public function set_cedula($valor)
+    {
+        $this->cedula = $valor;
+    }
+    public function set_contrasena($valor)
+    {
+        $this->contrasena = $valor;
+    }
+
+    public function iniciarSesion()
+    {
+        if ($this->cedula && $this->contrasena) {
+            $user = $this->obtenerUno($this->cedula);
+
+            if ($user && $user[0]["contrasena"] == $this->contrasena) {
                 return true;
             }
         }
@@ -19,51 +32,54 @@ class Usuario extends BaseDatos
         return false;
     }
 
-    public function insertar($cedula, $contraseña)
+    public function insertar()
     {
-        $sql = "INSERT INTO {$this->tabla} (cedula, contraseña) VALUES (:cedula, :contrasena)";
-        $stmt = $this->conexion()->prepare($sql);
+        if (!empty($this->obtenerUno($this->cedula))) {
+            throw new Exception("Ya existe");
+        }
 
-        // No usen caracteres especiales para los `bindParam`, como la Ñ, dara error de codificación.
-        $stmt->bindParam(":cedula", $cedula, PDO::PARAM_INT);
-        $stmt->bindParam(":contrasena", $contraseña);
-
-        return $stmt->execute();
+        $this->conexion()->query(
+            "INSERT INTO {$this->tabla}
+                (cedula, contrasena)
+            VALUES
+                ({$this->cedula}, {$this->contrasena})"
+        );
     }
 
-    public function actualizar($cedula_antiguo, $cedula, $contraseña)
+    public function modificar($cedula)
     {
-        throw new Exception("'actualizar' no ha sido implementado.");
+        throw new Exception("'modificar' no ha sido implementado.");
     }
 
     public function eliminar($cedula)
     {
-        $sql = "DELETE FROM {$this->tabla} WHERE cedula = ?";
-        $stmt = $this->conexion()->prepare($sql);
-
-        try {
-            $stmt->execute([$cedula]);
-            return true;
-        } catch (Exception) {
-            return false;
+        if (empty($this->obtenerUno($this->cedula))) {
+            throw new Exception("No existe");
         }
+
+        $this->conexion()->query(
+            "DELETE FROM {$this->tabla}
+            WHERE
+                cedula = '{$this->cedula}'"
+        );
     }
 
     public function consultar()
     {
-        $sql = "SELECT * FROM {$this->tabla}";
-        $stmt = $this->conexion()->prepare($sql);
-        $stmt->execute();
+        $stmt = $this->conexion()->query(
+            "SELECT * FROM {$this->tabla}"
+        );
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function obtenerUno($cedula)
     {
-        $sql = "SELECT * FROM {$this->tabla} WHERE cedula = ?";
-
-        $stmt = $this->conexion()->prepare($sql);
-        $stmt->execute([$cedula]);
+        $stmt = $this->conexion()->query(
+            "SELECT * FROM {$this->tabla}
+            WHERE
+                cedula = '{$this->cedula}'"
+        );
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

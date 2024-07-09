@@ -13,6 +13,7 @@
 				<th>ID Gerencia</th>
 				<th>ID Comunidad</th>
 				<th>Cedula Solicitante</th>
+				<th>Fecha</th>
 				<th>Problematica</th>
 				<th>Estatus</th>
 			</tr>
@@ -23,6 +24,7 @@
 			<td>1</td>
 			<td>1</td>
 			<td>1168576</td>
+			<td>04/01/2024</td>
 			<td>Asfalto</td>
 			<td>Culminado</td>
 
@@ -63,6 +65,12 @@
 				<div class="row">
 					<label class="form-label col">Cedula del solicitante
 						<input class="form-control" type="text" name="cedula_solicitante" required />
+					</label>
+				</div>
+
+				<div class="row">
+					<label class="form-label col">Fecha
+						<input class="form-control" type="date" name="fecha" required />
 					</label>
 				</div>
 

@@ -7,10 +7,10 @@ $modelo = new Usuario();
 $error = null;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $cedula = $_POST["cedula"];
-    $contraseña = $_POST["contraseña"];
+    $modelo->set_cedula($_POST["cedula"]);
+    $modelo->set_contrasena($_POST["contrasena"]);
 
-    if ($modelo->iniciarSesion($cedula, $contraseña)) {
+    if ($modelo->iniciarSesion()) {
         header("Location: ?pagina=principal");
         exit;
     } else {
