@@ -2,7 +2,7 @@
 <?php require_once "vista/componentes/barra.php"; ?>
 
 <main class="container" id="crud">
-    <h1>Gestiòn de las Gerencias de invilara</h1>
+    <h1>Gestión de Gerencias</h1>
     <hr>
     <button class="btn btn-primary my-3" value="insertar">Registrar</button>
     <hr>
@@ -12,7 +12,7 @@
                 <tr>
                     <th>Nombre de la Gerencia</th>
                     <th>Nombre del Gerente</th>
-                    <th>Dirección de la Gerencia:</th>
+                    <th>Dirección de la Gerencia</th>
                     <th>Acciones</th>
                 </tr>
             </thead>

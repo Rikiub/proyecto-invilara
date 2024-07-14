@@ -18,7 +18,7 @@
             </thead>
 
             <tbody class="table-group-divider">
-                <?php foreach ($datos as $d): ?>
+                <?php foreach ($datos as $d) : ?>
                     <tr>
                         <td class="d-none"><?php echo $d["id"] ?></td>
                         <td><?php echo $d["nombre"] ?></td>
@@ -27,8 +27,7 @@
 
                         <td class="d-grid d-md-block gap-2">
                             <button class="btn btn-outline-warning" value="modificar">Modificar</button>
-                            <button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
-                                data-bs-target="#modal-eliminacion">Eliminar</button>
+                            <button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal" data-bs-target="#modal-eliminacion">Eliminar</button>
                         </td>
                     </tr>
                 <?php endforeach ?>
@@ -53,11 +52,11 @@
 
                 <div class="row">
                     <label class="form-label col">Nombre
-                        <input class="form-control" type="text" name="nombre" required />
+                        <input class="form-control" type="text" name="nombre" minlength="3" maxlength="30" required />
                     </label>
 
                     <label class="form-label col">Dirección
-                        <input class="form-control" type="text" name="direccion" required />
+                        <input class="form-control" type="text" name="direccion" minlength="10" maxlength="250" required />
                     </label>
 
                     <label class="form-label col">Tipo
