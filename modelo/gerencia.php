@@ -12,46 +12,46 @@ class Gerente extends BaseDatos
     private $direccion;
 
 
-    // Getter
-    public function set_id($valor)
+    // coloco
+    function set_id($valor)
     {
         $this->id = $valor;
     }
-    public function set_nombre($valor)
+    function set_nombre($valor)
     {
         $this->nombre = $valor;
     }
-    public function set_nombre_gerente($valor)
+    function set_nombre_gerente($valor)
     {
         $this->nombre_gerente = $valor;
     }
-    public function set_direccion($valor)
+    function set_direccion($valor)
     {
         $this->direccion = $valor;
     }
 
 
-    // Setter
-    public function get_id()
+    // leeo
+    function get_id()
     {
         return $this->id;
     }
-    public function get_nombre()
+    function get_nombre()
     {
         return $this->nombre;
     }
-    public function get_nombre_gerente()
+    function get_nombre_gerente()
     {
         return $this->nombre_gerente;
     }
-    public function get_direccion()
+    function get_direccion()
     {
         return $this->direccion;
     }
 
-    public function insertar()
+    function insertar()
     {
-        if (!empty($this->obtenerUno($this->id))) {
+        if (!empty($this->conectamos($this->id))) {
             throw new Exception("Ya existe");
         }
 
@@ -69,9 +69,9 @@ class Gerente extends BaseDatos
         );
     }
 
-    public function modificar()
+    function modificar()
     {
-        if (empty($this->obtenerUno($this->id))) {
+        if (empty($this->conectamos($this->id))) {
             throw new Exception("No existe");
         }
 
@@ -88,9 +88,9 @@ class Gerente extends BaseDatos
 
     }
 
-    public function eliminar()
+    function eliminar()
     {
-        if (empty($this->obtenerUno($this->id))) {
+        if (empty($this->conectamos($this->id))) {
             throw new Exception("No existe");
         }
 
@@ -102,13 +102,13 @@ class Gerente extends BaseDatos
         );
     }
 
-    public function consultar()
+    function consultar()
     {
         $result = $this->conexion()->query("SELECT * FROM {$this->tabla}");
         return $result;
     }
 
-    public function obtenerUno($id)
+    function conectamos($id)
     {
         $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE id='$id'");
         $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);

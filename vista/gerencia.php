@@ -2,21 +2,20 @@
 <?php require_once "vista/componentes/barra.php"; ?>
 
 <main class="container" id="crud">
-    <h1>Gerencias</h1>
-
-    <button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
-
+    <h1>Gestiòn de las Gerencias de invilara</h1>
+    <hr>
+    <button class="btn btn-primary my-3" value="insertar">Registrar</button>
+    <hr>
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Gerente</th>
-                    <th>Dirección</th>
+                    <th>Nombre de la Gerencia</th>
+                    <th>Nombre del Gerente</th>
+                    <th>Dirección de la Gerencia:</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
-
             <tbody class="table-group-divider">
                 <?php foreach ($datos as $d): ?>
                     <tr>
@@ -26,8 +25,8 @@
                         <td><?php echo $d["direccion"] ?></td>
 
                         <td class="d-grid d-md-block gap-2">
-                            <button class="btn btn-outline-warning" value="modificar">Modificar</button>
-                            <button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
+                            <button class="btn btn-warning" value="modificar">Modificar</button>
+                            <button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
                                 data-bs-target="#modal-eliminacion">Eliminar</button>
                         </td>
                     </tr>
@@ -38,8 +37,6 @@
 </main>
 
 <?php require_once "vista/componentes/modal_eliminar.php"; ?>
-
-<!-- MODAL EDITOR -->
 <div class="modal modal-lg fade" id="modal-edicion" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content p-3">
@@ -52,18 +49,22 @@
                 <input type="hidden" name="id">
 
                 <div class="row">
-                    <label class="form-label col">Nombre
-                        <input class="form-control" type="text" name="nombre" required />
+                    <label class="form-label col">Nombre de la Gerencia:
+                        <input class="form-control" type="text" name="nombre" placeholder="Por ejemplo, Hidrolara"
+                            minlength="5" maxlength="70" required />
                     </label>
 
-                    <label class="form-label col">Gerente
-                        <input class="form-control" type="text" name="nombre_gerente" required />
+                    <label class="form-label col">Nombre y apellido del Gerente:
+                        <input class="form-control" type="text" name="nombre_gerente" id="nombre_gerente"
+                            pattern="[A-Za-z\s]+" placeholder="Agregar solo letras, Ejemplo: Juan Herrera" minlength="5"
+                            maxlength="70" required />
                     </label>
                 </div>
 
                 <div class="row">
-                    <label class="form-label col">Dirección
-                        <input class="form-control" type="text" name="direccion" required />
+                    <label class="form-label col">Dirección de la Gerencia:
+                        <input class="form-control" type="text" name="direccion"
+                            placeholder="Ejemplo, Calle 13 con carrera 22" minlength="5" maxlength="90" required />
                     </label>
                 </div>
 
@@ -75,5 +76,4 @@
         </div>
     </div>
 </div>
-
 <script src="recursos/js/crud.js"></script>
