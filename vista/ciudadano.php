@@ -55,14 +55,15 @@
 				<div class="row">
 					<label class="form-label col">
 						Cedula
-						<input data-id class="form-control" type="text" name="cedula" required />
+						<input data-id class="form-control" type="text" pattern="\d*" inputmode="numeric" minlength="7"
+							maxlength="8" name="cedula" required />
 					</label>
 				</div>
 
 				<div class="row">
 					<label class="form-label col">
 						Nombre
-						<input class="form-control" type="text" name="nombre" required />
+						<input class="form-control" type="text" name="nombre" maxlength="50" required />
 					</label>
 
 					<label class="form-label col">
@@ -72,7 +73,8 @@
 
 					<label class="form-label col">
 						Teléfono
-						<input class="form-control" type="tel" name="telefono" required />
+						<input class="form-control" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+							title="Ejemplo: 412-337-1891" name="telefono" required />
 					</label>
 				</div>
 
