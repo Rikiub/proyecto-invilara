@@ -18,13 +18,14 @@
         <tbody class="table-group-divider">
             <?php foreach ($datos as $d): ?>
                 <tr>
-                    <td class="d-none"><?php echo $d["id"] ?></td>
+                    <td class="d-none" data-id><?php echo $d["id"] ?></td>
                     <td><?php echo $d["nombre"] ?></td>
                     <td><?php echo $d["nombre_municipio"] ?></td>
 
                     <td>
                         <button class="btn btn-outline-warning" value="modificar">Modificar</button>
-                        <button class="btn btn-outline-danger" value="eliminar">Eliminar</button>
+                        <button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
+                            data-bs-target="#modal-eliminacion">Eliminar</button>
                     </td>
                 </tr>
             <?php endforeach ?>
@@ -32,10 +33,10 @@
     </table>
 </main>
 
-
+<?php require_once "vista/componentes/modal_eliminar.php"; ?>
 
 <!-- MODAL EDITOR -->
-<div class="modal modal-lg fade" id="modal" tabindex="-1">
+<div class="modal modal-lg fade" id="modal-edicion" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content p-3">
             <div class="modal-header">
@@ -43,8 +44,8 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            <form id="formulario" class="modal-body">
-                <input type="hidden" name="id">
+            <form id="form-edicion" class="modal-body">
+                <input data-id type="hidden" name="id">
 
                 <div class="row">
                     <label class="form-label col">Parroquia

@@ -29,7 +29,8 @@
 
 					<td>
 						<button class="btn btn-outline-warning" value="modificar">Modificar</button>
-						<button class="btn btn-outline-danger" value="eliminar">Eliminar</button>
+						<button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
+							data-bs-target="#modal-eliminacion">Eliminar</button>
 					</td>
 				</tr>
 			<?php endforeach ?>
@@ -37,10 +38,10 @@
 	</table>
 </main>
 
-
+<?php require_once "vista/componentes/modal_eliminar.php"; ?>
 
 <!-- MODAL EDITOR -->
-<div class="modal modal-lg fade" id="modal" tabindex="-1">
+<div class="modal modal-lg fade" id="modal-edicion" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content p-3">
 			<div class="modal-header">
@@ -48,29 +49,34 @@
 				<button class="btn-close" data-bs-dismiss="modal"></button>
 			</div>
 
-			<form id="formulario" class="modal-body">
+			<form id="form-edicion" class="modal-body">
 				<div class="row">
-					<label class="form-label col">Cedula
-						<input class="form-control" type="text" name="cedula" required />
+					<label class="form-label col">
+						Cedula
+						<input data-id class="form-control" type="text" name="cedula" required />
 					</label>
 				</div>
 
 				<div class="row">
-					<label class="form-label col">Nombre
+					<label class="form-label col">
+						Nombre
 						<input class="form-control" type="text" name="nombre" required />
 					</label>
 
-					<label class="form-label col">Correo
+					<label class="form-label col">
+						Correo
 						<input class="form-control" type="email" name="correo" required />
 					</label>
 
-					<label class="form-label col">Teléfono
+					<label class="form-label col">
+						Teléfono
 						<input class="form-control" type="tel" name="telefono" required />
 					</label>
 				</div>
 
 				<div class="row">
-					<label class="form-label col">Dirección
+					<label class="form-label col">
+						Dirección
 						<input class="form-control" type="text" name="direccion" required />
 					</label>
 				</div>

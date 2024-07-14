@@ -8,4 +8,5 @@
     "emmet.showExpandedAbbreviation": "always",
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
+    "php.version": "7.4",
 }

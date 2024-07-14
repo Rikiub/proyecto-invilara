@@ -8,7 +8,7 @@ if (isset($_POST["accion"])) {
 	$accion = $_POST["accion"];
 
 	try {
-		$modelo->set_cedula($_POST['cedula']);
+		$modelo->set_cedula($_POST["id"] ?? $_POST["cedula"]);
 
 		if ($accion == "eliminar") {
 			$modelo->eliminar();
