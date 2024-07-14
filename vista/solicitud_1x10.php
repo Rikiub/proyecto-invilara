@@ -6,35 +6,37 @@
 
 	<button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
 
-	<table class="table table-hover table-responsive">
-		<thead>
-			<tr>
-				<th>Nº Control</th>
-				<th>Gerencia</th>
-				<th>Comunidad</th>
-				<th>Cedula solicitante</th>
-				<th>Fecha</th>
-				<th>Problematica</th>
-				<th>Estatus</th>
-			</tr>
-		</thead>
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Nº Control</th>
+					<th>Gerencia</th>
+					<th>Comunidad</th>
+					<th>Cedula solicitante</th>
+					<th>Fecha</th>
+					<th>Problematica</th>
+					<th>Estatus</th>
+				</tr>
+			</thead>
 
-		<tbody class="table-group-divider">
-			<td>1</td>
-			<td>1</td>
-			<td>1</td>
-			<td>1168576</td>
-			<td>04/01/2024</td>
-			<td>Asfalto</td>
-			<td>Culminado</td>
+			<tbody class="table-group-divider">
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1168576</td>
+				<td>04/01/2024</td>
+				<td>Asfalto</td>
+				<td>Culminado</td>
 
-			<td>
-				<button class="btn btn-outline-warning" value="modificar">Modificar</button>
-				<button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
-					data-bs-target="#modal-eliminacion">Eliminar</button>
-			</td>
-		</tbody>
-	</table>
+				<td class="d-grid d-md-block gap-2">
+					<button class="btn btn-outline-warning" value="modificar">Modificar</button>
+					<button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
+						data-bs-target="#modal-eliminacion">Eliminar</button>
+				</td>
+			</tbody>
+		</table>
+	</div>
 </main>
 
 <?php require_once "vista/componentes/modal_eliminar.php"; ?>
@@ -51,7 +53,7 @@
 			<form id="form-edicion" class="modal-body">
 				<div class="row">
 					<label class="form-label col">Nº Control
-						<input class="form-control" type="text" name="nro_control" required />
+						<input data-id class="form-control" type="text" name="nro_control" required />
 					</label>
 
 					<label class="form-label col">Gerencia

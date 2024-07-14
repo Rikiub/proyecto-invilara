@@ -6,36 +6,38 @@
 
 	<button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
 
-	<table class="table table-hover table-responsive">
-		<thead>
-			<tr>
-				<th>Cedula</th>
-				<th>Nombre</th>
-				<th>Correo</th>
-				<th>Teléfono</th>
-				<th>Dirección</th>
-				<th>Acciones</th>
-			</tr>
-		</thead>
-
-		<tbody class="table-group-divider">
-			<?php foreach ($datos as $d): ?>
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
 				<tr>
-					<td><?php echo $d["cedula"] ?></td>
-					<td><?php echo $d["nombre"] ?></td>
-					<td><?php echo $d["correo"] ?></td>
-					<td><?php echo $d["telefono"] ?></td>
-					<td><?php echo $d["direccion"] ?></td>
-
-					<td>
-						<button class="btn btn-outline-warning" value="modificar">Modificar</button>
-						<button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
-							data-bs-target="#modal-eliminacion">Eliminar</button>
-					</td>
+					<th>Cedula</th>
+					<th>Nombre</th>
+					<th>Correo</th>
+					<th>Teléfono</th>
+					<th>Dirección</th>
+					<th>Acciones</th>
 				</tr>
-			<?php endforeach ?>
-		</tbody>
-	</table>
+			</thead>
+
+			<tbody class="table-group-divider">
+				<?php foreach ($datos as $d): ?>
+					<tr>
+						<td><?php echo $d["cedula"] ?></td>
+						<td><?php echo $d["nombre"] ?></td>
+						<td><?php echo $d["correo"] ?></td>
+						<td><?php echo $d["telefono"] ?></td>
+						<td><?php echo $d["direccion"] ?></td>
+
+						<td class="d-grid d-md-block gap-2">
+							<button class="btn btn-outline-warning" value="modificar">Modificar</button>
+							<button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
+								data-bs-target="#modal-eliminacion">Eliminar</button>
+						</td>
+					</tr>
+				<?php endforeach ?>
+			</tbody>
+		</table>
+	</div>
 </main>
 
 <?php require_once "vista/componentes/modal_eliminar.php"; ?>
