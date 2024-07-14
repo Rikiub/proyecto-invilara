@@ -19,18 +19,18 @@
 
             <tbody class="table-group-divider">
                 <?php foreach ($datos as $d): ?>
-                            <tr>
-                                <td class="d-none"><?php echo $d["id"] ?></td>
-                                <td><?php echo $d["nombre"] ?></td>
-                                <td><?php echo $d["nombre_gerente"] ?></td>
-                                <td><?php echo $d["direccion"] ?></td>
+                    <tr>
+                        <td class="d-none"><?php echo $d["id"] ?></td>
+                        <td><?php echo $d["nombre"] ?></td>
+                        <td><?php echo $d["nombre_gerente"] ?></td>
+                        <td><?php echo $d["direccion"] ?></td>
 
-                                <td class="d-grid d-md-block gap-2">
-                                    <button class="btn btn-outline-warning" value="modificar">Modificar</button>
-                                    <button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-eliminacion">Eliminar</button>
-                                </td>
-                            </tr>
+                        <td class="d-grid d-md-block gap-2">
+                            <button class="btn btn-outline-warning" value="modificar">Modificar</button>
+                            <button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
+                                data-bs-target="#modal-eliminacion">Eliminar</button>
+                        </td>
+                    </tr>
                 <?php endforeach ?>
             </tbody>
         </table>

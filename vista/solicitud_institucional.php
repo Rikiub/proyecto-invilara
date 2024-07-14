@@ -25,24 +25,24 @@
 
 			<tbody class="table-group-divider">
 				<?php foreach ($datos as $d): ?>
-						<tr>
-							<td><?php echo $d["nro_control"] ?></td>
-							<td><?php echo $d["nro_oficio"] ?></td>
-							<td><?php echo $d["id_institucion"] ?></td>
-							<td><?php echo $d["id_comunidad"] ?></td>
-							<td><?php echo $d["id_gerencia"] ?></td>
-							<td><?php echo $d["fecha"] ?></td>
-							<td><?php echo $d["problematica"] ?></td>
-							<td><?php echo $d["instrucciones"] ?></td>
-							<td><?php echo $d["observacion"] ?></td>
-							<td><?php echo $d["estatus"] ?></td>
+					<tr>
+						<td><?php echo $d["nro_control"] ?></td>
+						<td><?php echo $d["nro_oficio"] ?></td>
+						<td><?php echo $d["id_institucion"] ?></td>
+						<td><?php echo $d["id_comunidad"] ?></td>
+						<td><?php echo $d["id_gerencia"] ?></td>
+						<td><?php echo $d["fecha"] ?></td>
+						<td><?php echo $d["problematica"] ?></td>
+						<td><?php echo $d["instrucciones"] ?></td>
+						<td><?php echo $d["observacion"] ?></td>
+						<td><?php echo $d["estatus"] ?></td>
 
-							<td class="d-grid d-md-block gap-2">
-								<button class="btn btn-outline-warning" value="modificar">Modificar</button>
-								<button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
-									data-bs-target="#modal-eliminacion">Eliminar</button>
-							</td>
-						</tr>
+						<td class="d-grid d-md-block gap-2">
+							<button class="btn btn-outline-warning" value="modificar">Modificar</button>
+							<button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
+								data-bs-target="#modal-eliminacion">Eliminar</button>
+						</td>
+					</tr>
 				<?php endforeach ?>
 			</tbody>
 		</table>

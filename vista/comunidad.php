@@ -25,7 +25,7 @@
                         <td><?php echo $d["direccion"] ?></td>
                         <td><?php echo $d["tipo"] ?></td>
 
-                        <td>
+                        <td class="d-grid d-md-block gap-2">
                             <button class="btn btn-outline-warning" value="modificar">Modificar</button>
                             <button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
                                 data-bs-target="#modal-eliminacion">Eliminar</button>

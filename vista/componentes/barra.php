@@ -1,6 +1,6 @@
 <!--
-Aca haran las redirecciones. No muevan la estructura, solo vean la etiqueta <a> y vean el "href".
-Asignen la dirección de su controlador con "?pagina=<nombre_controlador>"
+Vean la etiqueta <a> y noten el atributo el "href".
+A la hora de agregar nuevas paginas, asignen la dirección de su controlador con "?pagina=<nombre_controlador>"
 -->
 
 <nav data-bs-theme="dark" class="navbar fixed-top inv-gradient">
@@ -11,6 +11,7 @@ Asignen la dirección de su controlador con "?pagina=<nombre_controlador>"
             <button class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#barra-lateral">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
 
             <aside class="offcanvas offcanvas-start inv-gradient" tabindex="-1" id="barra-lateral">
                 <header class="offcanvas-header">
