@@ -1,11 +1,11 @@
 <?php include "vista/componentes/encabezado.php"; ?>
 <?php include "vista/componentes/barra.php"; ?>
 
-<article class="container card w-25">
+<article class="card m-auto" style="max-width: 300px;">
     <div class="card-body">
-        <h3 class=" text-center py-4">Inicio de sesion</h3>
+        <h3 class="card-title text-center py-4">Inicio de sesion</h3>
 
-        <form method="post">
+        <form method="post" class="m-2">
             <?php if (isset($error)): ?>
                 <div class="py-2 text-danger text-center">
                     <p1><?php echo $error; ?></p1>
@@ -13,13 +13,15 @@
             <?php endif ?>
 
             <div class="row">
-                <label class="form-label">Cedula
+                <label class="form-label">
+					Cedula
                     <input class="form-control" type="number" name="cedula" required>
                 </label>
             </div>
 
             <div class="row">
-                <label class="form-label">Contraseña
+                <label class="form-label">
+					Contraseña
                     <input class="form-control" type="password" name="contrasena" required />
                 </label>
             </div>

@@ -38,7 +38,7 @@ CREATE TABLE `ciudadano` (
 
 LOCK TABLES `ciudadano` WRITE;
 /*!40000 ALTER TABLE `ciudadano` DISABLE KEYS */;
-INSERT INTO `ciudadano` VALUES (12239222,'Carlos Montella','hola@gmail.com','04124474248','Urb. 7'),(31492771,'Mario Barroco','hola@gmail.com','0412842951','Calle 9');
+INSERT INTO `ciudadano` VALUES (11985184,'Veronika','hola@gmail.com','412-134-4364','Calle 7'),(12239200,'Maria Belnadez','hola@gmail.com','412-447-4248','Calle 9');
 /*!40000 ALTER TABLE `ciudadano` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +58,7 @@ CREATE TABLE `comunidad` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `comunidad_parroquia_FK` (`id_parroquia`),
   CONSTRAINT `comunidad_parroquia_FK` FOREIGN KEY (`id_parroquia`) REFERENCES `parroquia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +84,7 @@ CREATE TABLE `gerencia` (
   `nombre_gerente` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
   `direccion` text,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `gerencia` (
 
 LOCK TABLES `gerencia` WRITE;
 /*!40000 ALTER TABLE `gerencia` DISABLE KEYS */;
-INSERT INTO `gerencia` VALUES (1,'Administración de herramientas','Francisco Gomez','Calle 7'),(5,'Administración de bienes','Rodrigo Torres','Calle 9');
+INSERT INTO `gerencia` VALUES (15,'Hidrolara','Juan Herrera','Calle 17');
 /*!40000 ALTER TABLE `gerencia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +115,7 @@ CREATE TABLE `institucion` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `institucion_parroquia_FK` (`id_parroquia`),
   CONSTRAINT `institucion_parroquia_FK` FOREIGN KEY (`id_parroquia`) REFERENCES `parroquia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +124,7 @@ CREATE TABLE `institucion` (
 
 LOCK TABLES `institucion` WRITE;
 /*!40000 ALTER TABLE `institucion` DISABLE KEYS */;
-INSERT INTO `institucion` VALUES (1,1,'Comisión Nacional para los Refugiados','Carlos Jimenez','hola@gmail.com','04124474248','Calle 6'),(2,1,'Departamento de defensa civil','Vicente Fernandez','bye@outlook.com','0412447','Calle 7');
+INSERT INTO `institucion` VALUES (1,1,'Comisión Nacional para los Refugiados','Carlos Jimenez','hola@gmail.com','412-447-4248','Calle 6'),(2,1,'Departamento de defensa civil','Vicente Fernandez','bye@outlook.com','412-447-4248','Calle 7');
 /*!40000 ALTER TABLE `institucion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +140,7 @@ CREATE TABLE `parroquia` (
   `nombre` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
   `nombre_municipio` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,7 +255,7 @@ CREATE TABLE `solicitud_institucional` (
 
 LOCK TABLES `solicitud_institucional` WRITE;
 /*!40000 ALTER TABLE `solicitud_institucional` DISABLE KEYS */;
-INSERT INTO `solicitud_institucional` VALUES ('1','1',1,1,1,'2024-07-07','Problema a solucionar.','Instrucciones para resolver la problemática.','','En programación');
+INSERT INTO `solicitud_institucional` VALUES ('1','1',1,1,NULL,'2024-07-07','Problema a solucionar.','Instrucciones para resolver la problemática.','','En programación');
 /*!40000 ALTER TABLE `solicitud_institucional` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,4 +296,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-09 18:51:16
+-- Dump completed on 2024-07-14 21:22:04

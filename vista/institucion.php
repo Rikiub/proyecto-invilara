@@ -59,11 +59,12 @@
 
 				<div class="row">
 					<label class="form-label col">Nombre
-						<input class="form-control" type="text" name="nombre" required />
+						<input class="form-control" type="text" name="nombre" minlength="5" placeholder="Por ejemplo: Invilara" required />
 					</label>
 
 					<label class="form-label col">Director
-						<input class="form-control" type="text" name="nombre_director" required />
+						<input class="form-control" type="text" name="nombre_director" minlength="5" 
+						maxlength="70" placeholder="Por ejemplo: Pedro Perez" required />
 					</label>
 				</div>
 
@@ -79,11 +80,13 @@
 
 				<div class="row">
 					<label class="form-label col">Correo
-						<input class="form-control" type="email" name="correo" required />
+						<input class="form-control" type="email" name="correo" 
+						placeholder="Ejemplo: jeremi1322@gmail.com" required />
 					</label>
 
 					<label class="form-label col">Teléfono
-						<input class="form-control" type="tel" name="telefono" required />
+						<input class="form-control" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+							title="Ejemplo: 412-337-1891" placeholder="Ejemplo: 412-337-1891" name="telefono" required />
 					</label>
 				</div>
 
