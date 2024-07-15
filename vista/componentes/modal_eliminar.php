@@ -1,5 +1,5 @@
 <!-- MODAL ELIMINACIÓN -->
-<div class="modal modal-sm" id="modal-eliminacion" tabindex="-1">
+<div class="modal modal-sm fade" id="modal-eliminacion" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
