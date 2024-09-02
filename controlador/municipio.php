@@ -1,8 +1,8 @@
 <?php
 
-require_once "modelo/gerencia.php";
+require_once "modelo/municipio.php";
 
-$modelo = new Gerencia();
+$modelo = new Municipio();
 
 if (isset($_POST["accion"])) {
     $accion = $_POST["accion"];
@@ -15,8 +15,6 @@ if (isset($_POST["accion"])) {
         } else {
             $modelo->set_id($_POST["id"]);
             $modelo->set_nombre($_POST["nombre"]);
-            $modelo->set_cedula_gerente($_POST["cedula_gerente"]);
-            $modelo->set_direccion($_POST["direccion"]);
 
             if ($accion == "insertar") {
                 $modelo->insertar();
@@ -36,6 +34,6 @@ if (isset($_POST["accion"])) {
 }
 
 $datos = $modelo->consultar();
-require_once "vista/gerencia.php";
+require_once "vista/municipio.php";
 
 ?>

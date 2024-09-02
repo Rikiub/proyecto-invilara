@@ -1,8 +1,8 @@
 <?php
 
-require_once "modelo/ciudadano.php";
+require_once "modelo/director.php";
 
-$modelo = new Ciudadano();
+$modelo = new Director();
 
 if (isset($_POST["accion"])) {
 	$accion = $_POST["accion"];
@@ -36,6 +36,6 @@ if (isset($_POST["accion"])) {
 }
 
 $datos = $modelo->consultar();
-require_once "vista/ciudadano.php";
+require_once "vista/director.php";
 
 ?>

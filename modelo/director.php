@@ -2,9 +2,9 @@
 
 require_once "modelo/base_datos.php";
 
-class Ciudadano extends BaseDatos
+class Director extends BaseDatos
 {
-	private $tabla = "ciudadano";
+	private $tabla = "director";
 
 	private $cedula;
 	private $nombre;

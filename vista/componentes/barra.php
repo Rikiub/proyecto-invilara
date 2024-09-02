@@ -33,12 +33,16 @@ A la hora de agregar nuevas paginas, asignen la dirección de su controlador con
                     <hr>
 
                     <article class="list-group">
+                        <a class="list-group-item list-group-item-action" href="?pagina=municipio">
+                            Municipios
+                        </a>
+
                         <a class="list-group-item list-group-item-action" href="?pagina=parroquia">
                             Parroquias
                         </a>
 
-                        <a class="list-group-item list-group-item-action" href="?pagina=ciudadano">
-                            Ciudadanos
+                        <a class="list-group-item list-group-item-action" href="?pagina=solicitante">
+                            Solicitantes
                         </a>
 
                         <a class="list-group-item list-group-item-action" href="?pagina=comunidad">
@@ -51,6 +55,14 @@ A la hora de agregar nuevas paginas, asignen la dirección de su controlador con
 
                         <a class="list-group-item list-group-item-action" href="?pagina=gerencia">
                             Gerencias
+                        </a>
+
+                        <a class="list-group-item list-group-item-action" href="?pagina=gerente">
+                            Gerentes
+                        </a>
+
+                        <a class="list-group-item list-group-item-action" href="?pagina=director">
+                            Directores
                         </a>
                     </article>
 
@@ -82,10 +94,10 @@ A la hora de agregar nuevas paginas, asignen la dirección de su controlador con
             </aside>
         <?php endif ?>
 
-        <label class="navbar-brand">
+        <div class="navbar-brand">
             INVILARA
             <img src="recursos/img/invilara-logo.png" alt="Logo" class="mx-2" width="30px">
-        </label>
+        </div>
     </div>
 </nav>
 

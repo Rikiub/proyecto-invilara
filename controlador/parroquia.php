@@ -15,8 +15,7 @@ if (isset($_POST["accion"])) {
         } else {
             $modelo->set_id($_POST["id"]);
             $modelo->set_nombre($_POST["nombre"]);
-            $modelo->set_nombre_municipio($_POST["nombre_municipio"]);
-
+            $modelo->set_id_municipio($_POST["id_municipio"]);
 
             if ($accion == "insertar") {
                 $modelo->insertar();

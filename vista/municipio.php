@@ -2,27 +2,24 @@
 <?php require_once "vista/componentes/barra.php"; ?>
 
 <main class="container" id="crud">
-    <h1>Gerencias</h1>
-    <hr>
+    <h1>Municipios</h1>
+
     <button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
-    <hr>
+
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Cedula del gerente</th>
-                    <th>Dirección de la gerencia</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
+
             <tbody class="table-group-divider">
                 <?php foreach ($datos as $d): ?>
                     <tr>
-                        <td class="d-none"><?php echo $d["id"] ?></td>
+                        <td class="d-none" data-id><?php echo $d["id"] ?></td>
                         <td><?php echo $d["nombre"] ?></td>
-                        <td><?php echo $d["cedula_gerente"] ?></td>
-                        <td><?php echo $d["direccion"] ?></td>
 
                         <td class="d-grid d-md-block gap-2">
                             <button class="btn btn-outline-warning" value="modificar">Modificar</button>
@@ -38,6 +35,7 @@
 
 <?php require_once "vista/componentes/modal_eliminar.php"; ?>
 
+<!-- MODAL EDITOR -->
 <div class="modal modal-lg fade" id="modal-edicion" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content p-3">
@@ -47,24 +45,11 @@
             </div>
 
             <form id="form-edicion" class="modal-body">
-                <input type="hidden" name="id">
+                <input data-id type="hidden" name="id">
 
                 <div class="row">
                     <label class="form-label col">Nombre
-                        <input class="form-control" type="text" name="nombre" minlength="5" maxlength="70" required />
-                    </label>
-
-                    <label class="form-label col">Cedula del gerente
-                        <input class="form-control" type="text" name="cedula_gerente" id="cedula_gerente" pattern="\d*"
-                            inputmode="numeric" minlength="7" maxlength="8" title="Solo se permiten numeros."
-                            required />
-                    </label>
-                </div>
-
-                <div class="row">
-                    <label class="form-label col">Dirección
-                        <input class="form-control" type="text" name="direccion" minlength="5" maxlength="90"
-                            required />
+                        <input class="form-control" type="text" name="nombre" required />
                     </label>
                 </div>
 
@@ -76,4 +61,5 @@
         </div>
     </div>
 </div>
+
 <script src="recursos/js/crud.js"></script>

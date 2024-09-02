@@ -2,14 +2,12 @@
 
 require_once "modelo/base_datos.php";
 
-class Parroquia extends BaseDatos
+class Municipio extends BaseDatos
 {
-    private $tabla = "parroquia";
+    private $tabla = "municipio";
 
     private $id;
     private $nombre;
-    private $id_municipio;
-
 
     // Getter
     public function set_id($valor)
@@ -20,11 +18,6 @@ class Parroquia extends BaseDatos
     {
         $this->nombre = $valor;
     }
-    public function set_id_municipio($valor)
-    {
-        $this->id_municipio = $valor;
-    }
-
 
     // Setter
     public function get_id()
@@ -35,11 +28,6 @@ class Parroquia extends BaseDatos
     {
         return $this->nombre;
     }
-    public function get_id_municipio()
-    {
-        return $this->id_municipio;
-    }
-
 
     public function insertar()
     {
@@ -49,12 +37,10 @@ class Parroquia extends BaseDatos
 
         $this->conexion()->query(
             "INSERT INTO {$this->tabla} (
-				nombre,
-				id_municipio
+				nombre
 			)
 			VALUES (
-				'{$this->nombre}',
-				'{$this->id_municipio}'
+				'{$this->nombre}'
 			)"
         );
     }
@@ -68,8 +54,7 @@ class Parroquia extends BaseDatos
         $this->conexion()->query(
             "UPDATE {$this->tabla} SET 
 				id = '{$this->id}',
-				nombre = '{$this->nombre}',
-				id_municipio = '{$this->id_municipio}'
+				nombre = '{$this->nombre}'
 		
 			WHERE
 				id = '{$this->id}'

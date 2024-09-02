@@ -9,7 +9,7 @@ class Institucion extends BaseDatos
     private $id;
     private $id_parroquia;
     private $nombre;
-    private $nombre_director;
+    private $cedula_director;
     private $correo;
     private $telefono;
     private $direccion;
@@ -27,9 +27,9 @@ class Institucion extends BaseDatos
     {
         $this->nombre = $valor;
     }
-    public function set_nombre_director($valor)
+    public function set_cedula_director($valor)
     {
-        $this->nombre_director = $valor;
+        $this->cedula_director = $valor;
     }
     public function set_correo($valor)
     {
@@ -45,31 +45,31 @@ class Institucion extends BaseDatos
     }
 
     // Getter
-    public function get_id($valor)
+    public function get_id()
     {
         return $this->id;
     }
-    public function get_id_parroquia($valor)
+    public function get_id_parroquia()
     {
         return $this->id_parroquia;
     }
-    public function get_nombre($valor)
+    public function get_nombre()
     {
         return $this->nombre;
     }
-    public function get_nombre_director($valor)
+    public function get_cedula_director()
     {
-        return $this->nombre_director;
+        return $this->cedula_director;
     }
-    public function get_correo($valor)
+    public function get_correo()
     {
         return $this->correo;
     }
-    public function get_telefono($valor)
+    public function get_telefono()
     {
         return $this->telefono;
     }
-    public function get_direccion($valor)
+    public function get_direccion()
     {
         return $this->direccion;
     }
@@ -77,14 +77,18 @@ class Institucion extends BaseDatos
     public function insertar()
     {
         if (!empty($this->obtenerUno($this->id))) {
-            throw new Exception("Ya existe");
+            throw new Exception("Ya existe.");
+        }
+
+        if (empty($this->obtenerDirector($this->cedula_director))) {
+            throw new Exception("El director con la cedula seleccionada no existe.");
         }
 
         $this->conexion()->query(
             "INSERT INTO {$this->tabla} (
                 id_parroquia,
                 nombre,
-                nombre_director,
+                cedula_director,
                 correo,
                 telefono,
                 direccion
@@ -92,7 +96,7 @@ class Institucion extends BaseDatos
 			VALUES (
                 '{$this->id_parroquia}',
                 '{$this->nombre}',
-                '{$this->nombre_director}',
+                '{$this->cedula_director}',
                 '{$this->correo}',
                 '{$this->telefono}',
                 '{$this->direccion}'
@@ -106,12 +110,16 @@ class Institucion extends BaseDatos
             throw new Exception("No existe");
         }
 
+        if (empty($this->obtenerDirector($this->cedula_director))) {
+            throw new Exception("El director con la cedula seleccionada no existe.");
+        }
+
         $this->conexion()->query(
             "UPDATE {$this->tabla} SET 
 				id = '{$this->id}',
                 id_parroquia = '{$this->id_parroquia}',
                 nombre = '{$this->nombre}',
-                nombre_director = '{$this->nombre_director}',
+                cedula_director = '{$this->cedula_director}',
                 correo = '{$this->correo}',
                 telefono = '{$this->telefono}',
                 direccion = '{$this->direccion}'
@@ -145,6 +153,13 @@ class Institucion extends BaseDatos
     public function obtenerUno($id)
     {
         $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE id='$id'");
+        $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $fila;
+    }
+
+    public function obtenerDirector($cedula)
+    {
+        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE cedula_director='$cedula'");
         $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $fila;
     }

@@ -2,13 +2,13 @@
 
 require_once "modelo/base_datos.php";
 
-class Gerente extends BaseDatos
+class Gerencia extends BaseDatos
 {
     private $tabla = "gerencia";
 
     private $id;
+    private $cedula_gerente;
     private $nombre;
-    private $nombre_gerente;
     private $direccion;
 
 
@@ -21,9 +21,9 @@ class Gerente extends BaseDatos
     {
         $this->nombre = $valor;
     }
-    function set_nombre_gerente($valor)
+    function set_cedula_gerente($valor)
     {
-        $this->nombre_gerente = $valor;
+        $this->cedula_gerente = $valor;
     }
     function set_direccion($valor)
     {
@@ -40,9 +40,9 @@ class Gerente extends BaseDatos
     {
         return $this->nombre;
     }
-    function get_nombre_gerente()
+    function get_cedula_gerente()
     {
-        return $this->nombre_gerente;
+        return $this->cedula_gerente;
     }
     function get_direccion()
     {
@@ -51,19 +51,23 @@ class Gerente extends BaseDatos
 
     function insertar()
     {
-        if (!empty($this->conectamos($this->id))) {
+        if (!empty($this->buscarID($this->id))) {
             throw new Exception("Ya existe");
+        }
+
+        if (empty($this->buscarGerente($this->cedula_gerente))) {
+            throw new Exception("El gerente con la cedula proporcionada no existe.");
         }
 
         $this->conexion()->query(
             "INSERT INTO {$this->tabla} (
 				nombre,
-				nombre_gerente,
+				cedula_gerente,
                 direccion
 			)
 			VALUES (
 				'{$this->nombre}',
-				'{$this->nombre_gerente}',
+				'{$this->cedula_gerente}',
                 '{$this->direccion}'
 			)"
         );
@@ -71,15 +75,19 @@ class Gerente extends BaseDatos
 
     function modificar()
     {
-        if (empty($this->conectamos($this->id))) {
+        if (empty($this->buscarID($this->id))) {
             throw new Exception("No existe");
+        }
+
+        if (empty($this->buscarGerente($this->cedula_gerente))) {
+            throw new Exception("El gerente con la cedula proporcionada no existe.");
         }
 
         $this->conexion()->query(
             "UPDATE {$this->tabla} SET 
 				id = '{$this->id}',
 				nombre = '{$this->nombre}',
-				nombre_gerente = '{$this->nombre_gerente}',
+				cedula_gerente = '{$this->cedula_gerente}',
                 direccion = '{$this->direccion}'
 			WHERE
 				id = '{$this->id}'
@@ -90,7 +98,7 @@ class Gerente extends BaseDatos
 
     function eliminar()
     {
-        if (empty($this->conectamos($this->id))) {
+        if (empty($this->buscarID($this->id))) {
             throw new Exception("No existe");
         }
 
@@ -108,9 +116,16 @@ class Gerente extends BaseDatos
         return $result;
     }
 
-    function conectamos($id)
+    function buscarID($id)
     {
         $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE id='$id'");
+        $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $fila;
+    }
+
+    function buscarGerente($cedula)
+    {
+        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE cedula_gerente='$cedula'");
         $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $fila;
     }

@@ -2,7 +2,7 @@
 <?php require_once "vista/componentes/barra.php"; ?>
 
 <main class="container" id="crud">
-	<h1>Instituciones</h1>
+	<h1>Directores</h1>
 
 	<button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
 
@@ -10,12 +10,11 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
+					<th>Cedula</th>
 					<th>Nombre</th>
-					<th>Cedula del director</th>
-					<th>Parroquia</th>
-					<th>Dirección</th>
 					<th>Correo</th>
 					<th>Teléfono</th>
+					<th>Dirección</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -23,13 +22,11 @@
 			<tbody class="table-group-divider">
 				<?php foreach ($datos as $d): ?>
 					<tr>
-						<td class="d-none"><?php echo $d["id"] ?></td>
+						<td><?php echo $d["cedula"] ?></td>
 						<td><?php echo $d["nombre"] ?></td>
-						<td><?php echo $d["cedula_director"] ?></td>
-						<td><?php echo $d["id_parroquia"] ?></td>
-						<td><?php echo $d["direccion"] ?></td>
 						<td><?php echo $d["correo"] ?></td>
 						<td><?php echo $d["telefono"] ?></td>
+						<td><?php echo $d["direccion"] ?></td>
 
 						<td class="d-grid d-md-block gap-2">
 							<button class="btn btn-outline-warning" value="modificar">Modificar</button>
@@ -55,41 +52,36 @@
 			</div>
 
 			<form id="form-edicion" class="modal-body">
-				<input type="hidden" name="id" />
-
 				<div class="row">
-					<label class="form-label col">Nombre
-						<input class="form-control" type="text" name="nombre" minlength="5"
-							placeholder="Por ejemplo: Invilara" required />
-					</label>
-
-					<label class="form-label col">Cedula del director
-						<input class="form-control" type="text" name="cedula_director" pattern="\d*" inputmode="numeric"
-							minlength="5" maxlength="15" placeholder="Por ejemplo: Pedro Perez"
-							title="Solo se aceptan numeros" required />
+					<label class="form-label col">
+						Cedula
+						<input data-id class="form-control" type="text" pattern="\d*" inputmode="numeric" minlength="7"
+							maxlength="8" name="cedula" required />
 					</label>
 				</div>
 
 				<div class="row">
-					<label class="form-label col">Parroquia
-						<input class="form-control" type="number" name="id_parroquia" required />
+					<label class="form-label col">
+						Nombre
+						<input class="form-control" type="text" name="nombre" maxlength="50" required />
 					</label>
 
-					<label class="form-label col">Dirección
-						<input class="form-control" type="text" name="direccion" required />
-					</label>
-				</div>
-
-				<div class="row">
-					<label class="form-label col">Correo
-						<input class="form-control" type="email" name="correo"
-							placeholder="Ejemplo: jeremi1322@gmail.com" required />
+					<label class="form-label col">
+						Correo
+						<input class="form-control" type="email" name="correo" required />
 					</label>
 
-					<label class="form-label col">Teléfono
+					<label class="form-label col">
+						Teléfono
 						<input class="form-control" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-							title="Ejemplo: 412-337-1891" placeholder="Ejemplo: 412-337-1891" name="telefono"
-							required />
+							title="Ejemplo: 412-337-1891" name="telefono" required />
+					</label>
+				</div>
+
+				<div class="row">
+					<label class="form-label col">
+						Dirección
+						<input class="form-control" type="text" name="direccion" required />
 					</label>
 				</div>
 
