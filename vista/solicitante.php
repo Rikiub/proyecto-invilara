@@ -4,10 +4,7 @@
 <main class="container" id="crud">
 	<h1>Solicitantes</h1>
 
-	<div class="d-flex justify-content-between">
-		<button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
-		<button class="btn btn-outline-danger my-3">Reporte (PDF)</button>
-	</div>
+	<button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
 
 	<div class="table-responsive">
 		<table class="table table-hover">
