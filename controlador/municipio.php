@@ -2,24 +2,24 @@
 
 require_once "modelo/municipio.php";
 
-$modelo = new Municipio();
+$institucion = new Municipio();
 
 if (isset($_POST["accion"])) {
     $accion = $_POST["accion"];
 
-    $modelo->set_id($_POST['id']);
+    $institucion->set_id($_POST['id']);
 
     try {
         if ($accion == "eliminar") {
-            $modelo->eliminar();
+            $institucion->eliminar();
         } else {
-            $modelo->set_id($_POST["id"]);
-            $modelo->set_nombre($_POST["nombre"]);
+            $institucion->set_id($_POST["id"]);
+            $institucion->set_nombre($_POST["nombre"]);
 
             if ($accion == "insertar") {
-                $modelo->insertar();
+                $institucion->insertar();
             } elseif ($accion == "modificar") {
-                $modelo->modificar();
+                $institucion->modificar();
             }
         }
 
@@ -33,7 +33,7 @@ if (isset($_POST["accion"])) {
     exit;
 }
 
-$datos = $modelo->consultar();
+$datos = $institucion->consultar();
 require_once "vista/municipio.php";
 
 ?>

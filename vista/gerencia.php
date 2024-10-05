@@ -3,9 +3,9 @@
 
 <main class="container" id="crud">
     <h1>Gerencias</h1>
-    <hr>
+
     <button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
-    <hr>
+
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>

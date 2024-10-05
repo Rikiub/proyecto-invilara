@@ -2,25 +2,25 @@
 
 require_once "modelo/comunidad.php";
 
-$modelo = new Comunidad();
+$institucion = new Comunidad();
 
 if (isset($_POST["accion"])) {
     $accion = $_POST["accion"];
 
-    $modelo->set_id($_POST['id']);
+    $institucion->set_id($_POST['id']);
 
     try {
         if ($accion == "eliminar") {
-            $modelo->eliminar();
+            $institucion->eliminar();
         } else {
-            $modelo->set_nombre($_POST['nombre']);
-            $modelo->set_direccion($_POST['direccion']);
-            $modelo->set_tipo($_POST['tipo']);
+            $institucion->set_nombre($_POST['nombre']);
+            $institucion->set_direccion($_POST['direccion']);
+            $institucion->set_tipo($_POST['tipo']);
 
             if ($accion == "insertar") {
-                $modelo->insertar();
+                $institucion->insertar();
             } elseif ($accion == "modificar") {
-                $modelo->modificar();
+                $institucion->modificar();
             }
         }
 
@@ -34,5 +34,5 @@ if (isset($_POST["accion"])) {
     exit;
 }
 
-$datos = $modelo->consultar();
+$datos = $institucion->consultar();
 require_once "vista/comunidad.php";

@@ -14,14 +14,15 @@
 
             <div class="row">
                 <label class="form-label">
-					Cedula
-                    <input class="form-control" type="number" name="cedula" required>
+                    Cedula
+                    <input class="form-control" type="text" pattern="\d*" inputmode="numeric" name="cedula"
+                        title="Solo se permiten numeros" required>
                 </label>
             </div>
 
             <div class="row">
                 <label class="form-label">
-					Contraseña
+                    Contraseña
                     <input class="form-control" type="password" name="contrasena" required />
                 </label>
             </div>

@@ -2,26 +2,26 @@
 
 require_once "modelo/gerencia.php";
 
-$modelo = new Gerencia();
+$institucion = new Gerencia();
 
 if (isset($_POST["accion"])) {
     $accion = $_POST["accion"];
 
-    $modelo->set_id($_POST['id']);
+    $institucion->set_id($_POST['id']);
 
     try {
         if ($accion == "eliminar") {
-            $modelo->eliminar();
+            $institucion->eliminar();
         } else {
-            $modelo->set_id($_POST["id"]);
-            $modelo->set_nombre($_POST["nombre"]);
-            $modelo->set_cedula_gerente($_POST["cedula_gerente"]);
-            $modelo->set_direccion($_POST["direccion"]);
+            $institucion->set_id($_POST["id"]);
+            $institucion->set_nombre($_POST["nombre"]);
+            $institucion->set_cedula_gerente($_POST["cedula_gerente"]);
+            $institucion->set_direccion($_POST["direccion"]);
 
             if ($accion == "insertar") {
-                $modelo->insertar();
+                $institucion->insertar();
             } elseif ($accion == "modificar") {
-                $modelo->modificar();
+                $institucion->modificar();
             }
         }
 
@@ -35,7 +35,7 @@ if (isset($_POST["accion"])) {
     exit;
 }
 
-$datos = $modelo->consultar();
+$datos = $institucion->consultar();
 require_once "vista/gerencia.php";
 
 ?>

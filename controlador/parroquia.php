@@ -1,26 +1,28 @@
 <?php
 
 require_once "modelo/parroquia.php";
+require_once "modelo/municipio.php";
 
-$modelo = new Parroquia();
+$institucion = new Parroquia();
+$municipio = new Municipio();
 
 if (isset($_POST["accion"])) {
     $accion = $_POST["accion"];
 
-    $modelo->set_id($_POST['id']);
+    $institucion->set_id($_POST['id']);
 
     try {
         if ($accion == "eliminar") {
-            $modelo->eliminar();
+            $institucion->eliminar();
         } else {
-            $modelo->set_id($_POST["id"]);
-            $modelo->set_nombre($_POST["nombre"]);
-            $modelo->set_id_municipio($_POST["id_municipio"]);
+            $institucion->set_id($_POST["id"]);
+            $institucion->set_nombre($_POST["nombre"]);
+            $institucion->set_id_municipio($_POST["id_municipio"]);
 
             if ($accion == "insertar") {
-                $modelo->insertar();
+                $institucion->insertar();
             } elseif ($accion == "modificar") {
-                $modelo->modificar();
+                $institucion->modificar();
             }
         }
 
@@ -34,7 +36,17 @@ if (isset($_POST["accion"])) {
     exit;
 }
 
-$datos = $modelo->consultar();
+// Preparar datos a mostrar
+$datos = $institucion->consultar();
+$municipios = $municipio->consultar();
+
+// Traducir datos transaccionales
+foreach ($datos as $index => $valor) {
+    $nombre = $municipio->obtenerUno($valor["id_municipio"])[0]["nombre"];
+    $datos[$index]["nombre_municipio"] = $nombre;
+}
+
+// Cargar vista
 require_once "vista/parroquia.php";
 
 ?>

@@ -2,33 +2,33 @@
 
 require_once "modelo/solicitud_institucional.php";
 
-$modelo = new Registro();
+$institucion = new Registro();
 
 if (isset($_POST["accion"])) {
 	$accion = $_POST["accion"];
 
-	$modelo->set_nro_control($_POST['nro_control']);
+	$institucion->set_nro_control($_POST['nro_control']);
 
 	try {
 		if ($accion == "eliminar") {
-			$modelo->eliminar();
+			$institucion->eliminar();
 		} else {
-			$modelo->set_nro_control($_POST["nro_control"]);
-			$modelo->set_nro_oficio($_POST["nro_oficio"]);
-			$modelo->set_id_institucion($_POST["id_institucion"]);
-			$modelo->set_id_comunidad($_POST["id_comunidad"]);
-			$modelo->set_id_gerencia($_POST["id_gerencia"]);
-			$modelo->set_fecha($_POST["fecha"]);
-			$modelo->set_problematica($_POST["problematica"]);
-			$modelo->set_instrucciones($_POST["instrucciones"]);
-			$modelo->set_observacion($_POST["observacion"]);
-			$modelo->set_estatus($_POST["estatus"]);
+			$institucion->set_nro_control($_POST["nro_control"]);
+			$institucion->set_nro_oficio($_POST["nro_oficio"]);
+			$institucion->set_id_institucion($_POST["id_institucion"]);
+			$institucion->set_id_comunidad($_POST["id_comunidad"]);
+			$institucion->set_id_gerencia($_POST["id_gerencia"]);
+			$institucion->set_fecha($_POST["fecha"]);
+			$institucion->set_problematica($_POST["problematica"]);
+			$institucion->set_instrucciones($_POST["instrucciones"]);
+			$institucion->set_observacion($_POST["observacion"]);
+			$institucion->set_estatus($_POST["estatus"]);
 
 
 			if ($accion == "insertar") {
-				$modelo->insertar();
+				$institucion->insertar();
 			} elseif ($accion == "modificar") {
-				$modelo->modificar();
+				$institucion->modificar();
 			}
 		}
 
@@ -42,7 +42,7 @@ if (isset($_POST["accion"])) {
 	exit;
 }
 
-$datos = $modelo->consultar();
+$datos = $institucion->consultar();
 require_once "vista/solicitud_institucional.php";
 
 ?>

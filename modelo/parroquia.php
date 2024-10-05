@@ -94,7 +94,8 @@ class Parroquia extends BaseDatos
 
     public function consultar()
     {
-        $result = $this->conexion()->query("SELECT * FROM {$this->tabla}");
+        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla}");
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 

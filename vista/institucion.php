@@ -72,7 +72,13 @@
 
 				<div class="row">
 					<label class="form-label col">Parroquia
-						<input class="form-control" type="number" name="id_parroquia" required />
+						<select class="form-select" name="id_municipio" required>
+							<?php foreach ($municipios as $m): ?>
+								<option value=<?php echo $m["id"] ?>>
+									<?php echo $m["nombre"] ?>
+								</option>
+							<?php endforeach ?>
+						</select>
 					</label>
 
 					<label class="form-label col">Dirección
