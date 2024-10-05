@@ -2,28 +2,28 @@
 
 require_once "modelo/institucion.php";
 
-$institucion = new Institucion();
+$usuario = new Institucion();
 
 if (isset($_POST["accion"])) {
 	$accion = $_POST["accion"];
 
 	try {
-		$institucion->set_id($_POST["id"]);
+		$usuario->set_id($_POST["id"]);
 
 		if ($accion == "eliminar") {
-			$institucion->eliminar();
+			$usuario->eliminar();
 		} else {
-			$institucion->set_id_parroquia($_POST["id_parroquia"]);
-			$institucion->set_nombre($_POST["nombre"]);
-			$institucion->set_cedula_director($_POST["cedula_director"]);
-			$institucion->set_correo($_POST["correo"]);
-			$institucion->set_telefono($_POST["telefono"]);
-			$institucion->set_direccion($_POST["direccion"]);
+			$usuario->set_id_parroquia($_POST["id_parroquia"]);
+			$usuario->set_nombre($_POST["nombre"]);
+			$usuario->set_cedula_director($_POST["cedula_director"]);
+			$usuario->set_correo($_POST["correo"]);
+			$usuario->set_telefono($_POST["telefono"]);
+			$usuario->set_direccion($_POST["direccion"]);
 
 			if ($accion == "insertar") {
-				$institucion->insertar();
+				$usuario->insertar();
 			} elseif ($accion == "modificar") {
-				$institucion->modificar();
+				$usuario->modificar();
 			}
 		}
 
@@ -37,7 +37,7 @@ if (isset($_POST["accion"])) {
 	exit;
 }
 
-$datos = $institucion->consultar();
+$datos = $usuario->consultar();
 
 // Cargar vista
 require_once "vista/institucion.php";

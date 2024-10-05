@@ -2,15 +2,15 @@
 
 require_once "modelo/usuario.php";
 
-$institucion = new Usuario();
+$usuario = new Usuario();
 
 $error = null;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $institucion->set_cedula($_POST["cedula"]);
-    $institucion->set_contrasena($_POST["contrasena"]);
+    $usuario->set_cedula($_POST["cedula"]);
+    $usuario->set_contrasena($_POST["contrasena"]);
 
-    if ($institucion->iniciarSesion()) {
+    if ($usuario->iniciarSesion()) {
         header("Location: ?pagina=principal");
         exit;
     } else {
