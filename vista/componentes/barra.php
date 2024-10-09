@@ -5,13 +5,10 @@ A la hora de agregar nuevas paginas, asignen la dirección de su controlador con
 
 <nav data-bs-theme="dark" class="navbar fixed-top inv-gradient">
     <div class="container-fluid mx-2">
-        <?php if (isset($barra_simple)): ?>
-            <div></div>
-        <?php else: ?>
+        <?php if ($rol == "usuario"): ?>
             <button class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#barra-lateral">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
 
             <aside class="offcanvas offcanvas-start inv-gradient" tabindex="-1" id="barra-lateral">
                 <header class="offcanvas-header">
@@ -25,7 +22,7 @@ A la hora de agregar nuevas paginas, asignen la dirección de su controlador con
                             Inicio
                         </a>
 
-                        <a class="list-group-item list-group-item-action" href="?pagina=inicio_sesion">
+                        <a class="list-group-item list-group-item-action" href="?pagina=salir">
                             Cerrar sesión
                         </a>
                     </article>
@@ -92,6 +89,8 @@ A la hora de agregar nuevas paginas, asignen la dirección de su controlador con
                     </article>
                 </div>
             </aside>
+        <?php else: ?>
+            <a class="btn btn-primary" href="?pagina=inicio_sesion">Iniciar Sesión</a>
         <?php endif ?>
 
         <div class="navbar-brand">

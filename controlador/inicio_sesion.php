@@ -11,6 +11,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario->set_contrasena($_POST["contrasena"]);
 
     if ($usuario->iniciarSesion()) {
+        session_start();
+        $_SESSION["rol"] = "usuario";
+
         header("Location: ?pagina=principal");
         exit;
     } else {
@@ -19,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Mostrar vista
-$barra_simple = true;
 require_once "vista/inicio_sesion.php";
 
 ?>
