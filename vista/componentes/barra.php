@@ -73,16 +73,8 @@ A la hora de agregar nuevas paginas, asignen la dirección de su controlador con
 
                         <section class="collapse" id="solicitudes">
                             <div class="list-group list-group-flush">
-                                <a class="list-group-item list-group-item-action" href="?pagina=solicitud_1x10">
-                                    1x10
-                                </a>
-
-                                <a class="list-group-item list-group-item-action" href="?pagina=solicitud_general">
+                                <a class="list-group-item list-group-item-action" href="?pagina=solicitud">
                                     Generales
-                                </a>
-
-                                <a class="list-group-item list-group-item-action" href="?pagina=solicitud_institucional">
-                                    Institucionales
                                 </a>
                             </div>
                         </section>

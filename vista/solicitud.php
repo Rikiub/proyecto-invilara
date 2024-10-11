@@ -2,7 +2,7 @@
 <?php require_once "vista/componentes/barra.php"; ?>
 
 <main class="container" id="crud">
-	<h1>Solicitudes 1x10</h1>
+	<h1>Solicitudes</h1>
 
 	<button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
 
