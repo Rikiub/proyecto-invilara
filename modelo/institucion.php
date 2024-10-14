@@ -7,7 +7,6 @@ class Institucion extends BaseDatos
     private $tabla = "institucion";
 
     private $id;
-    private $id_parroquia;
     private $nombre;
     private $cedula_director;
     private $correo;
@@ -19,13 +18,9 @@ class Institucion extends BaseDatos
     {
         $this->id = $valor;
     }
-    public function set_id_parroquia($valor)
-    {
-        $this->id_parroquia = $valor;
-    }
     public function set_nombre($valor)
     {
-        $this->nombre = $valor;
+        $this->nombre = ucwords(strtolower($valor));
     }
     public function set_cedula_director($valor)
     {
@@ -48,10 +43,6 @@ class Institucion extends BaseDatos
     public function get_id()
     {
         return $this->id;
-    }
-    public function get_id_parroquia()
-    {
-        return $this->id_parroquia;
     }
     public function get_nombre()
     {
@@ -86,17 +77,15 @@ class Institucion extends BaseDatos
 
         $this->conexion()->query(
             "INSERT INTO {$this->tabla} (
-                id_parroquia,
-                nombre,
                 cedula_director,
+                nombre,
                 correo,
                 telefono,
                 direccion
 			)
 			VALUES (
-                '{$this->id_parroquia}',
-                '{$this->nombre}',
                 '{$this->cedula_director}',
+                '{$this->nombre}',
                 '{$this->correo}',
                 '{$this->telefono}',
                 '{$this->direccion}'
@@ -117,9 +106,8 @@ class Institucion extends BaseDatos
         $this->conexion()->query(
             "UPDATE {$this->tabla} SET 
 				id = '{$this->id}',
-                id_parroquia = '{$this->id_parroquia}',
-                nombre = '{$this->nombre}',
                 cedula_director = '{$this->cedula_director}',
+                nombre = '{$this->nombre}',
                 correo = '{$this->correo}',
                 telefono = '{$this->telefono}',
                 direccion = '{$this->direccion}'

@@ -3,26 +3,26 @@
 require_once "modelo/parroquia.php";
 require_once "modelo/municipio.php";
 
-$usuario = new Parroquia();
+$modelo = new Parroquia();
 $municipio = new Municipio();
 
 if (isset($_POST["accion"])) {
     $accion = $_POST["accion"];
 
-    $usuario->set_id($_POST['id']);
+    $modelo->set_id($_POST['id']);
 
     try {
         if ($accion == "eliminar") {
-            $usuario->eliminar();
+            $modelo->eliminar();
         } else {
-            $usuario->set_id($_POST["id"]);
-            $usuario->set_nombre($_POST["nombre"]);
-            $usuario->set_id_municipio($_POST["id_municipio"]);
+            $modelo->set_id($_POST["id"]);
+            $modelo->set_nombre($_POST["nombre"]);
+            $modelo->set_id_municipio($_POST["id_municipio"]);
 
             if ($accion == "insertar") {
-                $usuario->insertar();
+                $modelo->insertar();
             } elseif ($accion == "modificar") {
-                $usuario->modificar();
+                $modelo->modificar();
             }
         }
 
@@ -37,7 +37,7 @@ if (isset($_POST["accion"])) {
 }
 
 // Preparar datos a mostrar
-$datos = $usuario->consultar();
+$datos = $modelo->consultar();
 $municipios = $municipio->consultar();
 
 // Traducir datos transaccionales

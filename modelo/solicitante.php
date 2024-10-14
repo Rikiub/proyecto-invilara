@@ -20,7 +20,7 @@ class Solicitante extends BaseDatos
 	}
 	public function set_nombre($valor)
 	{
-		$this->nombre = $valor;
+		$this->nombre = ucwords(strtolower($valor));
 	}
 	public function set_correo($valor)
 	{

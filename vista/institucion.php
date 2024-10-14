@@ -12,7 +12,6 @@
 				<tr>
 					<th>Nombre</th>
 					<th>Cedula del director</th>
-					<th>Parroquia</th>
 					<th>Dirección</th>
 					<th>Correo</th>
 					<th>Teléfono</th>
@@ -26,7 +25,6 @@
 						<td class="d-none"><?php echo $d["id"] ?></td>
 						<td><?php echo $d["nombre"] ?></td>
 						<td><?php echo $d["cedula_director"] ?></td>
-						<td><?php echo $d["id_parroquia"] ?></td>
 						<td><?php echo $d["direccion"] ?></td>
 						<td><?php echo $d["correo"] ?></td>
 						<td><?php echo $d["telefono"] ?></td>
@@ -71,16 +69,6 @@
 				</div>
 
 				<div class="row">
-					<label class="form-label col">Parroquia
-						<select class="form-select" name="id_municipio" required>
-							<?php foreach ($municipios as $m): ?>
-								<option value=<?php echo $m["id"] ?>>
-									<?php echo $m["nombre"] ?>
-								</option>
-							<?php endforeach ?>
-						</select>
-					</label>
-
 					<label class="form-label col">Dirección
 						<input class="form-control" type="text" name="direccion" required />
 					</label>

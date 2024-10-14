@@ -19,7 +19,7 @@ class Gerencia extends BaseDatos
     }
     function set_nombre($valor)
     {
-        $this->nombre = $valor;
+        $this->nombre = ucwords(strtolower($valor));
     }
     function set_cedula_gerente($valor)
     {

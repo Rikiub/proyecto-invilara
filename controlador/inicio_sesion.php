@@ -2,15 +2,15 @@
 
 require_once "modelo/usuario.php";
 
-$usuario = new Usuario();
+$modelo = new Usuario();
 
 $error = null;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario->set_cedula($_POST["cedula"]);
-    $usuario->set_contrasena($_POST["contrasena"]);
+    $modelo->set_cedula($_POST["cedula"]);
+    $modelo->set_contrasena($_POST["contrasena"]);
 
-    if ($usuario->iniciarSesion()) {
+    if ($modelo->iniciarSesion()) {
         session_start();
         $_SESSION["rol"] = "usuario";
 

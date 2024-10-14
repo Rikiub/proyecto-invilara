@@ -2,26 +2,26 @@
 
 require_once "modelo/director.php";
 
-$usuario = new Director();
+$modelo = new Director();
 
 if (isset($_POST["accion"])) {
 	$accion = $_POST["accion"];
 
 	try {
-		$usuario->set_cedula(isset($_POST["id"]) ? $_POST["id"] : $_POST["cedula"]);
+		$modelo->set_cedula(isset($_POST["id"]) ? $_POST["id"] : $_POST["cedula"]);
 
 		if ($accion == "eliminar") {
-			$usuario->eliminar();
+			$modelo->eliminar();
 		} else {
-			$usuario->set_nombre($_POST["nombre"]);
-			$usuario->set_correo($_POST["correo"]);
-			$usuario->set_telefono($_POST["telefono"]);
-			$usuario->set_direccion($_POST["direccion"]);
+			$modelo->set_nombre($_POST["nombre"]);
+			$modelo->set_correo($_POST["correo"]);
+			$modelo->set_telefono($_POST["telefono"]);
+			$modelo->set_direccion($_POST["direccion"]);
 
 			if ($accion == "insertar") {
-				$usuario->insertar();
+				$modelo->insertar();
 			} elseif ($accion == "modificar") {
-				$usuario->modificar();
+				$modelo->modificar();
 			}
 		}
 
@@ -35,7 +35,7 @@ if (isset($_POST["accion"])) {
 	exit;
 }
 
-$datos = $usuario->consultar();
+$datos = $modelo->consultar();
 require_once "vista/director.php";
 
 ?>
