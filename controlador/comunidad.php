@@ -13,9 +13,12 @@ if (isset($_POST["accion"])) {
         if ($accion == "eliminar") {
             $modelo->eliminar();
         } else {
+            $modelo->set_tipo($_POST['tipo']);
             $modelo->set_nombre($_POST['nombre']);
             $modelo->set_direccion($_POST['direccion']);
-            $modelo->set_tipo($_POST['tipo']);
+            $modelo->set_representante($_POST['representante']);
+            $modelo->set_rif($_POST['rif']);
+            $modelo->set_ambito($_POST['ambito']);
 
             if ($accion == "insertar") {
                 $modelo->insertar();
@@ -36,3 +39,5 @@ if (isset($_POST["accion"])) {
 
 $datos = $modelo->consultar();
 require_once "vista/comunidad.php";
+
+?>

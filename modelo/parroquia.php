@@ -94,7 +94,15 @@ class Parroquia extends BaseDatos
 
     public function consultar()
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla}");
+        $stmt = $this->conexion()->query(
+            "SELECT
+                {$this->tabla}.*,
+                municipio.nombre AS nombre_municipio
+            FROM
+                {$this->tabla}
+            LEFT JOIN
+                municipio ON {$this->tabla}.id_municipio = municipio.id"
+        );
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }

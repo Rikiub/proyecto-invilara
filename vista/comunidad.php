@@ -10,24 +10,31 @@
         <table class="table table-hover">
             <thead>
                 <tr>
+                    <th>Tipo</th>
                     <th>Nombre</th>
                     <th>Dirección</th>
-                    <th>Tipo</th>
+                    <th>Representante</th>
+                    <th>RIF</th>
+                    <th>Ambito</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
 
             <tbody class="table-group-divider">
-                <?php foreach ($datos as $d) : ?>
+                <?php foreach ($datos as $d): ?>
                     <tr>
                         <td class="d-none"><?php echo $d["id"] ?></td>
+                        <td><?php echo $d["tipo"] ?></td>
                         <td><?php echo $d["nombre"] ?></td>
                         <td><?php echo $d["direccion"] ?></td>
-                        <td><?php echo $d["tipo"] ?></td>
+                        <td><?php echo $d["representante"] ?></td>
+                        <td><?php echo $d["rif"] ?></td>
+                        <td><?php echo $d["ambito"] ?></td>
 
                         <td class="d-grid d-md-block gap-2">
                             <button class="btn btn-outline-warning" value="modificar">Modificar</button>
-                            <button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal" data-bs-target="#modal-eliminacion">Eliminar</button>
+                            <button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
+                                data-bs-target="#modal-eliminacion">Eliminar</button>
                         </td>
                     </tr>
                 <?php endforeach ?>
@@ -51,16 +58,39 @@
                 <input type="hidden" name="id" />
 
                 <div class="row">
+                    <label class="form-label col">Tipo
+                        <select class="form-select" name="tipo" required>
+                            <option value="comunal" selected>Organización comunal</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="row">
                     <label class="form-label col">Nombre
                         <input class="form-control" type="text" name="nombre" minlength="3" maxlength="30" required />
                     </label>
 
                     <label class="form-label col">Dirección
-                        <input class="form-control" type="text" name="direccion" minlength="10" maxlength="250" required />
+                        <input class="form-control" type="text" name="direccion" minlength="10" maxlength="250"
+                            required />
+                    </label>
+                </div>
+
+                <div class="row">
+                    <label class="form-label col">Representante
+                        <input class="form-control" type="text" name="representante" minlength="3" maxlength="30"
+                            required>
                     </label>
 
-                    <label class="form-label col">Tipo
-                        <input class="form-control" type="text" name="tipo" required />
+                    <label class="form-label col">RIF
+                        <input class="form-control" type="text" name="rif" pattern="\d*" inputmode="numeric"
+                            title="Solo se permiten numeros" required>
+                    </label>
+                </div>
+
+                <div class="row">
+                    <label class="form-label col">Ambito
+                        <input class="form-control" type="text" name="ambito" minlength="3" maxlength="30" required>
                     </label>
                 </div>
 

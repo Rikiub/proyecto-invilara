@@ -62,9 +62,13 @@
 					</label>
 
 					<label class="form-label col">Cedula del director
-						<input class="form-control" type="text" name="cedula_director" pattern="\d*" inputmode="numeric"
-							minlength="5" maxlength="15" placeholder="Por ejemplo: Pedro Perez"
-							title="Solo se aceptan numeros" required />
+						<select class="form-select" name="cedula_director" required>
+							<?php foreach ($directores as $d): ?>
+								<option value=<?php echo $d["cedula"] ?>>
+									<?php echo $d["cedula"] . " - " . $d["nombre"] ?>
+								</option>
+							<?php endforeach ?>
+						</select>
 					</label>
 				</div>
 

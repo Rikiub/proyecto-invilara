@@ -148,7 +148,7 @@ class Institucion extends BaseDatos
 
     public function obtenerDirector($cedula)
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE cedula_director='$cedula'");
+        $stmt = $this->conexion()->query("SELECT * FROM director WHERE cedula='$cedula'");
         $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $fila;
     }

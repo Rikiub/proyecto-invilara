@@ -29,7 +29,7 @@ CREATE TABLE `asignacion` (
   PRIMARY KEY (`id`),
   KEY `asignacion_gerencia_FK` (`id_gerencia`),
   CONSTRAINT `asignacion_gerencia_FK` FOREIGN KEY (`id_gerencia`) REFERENCES `gerencia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `asignacion` (
 
 LOCK TABLES `asignacion` WRITE;
 /*!40000 ALTER TABLE `asignacion` DISABLE KEYS */;
+INSERT INTO `asignacion` VALUES (60,1,'En programación'),(61,1,'En programación'),(62,1,'En programación'),(63,1,'En programación'),(64,1,'En programación'),(65,1,'En programación'),(66,1,'En programación'),(67,1,'En programación'),(68,1,'En programación'),(69,21,'En programación'),(70,1,'En programación'),(71,1,'En programación');
 /*!40000 ALTER TABLE `asignacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +58,7 @@ CREATE TABLE `comunidad` (
   `rif` int DEFAULT NULL,
   `ambito` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +67,7 @@ CREATE TABLE `comunidad` (
 
 LOCK TABLES `comunidad` WRITE;
 /*!40000 ALTER TABLE `comunidad` DISABLE KEYS */;
-INSERT INTO `comunidad` VALUES (1,'Sindicato','Sindicato Único de Telecomunicaciones del Estadio Anzoátegui','Urb. 7',NULL,NULL,NULL),(2,'Parque','Parque \"Oeste\"','Calle 7 y Calle 9',NULL,NULL,NULL);
+INSERT INTO `comunidad` VALUES (1,'Sindicato','Sindicato Único de Telecomunicaciones del Estadio Anzoátegui','Urb. 7','Leonardo Torres',437488,'Sindicato'),(2,'Parque','Parque \"Oeste\"','Calle 7 y Calle 9','Carlos Villegas',352362,'Parque nacional');
 /*!40000 ALTER TABLE `comunidad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +94,7 @@ CREATE TABLE `director` (
 
 LOCK TABLES `director` WRITE;
 /*!40000 ALTER TABLE `director` DISABLE KEYS */;
-INSERT INTO `director` VALUES (11222333,'Urb. 7 con calle 3','Carlos Jimenez','412-134-4364','hola@gmail.com');
+INSERT INTO `director` VALUES (11222333,'Urb. 7 con calle 3','Carlos Jimenez','412-134-4364','hola@gmail.com'),(12121212,'asfasf','Benjamine','412-134-4364','hola@gmail.com');
 /*!40000 ALTER TABLE `director` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,7 +113,7 @@ CREATE TABLE `gerencia` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `gerencia_gerente_FK` (`cedula_gerente`),
   CONSTRAINT `gerencia_gerente_FK` FOREIGN KEY (`cedula_gerente`) REFERENCES `gerente` (`cedula`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +122,7 @@ CREATE TABLE `gerencia` (
 
 LOCK TABLES `gerencia` WRITE;
 /*!40000 ALTER TABLE `gerencia` DISABLE KEYS */;
-INSERT INTO `gerencia` VALUES (16,11222333,'Hidrolara','Parroquias');
+INSERT INTO `gerencia` VALUES (1,11222333,'Hidrolara','Parroquias'),(21,11222333,'Servitel','Torres');
 /*!40000 ALTER TABLE `gerencia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,7 +170,7 @@ CREATE TABLE `institucion` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `institucion_director_FK` (`cedula_director`),
   CONSTRAINT `institucion_director_FK` FOREIGN KEY (`cedula_director`) REFERENCES `director` (`cedula`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +179,7 @@ CREATE TABLE `institucion` (
 
 LOCK TABLES `institucion` WRITE;
 /*!40000 ALTER TABLE `institucion` DISABLE KEYS */;
-INSERT INTO `institucion` VALUES (6,11222333,'Pepito','hola@gmail.com','412-134-4364','Caracas');
+INSERT INTO `institucion` VALUES (1,12121212,'Bellas Artes','hola@gmail.com','412-134-4364','Caracas'),(17,11222333,'Academia De Investigación','hola@gmail.com','412-134-4364','Caracas');
 /*!40000 ALTER TABLE `institucion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,7 +194,7 @@ CREATE TABLE `municipio` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -220,7 +221,7 @@ CREATE TABLE `parroquia` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `parroquia_municipio_FK` (`id_municipio`),
   CONSTRAINT `parroquia_municipio_FK` FOREIGN KEY (`id_municipio`) REFERENCES `municipio` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -284,13 +285,13 @@ CREATE TABLE `solicitud` (
   KEY `solicitud_solicitante_FK` (`cedula_solicitante`),
   KEY `solicitud_tipo_solicitud_FK` (`tipo_solicitud`),
   KEY `solicitud_parroquia_FK` (`id_parroquia`),
-  CONSTRAINT `solicitud_asignacion_FK` FOREIGN KEY (`id_asignacion`) REFERENCES `asignacion` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `solicitud_asignacion_FK` FOREIGN KEY (`id_asignacion`) REFERENCES `asignacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `solicitud_comunidad_fk` FOREIGN KEY (`id_comunidad`) REFERENCES `comunidad` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `solicitud_institucion_fk` FOREIGN KEY (`id_institucion`) REFERENCES `institucion` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `solicitud_parroquia_FK` FOREIGN KEY (`id_parroquia`) REFERENCES `parroquia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `solicitud_solicitante_FK` FOREIGN KEY (`cedula_solicitante`) REFERENCES `solicitante` (`cedula`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `solicitud_tipo_solicitud_FK` FOREIGN KEY (`tipo_solicitud`) REFERENCES `tipo_solicitud` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43734735 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -299,6 +300,7 @@ CREATE TABLE `solicitud` (
 
 LOCK TABLES `solicitud` WRITE;
 /*!40000 ALTER TABLE `solicitud` DISABLE KEYS */;
+INSERT INTO `solicitud` VALUES (28,1,61,NULL,1,11985184,1,'Hay un problema.','2024-10-18'),(29,1,62,NULL,1,11985184,2,'Hay un problema.','2024-10-18'),(30,1,63,1,1,NULL,3,'Hay un problema.','2024-10-18'),(31,1,64,1,1,NULL,3,'asf','2024-10-18');
 /*!40000 ALTER TABLE `solicitud` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -313,7 +315,7 @@ CREATE TABLE `tipo_solicitud` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -322,6 +324,7 @@ CREATE TABLE `tipo_solicitud` (
 
 LOCK TABLES `tipo_solicitud` WRITE;
 /*!40000 ALTER TABLE `tipo_solicitud` DISABLE KEYS */;
+INSERT INTO `tipo_solicitud` VALUES (1,'general'),(2,'1x10'),(3,'institucional');
 /*!40000 ALTER TABLE `tipo_solicitud` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -362,4 +365,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-11 15:18:57
+-- Dump completed on 2024-10-18 14:08:32

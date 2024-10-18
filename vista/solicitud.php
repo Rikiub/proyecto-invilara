@@ -2,38 +2,73 @@
 <?php require_once "vista/componentes/barra.php"; ?>
 
 <main class="container" id="crud">
-	<h1>Solicitudes</h1>
+	<h1>
+		Solicitudes: <small class="text-muted fs-3"><?php echo $tipo_solicitud_nombre; ?></small>
+	</h1>
 
-	<button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
+	<div class="row">
+		<label>
+			<select class="form-select my-2" id="tipo-solicitud">
+				<option disabled hidden selected>Tipo de solicitud</option>
+
+				<option value="1">General</option>
+				<option value="2">1x10</option>
+				<option value="3">Institucional</option>
+			</select>
+		</label>
+	</div>
+
+	<hr>
+
+	<button class="btn btn-outline-primary my-3 me-3" value="insertar">Registrar</button>
 
 	<div class="table-responsive">
 		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>Nº Control</th>
-					<th>Gerencia</th>
+
+					<?php if ($tipo_solicitud == "1" || $tipo_solicitud == "2"): ?>
+						<th>Cedula solicitante</th>
+					<?php elseif ($tipo_solicitud == "3"): ?>
+						<th>Institución</th>
+					<?php endif ?>
+
 					<th>Comunidad</th>
-					<th>Cedula solicitante</th>
+					<th>Parroquia</th>
+					<th>Gerencia</th>
 					<th>Fecha</th>
-					<th>Problematica</th>
 					<th>Estatus</th>
+					<th>Problematica</th>
+					<th>Acciones</th>
 				</tr>
 			</thead>
 
 			<tbody class="table-group-divider">
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1168576</td>
-				<td>04/01/2024</td>
-				<td>Asfalto</td>
-				<td>Culminado</td>
+				<?php foreach ($datos as $d): ?>
+					<tr>
+						<td><?php echo $d["id"]; ?></td>
 
-				<td class="d-grid d-md-block gap-2">
-					<button class="btn btn-outline-warning" value="modificar">Modificar</button>
-					<button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
-						data-bs-target="#modal-eliminacion">Eliminar</button>
-				</td>
+						<?php if ($tipo_solicitud == "1" || $tipo_solicitud == "2"): ?>
+							<td><?php echo $d["cedula_solicitante"]; ?></td>
+						<?php elseif ($tipo_solicitud == "3"): ?>
+							<td><?php echo $d["nombre_institucion"]; ?></td>
+						<?php endif ?>
+
+						<td><?php echo $d["nombre_comunidad"]; ?></td>
+						<td><?php echo $d["nombre_parroquia"]; ?></td>
+						<td><?php echo $d["nombre_gerencia"]; ?></td>
+						<td><?php echo $d["fecha"]; ?></td>
+						<td><?php echo $d["estatus"]; ?></td>
+						<td><?php echo $d["problematica"]; ?></td>
+
+						<td class="d-grid d-md-block gap-2">
+							<button class="btn btn-outline-warning" value="modificar">Modificar</button>
+							<button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
+								data-bs-target="#modal-eliminacion">Eliminar</button>
+						</td>
+					</tr>
+				<?php endforeach ?>
 			</tbody>
 		</table>
 	</div>
@@ -53,33 +88,74 @@
 			<form id="form-edicion" class="modal-body">
 				<div class="row">
 					<label class="form-label col">Nº Control
-						<input data-id class="form-control" type="text" name="nro_control" required />
-					</label>
-
-					<label class="form-label col">Gerencia
-						<input class="form-control" type="text" name="id_gerencia" required />
-					</label>
-
-					<label class="form-label col">Comunidad
-						<input class="form-control" type="text" name="id_comunidad" required />
+						<input data-id class="form-control" pattern="\d*" inputmode="numeric" type="text" name="id"
+							title="Solo se permiten numeros" required />
 					</label>
 				</div>
 
 				<div class="row">
-					<label class="form-label col">Cedula solicitante
-						<input class="form-control" type="text" name="cedula_solicitante" required />
+					<?php if ($tipo_solicitud == "1" || $tipo_solicitud == "2"): ?>
+
+						<label class="form-label col">Cedula solicitante
+							<select class="form-select" name="cedula_solicitante" required>
+								<?php foreach ($solicitantes as $d): ?>
+									<option value=<?php echo $d["cedula"] ?>>
+										<?php echo $d["cedula"] . " - " . $d["nombre"] ?>
+									</option>
+								<?php endforeach ?>
+							</select>
+						</label>
+
+					<?php elseif ($tipo_solicitud == "3"): ?>
+
+						<label class="form-label col">Institución
+							<select class="form-select" name="id_institucion" required>
+								<?php foreach ($instituciones as $d): ?>
+									<option value=<?php echo $d["id"] ?>>
+										<?php echo $d["nombre"] ?>
+									</option>
+								<?php endforeach ?>
+							</select>
+						</label>
+
+					<?php endif ?>
+				</div>
+
+				<div class="row">
+					<label class="form-label col">Comunidad
+						<select class="form-select" name="id_comunidad" required>
+							<?php foreach ($comunidades as $d): ?>
+								<option value=<?php echo $d["id"] ?>>
+									<?php echo $d["nombre"] ?>
+								</option>
+							<?php endforeach ?>
+						</select>
+					</label>
+
+					<label class="form-label col">Parroquia
+						<select class="form-select" name="id_parroquia" required>
+							<?php foreach ($parroquias as $d): ?>
+								<option value=<?php echo $d["id"] ?>>
+									<?php echo $d["nombre"] ?>
+								</option>
+							<?php endforeach ?>
+						</select>
+					</label>
+
+					<label class="form-label col">Gerencia
+						<select class="form-select" name="id_gerencia" required>
+							<?php foreach ($gerencias as $d): ?>
+								<option value=<?php echo $d["id"] ?>>
+									<?php echo $d["nombre"] ?>
+								</option>
+							<?php endforeach ?>
+						</select>
 					</label>
 				</div>
 
 				<div class="row">
 					<label class="form-label col">Fecha
 						<input class="form-control" type="date" name="fecha" required />
-					</label>
-				</div>
-
-				<div class="row">
-					<label class="form-label col">Problematica
-						<textarea class="form-control" name="problematica" required></textarea>
 					</label>
 				</div>
 
@@ -93,8 +169,16 @@
 					</label>
 				</div>
 
+				<div class="row">
+					<label class="form-label col">Problematica
+						<textarea class="form-control" name="problematica" required></textarea>
+					</label>
+				</div>
+
 				<div class="modal-footer my-4">
 					<input type="hidden" name="accion">
+					<input type="hidden" value="<?php echo $tipo_solicitud; ?>">
+
 					<button class="btn btn-primary px-5 py-2" type="submit">Procesar</button>
 				</div>
 			</form>
@@ -103,3 +187,4 @@
 </div>
 
 <script src="recursos/js/crud.js"></script>
+<script src="recursos/js/solicitud.js"></script>

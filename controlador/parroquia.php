@@ -40,12 +40,6 @@ if (isset($_POST["accion"])) {
 $datos = $modelo->consultar();
 $municipios = $municipio->consultar();
 
-// Traducir datos transaccionales
-foreach ($datos as $index => $valor) {
-    $nombre = $municipio->obtenerUno($valor["id_municipio"])[0]["nombre"];
-    $datos[$index]["nombre_municipio"] = $nombre;
-}
-
 // Cargar vista
 require_once "vista/parroquia.php";
 

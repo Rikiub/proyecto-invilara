@@ -35,6 +35,11 @@ if (isset($_POST["accion"])) {
     exit;
 }
 
+require_once "modelo/gerente.php";
+$m = new Gerente();
+
+$gerentes = $m->consultar();
+
 $datos = $modelo->consultar();
 require_once "vista/gerencia.php";
 

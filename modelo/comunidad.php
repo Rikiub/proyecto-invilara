@@ -6,13 +6,19 @@ class Comunidad extends BaseDatos
 {
     private $tabla = "comunidad";
 
+    private $tipo;
     private $id;
     private $nombre;
     private $direccion;
-    private $tipo;
-
+    private $representante;
+    private $rif;
+    private $ambito;
 
     // Setter
+    public function set_tipo($valor)
+    {
+        $this->tipo = $valor;
+    }
     public function set_id($valor)
     {
         $this->id = $valor;
@@ -25,9 +31,17 @@ class Comunidad extends BaseDatos
     {
         $this->direccion = $valor;
     }
-    public function set_tipo($valor)
+    public function set_representante($valor)
     {
-        $this->tipo = $valor;
+        $this->representante = $valor;
+    }
+    public function set_rif($valor)
+    {
+        $this->rif = $valor;
+    }
+    public function set_ambito($valor)
+    {
+        $this->ambito = $valor;
     }
 
     // Getter
@@ -47,6 +61,18 @@ class Comunidad extends BaseDatos
     {
         return $this->tipo;
     }
+    public function get_representante()
+    {
+        return $this->representante;
+    }
+    public function get_rif()
+    {
+        return $this->rif;
+    }
+    public function get_ambito()
+    {
+        return $this->ambito;
+    }
 
     public function insertar()
     {
@@ -56,14 +82,20 @@ class Comunidad extends BaseDatos
 
         $this->conexion()->query(
             "INSERT INTO {$this->tabla} (
+                tipo,
 				nombre,
 				direccion,
-				tipo
+				representante,
+                rif,
+                ambito
 			)
 			VALUES (
+				'{$this->tipo}',
 				'{$this->nombre}',
 				'{$this->direccion}',
-				'{$this->tipo}'
+                '{$this->representante}',
+                '{$this->rif}',
+                '{$this->ambito}'
 			)"
         );
     }
@@ -77,9 +109,12 @@ class Comunidad extends BaseDatos
         $this->conexion()->query(
             "UPDATE {$this->tabla} SET 
                 id = '{$this->id}',
+				tipo = '{$this->tipo}',
 				nombre = '{$this->nombre}',
 				direccion = '{$this->direccion}',
-				tipo = '{$this->tipo}'
+                representante = '{$this->representante}',
+                rif = '{$this->rif}',
+                ambito = '{$this->ambito}'
 			WHERE
 				id = '{$this->id}'
 			"

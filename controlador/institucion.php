@@ -36,6 +36,11 @@ if (isset($_POST["accion"])) {
 	exit;
 }
 
+require_once "modelo/director.php";
+$m = new Director();
+
+$directores = $m->consultar();
+
 // Preparar datos a mostrar
 $datos = $modelo->consultar();
 

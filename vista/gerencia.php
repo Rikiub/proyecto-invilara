@@ -55,9 +55,13 @@
                     </label>
 
                     <label class="form-label col">Cedula del gerente
-                        <input class="form-control" type="text" name="cedula_gerente" id="cedula_gerente" pattern="\d*"
-                            inputmode="numeric" minlength="7" maxlength="8" title="Solo se permiten numeros."
-                            required />
+                        <select class="form-select" name="cedula_gerente" required>
+                            <?php foreach ($gerentes as $d): ?>
+                                <option value=<?php echo $d["cedula"] ?>>
+                                    <?php echo $d["cedula"] . " - " . $d["nombre"] ?>
+                                </option>
+                            <?php endforeach ?>
+                        </select>
                     </label>
                 </div>
 

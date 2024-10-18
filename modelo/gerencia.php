@@ -11,8 +11,7 @@ class Gerencia extends BaseDatos
     private $nombre;
     private $direccion;
 
-
-    // coloco
+    // Setter
     function set_id($valor)
     {
         $this->id = $valor;
@@ -30,8 +29,7 @@ class Gerencia extends BaseDatos
         $this->direccion = $valor;
     }
 
-
-    // leeo
+    // Getter
     function get_id()
     {
         return $this->id;

@@ -56,9 +56,9 @@
 
                     <label class="form-label col">Municipio
                         <select class="form-select" name="id_municipio" required>
-                            <?php foreach ($municipios as $m): ?>
-                                <option value=<?php echo $m["id"] ?>>
-                                    <?php echo $m["nombre"] ?>
+                            <?php foreach ($municipios as $d): ?>
+                                <option value=<?php echo $d["id"] ?>>
+                                    <?php echo $d["nombre"] ?>
                                 </option>
                             <?php endforeach ?>
                         </select>
