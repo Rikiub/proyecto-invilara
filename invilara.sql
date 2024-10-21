@@ -273,6 +273,7 @@ CREATE TABLE `solicitud` (
   `id_comunidad` int DEFAULT NULL,
   `id_asignacion` int DEFAULT NULL,
   `id_institucion` int DEFAULT NULL,
+  `id_municipio` int DEFAULT NULL,
   `id_parroquia` int DEFAULT NULL,
   `cedula_solicitante` int DEFAULT NULL,
   `tipo_solicitud` int DEFAULT NULL,
@@ -285,9 +286,11 @@ CREATE TABLE `solicitud` (
   KEY `solicitud_solicitante_FK` (`cedula_solicitante`),
   KEY `solicitud_tipo_solicitud_FK` (`tipo_solicitud`),
   KEY `solicitud_parroquia_FK` (`id_parroquia`),
+  KEY `solicitud_municipio_FK` (`id_municipio`),
   CONSTRAINT `solicitud_asignacion_FK` FOREIGN KEY (`id_asignacion`) REFERENCES `asignacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `solicitud_comunidad_fk` FOREIGN KEY (`id_comunidad`) REFERENCES `comunidad` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `solicitud_institucion_fk` FOREIGN KEY (`id_institucion`) REFERENCES `institucion` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `solicitud_municipio_FK` FOREIGN KEY (`id_municipio`) REFERENCES `municipio` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `solicitud_parroquia_FK` FOREIGN KEY (`id_parroquia`) REFERENCES `parroquia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `solicitud_solicitante_FK` FOREIGN KEY (`cedula_solicitante`) REFERENCES `solicitante` (`cedula`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `solicitud_tipo_solicitud_FK` FOREIGN KEY (`tipo_solicitud`) REFERENCES `tipo_solicitud` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
@@ -300,7 +303,7 @@ CREATE TABLE `solicitud` (
 
 LOCK TABLES `solicitud` WRITE;
 /*!40000 ALTER TABLE `solicitud` DISABLE KEYS */;
-INSERT INTO `solicitud` VALUES (28,1,61,NULL,1,11985184,1,'Hay un problema.','2024-10-18'),(29,1,62,NULL,1,11985184,2,'Hay un problema.','2024-10-18'),(30,1,63,1,1,NULL,3,'Hay un problema.','2024-10-18'),(31,1,64,1,1,NULL,3,'asf','2024-10-18');
+INSERT INTO `solicitud` VALUES (28,1,61,NULL,NULL,1,11985184,1,'Hay un problema.','2024-10-18'),(29,1,62,NULL,NULL,1,11985184,2,'Hay un problema.','2024-10-18'),(30,1,63,1,NULL,1,NULL,3,'Hay un problema.','2024-10-18'),(31,1,64,1,NULL,1,NULL,3,'asf','2024-10-18');
 /*!40000 ALTER TABLE `solicitud` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -365,4 +368,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-18 14:08:32
+-- Dump completed on 2024-10-20 18:18:51
