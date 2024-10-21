@@ -28,7 +28,18 @@ crud.addEventListener("click", (event) => {
 
 			// Iterar sobre todos los <td> y copiar su valor al formulario.
 			for (const [index, td] of td_lista.entries()) {
-				form_edicion[index].value = td.textContent;
+				el = form_edicion[index];
+
+				if (el.tagName === "SELECT") {
+					for (let i = 0; i < el.options.length; i++) {
+						if (el.options[i].text === td.textContent) {
+							el.selectedIndex = i;
+							break;
+						}
+					}
+				} else {
+					el.value = td.textContent;
+				}
 			}
 
 			desactivar_input(true);

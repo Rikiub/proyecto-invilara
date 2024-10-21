@@ -10,6 +10,7 @@ class Solicitud extends BaseDatos
     private $cedula_solicitante;
     private $id_institucion;
     private $id_comunidad;
+    private $id_municipio;
     private $id_parroquia;
     private $id_gerencia;
     private $fecha;
@@ -33,6 +34,10 @@ class Solicitud extends BaseDatos
     public function set_id_comunidad($valor)
     {
         $this->id_comunidad = $valor;
+    }
+    public function set_id_municipio($valor)
+    {
+        $this->id_municipio = $valor;
     }
     public function set_id_parroquia($valor)
     {
@@ -99,55 +104,40 @@ class Solicitud extends BaseDatos
 
         $id_asignacion = $pdo->lastInsertId();
 
+        // Cambiar la columna y el valor según el tipo de solicitud.
         if ($this->esGeneral()) {
-            $stmt = $pdo->prepare(
-                "INSERT INTO `{$this->tabla}` (
-                    `id`,
-                    `id_asignacion`,
-                    `cedula_solicitante`,
-                    `id_comunidad`,
-                    `id_parroquia`,
-                    `fecha`,
-                    `problematica`,
-                    `tipo_solicitud`
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-            );
-
-            $stmt->execute([
-                $this->id,
-                $id_asignacion,
-                $this->cedula_solicitante,
-                $this->id_comunidad,
-                $this->id_parroquia,
-                $this->fecha,
-                $this->problematica,
-                $this->tipo_solicitud
-            ]);
+            $sql_columna = "cedula_solicitante";
+            $sql_valor = $this->cedula_solicitante;
         } else if ($this->esInstitucional()) {
-            $stmt = $pdo->prepare(
-                "INSERT INTO {$this->tabla} (
-                    id,
-                    id_asignacion,
-                    id_institucion,
-                    id_comunidad,
-                    id_parroquia,
-                    fecha,
-                    problematica,
-                    tipo_solicitud
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-            );
-
-            $stmt->execute([
-                $this->id,
-                $id_asignacion,
-                $this->id_institucion,
-                $this->id_comunidad,
-                $this->id_parroquia,
-                $this->fecha,
-                $this->problematica,
-                $this->tipo_solicitud
-            ]);
+            $sql_columna = "id_institucion";
+            $sql_valor = $this->id_institucion;
         }
+
+        $stmt = $pdo->prepare(
+            "INSERT INTO `{$this->tabla}` (
+                `id`,
+                `id_asignacion`,
+                `{$sql_columna}`,
+                `id_comunidad`,
+                `id_municipio`,
+                `id_parroquia`,
+                `fecha`,
+                `problematica`,
+                `tipo_solicitud`
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        );
+
+        $stmt->execute([
+            $this->id,
+            $id_asignacion,
+            $sql_valor,
+            $this->id_comunidad,
+            $this->id_municipio,
+            $this->id_parroquia,
+            $this->fecha,
+            $this->problematica,
+            $this->tipo_solicitud
+        ]);
     }
 
     public function modificar()
@@ -174,53 +164,41 @@ class Solicitud extends BaseDatos
         ]);
 
         // Actualizar solicitud
+
+        // Cambiar la columna y el valor según el tipo de solicitud.
         if ($this->esGeneral()) {
-            $stmt = $this->conexion()->prepare(
-                "UPDATE `{$this->tabla}` SET
-                    `cedula_solicitante` = ?,
-                    `id_comunidad` = ?,
-                    `id_parroquia` = ?,
-                    `fecha` = ?,
-                    `problematica` = ?,
-                    `tipo_solicitud` = ?
-                WHERE
-                    id = ?"
-            );
-
-            $stmt->execute([
-                $this->cedula_solicitante,
-                $this->id_comunidad,
-                $this->id_parroquia,
-                $this->fecha,
-                $this->problematica,
-                $this->tipo_solicitud,
-
-                $this->id,
-            ]);
+            $sql_columna = "cedula_solicitante";
+            $sql_valor = $this->cedula_solicitante;
         } else if ($this->esInstitucional()) {
-            $stmt = $this->conexion()->prepare(
-                "UPDATE `{$this->tabla}` SET
-                    `id_institucion` = ?,
-                    `id_comunidad` = ?,
-                    `id_parroquia` = ?,
-                    `fecha` = ?,
-                    `problematica` = ?,
-                    `tipo_solicitud` = ?
-                WHERE
-                    id = ?"
-            );
-
-            $stmt->execute([
-                $this->id_institucion,
-                $this->id_comunidad,
-                $this->id_parroquia,
-                $this->fecha,
-                $this->problematica,
-                $this->tipo_solicitud,
-
-                $this->id,
-            ]);
+            $sql_columna = "id_institucion";
+            $sql_valor = $this->id_institucion;
         }
+
+        $stmt = $this->conexion()->prepare(
+            "UPDATE `{$this->tabla}` SET
+                `{$sql_columna}` = ?,
+                `id_comunidad` = ?,
+                `id_municipio` = ?,
+                `id_parroquia` = ?,
+                `fecha` = ?,
+                `problematica` = ?,
+                `tipo_solicitud` = ?
+            WHERE
+                id = ?"
+        );
+
+        $stmt->execute([
+            $sql_valor,
+
+            $this->id_comunidad,
+            $this->id_municipio,
+            $this->id_parroquia,
+            $this->fecha,
+            $this->problematica,
+            $this->tipo_solicitud,
+
+            $this->id,
+        ]);
     }
 
     public function eliminar()
@@ -241,23 +219,26 @@ class Solicitud extends BaseDatos
     {
         $stmt = $this->conexion()->query(
             "SELECT
-                solicitud.*,
+                {$this->tabla}.*,
                 comunidad.nombre AS nombre_comunidad,
+                municipio.nombre AS nombre_municipio,
                 parroquia.nombre AS nombre_parroquia,
                 institucion.nombre AS nombre_institucion,
                 asignacion.id_gerencia,
                 asignacion.estatus,
                 gerencia.nombre AS nombre_gerencia
             FROM
-                solicitud
+                {$this->tabla}
             LEFT JOIN
-                comunidad ON solicitud.id_comunidad = comunidad.id
+                comunidad ON {$this->tabla}.id_comunidad = comunidad.id
             LEFT JOIN
-                parroquia ON solicitud.id_parroquia = parroquia.id
+                municipio ON {$this->tabla}.id_municipio = municipio.id
             LEFT JOIN
-                institucion ON solicitud.id_institucion = institucion.id
+                parroquia ON {$this->tabla}.id_parroquia = parroquia.id
             LEFT JOIN
-                asignacion ON solicitud.id_asignacion = asignacion.id
+                institucion ON {$this->tabla}.id_institucion = institucion.id
+            LEFT JOIN
+                asignacion ON {$this->tabla}.id_asignacion = asignacion.id
             LEFT JOIN
                 gerencia ON asignacion.id_gerencia = gerencia.id
             WHERE

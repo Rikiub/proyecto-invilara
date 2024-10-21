@@ -36,6 +36,7 @@ if (isset($_POST["accion"])) {
             }
 
             $modelo->set_id_comunidad($_POST['id_comunidad']);
+            $modelo->set_id_municipio($_POST['id_municipio']);
             $modelo->set_id_parroquia($_POST['id_parroquia']);
             $modelo->set_id_gerencia($_POST['id_gerencia']);
             $modelo->set_fecha($_POST['fecha']);
@@ -84,6 +85,11 @@ require_once "modelo/parroquia.php";
 $m = new Parroquia();
 
 $parroquias = $m->consultar();
+
+require_once "modelo/municipio.php";
+$m = new Municipio();
+
+$municipios = $m->consultar();
 
 // Datos principales
 $datos = $modelo->consultar();

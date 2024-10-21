@@ -35,6 +35,7 @@
 					<?php endif ?>
 
 					<th>Comunidad</th>
+					<th>Municipio</th>
 					<th>Parroquia</th>
 					<th>Gerencia</th>
 					<th>Fecha</th>
@@ -56,6 +57,7 @@
 						<?php endif ?>
 
 						<td><?php echo $d["nombre_comunidad"]; ?></td>
+						<td><?php echo $d["nombre_municipio"]; ?></td>
 						<td><?php echo $d["nombre_parroquia"]; ?></td>
 						<td><?php echo $d["nombre_gerencia"]; ?></td>
 						<td><?php echo $d["fecha"]; ?></td>
@@ -132,6 +134,16 @@
 						</select>
 					</label>
 
+					<label class="form-label col">Municipio
+						<select class="form-select" name="id_municipio" required>
+							<?php foreach ($municipios as $d): ?>
+								<option value=<?php echo $d["id"] ?>>
+									<?php echo $d["nombre"] ?>
+								</option>
+							<?php endforeach ?>
+						</select>
+					</label>
+
 					<label class="form-label col">Parroquia
 						<select class="form-select" name="id_parroquia" required>
 							<?php foreach ($parroquias as $d): ?>
@@ -141,7 +153,9 @@
 							<?php endforeach ?>
 						</select>
 					</label>
+				</div>
 
+				<div class="row">
 					<label class="form-label col">Gerencia
 						<select class="form-select" name="id_gerencia" required>
 							<?php foreach ($gerencias as $d): ?>
