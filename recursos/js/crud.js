@@ -31,12 +31,17 @@ crud.addEventListener("click", (event) => {
 				el = form_edicion[index];
 
 				if (el.tagName === "SELECT") {
+					// Fijar posición del <select>
 					for (let i = 0; i < el.options.length; i++) {
 						if (el.options[i].text === td.textContent) {
 							el.selectedIndex = i;
 							break;
 						}
 					}
+				} else if (el.type === "date") {
+					// Fijar fecha.
+					const [dia, mes, año] = td.textContent.split("/");
+					el.value = `${año}-${mes}-${dia}`;
 				} else {
 					el.value = td.textContent;
 				}

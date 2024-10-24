@@ -40,6 +40,8 @@
 					<th>Gerencia</th>
 					<th>Fecha</th>
 					<th>Estatus</th>
+					<th>Remitente</th>
+					<th>Observación</th>
 					<th>Problematica</th>
 					<th>Acciones</th>
 				</tr>
@@ -60,8 +62,10 @@
 						<td><?php echo $d["nombre_municipio"]; ?></td>
 						<td><?php echo $d["nombre_parroquia"]; ?></td>
 						<td><?php echo $d["nombre_gerencia"]; ?></td>
-						<td><?php echo $d["fecha"]; ?></td>
+						<td><?php echo date("d/m/Y", strtotime($d["fecha"])); ?></td>
 						<td><?php echo $d["estatus"]; ?></td>
+						<td><?php echo $d["remitente"]; ?></td>
+						<td><?php echo $d["observacion"]; ?></td>
 						<td><?php echo $d["problematica"]; ?></td>
 
 						<td class="d-grid d-md-block gap-2">
@@ -90,8 +94,8 @@
 			<form id="form-edicion" class="modal-body">
 				<div class="row">
 					<label class="form-label col">Nº Control
-						<input data-id class="form-control" pattern="\d*" inputmode="numeric" type="text" name="id"
-							title="Solo se permiten numeros" required />
+						<input data-id class="form-control" type="text" name="id" title="Solo se permiten numeros"
+							required />
 					</label>
 				</div>
 
@@ -134,15 +138,7 @@
 						</select>
 					</label>
 
-					<label class="form-label col">Municipio
-						<select class="form-select" name="id_municipio" required>
-							<?php foreach ($municipios as $d): ?>
-								<option value=<?php echo $d["id"] ?>>
-									<?php echo $d["nombre"] ?>
-								</option>
-							<?php endforeach ?>
-						</select>
-					</label>
+					<input type="hidden">
 
 					<label class="form-label col">Parroquia
 						<select class="form-select" name="id_parroquia" required>
@@ -176,10 +172,22 @@
 				<div class="row">
 					<label class="form-label col">Estatus
 						<select class="form-select" name="estatus">
-							<option value="En programación">En programación</option>
-							<option value="En ejecución">En ejecución</option>
-							<option value="Cerrado">Cerrado</option>
+							<option>Programado</option>
+							<option>Ejecutado</option>
+							<option>Cerrado</option>
 						</select>
+					</label>
+				</div>
+
+				<div class="row">
+					<label class="form-label col">Remitente
+						<input class="form-control" type="text" name="remitente" required>
+					</label>
+				</div>
+
+				<div class="row">
+					<label class="form-label col">Observación
+						<textarea class="form-control" name="observacion" required></textarea>
 					</label>
 				</div>
 

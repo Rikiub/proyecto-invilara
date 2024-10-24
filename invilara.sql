@@ -25,11 +25,12 @@ DROP TABLE IF EXISTS `asignacion`;
 CREATE TABLE `asignacion` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_gerencia` int DEFAULT NULL,
+  `remitente` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `estatus` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `asignacion_gerencia_FK` (`id_gerencia`),
   CONSTRAINT `asignacion_gerencia_FK` FOREIGN KEY (`id_gerencia`) REFERENCES `gerencia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +39,7 @@ CREATE TABLE `asignacion` (
 
 LOCK TABLES `asignacion` WRITE;
 /*!40000 ALTER TABLE `asignacion` DISABLE KEYS */;
-INSERT INTO `asignacion` VALUES (60,1,'En programación'),(61,1,'En programación'),(62,1,'En programación'),(63,1,'En programación'),(64,1,'En programación'),(65,1,'En programación'),(66,1,'En programación'),(67,1,'En programación'),(68,1,'En programación'),(69,21,'En programación'),(70,1,'En programación'),(71,1,'En programación');
+INSERT INTO `asignacion` VALUES (60,1,NULL,'En programación'),(61,1,'Juanito','Programado'),(62,1,'Juanito','Programado'),(63,1,'Juanito','Programado'),(64,1,NULL,'En programación'),(65,1,NULL,'En programación'),(66,1,NULL,'En programación'),(67,1,NULL,'En programación'),(68,1,NULL,'En programación'),(69,21,NULL,'En programación'),(70,1,NULL,'En programación'),(71,1,NULL,'En programación'),(72,1,NULL,'En programación'),(73,1,NULL,'En programación'),(74,21,NULL,'En programación'),(75,21,NULL,'En programación'),(76,1,NULL,'En programación'),(77,1,NULL,'En programación'),(78,1,NULL,'En programación'),(79,21,NULL,'En programación'),(80,1,'XD','En programación');
 /*!40000 ALTER TABLE `asignacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,16 +270,16 @@ DROP TABLE IF EXISTS `solicitud`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `solicitud` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `id_comunidad` int DEFAULT NULL,
   `id_asignacion` int DEFAULT NULL,
   `id_institucion` int DEFAULT NULL,
-  `id_municipio` int DEFAULT NULL,
   `id_parroquia` int DEFAULT NULL,
   `cedula_solicitante` int DEFAULT NULL,
   `tipo_solicitud` int DEFAULT NULL,
-  `problematica` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `fecha` date DEFAULT NULL,
+  `observacion` varchar(300) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `problematica` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `solicitud_comunidad_fk` (`id_comunidad`),
   KEY `solicitud_institucion_fk` (`id_institucion`),
@@ -286,15 +287,13 @@ CREATE TABLE `solicitud` (
   KEY `solicitud_solicitante_FK` (`cedula_solicitante`),
   KEY `solicitud_tipo_solicitud_FK` (`tipo_solicitud`),
   KEY `solicitud_parroquia_FK` (`id_parroquia`),
-  KEY `solicitud_municipio_FK` (`id_municipio`),
   CONSTRAINT `solicitud_asignacion_FK` FOREIGN KEY (`id_asignacion`) REFERENCES `asignacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `solicitud_comunidad_fk` FOREIGN KEY (`id_comunidad`) REFERENCES `comunidad` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `solicitud_institucion_fk` FOREIGN KEY (`id_institucion`) REFERENCES `institucion` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `solicitud_municipio_FK` FOREIGN KEY (`id_municipio`) REFERENCES `municipio` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `solicitud_parroquia_FK` FOREIGN KEY (`id_parroquia`) REFERENCES `parroquia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `solicitud_solicitante_FK` FOREIGN KEY (`cedula_solicitante`) REFERENCES `solicitante` (`cedula`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `solicitud_tipo_solicitud_FK` FOREIGN KEY (`tipo_solicitud`) REFERENCES `tipo_solicitud` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=43734735 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -303,7 +302,7 @@ CREATE TABLE `solicitud` (
 
 LOCK TABLES `solicitud` WRITE;
 /*!40000 ALTER TABLE `solicitud` DISABLE KEYS */;
-INSERT INTO `solicitud` VALUES (28,1,61,NULL,NULL,1,11985184,1,'Hay un problema.','2024-10-18'),(29,1,62,NULL,NULL,1,11985184,2,'Hay un problema.','2024-10-18'),(30,1,63,1,NULL,1,NULL,3,'Hay un problema.','2024-10-18'),(31,1,64,1,NULL,1,NULL,3,'asf','2024-10-18');
+INSERT INTO `solicitud` VALUES ('28',1,61,NULL,1,11985184,1,'2024-10-24','Observamos algo.','Hay un problema.'),('29',1,62,NULL,1,11985184,2,'2024-10-18','Observamos algo.','Hay un problema.'),('30',1,63,1,1,NULL,3,'2024-10-18','Observamos algo.','Hay un problema.');
 /*!40000 ALTER TABLE `solicitud` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -368,4 +367,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-20 18:18:51
+-- Dump completed on 2024-10-24 12:28:47

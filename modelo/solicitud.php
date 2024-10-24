@@ -10,11 +10,12 @@ class Solicitud extends BaseDatos
     private $cedula_solicitante;
     private $id_institucion;
     private $id_comunidad;
-    private $id_municipio;
     private $id_parroquia;
     private $id_gerencia;
     private $fecha;
     private $estatus;
+    private $remitente;
+    private $observacion;
     private $problematica;
     private $tipo_solicitud;
 
@@ -35,10 +36,6 @@ class Solicitud extends BaseDatos
     {
         $this->id_comunidad = $valor;
     }
-    public function set_id_municipio($valor)
-    {
-        $this->id_municipio = $valor;
-    }
     public function set_id_parroquia($valor)
     {
         $this->id_parroquia = $valor;
@@ -54,6 +51,14 @@ class Solicitud extends BaseDatos
     public function set_estatus($valor)
     {
         $this->estatus = $valor;
+    }
+    public function set_remitente($valor)
+    {
+        $this->remitente = $valor;
+    }
+    public function set_observacion($valor)
+    {
+        $this->observacion = $valor;
     }
     public function set_problematica($valor)
     {
@@ -93,12 +98,14 @@ class Solicitud extends BaseDatos
         $stmt = $pdo->prepare(
             "INSERT INTO `asignacion` (
                 `id_gerencia`,
+                `remitente`,
                 `estatus`
             )
-            VALUES (?, ?)"
+            VALUES (?, ?, ?)"
         );
         $stmt->execute([
             $this->id_gerencia,
+            $this->remitente,
             $this->estatus
         ]);
 
@@ -119,9 +126,9 @@ class Solicitud extends BaseDatos
                 `id_asignacion`,
                 `{$sql_columna}`,
                 `id_comunidad`,
-                `id_municipio`,
                 `id_parroquia`,
                 `fecha`,
+                `observacion`,
                 `problematica`,
                 `tipo_solicitud`
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
@@ -132,9 +139,9 @@ class Solicitud extends BaseDatos
             $id_asignacion,
             $sql_valor,
             $this->id_comunidad,
-            $this->id_municipio,
             $this->id_parroquia,
             $this->fecha,
+            $this->observacion,
             $this->problematica,
             $this->tipo_solicitud
         ]);
@@ -152,12 +159,14 @@ class Solicitud extends BaseDatos
         $stmt = $this->conexion()->prepare(
             "UPDATE `asignacion` SET
                 `id_gerencia` = ?,
+                `remitente` = ?,
                 `estatus` = ?
             WHERE
                 id = ?"
         );
         $stmt->execute([
             $this->id_gerencia,
+            $this->remitente,
             $this->estatus,
 
             $solicitud["id_asignacion"],
@@ -178,9 +187,9 @@ class Solicitud extends BaseDatos
             "UPDATE `{$this->tabla}` SET
                 `{$sql_columna}` = ?,
                 `id_comunidad` = ?,
-                `id_municipio` = ?,
                 `id_parroquia` = ?,
                 `fecha` = ?,
+                `observacion` = ?,
                 `problematica` = ?,
                 `tipo_solicitud` = ?
             WHERE
@@ -191,9 +200,9 @@ class Solicitud extends BaseDatos
             $sql_valor,
 
             $this->id_comunidad,
-            $this->id_municipio,
             $this->id_parroquia,
             $this->fecha,
+            $this->observacion,
             $this->problematica,
             $this->tipo_solicitud,
 
@@ -220,21 +229,22 @@ class Solicitud extends BaseDatos
         $stmt = $this->conexion()->query(
             "SELECT
                 {$this->tabla}.*,
+                asignacion.id_gerencia,
+                asignacion.estatus,
+                asignacion.remitente,
                 comunidad.nombre AS nombre_comunidad,
                 municipio.nombre AS nombre_municipio,
                 parroquia.nombre AS nombre_parroquia,
                 institucion.nombre AS nombre_institucion,
-                asignacion.id_gerencia,
-                asignacion.estatus,
                 gerencia.nombre AS nombre_gerencia
             FROM
                 {$this->tabla}
             LEFT JOIN
-                comunidad ON {$this->tabla}.id_comunidad = comunidad.id
-            LEFT JOIN
-                municipio ON {$this->tabla}.id_municipio = municipio.id
-            LEFT JOIN
                 parroquia ON {$this->tabla}.id_parroquia = parroquia.id
+            LEFT JOIN
+                municipio ON parroquia.id_municipio = municipio.id
+            LEFT JOIN
+                comunidad ON {$this->tabla}.id_comunidad = comunidad.id
             LEFT JOIN
                 institucion ON {$this->tabla}.id_institucion = institucion.id
             LEFT JOIN

@@ -12,7 +12,7 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Cedula del gerente</th>
-                    <th>Dirección de la gerencia</th>
+                    <th>Dirección</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
