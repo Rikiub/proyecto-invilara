@@ -67,9 +67,8 @@ crud.addEventListener("click", (event) => {
 for (const form of [form_edicion, form_eliminacion]) {
 	form.addEventListener("submit", (event) => {
 		event.preventDefault();
-
-		const data = new FormData(form);
-		envioAjax(data);
+		const datos = new FormData(form);
+		envioAjax(datos);
 	});
 }
 

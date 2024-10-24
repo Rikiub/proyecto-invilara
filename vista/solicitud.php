@@ -20,64 +20,16 @@
 
 	<hr>
 
-	<button class="btn btn-outline-primary my-3 me-3" value="insertar">Registrar</button>
+	<div class="d-flex justify-content-between">
+		<button class="btn btn-outline-primary my-3 me-3" value="insertar">Registrar</button>
 
-	<div class="table-responsive">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>Nº Control</th>
-
-					<?php if ($tipo_solicitud == "1" || $tipo_solicitud == "2"): ?>
-						<th>Cedula solicitante</th>
-					<?php elseif ($tipo_solicitud == "3"): ?>
-						<th>Institución</th>
-					<?php endif ?>
-
-					<th>Comunidad</th>
-					<th>Municipio</th>
-					<th>Parroquia</th>
-					<th>Gerencia</th>
-					<th>Fecha</th>
-					<th>Estatus</th>
-					<th>Remitente</th>
-					<th>Observación</th>
-					<th>Problematica</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-
-			<tbody class="table-group-divider">
-				<?php foreach ($datos as $d): ?>
-					<tr>
-						<td><?php echo $d["id"]; ?></td>
-
-						<?php if ($tipo_solicitud == "1" || $tipo_solicitud == "2"): ?>
-							<td><?php echo $d["cedula_solicitante"]; ?></td>
-						<?php elseif ($tipo_solicitud == "3"): ?>
-							<td><?php echo $d["nombre_institucion"]; ?></td>
-						<?php endif ?>
-
-						<td><?php echo $d["nombre_comunidad"]; ?></td>
-						<td><?php echo $d["nombre_municipio"]; ?></td>
-						<td><?php echo $d["nombre_parroquia"]; ?></td>
-						<td><?php echo $d["nombre_gerencia"]; ?></td>
-						<td><?php echo date("d/m/Y", strtotime($d["fecha"])); ?></td>
-						<td><?php echo $d["estatus"]; ?></td>
-						<td><?php echo $d["remitente"]; ?></td>
-						<td><?php echo $d["observacion"]; ?></td>
-						<td><?php echo $d["problematica"]; ?></td>
-
-						<td class="d-grid d-md-block gap-2">
-							<button class="btn btn-outline-warning" value="modificar">Modificar</button>
-							<button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
-								data-bs-target="#modal-eliminacion">Eliminar</button>
-						</td>
-					</tr>
-				<?php endforeach ?>
-			</tbody>
-		</table>
+		<form method="POST">
+			<button class="btn btn-outline-danger my-3 me-3" name="accion" value="reportar" type="submit">Generar
+				Reporte</button>
+		</form>
 	</div>
+
+	<?php require_once "vista/componentes/tabla_solicitud.php"; ?>
 </main>
 
 <?php require_once "vista/componentes/modal_eliminar.php"; ?>
@@ -165,7 +117,8 @@
 
 				<div class="row">
 					<label class="form-label col">Fecha
-						<input class="form-control" type="date" name="fecha" required />
+						<input class="form-control" type="date" name="fecha" value="<?php echo date('Y-m-d'); ?>"
+							required />
 					</label>
 				</div>
 

@@ -2,6 +2,9 @@
 
 require_once "modelo/base_datos.php";
 
+require_once "librerias/dompdf/autoload.inc.php";
+use Dompdf\Dompdf;
+
 class Solicitud extends BaseDatos
 {
     private $tabla = "solicitud";
@@ -256,6 +259,27 @@ class Solicitud extends BaseDatos
         );
         $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $datos;
+    }
+
+    public function generarPDF()
+    {
+        $dompdf = new Dompdf();
+
+        // Generar HTML
+        $datos = $this->consultar();
+        $tipo_solicitud = $this->tipo_solicitud;
+        $reporte = true;
+
+        ob_start();
+        require_once "vista/componentes/encabezado_dompdf.php";
+        require_once "vista/componentes/tabla_solicitud.php";
+        $html = ob_get_clean();
+
+        // Generar PDF
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper("A4", "landscape");
+        $dompdf->render();
+        $dompdf->stream("reporte_invilara.pdf", array("Attachment" => 0));
     }
 
     public function obtenerDato($id)

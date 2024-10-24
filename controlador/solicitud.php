@@ -20,39 +20,47 @@ switch ($tipo_solicitud) {
 }
 
 // Procesar POST
-if (isset($_POST["accion"])) {
-    $accion = $_POST["accion"];
-
-    $modelo->set_id($_POST['id']);
-
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        if ($accion == "eliminar") {
-            $modelo->eliminar();
+        if (isset($_POST["accion"])) {
+            $accion = $_POST["accion"];
         } else {
-            if ($modelo->esGeneral()) {
-                $modelo->set_cedula_solicitante($_POST['cedula_solicitante']);
-            } elseif ($modelo->esInstitucional()) {
-                $modelo->set_id_institucion($_POST['id_institucion']);
-            }
-
-            $modelo->set_id_comunidad($_POST['id_comunidad']);
-            $modelo->set_id_parroquia($_POST['id_parroquia']);
-            $modelo->set_id_gerencia($_POST['id_gerencia']);
-            $modelo->set_fecha($_POST['fecha']);
-            $modelo->set_estatus($_POST['estatus']);
-            $modelo->set_remitente($_POST['remitente']);
-            $modelo->set_observacion($_POST['observacion']);
-            $modelo->set_problematica($_POST['problematica']);
-
-            if ($accion == "insertar") {
-                $modelo->insertar();
-            } elseif ($accion == "modificar") {
-                $modelo->modificar();
-            }
+            throw new Exception("Se necesita especificar una acción.");
         }
 
-        $res["exito"] = "Procesado con exito";
-        echo json_encode($res);
+        if ($accion == "reportar") {
+            $modelo->generarPDF();
+        } else {
+            $modelo->set_id($_POST['id']);
+
+            if ($accion == "eliminar") {
+                $modelo->eliminar();
+            } else {
+                if ($modelo->esGeneral()) {
+                    $modelo->set_cedula_solicitante($_POST['cedula_solicitante']);
+                } elseif ($modelo->esInstitucional()) {
+                    $modelo->set_id_institucion($_POST['id_institucion']);
+                }
+
+                $modelo->set_id_comunidad($_POST['id_comunidad']);
+                $modelo->set_id_parroquia($_POST['id_parroquia']);
+                $modelo->set_id_gerencia($_POST['id_gerencia']);
+                $modelo->set_fecha($_POST['fecha']);
+                $modelo->set_estatus($_POST['estatus']);
+                $modelo->set_remitente($_POST['remitente']);
+                $modelo->set_observacion($_POST['observacion']);
+                $modelo->set_problematica($_POST['problematica']);
+
+                if ($accion == "insertar") {
+                    $modelo->insertar();
+                } elseif ($accion == "modificar") {
+                    $modelo->modificar();
+                }
+            }
+
+            $res["exito"] = "Procesado con exito";
+            echo json_encode($res);
+        }
     } catch (Exception $err) {
         $res["error"] = $err->getMessage();
         echo json_encode($res);
