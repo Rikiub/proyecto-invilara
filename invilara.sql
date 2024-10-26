@@ -30,7 +30,7 @@ CREATE TABLE `asignacion` (
   PRIMARY KEY (`id`),
   KEY `asignacion_gerencia_FK` (`id_gerencia`),
   CONSTRAINT `asignacion_gerencia_FK` FOREIGN KEY (`id_gerencia`) REFERENCES `gerencia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `asignacion` (
 
 LOCK TABLES `asignacion` WRITE;
 /*!40000 ALTER TABLE `asignacion` DISABLE KEYS */;
-INSERT INTO `asignacion` VALUES (60,1,NULL,'En programación'),(61,1,'Juanito','Programado'),(62,1,'Juanito','Programado'),(63,1,'Juanito','Programado'),(64,1,NULL,'En programación'),(65,1,NULL,'En programación'),(66,1,NULL,'En programación'),(67,1,NULL,'En programación'),(68,1,NULL,'En programación'),(69,21,NULL,'En programación'),(70,1,NULL,'En programación'),(71,1,NULL,'En programación'),(72,1,NULL,'En programación'),(73,1,NULL,'En programación'),(74,21,NULL,'En programación'),(75,21,NULL,'En programación'),(76,1,NULL,'En programación'),(77,1,NULL,'En programación'),(78,1,NULL,'En programación'),(79,21,NULL,'En programación'),(80,1,'XD','En programación');
+INSERT INTO `asignacion` VALUES (60,1,NULL,'En programación'),(61,1,'Juanito','Programado'),(62,1,'Juanito','Programado'),(63,1,'Juanito','Programado'),(64,1,NULL,'En programación'),(65,1,NULL,'En programación'),(66,1,NULL,'En programación'),(67,1,NULL,'En programación'),(68,1,NULL,'En programación'),(69,21,NULL,'En programación'),(70,1,NULL,'En programación'),(71,1,NULL,'En programación'),(72,1,NULL,'En programación'),(73,1,NULL,'En programación'),(74,21,NULL,'En programación'),(75,21,NULL,'En programación'),(76,1,NULL,'En programación'),(77,1,NULL,'En programación'),(78,1,NULL,'En programación'),(79,21,NULL,'En programación'),(80,1,'XD','En programación'),(81,1,'x','Programado'),(82,1,'ee','Programado'),(83,1,'xd','Programado'),(84,1,'asf','Programado'),(85,1,'asf','Programado'),(86,1,'Juanito','Programado'),(87,21,'Juanito','Programado'),(88,1,'Remitido','Programado'),(89,1,'Remitido','Ejecutado'),(90,21,'Remitido','Programado'),(91,1,'Remitido','Programado'),(92,1,'Remitido','Cerrado');
 /*!40000 ALTER TABLE `asignacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,7 +95,7 @@ CREATE TABLE `director` (
 
 LOCK TABLES `director` WRITE;
 /*!40000 ALTER TABLE `director` DISABLE KEYS */;
-INSERT INTO `director` VALUES (11222333,'Urb. 7 con calle 3','Carlos Jimenez','412-134-4364','hola@gmail.com'),(12121212,'asfasf','Benjamine','412-134-4364','hola@gmail.com');
+INSERT INTO `director` VALUES (11222333,'Urb. 7 con calle 3','Carlos Jimenez','412-134-4364','hola@gmail.com');
 /*!40000 ALTER TABLE `director` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +171,7 @@ CREATE TABLE `institucion` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `institucion_director_FK` (`cedula_director`),
   CONSTRAINT `institucion_director_FK` FOREIGN KEY (`cedula_director`) REFERENCES `director` (`cedula`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +180,7 @@ CREATE TABLE `institucion` (
 
 LOCK TABLES `institucion` WRITE;
 /*!40000 ALTER TABLE `institucion` DISABLE KEYS */;
-INSERT INTO `institucion` VALUES (1,12121212,'Bellas Artes','hola@gmail.com','412-134-4364','Caracas'),(17,11222333,'Academia De Investigación','hola@gmail.com','412-134-4364','Caracas');
+INSERT INTO `institucion` VALUES (1,11222333,'Bellas Artes','hola@gmail.com','412-134-4364','Caracas'),(17,11222333,'Academia De Investigación','hola@gmail.com','412-134-4364','Caracas');
 /*!40000 ALTER TABLE `institucion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,7 +195,7 @@ CREATE TABLE `municipio` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,7 +204,7 @@ CREATE TABLE `municipio` (
 
 LOCK TABLES `municipio` WRITE;
 /*!40000 ALTER TABLE `municipio` DISABLE KEYS */;
-INSERT INTO `municipio` VALUES (1,'Iribarren'),(2,'Andres Eloy Blanco'),(3,'Urdaneta');
+INSERT INTO `municipio` VALUES (2,'Andrés Eloy Blanco'),(3,'Urdaneta'),(18,'Irribarren'),(21,'Crespo'),(22,'Torres'),(23,'Jiménez'),(24,'Morán'),(25,'Palavecino'),(26,'Simón Planas');
 /*!40000 ALTER TABLE `municipio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,7 +222,7 @@ CREATE TABLE `parroquia` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `parroquia_municipio_FK` (`id_municipio`),
   CONSTRAINT `parroquia_municipio_FK` FOREIGN KEY (`id_municipio`) REFERENCES `municipio` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,7 +231,7 @@ CREATE TABLE `parroquia` (
 
 LOCK TABLES `parroquia` WRITE;
 /*!40000 ALTER TABLE `parroquia` DISABLE KEYS */;
-INSERT INTO `parroquia` VALUES (1,3,'Barquisimeto');
+INSERT INTO `parroquia` VALUES (1,26,'Sarare'),(35,22,'Altragracia'),(36,22,'Antonio Díaz'),(37,2,'Quebrada Honda De Guache'),(38,2,'Pío Tamayo'),(39,25,'Cabudare'),(40,18,'Aguedo Felipe Alvarado'),(41,21,'José María Blanco');
 /*!40000 ALTER TABLE `parroquia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -302,7 +302,7 @@ CREATE TABLE `solicitud` (
 
 LOCK TABLES `solicitud` WRITE;
 /*!40000 ALTER TABLE `solicitud` DISABLE KEYS */;
-INSERT INTO `solicitud` VALUES ('28',1,61,NULL,1,11985184,1,'2024-10-24','Observamos algo.','Hay un problema.'),('29',1,62,NULL,1,11985184,2,'2024-10-18','Observamos algo.','Hay un problema.'),('30',1,63,1,1,NULL,3,'2024-10-18','Observamos algo.','Hay un problema.');
+INSERT INTO `solicitud` VALUES ('BR-1954',1,90,NULL,1,11985184,2,'2024-10-26','Observamos algo.','Hay un problema.'),('IK-57343',1,92,NULL,1,11985184,1,'2024-10-03','Observamos algo.','Hay un problema.'),('LF-32678',1,91,1,1,NULL,3,'2024-10-26','Observamos algo.','Hay un problema.'),('LS-7523',1,89,NULL,1,11985184,2,'2024-10-16','Observamos algo.','Hay un problema.'),('SR-3057',2,88,1,1,NULL,3,'2024-10-24','Observamos algo.','Hay un problema.'),('SR-326236',1,86,NULL,1,11985184,1,'2024-10-24','Observamos algo.','Hay un problema.');
 /*!40000 ALTER TABLE `solicitud` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,4 +367,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-24 12:28:47
+-- Dump completed on 2024-10-25 20:54:50

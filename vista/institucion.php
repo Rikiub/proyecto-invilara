@@ -21,20 +21,20 @@
 
 			<tbody class="table-group-divider">
 				<?php foreach ($datos as $d): ?>
-					<tr>
-						<td class="d-none"><?php echo $d["id"] ?></td>
-						<td><?php echo $d["nombre"] ?></td>
-						<td><?php echo $d["cedula_director"] ?></td>
-						<td><?php echo $d["direccion"] ?></td>
-						<td><?php echo $d["correo"] ?></td>
-						<td><?php echo $d["telefono"] ?></td>
+						<tr>
+							<td class="d-none"><?php echo $d["id"] ?></td>
+							<td><?php echo $d["nombre"] ?></td>
+							<td><?php echo $d["cedula_director"] ?></td>
+							<td><?php echo $d["direccion"] ?></td>
+							<td><?php echo $d["correo"] ?></td>
+							<td><?php echo $d["telefono"] ?></td>
 
-						<td class="d-grid d-md-block gap-2">
-							<button class="btn btn-outline-warning" value="modificar">Modificar</button>
-							<button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
-								data-bs-target="#modal-eliminacion">Eliminar</button>
-						</td>
-					</tr>
+							<td class="d-grid d-md-block gap-2">
+								<button class="btn btn-outline-warning" value="modificar">Modificar</button>
+								<button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
+									data-bs-target="#modal-eliminacion">Eliminar</button>
+							</td>
+						</tr>
 				<?php endforeach ?>
 			</tbody>
 		</table>
@@ -57,16 +57,16 @@
 
 				<div class="row">
 					<label class="form-label col">Nombre
-						<input class="form-control" type="text" name="nombre" minlength="5"
-							placeholder="Por ejemplo: Invilara" required />
+						<input class="form-control" type="text" name="nombre" minlength="3" maxlength="50"
+							pattern="[A-Za-zÀ-ý ]+" title="Solo se aceptan letras" required />
 					</label>
 
 					<label class="form-label col">Cedula del director
 						<select class="form-select" name="cedula_director" required>
 							<?php foreach ($directores as $d): ?>
-								<option value=<?php echo $d["cedula"] ?>>
-									<?php echo $d["cedula"] . " - " . $d["nombre"] ?>
-								</option>
+									<option value=<?php echo $d["cedula"] ?>>
+										<?php echo $d["cedula"] . " - " . $d["nombre"] ?>
+									</option>
 							<?php endforeach ?>
 						</select>
 					</label>
@@ -80,14 +80,12 @@
 
 				<div class="row">
 					<label class="form-label col">Correo
-						<input class="form-control" type="email" name="correo"
-							placeholder="Ejemplo: jeremi1322@gmail.com" required />
+						<input class="form-control" type="email" name="correo" required />
 					</label>
 
 					<label class="form-label col">Teléfono
 						<input class="form-control" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-							title="Ejemplo: 412-337-1891" placeholder="Ejemplo: 412-337-1891" name="telefono"
-							required />
+							title="Ejemplo: 412-337-1891" name="telefono" required />
 					</label>
 				</div>
 

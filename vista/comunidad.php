@@ -67,7 +67,8 @@
 
                 <div class="row">
                     <label class="form-label col">Nombre
-                        <input class="form-control" type="text" name="nombre" minlength="3" maxlength="30" required />
+                        <input class="form-control" type="text" name="nombre" minlength="3" maxlength="50"
+                            pattern="[A-Za-zÀ-ý ]+" required />
                     </label>
 
                     <label class="form-label col">Dirección

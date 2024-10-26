@@ -96,21 +96,21 @@ function envioAjax(formData) {
 		async: true,
 		success: (res) => {
 			if (res.error) {
-				const msg = `ERROR: ${res.error}`;
-
-				console.log(msg);
-
 				// Mostrar error en pantalla.
+				const msg = `ERROR: ${res.error}`;
 				alert(msg);
-			} else {
-				console.log("Procesado con exito");
 
-				// Ocultar modal.
-				modal_edicion.hide();
-
-				// Reiniciar pagina y obtener datos actualizados.
-				window.location.reload();
+				// Mostrar en consola.
+				throw res.error;
 			}
+
+			console.log("Procesado con exito");
+
+			// Ocultar modal.
+			modal_edicion.hide();
+
+			// Reiniciar pagina y obtener datos actualizados.
+			window.location.reload();
 		},
 	});
 }

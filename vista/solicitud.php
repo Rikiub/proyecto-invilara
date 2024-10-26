@@ -46,8 +46,7 @@
 			<form id="form-edicion" class="modal-body">
 				<div class="row">
 					<label class="form-label col">Nº Control
-						<input data-id class="form-control" type="text" name="id" title="Solo se permiten numeros"
-							required />
+						<input data-id class="form-control" type="text" name="id" required />
 					</label>
 				</div>
 

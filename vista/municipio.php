@@ -17,16 +17,16 @@
 
             <tbody class="table-group-divider">
                 <?php foreach ($datos as $d): ?>
-                    <tr>
-                        <td class="d-none" data-id><?php echo $d["id"] ?></td>
-                        <td><?php echo $d["nombre"] ?></td>
+                        <tr>
+                            <td class="d-none" data-id><?php echo $d["id"] ?></td>
+                            <td><?php echo $d["nombre"] ?></td>
 
-                        <td class="d-grid d-md-block gap-2">
-                            <button class="btn btn-outline-warning" value="modificar">Modificar</button>
-                            <button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
-                                data-bs-target="#modal-eliminacion">Eliminar</button>
-                        </td>
-                    </tr>
+                            <td class="d-grid d-md-block gap-2">
+                                <button class="btn btn-outline-warning" value="modificar">Modificar</button>
+                                <button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
+                                    data-bs-target="#modal-eliminacion">Eliminar</button>
+                            </td>
+                        </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
@@ -49,7 +49,8 @@
 
                 <div class="row">
                     <label class="form-label col">Nombre
-                        <input class="form-control" type="text" name="nombre" required />
+                        <input class="form-control" type="text" name="nombre" pattern="[A-Za-zÀ-ý ]+"
+                            title="Solo se aceptan letras" required />
                     </label>
                 </div>
 

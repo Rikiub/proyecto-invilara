@@ -18,18 +18,18 @@
             </thead>
             <tbody class="table-group-divider">
                 <?php foreach ($datos as $d): ?>
-                    <tr>
-                        <td class="d-none"><?php echo $d["id"] ?></td>
-                        <td><?php echo $d["nombre"] ?></td>
-                        <td><?php echo $d["cedula_gerente"] ?></td>
-                        <td><?php echo $d["direccion"] ?></td>
+                        <tr>
+                            <td class="d-none"><?php echo $d["id"] ?></td>
+                            <td><?php echo $d["nombre"] ?></td>
+                            <td><?php echo $d["cedula_gerente"] ?></td>
+                            <td><?php echo $d["direccion"] ?></td>
 
-                        <td class="d-grid d-md-block gap-2">
-                            <button class="btn btn-outline-warning" value="modificar">Modificar</button>
-                            <button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
-                                data-bs-target="#modal-eliminacion">Eliminar</button>
-                        </td>
-                    </tr>
+                            <td class="d-grid d-md-block gap-2">
+                                <button class="btn btn-outline-warning" value="modificar">Modificar</button>
+                                <button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
+                                    data-bs-target="#modal-eliminacion">Eliminar</button>
+                            </td>
+                        </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
@@ -51,15 +51,16 @@
 
                 <div class="row">
                     <label class="form-label col">Nombre
-                        <input class="form-control" type="text" name="nombre" minlength="5" maxlength="70" required />
+                        <input class="form-control" type="text" name="nombre" minlength="3" maxlength="50"
+                            pattern="[A-Za-zÀ-ý ]+" required />
                     </label>
 
                     <label class="form-label col">Cedula del gerente
                         <select class="form-select" name="cedula_gerente" required>
                             <?php foreach ($gerentes as $d): ?>
-                                <option value=<?php echo $d["cedula"] ?>>
-                                    <?php echo $d["cedula"] . " - " . $d["nombre"] ?>
-                                </option>
+                                    <option value=<?php echo $d["cedula"] ?>>
+                                        <?php echo $d["cedula"] . " - " . $d["nombre"] ?>
+                                    </option>
                             <?php endforeach ?>
                         </select>
                     </label>

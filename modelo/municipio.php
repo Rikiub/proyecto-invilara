@@ -31,8 +31,12 @@ class Municipio extends BaseDatos
 
     public function insertar()
     {
-        if (!empty($this->obtenerUno($this->id))) {
+        if ($this->obtenerPorId($this->id)) {
             throw new Exception("Ya existe");
+        }
+
+        if ($this->obtenerPorNombre($this->nombre)) {
+            throw new Exception("Ya existe un dato con este nombre.");
         }
 
         $this->conexion()->query(
@@ -47,8 +51,12 @@ class Municipio extends BaseDatos
 
     public function modificar()
     {
-        if (empty($this->obtenerUno($this->id))) {
-            throw new Exception("No existe");
+        if (!$this->obtenerPorId($this->id)) {
+            throw new Exception("Ya existe");
+        }
+
+        if ($this->obtenerPorNombre($this->nombre)) {
+            throw new Exception("Ya existe un dato con este nombre.");
         }
 
         $this->conexion()->query(
@@ -65,7 +73,7 @@ class Municipio extends BaseDatos
 
     public function eliminar()
     {
-        if (empty($this->obtenerUno($this->id))) {
+        if (empty($this->obtenerPorId($this->id))) {
             throw new Exception("No existe");
         }
 
@@ -79,14 +87,25 @@ class Municipio extends BaseDatos
 
     public function consultar()
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla}");
+        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} ORDER BY nombre ASC");
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function obtenerUno($id)
+    public function obtenerPorNombre($nombre)
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE id='$id'");
+        $stmt = $this->conexion()->prepare("SELECT * FROM {$this->tabla} WHERE nombre = ?");
+        $stmt->execute([$nombre]);
+
+        $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $fila;
+    }
+
+    public function obtenerPorId($id)
+    {
+        $stmt = $this->conexion()->prepare("SELECT * FROM {$this->tabla} WHERE id = ?");
+        $stmt->execute([$id]);
+
         $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $fila;
     }

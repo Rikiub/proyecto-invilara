@@ -43,26 +43,34 @@ class Parroquia extends BaseDatos
 
     public function insertar()
     {
-        if (!empty($this->obtenerUno($this->id))) {
-            throw new Exception("Ya existe");
+        $consulta = $this->obtenerPorNombre($this->nombre);
+
+        if ($consulta) {
+            throw new Exception("Ya hay un dato con este nombre, por favor inserte otro nombre.");
         }
 
         $this->conexion()->query(
             "INSERT INTO {$this->tabla} (
-				nombre,
-				id_municipio
-			)
-			VALUES (
-				'{$this->nombre}',
-				'{$this->id_municipio}'
-			)"
+                nombre,
+                id_municipio
+            )
+            VALUES (
+                '{$this->nombre}',
+                '{$this->id_municipio}'
+            )"
         );
     }
 
     public function modificar()
     {
-        if (empty($this->obtenerUno($this->id))) {
+        $consulta = $this->obtenerPorId($this->id);
+        if (!$consulta) {
             throw new Exception("No existe");
+        }
+
+        $consulta = $this->obtenerPorNombre($this->nombre);
+        if ($consulta) {
+            throw new Exception("Ya hay un dato con este nombre.");
         }
 
         $this->conexion()->query(
@@ -70,7 +78,6 @@ class Parroquia extends BaseDatos
 				id = '{$this->id}',
 				nombre = '{$this->nombre}',
 				id_municipio = '{$this->id_municipio}'
-		
 			WHERE
 				id = '{$this->id}'
 			"
@@ -80,7 +87,7 @@ class Parroquia extends BaseDatos
 
     public function eliminar()
     {
-        if (empty($this->obtenerUno($this->id))) {
+        if (!$this->obtenerPorId($this->id)) {
             throw new Exception("No existe");
         }
 
@@ -101,15 +108,41 @@ class Parroquia extends BaseDatos
             FROM
                 {$this->tabla}
             LEFT JOIN
-                municipio ON {$this->tabla}.id_municipio = municipio.id"
+                municipio ON {$this->tabla}.id_municipio = municipio.id
+            ORDER BY municipio.nombre ASC"
         );
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function obtenerUno($id)
+    public function obtenerPorId($id)
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE id='$id'");
+        $stmt = $this->conexion()->prepare(
+            "SELECT *
+            FROM
+                {$this->tabla}
+            WHERE id = ?"
+        );
+        $stmt->execute([$id]);
+
+        $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $fila;
+    }
+
+    public function obtenerPorNombre($nombre)
+    {
+        $stmt = $this->conexion()->prepare(
+            "SELECT
+                {$this->tabla}.*,
+                municipio.nombre AS nombre_municipio
+            FROM
+                {$this->tabla}
+            LEFT JOIN
+                municipio ON {$this->tabla}.id_municipio = municipio.id
+            WHERE {$this->tabla}.nombre = ?"
+        );
+        $stmt->execute([$nombre]);
+
         $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $fila;
     }
