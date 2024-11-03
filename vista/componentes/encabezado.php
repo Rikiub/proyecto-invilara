@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="light">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -12,10 +12,11 @@
     <script src="librerias/jquery/jquery-3.7.1.min.js"></script>
 
     <!-- Recursos locales -->
+    <script src="recursos/js/modo-oscuro.js"></script>
     <link rel="icon" href="recursos/img/favicon.png">
     <link rel="stylesheet" href="recursos/css/styles.css">
 
     <title><?php echo isset($titulo) ? $titulo : "Proyecto INVILARA" ?></title>
 </head>
 
-<body>
+<body data-bs-theme="auto">

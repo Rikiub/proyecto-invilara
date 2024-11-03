@@ -13,12 +13,10 @@ class Solicitud extends BaseDatos
     private $cedula_solicitante;
     private $id_institucion;
     private $id_comunidad;
-    private $id_parroquia;
     private $id_gerencia;
     private $fecha;
-    private $estatus;
-    private $remitente;
-    private $observacion;
+    private $estado;
+    private $id_institucion_remitente;
     private $problematica;
     private $tipo_solicitud;
 
@@ -39,10 +37,6 @@ class Solicitud extends BaseDatos
     {
         $this->id_comunidad = $valor;
     }
-    public function set_id_parroquia($valor)
-    {
-        $this->id_parroquia = $valor;
-    }
     public function set_id_gerencia($valor)
     {
         $this->id_gerencia = $valor;
@@ -51,17 +45,13 @@ class Solicitud extends BaseDatos
     {
         $this->fecha = $valor;
     }
-    public function set_estatus($valor)
+    public function set_estado($valor)
     {
-        $this->estatus = $valor;
+        $this->estado = $valor;
     }
-    public function set_remitente($valor)
+    public function set_id_institucion_remitente($valor)
     {
-        $this->remitente = $valor;
-    }
-    public function set_observacion($valor)
-    {
-        $this->observacion = $valor;
+        $this->id_institucion_remitente = $valor;
     }
     public function set_problematica($valor)
     {
@@ -101,15 +91,15 @@ class Solicitud extends BaseDatos
         $stmt = $pdo->prepare(
             "INSERT INTO `asignacion` (
                 `id_gerencia`,
-                `remitente`,
-                `estatus`
+                `id_institucion_remitente`,
+                `estado`
             )
             VALUES (?, ?, ?)"
         );
         $stmt->execute([
             $this->id_gerencia,
-            $this->remitente,
-            $this->estatus
+            $this->id_institucion_remitente,
+            $this->estado
         ]);
 
         $id_asignacion = $pdo->lastInsertId();
@@ -129,12 +119,10 @@ class Solicitud extends BaseDatos
                 `id_asignacion`,
                 `{$sql_columna}`,
                 `id_comunidad`,
-                `id_parroquia`,
                 `fecha`,
-                `observacion`,
                 `problematica`,
                 `tipo_solicitud`
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)"
         );
 
         $stmt->execute([
@@ -142,9 +130,7 @@ class Solicitud extends BaseDatos
             $id_asignacion,
             $sql_valor,
             $this->id_comunidad,
-            $this->id_parroquia,
             $this->fecha,
-            $this->observacion,
             $this->problematica,
             $this->tipo_solicitud
         ]);
@@ -162,15 +148,15 @@ class Solicitud extends BaseDatos
         $stmt = $this->conexion()->prepare(
             "UPDATE `asignacion` SET
                 `id_gerencia` = ?,
-                `remitente` = ?,
-                `estatus` = ?
+                `id_institucion_remitente` = ?,
+                `estado` = ?
             WHERE
                 id = ?"
         );
         $stmt->execute([
             $this->id_gerencia,
-            $this->remitente,
-            $this->estatus,
+            $this->id_institucion_remitente,
+            $this->estado,
 
             $solicitud["id_asignacion"],
         ]);
@@ -190,9 +176,7 @@ class Solicitud extends BaseDatos
             "UPDATE `{$this->tabla}` SET
                 `{$sql_columna}` = ?,
                 `id_comunidad` = ?,
-                `id_parroquia` = ?,
                 `fecha` = ?,
-                `observacion` = ?,
                 `problematica` = ?,
                 `tipo_solicitud` = ?
             WHERE
@@ -203,9 +187,7 @@ class Solicitud extends BaseDatos
             $sql_valor,
 
             $this->id_comunidad,
-            $this->id_parroquia,
             $this->fecha,
-            $this->observacion,
             $this->problematica,
             $this->tipo_solicitud,
 
@@ -233,8 +215,9 @@ class Solicitud extends BaseDatos
             "SELECT
                 {$this->tabla}.*,
                 asignacion.id_gerencia,
-                asignacion.estatus,
-                asignacion.remitente,
+                asignacion.estado,
+                institucion_remitente.nombre AS nombre_remitente,
+                institucion_remitente.id AS id_remitente,
                 comunidad.nombre AS nombre_comunidad,
                 municipio.nombre AS nombre_municipio,
                 parroquia.nombre AS nombre_parroquia,
@@ -243,15 +226,17 @@ class Solicitud extends BaseDatos
             FROM
                 {$this->tabla}
             LEFT JOIN
-                parroquia ON {$this->tabla}.id_parroquia = parroquia.id
+                comunidad ON {$this->tabla}.id_comunidad = comunidad.id
+            LEFT JOIN
+                parroquia ON comunidad.id_parroquia = parroquia.id
             LEFT JOIN
                 municipio ON parroquia.id_municipio = municipio.id
             LEFT JOIN
-                comunidad ON {$this->tabla}.id_comunidad = comunidad.id
+                asignacion ON {$this->tabla}.id_asignacion = asignacion.id
             LEFT JOIN
                 institucion ON {$this->tabla}.id_institucion = institucion.id
             LEFT JOIN
-                asignacion ON {$this->tabla}.id_asignacion = asignacion.id
+                institucion AS institucion_remitente ON asignacion.id_institucion_remitente = institucion.id
             LEFT JOIN
                 gerencia ON asignacion.id_gerencia = gerencia.id
             WHERE
@@ -264,11 +249,12 @@ class Solicitud extends BaseDatos
     public function generarPDF()
     {
         $dompdf = new Dompdf();
+        $ocultar_acciones = true;
 
         // Generar HTML
         $datos = $this->consultar();
         $tipo_solicitud = $this->tipo_solicitud;
-        $reporte = true;
+        $tipo_vista = "programado";
 
         ob_start();
         require_once "vista/componentes/encabezado_dompdf.php";

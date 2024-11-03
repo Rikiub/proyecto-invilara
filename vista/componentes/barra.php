@@ -3,7 +3,7 @@ Vean la etiqueta <a> y noten el atributo el "href".
 A la hora de agregar nuevas paginas, asignen la dirección de su controlador con "?pagina=<nombre_controlador>"
 -->
 
-<nav data-bs-theme="dark" class="navbar fixed-top inv-gradient">
+<nav class="navbar fixed-top inv-gradient">
     <div class="container-fluid mx-2">
         <?php if ($rol == "usuario"): ?>
             <button class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#barra-lateral">
@@ -16,13 +16,13 @@ A la hora de agregar nuevas paginas, asignen la dirección de su controlador con
                     <button class="btn-close" data-bs-dismiss="offcanvas"></button>
                 </header>
 
-                <div data-bs-theme="light" class="offcanvas-body">
+                <div class="offcanvas-body">
                     <article class="list-group">
-                        <a class="list-group-item list-group-item-action" href="?pagina=principal">
+                        <a class="list-group-item list-group-item-action bg-body-tertiary" href="?pagina=principal">
                             Inicio
                         </a>
 
-                        <a class="list-group-item list-group-item-action" href="?pagina=salir">
+                        <a class="list-group-item list-group-item-action bg-body-tertiary" href="?pagina=salir">
                             Cerrar sesión
                         </a>
                     </article>
@@ -30,35 +30,35 @@ A la hora de agregar nuevas paginas, asignen la dirección de su controlador con
                     <hr>
 
                     <article class="list-group">
-                        <a class="list-group-item list-group-item-action" href="?pagina=municipio">
+                        <a class="list-group-item list-group-item-action bg-body-tertiary" href="?pagina=municipio">
                             Municipios
                         </a>
 
-                        <a class="list-group-item list-group-item-action" href="?pagina=parroquia">
+                        <a class="list-group-item list-group-item-action bg-body-tertiary" href="?pagina=parroquia">
                             Parroquias
                         </a>
 
-                        <a class="list-group-item list-group-item-action" href="?pagina=solicitante">
+                        <a class="list-group-item list-group-item-action bg-body-tertiary" href="?pagina=solicitante">
                             Solicitantes
                         </a>
 
-                        <a class="list-group-item list-group-item-action" href="?pagina=comunidad">
+                        <a class="list-group-item list-group-item-action bg-body-tertiary" href="?pagina=comunidad">
                             Comunidades
                         </a>
 
-                        <a class="list-group-item list-group-item-action" href="?pagina=institucion">
+                        <a class="list-group-item list-group-item-action bg-body-tertiary" href="?pagina=institucion">
                             Instituciones
                         </a>
 
-                        <a class="list-group-item list-group-item-action" href="?pagina=gerencia">
+                        <a class="list-group-item list-group-item-action bg-body-tertiary" href="?pagina=gerencia">
                             Gerencias
                         </a>
 
-                        <a class="list-group-item list-group-item-action" href="?pagina=gerente">
+                        <a class="list-group-item list-group-item-action bg-body-tertiary" href="?pagina=gerente">
                             Gerentes
                         </a>
 
-                        <a class="list-group-item list-group-item-action" href="?pagina=director">
+                        <a class="list-group-item list-group-item-action bg-body-tertiary" href="?pagina=director">
                             Directores
                         </a>
                     </article>
@@ -73,8 +73,19 @@ A la hora de agregar nuevas paginas, asignen la dirección de su controlador con
 
                         <section class="collapse" id="solicitudes">
                             <div class="list-group list-group-flush">
-                                <a class="list-group-item list-group-item-action" href="?pagina=solicitud">
-                                    Generales
+                                <a class="list-group-item list-group-item-action bg-body-tertiary"
+                                    href="?pagina=solicitud&vista=programado">
+                                    Solicitudes Programadas
+                                </a>
+
+                                <a class="list-group-item list-group-item-action bg-body-tertiary"
+                                    href="?pagina=solicitud&vista=ejecucion">
+                                    Solicitudes Asignadas
+                                </a>
+
+                                <a class="list-group-item list-group-item-action bg-body-tertiary"
+                                    href="?pagina=solicitud&vista=cerrado">
+                                    Solicitudes Cerradas
                                 </a>
                             </div>
                         </section>

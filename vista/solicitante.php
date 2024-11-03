@@ -4,7 +4,7 @@
 <main class="container" id="crud">
 	<h1>Solicitantes</h1>
 
-	<button class="btn btn-outline-primary my-3" value="insertar">Registrar</button>
+	<button class="btn btn-primary my-3" value="insertar">Registrar</button>
 
 	<div class="table-responsive">
 		<table class="table table-hover">
@@ -28,10 +28,12 @@
 							<td><?php echo $d["telefono"] ?></td>
 							<td><?php echo $d["direccion"] ?></td>
 
-							<td class="d-grid d-md-block gap-2">
-								<button class="btn btn-outline-warning" value="modificar">Modificar</button>
-								<button class="btn btn-outline-danger" value="eliminar" data-bs-toggle="modal"
-									data-bs-target="#modal-eliminacion">Eliminar</button>
+							<td>
+								<div class="btn-group-vertical">
+									<button class="btn btn-warning" value="modificar">Modificar</button>
+									<button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
+										data-bs-target="#modal-eliminacion">Eliminar</button>
+								</div>
 							</td>
 						</tr>
 				<?php endforeach ?>
@@ -53,7 +55,7 @@
 
 			<form id="form-edicion" class="modal-body">
 				<div class="row">
-					<label class="form-label col">
+					<label class="form-label col fw-semibold">
 						Cedula
 						<input data-id class="form-control" type="text" pattern="\d*" inputmode="numeric" minlength="7"
 							maxlength="8" name="cedula" required />
@@ -61,18 +63,18 @@
 				</div>
 
 				<div class="row">
-					<label class="form-label col">
+					<label class="form-label col fw-semibold">
 						Nombre
 						<input class="form-control" type="text" name="nombre" minlength="3" maxlength="50"
 							pattern="[A-Za-zÀ-ý ]+" title="Solo se aceptan letras" required />
 					</label>
 
-					<label class="form-label col">
+					<label class="form-label col fw-semibold">
 						Correo
 						<input class="form-control" type="email" name="correo" required />
 					</label>
 
-					<label class="form-label col">
+					<label class="form-label col fw-semibold">
 						Teléfono
 						<input class="form-control" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
 							title="Ejemplo: 412-337-1891" name="telefono" required />
@@ -80,7 +82,7 @@
 				</div>
 
 				<div class="row">
-					<label class="form-label col">
+					<label class="form-label col fw-semibold">
 						Dirección
 						<input class="form-control" type="text" name="direccion" required />
 					</label>

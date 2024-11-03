@@ -20,6 +20,7 @@ crud.addEventListener("click", (event) => {
 			form_edicion.reset();
 
 			desactivar_input(false);
+			actualizar_fecha_input();
 			modal_edicion.show();
 		} else if (accion === "modificar") {
 			// Desde la ubicación del boton, obtener <tr> más cercano.
@@ -48,6 +49,7 @@ crud.addEventListener("click", (event) => {
 			}
 
 			desactivar_input(true);
+			actualizar_fecha_input();
 			modal_edicion.show();
 		} else if (accion === "eliminar") {
 			// Desde la ubicación del boton, obtener <tr> más cercano.
@@ -78,8 +80,27 @@ for (const form of [form_edicion, form_eliminacion]) {
 function desactivar_input(bool) {
 	const lista = form_edicion.querySelectorAll("input[data-id]");
 
+	if (bool) {
+		for (const input of lista) {
+			input.readOnly = true;
+			input.classList.add("bg-secondary-subtle");
+		}
+	} else if (!bool) {
+		for (const input of lista) {
+			input.readOnly = false;
+			input.classList.remove("bg-secondary-subtle");
+		}
+	}
+}
+
+function actualizar_fecha_input() {
+	const lista = form_edicion.querySelectorAll("input[data-actualizar-fecha]");
+
 	for (const input of lista) {
-		input.readOnly = bool;
+		if (input.type === "date") {
+			fecha = new Date().toISOString().split("T")[0];
+			input.value = fecha;
+		}
 	}
 }
 

@@ -9,13 +9,31 @@ $modelo->set_tipo_solicitud($tipo_solicitud);
 
 switch ($tipo_solicitud) {
     case "1":
-        $tipo_solicitud_nombre = "Generales";
+        $nombre_solicitud = "Generales";
         break;
     case "2":
-        $tipo_solicitud_nombre = "1x10";
+        $nombre_solicitud = "1x10";
         break;
     case "3":
-        $tipo_solicitud_nombre = "Institucionales";
+        $nombre_solicitud = "Institucionales";
+        break;
+}
+
+# Fijar tipo de vista
+$tipo_vista = isset($_GET["vista"]) ? $_GET["vista"] : "programado";
+
+switch ($tipo_vista) {
+    case "programado":
+        $nombre_estado = "En Programación";
+        $id_estado = "1";
+        break;
+    case "ejecucion":
+        $nombre_estado = "En Ejecución";
+        $id_estado = "2";
+        break;
+    case "cerrado":
+        $nombre_estado = "Cerrado";
+        $id_estado = "3";
         break;
 }
 
@@ -42,13 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $modelo->set_id_institucion($_POST['id_institucion']);
                 }
 
+                $modelo->set_id_gerencia(isset($_POST['id_gerencia']) ? $_POST['id_gerencia'] : null);
                 $modelo->set_id_comunidad($_POST['id_comunidad']);
-                $modelo->set_id_parroquia($_POST['id_parroquia']);
-                $modelo->set_id_gerencia($_POST['id_gerencia']);
                 $modelo->set_fecha($_POST['fecha']);
-                $modelo->set_estatus($_POST['estatus']);
-                $modelo->set_remitente($_POST['remitente']);
-                $modelo->set_observacion($_POST['observacion']);
+                $modelo->set_estado($_POST['estado']);
+                $modelo->set_id_institucion_remitente($_POST['id_remitente']);
                 $modelo->set_problematica($_POST['problematica']);
 
                 if ($accion == "insertar") {

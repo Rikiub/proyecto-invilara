@@ -13,6 +13,7 @@ if (isset($_POST["accion"])) {
         if ($accion == "eliminar") {
             $modelo->eliminar();
         } else {
+            $modelo->set_id_parroquia($_POST['id_parroquia']);
             $modelo->set_tipo($_POST['tipo']);
             $modelo->set_nombre($_POST['nombre']);
             $modelo->set_direccion($_POST['direccion']);
@@ -36,6 +37,11 @@ if (isset($_POST["accion"])) {
 
     exit;
 }
+
+require_once "modelo/parroquia.php";
+$m = new Parroquia();
+
+$parroquias = $m->consultar();
 
 $datos = $modelo->consultar();
 require_once "vista/comunidad.php";

@@ -8,6 +8,7 @@ class Comunidad extends BaseDatos
 
     private $tipo;
     private $id;
+    private $id_parroquia;
     private $nombre;
     private $direccion;
     private $representante;
@@ -22,6 +23,10 @@ class Comunidad extends BaseDatos
     public function set_id($valor)
     {
         $this->id = $valor;
+    }
+    public function set_id_parroquia($valor)
+    {
+        $this->id_parroquia = $valor;
     }
     public function set_nombre($valor)
     {
@@ -83,6 +88,7 @@ class Comunidad extends BaseDatos
         $this->conexion()->query(
             "INSERT INTO {$this->tabla} (
                 tipo,
+                id_parroquia,
 				nombre,
 				direccion,
 				representante,
@@ -91,6 +97,7 @@ class Comunidad extends BaseDatos
 			)
 			VALUES (
 				'{$this->tipo}',
+                '{$this->id_parroquia}',
 				'{$this->nombre}',
 				'{$this->direccion}',
                 '{$this->representante}',
@@ -109,6 +116,7 @@ class Comunidad extends BaseDatos
         $this->conexion()->query(
             "UPDATE {$this->tabla} SET 
                 id = '{$this->id}',
+                id_parroquia = '{$this->id_parroquia}',
 				tipo = '{$this->tipo}',
 				nombre = '{$this->nombre}',
 				direccion = '{$this->direccion}',
@@ -137,7 +145,15 @@ class Comunidad extends BaseDatos
 
     public function consultar()
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla}");
+        $stmt = $this->conexion()->query(
+            "SELECT
+                {$this->tabla}.*,
+                parroquia.nombre AS nombre_parroquia
+            FROM
+                {$this->tabla}
+            LEFT JOIN
+                parroquia ON {$this->tabla}.id_parroquia = parroquia.id"
+        );
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
