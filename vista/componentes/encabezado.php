@@ -8,6 +8,7 @@
     <!-- Librerias externas -->
     <link rel="stylesheet" href="librerias/bootstrap/bootstrap.min.css">
     <script src="librerias/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="librerias/gridjs/gridjs.umd.js"></script>
 
     <script src="librerias/jquery/jquery-3.7.1.min.js"></script>
 

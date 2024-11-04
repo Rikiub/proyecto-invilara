@@ -24,18 +24,22 @@ $tipo_vista = isset($_GET["vista"]) ? $_GET["vista"] : "programado";
 
 switch ($tipo_vista) {
     case "programado":
+        $titulo_vista = "En Programación";
         $nombre_estado = "En Programación";
         $id_estado = "1";
         break;
     case "ejecucion":
+        $titulo_vista = "En Ejecución";
         $nombre_estado = "En Ejecución";
         $id_estado = "2";
         break;
     case "cerrado":
+        $titulo_vista = "Asignadas y Cerradas";
         $nombre_estado = "Cerrado";
         $id_estado = "3";
         break;
 }
+$modelo->set_estado($id_estado);
 
 // Procesar POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -63,7 +67,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $modelo->set_id_gerencia(isset($_POST['id_gerencia']) ? $_POST['id_gerencia'] : null);
                 $modelo->set_id_comunidad($_POST['id_comunidad']);
                 $modelo->set_fecha($_POST['fecha']);
-                $modelo->set_estado($_POST['estado']);
                 $modelo->set_id_institucion_remitente($_POST['id_remitente']);
                 $modelo->set_problematica($_POST['problematica']);
 
@@ -113,6 +116,7 @@ $parroquias = $m->consultar();
 
 // Datos principales
 $datos = $modelo->consultar();
+$estados = $modelo->consultar_estados();
 
 // Cargar vista
 require_once "vista/solicitud.php";

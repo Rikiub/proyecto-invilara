@@ -79,6 +79,10 @@ class Solicitud extends BaseDatos
     {
         return $this->id_comunidad;
     }
+    public function get_estado()
+    {
+        return $this->estado;
+    }
 
     public function insertar()
     {
@@ -92,7 +96,7 @@ class Solicitud extends BaseDatos
             "INSERT INTO `asignacion` (
                 `id_gerencia`,
                 `id_institucion_remitente`,
-                `estado`
+                `id_estado`
             )
             VALUES (?, ?, ?)"
         );
@@ -149,7 +153,7 @@ class Solicitud extends BaseDatos
             "UPDATE `asignacion` SET
                 `id_gerencia` = ?,
                 `id_institucion_remitente` = ?,
-                `estado` = ?
+                `id_estado` = ?
             WHERE
                 id = ?"
         );
@@ -209,39 +213,68 @@ class Solicitud extends BaseDatos
         );
     }
 
-    public function consultar()
+    public function consultar_estados()
     {
         $stmt = $this->conexion()->query(
             "SELECT
-                {$this->tabla}.*,
-                asignacion.id_gerencia,
-                asignacion.estado,
-                institucion_remitente.nombre AS nombre_remitente,
-                institucion_remitente.id AS id_remitente,
-                comunidad.nombre AS nombre_comunidad,
-                municipio.nombre AS nombre_municipio,
-                parroquia.nombre AS nombre_parroquia,
-                institucion.nombre AS nombre_institucion,
-                gerencia.nombre AS nombre_gerencia
+                *
             FROM
-                {$this->tabla}
-            LEFT JOIN
-                comunidad ON {$this->tabla}.id_comunidad = comunidad.id
-            LEFT JOIN
-                parroquia ON comunidad.id_parroquia = parroquia.id
-            LEFT JOIN
-                municipio ON parroquia.id_municipio = municipio.id
-            LEFT JOIN
-                asignacion ON {$this->tabla}.id_asignacion = asignacion.id
-            LEFT JOIN
-                institucion ON {$this->tabla}.id_institucion = institucion.id
-            LEFT JOIN
-                institucion AS institucion_remitente ON asignacion.id_institucion_remitente = institucion.id
-            LEFT JOIN
-                gerencia ON asignacion.id_gerencia = gerencia.id
-            WHERE
-                tipo_solicitud='{$this->tipo_solicitud}'"
+                tipo_estado"
         );
+        $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $datos;
+    }
+
+    public function consultar()
+    {
+        $filtro = "";
+        switch ($this->estado) {
+            case "1":
+                $filtro = "AND id_estado='1'";
+                break;
+            case "2":
+                $filtro = "AND id_estado='1' OR id_estado='2'";
+                break;
+            case "3":
+                $filtro = "AND id_estado='2'";
+                break;
+        }
+
+        $query = "SELECT
+                    {$this->tabla}.*,
+                    asignacion.id_gerencia,
+                    tipo_estado.id AS id_estado,
+                    tipo_estado.nombre AS nombre_estado,
+                    institucion_remitente.id AS id_remitente,
+                    institucion_remitente.nombre AS nombre_remitente,
+                    comunidad.nombre AS nombre_comunidad,
+                    municipio.nombre AS nombre_municipio,
+                    parroquia.nombre AS nombre_parroquia,
+                    institucion.nombre AS nombre_institucion,
+                    gerencia.nombre AS nombre_gerencia
+                FROM
+                    {$this->tabla}
+                LEFT JOIN
+                    comunidad ON {$this->tabla}.id_comunidad = comunidad.id
+                LEFT JOIN
+                    parroquia ON comunidad.id_parroquia = parroquia.id
+                LEFT JOIN
+                    municipio ON parroquia.id_municipio = municipio.id
+                LEFT JOIN
+                    asignacion ON {$this->tabla}.id_asignacion = asignacion.id
+                LEFT JOIN
+                    tipo_estado ON asignacion.id_estado = tipo_estado.id
+                LEFT JOIN
+                    institucion ON {$this->tabla}.id_institucion = institucion.id
+                LEFT JOIN
+                    institucion AS institucion_remitente ON asignacion.id_institucion_remitente = institucion.id
+                LEFT JOIN
+                    gerencia ON asignacion.id_gerencia = gerencia.id
+                WHERE
+                    tipo_solicitud='{$this->tipo_solicitud}'";
+        $query = $query . " $filtro" . " ORDER BY id_estado DESC";
+
+        $stmt = $this->conexion()->query($query);
         $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $datos;
     }

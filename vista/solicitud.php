@@ -3,8 +3,14 @@
 
 <main class="container" id="crud">
 	<h1>
-		Solicitudes: <small class="text-muted fs-3"><?php echo $nombre_solicitud; ?></small>
+		<span class="text-muted">Solicitudes</span>
+		>
+		<span><?php echo $nombre_solicitud; ?></span>
+		>
+		<span class="fw-bold"><?php echo $titulo_vista; ?></span>
 	</h1>
+
+	<hr>
 
 	<div class="d-flex justify-content-between">
 		<div>
@@ -54,7 +60,7 @@
 					<?php if ($tipo_solicitud == "1" || $tipo_solicitud == "2"): ?>
 
 						<label class="form-label col fw-semibold">Cedula solicitante
-							<select class="form-select" name="cedula_solicitante" required>
+							<select class="form-select" name="cedula_solicitante" required <?php echo ($tipo_vista != "programado" ? "readonly" : "") ?>>
 								<?php foreach ($solicitantes as $d): ?>
 									<option value=<?php echo $d["cedula"] ?>>
 										<?php echo $d["cedula"] . " - " . $d["nombre"] ?>
@@ -66,7 +72,7 @@
 					<?php elseif ($tipo_solicitud == "3"): ?>
 
 						<label class="form-label col fw-semibold">Institución
-							<select class="form-select" name="id_institucion" required>
+							<select class="form-select" name="id_institucion" required <?php echo ($tipo_vista != "programado" ? "readonly" : "") ?>>
 								<?php foreach ($instituciones as $d): ?>
 									<option value=<?php echo $d["id"] ?>>
 										<?php echo $d["nombre"] ?>
@@ -78,7 +84,7 @@
 					<?php endif ?>
 
 					<label class="form-label col fw-semibold">Remitente
-						<select class="form-select" name="id_remitente" required>
+						<select class="form-select" name="id_remitente" required <?php echo ($tipo_vista != "programado" ? "readonly" : "") ?>>
 							<?php foreach ($instituciones as $d): ?>
 								<option value=<?php echo $d["id"] ?>>
 									<?php echo $d["nombre"] ?>
@@ -88,7 +94,7 @@
 					</label>
 
 					<label class="form-label col fw-semibold">Comunidad
-						<select class="form-select" name="id_comunidad" required>
+						<select class="form-select" name="id_comunidad" required <?php echo ($tipo_vista != "programado" ? "readonly" : "") ?>>
 							<?php foreach ($comunidades as $d): ?>
 								<option value=<?php echo $d["id"] ?>>
 									<?php echo $d["nombre"] ?>
@@ -122,14 +128,19 @@
 					</label>
 
 					<label class="form-label col fw-semibold">Estado
-						<input class="form-control bg-secondary-subtle" type="text" readonly
-							value="<?php echo $nombre_estado; ?>">
+						<select class="form-select bg-secondary-subtle" name="estado" required <?php echo ($tipo_vista != "programado" ? "readonly" : "") ?>>
+							<?php foreach ($estados as $d): ?>
+								<option value=<?php echo $d["id"] ?> 	<?php echo ($id_estado != $d["id"] ? "disabled" : "") ?>>
+									<?php echo $d["nombre"] ?>
+								</option>
+							<?php endforeach ?>
+						</select>
 					</label>
 				</div>
 
 				<div class="row">
 					<label class="form-label col fw-semibold">Problematica
-						<textarea class="form-control" name="problematica" required></textarea>
+						<textarea class="form-control" name="problematica" required <?php echo ($tipo_vista != "programado" ? "readonly" : "") ?>></textarea>
 					</label>
 				</div>
 

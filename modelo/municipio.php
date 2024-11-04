@@ -2,6 +2,9 @@
 
 require_once "modelo/base_datos.php";
 
+require_once "librerias/dompdf/autoload.inc.php";
+use Dompdf\Dompdf;
+
 class Municipio extends BaseDatos
 {
     private $tabla = "municipio";
@@ -68,7 +71,6 @@ class Municipio extends BaseDatos
 				id = '{$this->id}'
 			"
         );
-
     }
 
     public function eliminar()
@@ -83,6 +85,25 @@ class Municipio extends BaseDatos
 				id = '{$this->id}'
 			"
         );
+    }
+
+    public function generarPDF()
+    {
+        $dompdf = new Dompdf();
+
+        // Generar HTML
+        $datos = $this->consultar();
+
+        ob_start();
+        require_once "vista/componentes/encabezado_dompdf.php";
+        require_once "vista/componentes/tabla_solicitud.php";
+        $html = ob_get_clean();
+
+        // Generar PDF
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper("A4", "landscape");
+        $dompdf->render();
+        $dompdf->stream("reporte_invilara.pdf", array("Attachment" => 0));
     }
 
     public function consultar()

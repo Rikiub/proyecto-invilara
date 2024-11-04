@@ -7,12 +7,14 @@ $modelo = new Municipio();
 if (isset($_POST["accion"])) {
     $accion = $_POST["accion"];
 
-    $modelo->set_id($_POST['id']);
-
     try {
-        if ($accion == "eliminar") {
-            $modelo->eliminar();
+        if ($accion == "reporte") {
+            $modelo->generarPDF();
         } else {
+            if ($accion == "eliminar") {
+                $modelo->eliminar();
+            }
+
             $modelo->set_id($_POST["id"]);
             $modelo->set_nombre($_POST["nombre"]);
 
