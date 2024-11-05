@@ -1,3 +1,7 @@
+<?php if (isset($ocultar_acciones)): ?>
+    <p>Aqui va el banner</p>
+<?php endif ?>
+
 <div class="table-responsive" id="tabla-contenedor">
     <table class="table table-hover" id="tabla-principal">
         <thead>
@@ -59,20 +63,18 @@
 
                     <td>
                         <div class="btn-group-vertical">
-                            <?php if (isset($ocultar_acciones)): ?>
-                                <!-- Vacio -->
-                            <?php elseif ($tipo_vista == "programado"): ?>
-                                <button class="btn btn-warning" value="modificar">Modificar</button>
-                            <?php elseif ($tipo_vista == "ejecucion"): ?>
-                                <button class="btn btn-warning" value="modificar">Asignar</button>
-                            <?php elseif ($tipo_vista == "cerrado"): ?>
-                                <button class="btn btn-warning" value="modificar">Cerrar</button>
-                            <?php else: ?>
-                                <button class="btn btn-warning" value="modificar">Modificar</button>
-                            <?php endif ?>
+                            <?php if (!isset($ocultar_acciones)): ?>
+                                <?php if ($tipo_vista == "programado"): ?>
+                                    <button class="btn btn-warning" value="modificar">Modificar</button>
+                                <?php elseif ($tipo_vista == "ejecucion"): ?>
+                                    <button class="btn btn-warning" value="modificar">Asignar</button>
+                                <?php elseif ($tipo_vista == "cerrado"): ?>
+                                    <button class="btn btn-warning" value="modificar">Cerrar</button>
+                                <?php endif ?>
 
-                            <button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
-                                data-bs-target="#modal-eliminacion">Eliminar</button>
+                                <button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
+                                    data-bs-target="#modal-eliminacion">Eliminar</button>
+                            <?php endif ?>
                         </div>
                     </td>
                 </tr>

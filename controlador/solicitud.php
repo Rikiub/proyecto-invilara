@@ -24,19 +24,21 @@ $tipo_vista = isset($_GET["vista"]) ? $_GET["vista"] : "programado";
 
 switch ($tipo_vista) {
     case "programado":
-        $titulo_vista = "En Programación";
-        $nombre_estado = "En Programación";
+        $titulo_vista = "En programación";
         $id_estado = "1";
         break;
     case "ejecucion":
-        $titulo_vista = "En Ejecución";
-        $nombre_estado = "En Ejecución";
+        $titulo_vista = "En programación y ejecución";
         $id_estado = "2";
         break;
     case "cerrado":
-        $titulo_vista = "Asignadas y Cerradas";
-        $nombre_estado = "Cerrado";
+        $titulo_vista = "Asignadas y cerradas";
         $id_estado = "3";
+        break;
+    case "reporte":
+        $titulo_vista = "Reporte";
+        $id_estado = null;
+        $ocultar_acciones = true;
         break;
 }
 $modelo->set_estado($id_estado);

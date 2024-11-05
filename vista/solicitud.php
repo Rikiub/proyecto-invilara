@@ -58,19 +58,17 @@
 
 				<div class="row">
 					<?php if ($tipo_solicitud == "1" || $tipo_solicitud == "2"): ?>
-
 						<label class="form-label col fw-semibold">Cedula solicitante
 							<select class="form-select" name="cedula_solicitante" required <?php echo ($tipo_vista != "programado" ? "readonly" : "") ?>>
 								<?php foreach ($solicitantes as $d): ?>
 									<option value=<?php echo $d["cedula"] ?>>
-										<?php echo $d["cedula"] . " - " . $d["nombre"] ?>
+										<?php echo $d["cedula"]; ?>
 									</option>
 								<?php endforeach ?>
 							</select>
 						</label>
 
 					<?php elseif ($tipo_solicitud == "3"): ?>
-
 						<label class="form-label col fw-semibold">Institución
 							<select class="form-select" name="id_institucion" required <?php echo ($tipo_vista != "programado" ? "readonly" : "") ?>>
 								<?php foreach ($instituciones as $d): ?>
@@ -84,9 +82,9 @@
 					<?php endif ?>
 
 					<label class="form-label col fw-semibold">Remitente
-						<select class="form-select" name="id_remitente" required <?php echo ($tipo_vista != "programado" ? "readonly" : "") ?>>
+						<select class="form-select" name="id_remitente" required>
 							<?php foreach ($instituciones as $d): ?>
-								<option value=<?php echo $d["id"] ?>>
+								<option value="<?php echo $d["id"] ?>">
 									<?php echo $d["nombre"] ?>
 								</option>
 							<?php endforeach ?>
@@ -94,9 +92,9 @@
 					</label>
 
 					<label class="form-label col fw-semibold">Comunidad
-						<select class="form-select" name="id_comunidad" required <?php echo ($tipo_vista != "programado" ? "readonly" : "") ?>>
+						<select class="form-select" name="id_comunidad" required>
 							<?php foreach ($comunidades as $d): ?>
-								<option value=<?php echo $d["id"] ?>>
+								<option value="<?php echo $d["id"] ?>">
 									<?php echo $d["nombre"] ?>
 								</option>
 							<?php endforeach ?>
@@ -110,7 +108,7 @@
 				<?php if ($tipo_vista != "programado"): ?>
 					<div class="row">
 						<label class="form-label col fw-semibold">Gerencia
-							<select class="form-select" name="id_comunidad" required>
+							<select class="form-select" name="id_gerencia" required>
 								<?php foreach ($gerencias as $d): ?>
 									<option value=<?php echo $d["id"] ?>>
 										<?php echo $d["nombre"] ?>

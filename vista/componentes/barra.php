@@ -87,6 +87,11 @@ A la hora de agregar nuevas paginas, asignen la dirección de su controlador con
                                     href="?pagina=solicitud&vista=cerrado">
                                     Solicitudes Cerradas
                                 </a>
+
+                                <a class="list-group-item list-group-item-action bg-body-tertiary"
+                                    href="?pagina=solicitud&vista=reporte">
+                                    Reporte
+                                </a>
                             </div>
                         </section>
                     </article>
