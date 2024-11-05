@@ -1,5 +1,8 @@
 <?php
 
+require_once "librerias/dompdf/autoload.inc.php";
+use Dompdf\Dompdf;
+
 require_once "modelo/solicitud.php";
 $modelo = new Solicitud();
 
@@ -46,6 +49,34 @@ $modelo->set_estado($id_estado);
 // Procesar POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
+        if (isset($_POST["tipo_reporte"])) {
+            $tipo = $_POST["tipo_reporte"];
+
+            $dompdf = new Dompdf();
+
+            # Extraer HTML
+            ob_start();
+            require_once "vista/componentes/encabezado_dompdf.php";
+            require_once "controlador/" . $tipo . ".php";
+            $html = ob_get_clean();
+
+            # Limpiar HTML
+            /*
+            $dom = new DOMDocument();
+            $dom->loadHTML($html);
+            $elemento = $dom->getElementById("tabla-contenedor");
+            $html = $dom->saveHTML($elemento);
+            */
+
+            // Generar PDF
+            $dompdf->loadHtml(html_entity_decode($html));
+            $dompdf->setPaper("A4", "landscape");
+            $dompdf->render();
+            $dompdf->stream("reporte_invilara.pdf", array("Attachment" => 0));
+
+            exit;
+        }
+
         if (isset($_POST["accion"])) {
             $accion = $_POST["accion"];
         } else {

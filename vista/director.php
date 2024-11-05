@@ -6,7 +6,7 @@
 
 	<button class="btn btn-primary my-3" value="insertar">Registrar</button>
 
-	<div class="table-responsive">
+	<div class="table-responsive" id="tabla-contenedor">
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -21,21 +21,21 @@
 
 			<tbody class="table-group-divider">
 				<?php foreach ($datos as $d): ?>
-						<tr>
-							<td><?php echo $d["cedula"] ?></td>
-							<td><?php echo $d["nombre"] ?></td>
-							<td><?php echo $d["correo"] ?></td>
-							<td><?php echo $d["telefono"] ?></td>
-							<td><?php echo $d["direccion"] ?></td>
+					<tr>
+						<td><?php echo $d["cedula"] ?></td>
+						<td><?php echo $d["nombre"] ?></td>
+						<td><?php echo $d["correo"] ?></td>
+						<td><?php echo $d["telefono"] ?></td>
+						<td><?php echo $d["direccion"] ?></td>
 
-							<td>
-								<div class="btn-group-vertical">
-									<button class="btn btn-warning" value="modificar">Modificar</button>
-									<button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
-										data-bs-target="#modal-eliminacion">Eliminar</button>
-								</div>
-							</td>
-						</tr>
+						<td>
+							<div class="btn-group-vertical">
+								<button class="btn btn-warning" value="modificar">Modificar</button>
+								<button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
+									data-bs-target="#modal-eliminacion">Eliminar</button>
+							</div>
+						</td>
+					</tr>
 				<?php endforeach ?>
 			</tbody>
 		</table>

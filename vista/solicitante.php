@@ -13,7 +13,7 @@
 		</form>
 	</div>
 
-	<div class="table-responsive">
+	<div class="table-responsive" id="tabla-contenedor">
 		<table class="table table-hover">
 			<thead>
 				<tr>

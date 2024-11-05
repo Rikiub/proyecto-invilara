@@ -7,7 +7,10 @@ while (contenedor.firstChild) {
 
 const grid = new gridjs.Grid({
 	from: principal,
+	sort: true,
 	search: true,
+	resizable: true,
+	fixedHeader: true,
 	language: {
 		search: {
 			placeholder: "Escribe algo...",
@@ -18,7 +21,8 @@ const grid = new gridjs.Grid({
 		},
 	},
 	className: {
-		table: "table table-hover",
+		th: "bg-body-secondary-subtle text-body",
+		td: "bg-body text-body",
 		tbody: "table-group-divider",
 	},
 }).render(contenedor);

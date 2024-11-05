@@ -6,7 +6,7 @@
 
     <button class="btn btn-primary my-3" value="insertar">Registrar</button>
 
-    <div class="table-responsive">
+    <div class="table-responsive" id="tabla-contenedor">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -18,19 +18,19 @@
 
             <tbody class="table-group-divider">
                 <?php foreach ($datos as $d): ?>
-                        <tr>
-                            <td class="d-none" data-id><?php echo $d["id"] ?></td>
-                            <td><?php echo $d["nombre"] ?></td>
-                            <td><?php echo $d["nombre_municipio"] ?></td>
+                    <tr>
+                        <td class="d-none" data-id><?php echo $d["id"] ?></td>
+                        <td><?php echo $d["nombre"] ?></td>
+                        <td><?php echo $d["nombre_municipio"] ?></td>
 
-                            <td>
-                                <div class="btn-group-vertical">
-                                    <button class="btn btn-warning" value="modificar">Modificar</button>
-                                    <button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-eliminacion">Eliminar</button>
-                                </div>
-                            </td>
-                        </tr>
+                        <td>
+                            <div class="btn-group-vertical">
+                                <button class="btn btn-warning" value="modificar">Modificar</button>
+                                <button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
+                                    data-bs-target="#modal-eliminacion">Eliminar</button>
+                            </div>
+                        </td>
+                    </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
@@ -60,9 +60,9 @@
                     <label class="form-label col fw-semibold">Municipio
                         <select class="form-select" name="id_municipio" required>
                             <?php foreach ($municipios as $d): ?>
-                                    <option value=<?php echo $d["id"] ?>>
-                                        <?php echo $d["nombre"] ?>
-                                    </option>
+                                <option value=<?php echo $d["id"] ?>>
+                                    <?php echo $d["nombre"] ?>
+                                </option>
                             <?php endforeach ?>
                         </select>
                     </label>

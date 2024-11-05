@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="librerias/bootstrap/bootstrap.min.css">
     <script src="librerias/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="librerias/gridjs/gridjs.umd.js"></script>
+    <link rel="stylesheet" href="librerias/gridjs/mermaid.min.css">
 
     <script src="librerias/jquery/jquery-3.7.1.min.js"></script>
 
@@ -20,4 +21,4 @@
     <title><?php echo isset($titulo) ? $titulo : "Proyecto INVILARA" ?></title>
 </head>
 
-<body data-bs-theme="auto">
+<body data-bs-theme="light">

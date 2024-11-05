@@ -29,10 +29,34 @@
 			</label>
 		</div>
 
-		<form method="POST">
-			<button class="btn btn-danger my-3 me-3" name="accion" value="reportar" type="submit">Generar
-				Reporte</button>
-		</form>
+		<?php if ($tipo_vista == "reporte"): ?>
+			<div class="dropdown">
+				<button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown">
+					Generar Reporte
+				</button>
+
+				<form method="post">
+					<ul class="dropdown-menu" id="reportes">
+						<li><button class="dropdown-item" name="tipo_reporte" value="solicitud">Solicitud Actual</button>
+						</li>
+						<li><button class="dropdown-item" name="tipo_reporte" value="municipio">Municipios</button></li>
+						<li><button class="dropdown-item" name="tipo_reporte" value="parroquia">Parroquias</button></li>
+						<li><button class="dropdown-item" name="tipo_reporte" value="solicitante">Solicitantes</button></li>
+						<li><button class="dropdown-item" name="tipo_reporte" value="comunidad">Comunidades</button></li>
+						<li><button class="dropdown-item" name="tipo_reporte" value="institucion">Instituciones</button>
+						</li>
+						<li><button class="dropdown-item" name="tipo_reporte" value="gerencia">Gerencias</button></li>
+						<li><button class="dropdown-item" name="tipo_reporte" value="gerente">Gerentes</button></li>
+						<li><button class="dropdown-item" name="tipo_reporte" value="director">Directores</button></li>
+					</ul>
+				</form>
+			</div>
+		<?php else: ?>
+			<form method="POST">
+				<button class="btn btn-danger my-3 me-3" name="accion" value="reportar" type="submit">Generar
+					Reporte</button>
+			</form>
+		<?php endif ?>
 	</div>
 
 	<?php require_once "vista/componentes/tabla_solicitud.php"; ?>

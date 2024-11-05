@@ -1,7 +1,3 @@
-<?php if (isset($ocultar_acciones)): ?>
-    <p>Aqui va el banner</p>
-<?php endif ?>
-
 <div class="table-responsive" id="tabla-contenedor">
     <table class="table table-hover" id="tabla-principal">
         <thead>
