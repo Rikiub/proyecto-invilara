@@ -23,7 +23,7 @@
                 <th>Estatus</th>
                 <th>Problematica</th>
 
-                <?php if (!isset($ocultar_acciones)): ?>
+                <?php if (!isset($reporte)): ?>
                     <th>Acciones</th>
                 <?php endif ?>
             </tr>
@@ -59,7 +59,7 @@
 
                     <td>
                         <div class="btn-group-vertical">
-                            <?php if (!isset($ocultar_acciones)): ?>
+                            <?php if (!isset($reporte)): ?>
                                 <?php if ($tipo_vista == "programado"): ?>
                                     <button class="btn btn-warning" value="modificar">Modificar</button>
                                 <?php elseif ($tipo_vista == "ejecucion"): ?>

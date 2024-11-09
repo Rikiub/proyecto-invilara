@@ -12,7 +12,10 @@
                 <tr>
                     <th>Parroquia</th>
                     <th>Municipio</th>
-                    <th>Acciones</th>
+
+                    <?php if (!isset($reporte)): ?>
+                        <th id="botones-accion">Acciones</th>
+                    <?php endif ?>
                 </tr>
             </thead>
 
@@ -23,13 +26,15 @@
                         <td><?php echo $d["nombre"] ?></td>
                         <td><?php echo $d["nombre_municipio"] ?></td>
 
-                        <td>
-                            <div class="btn-group-vertical">
-                                <button class="btn btn-warning" value="modificar">Modificar</button>
-                                <button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
-                                    data-bs-target="#modal-eliminacion">Eliminar</button>
-                            </div>
-                        </td>
+                        <?php if (!isset($reporte)): ?>
+                            <td id="botones-accion">
+                                <div class="btn-group-vertical">
+                                    <button class="btn btn-warning" value="modificar">Modificar</button>
+                                    <button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
+                                        data-bs-target="#modal-eliminacion">Eliminar</button>
+                                </div>
+                            </td>
+                        <?php endif ?>
                     </tr>
                 <?php endforeach ?>
             </tbody>

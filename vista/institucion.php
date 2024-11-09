@@ -11,6 +11,7 @@
 			<thead>
 				<tr>
 					<th>Nombre</th>
+					<th>Nombre del director</th>
 					<th>Cedula del director</th>
 					<th>Dirección</th>
 					<th>Correo</th>
@@ -24,6 +25,7 @@
 					<tr>
 						<td class="d-none"><?php echo $d["id"] ?></td>
 						<td><?php echo $d["nombre"] ?></td>
+						<td><?php echo $d["nombre_director"] ?></td>
 						<td><?php echo $d["cedula_director"] ?></td>
 						<td><?php echo $d["direccion"] ?></td>
 						<td><?php echo $d["correo"] ?></td>
@@ -59,15 +61,17 @@
 
 				<div class="row">
 					<label class="form-label col fw-semibold">Nombre
-						<input class="form-control" type="text" name="nombre" minlength="3" maxlength="50"
+						<input id="nombre" class="form-control" type="text" name="nombre" minlength="3" maxlength="50"
 							pattern="[A-Za-zÀ-ý ]+" title="Solo se aceptan letras" required />
 					</label>
+
+					<input type="hidden">
 
 					<label class="form-label col fw-semibold">Cedula del director
 						<select class="form-select" name="cedula_director" required>
 							<?php foreach ($directores as $d): ?>
 								<option value=<?php echo $d["cedula"] ?>>
-									<?php echo $d["cedula"] . " - " . $d["nombre"] ?>
+									<?php echo $d["cedula"] ?>
 								</option>
 							<?php endforeach ?>
 						</select>
@@ -75,19 +79,21 @@
 				</div>
 
 				<div class="row">
-					<label class="form-label col fw-semibold">Dirección
-						<input class="form-control" type="text" name="direccion" required />
+					<label class="form-label col fw-semibold">Direccion
+						<input id="direccion" class="form-control" type="text" name="direccion" required />
 					</label>
 				</div>
 
 				<div class="row">
 					<label class="form-label col fw-semibold">Correo
-						<input class="form-control" type="email" name="correo" required />
+						<input id="correo" class="form-control" type="email" name="correo" required />
 					</label>
 
 					<label class="form-label col fw-semibold">Teléfono
-						<input class="form-control" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-							title="Ejemplo: 412-337-1891" name="telefono" required />
+						<input id="telefono" class="form-control" type="tel" name="telefono"
+							placeholder="Ej: 0412, 0416 o 0426" minlength="12" maxlength="12"
+							title=" Debe ser un número válido" required />
+					</label>
 					</label>
 				</div>
 
@@ -101,3 +107,4 @@
 </div>
 
 <script src="recursos/js/crud.js"></script>
+<script src="recursos/js/institucion.js"></script>

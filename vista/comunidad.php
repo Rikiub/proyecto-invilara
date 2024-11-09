@@ -17,7 +17,10 @@
                     <th>Dirección</th>
                     <th>Parroquia</th>
                     <th>Ambito</th>
-                    <th>Acciones</th>
+
+                    <?php if (!isset($reporte)): ?>
+                        <th id="botones-accion">Acciones</th>
+                    <?php endif ?>
                 </tr>
             </thead>
 
@@ -33,13 +36,15 @@
                         <td><?php echo $d["nombre_parroquia"] ?></td>
                         <td><?php echo $d["ambito"] ?></td>
 
-                        <td>
-                            <div class="btn-group-vertical">
-                                <button class="btn btn-warning" value="modificar">Modificar</button>
-                                <button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
-                                    data-bs-target="#modal-eliminacion">Eliminar</button>
-                            </div>
-                        </td>
+                        <?php if (!isset($reporte)): ?>
+                            <td id="botones-accion">
+                                <div class="btn-group-vertical">
+                                    <button class="btn btn-warning" value="modificar">Modificar</button>
+                                    <button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
+                                        data-bs-target="#modal-eliminacion">Eliminar</button>
+                                </div>
+                            </td>
+                        <?php endif ?>
                     </tr>
                 <?php endforeach ?>
             </tbody>
@@ -73,48 +78,58 @@
                         <select class="form-select" name="tipo" required>
                             <option disabled selected hidden>Seleccione una opcion</option>
                             <option>Organización comunal</option>
+                            <option>Comuna</option>
+                            <option>Consejo Comunal</option>
                             <option>UBCH</option>
                         </select>
                     </label>
 
                     <label class="form-label col fw-semibold">RIF
-                        <input class="form-control" type="text" name="rif" pattern="[CGJV]{1}-[0-9]{7,8}-[0-9]{1}"
-                            placeholder="CGJV-12345678-9" title="Formato: V-12345678-9" required>
-                    </label>
-                </div>
+                        <div class="input-group">
+                            <select data-ignorar class="form-select" name="tipo_rif" required>
+                                <option>C</option>
+                                <option>V</option>
+                                <option>E</option>
+                            </select>
 
-                <div class="row">
-                    <label class="form-label col fw-semibold">Representante
-                        <input class="form-control" type="text" name="representante" minlength="3" maxlength="30"
-                            required>
-                    </label>
-
-                    <label class="form-label col fw-semibold">Dirección
-                        <input class="form-control" type="text" name="direccion" minlength="5" maxlength="250"
-                            required />
+                            <input class="form-control" type="text" name="rif" pattern="[0-9]{7,8}-[0-9]{1}"
+                                placeholder="CGJV-12345678-9" title="Formato: C-12345678-9" required>
+                        </div>
                     </label>
 
-                    <label class="form-label col fw-semibold">Parroquia
-                        <select class="form-select" name="id_parroquia" required>
-                            <?php foreach ($parroquias as $d): ?>
-                                <option value=<?php echo $d["id"] ?>>
-                                    <?php echo $d["nombre"] ?>
-                                </option>
-                            <?php endforeach ?>
-                        </select>
-                    </label>
-                </div>
+                    <div class="row">
+                        <label class="form-label col fw-semibold">Representante
+                            <input class="form-control" type="text" name="representante" minlength="3" maxlength="30"
+                                required>
+                        </label>
 
-                <div class="row">
-                    <label class="form-label col fw-semibold">Ambito
-                        <input class="form-control" type="text" name="ambito" minlength="3" maxlength="100" required>
-                    </label>
-                </div>
+                        <label class="form-label col fw-semibold">Dirección
+                            <input class="form-control" type="text" name="direccion" minlength="5" maxlength="250"
+                                required />
+                        </label>
 
-                <div class="modal-footer my-4">
-                    <input type="hidden" name="accion">
-                    <button class="btn btn-primary px-5 py-2" type="submit">Procesar</button>
-                </div>
+                        <label class="form-label col fw-semibold">Parroquia
+                            <select class="form-select" name="id_parroquia" required>
+                                <?php foreach ($parroquias as $d): ?>
+                                    <option value=<?php echo $d["id"] ?>>
+                                        <?php echo $d["nombre"] ?>
+                                    </option>
+                                <?php endforeach ?>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="row">
+                        <label class="form-label col fw-semibold">Ambito
+                            <input class="form-control" type="text" name="ambito" minlength="3" maxlength="100"
+                                required>
+                        </label>
+                    </div>
+
+                    <div class="modal-footer my-4">
+                        <input type="hidden" name="accion">
+                        <button class="btn btn-primary px-5 py-2" type="submit">Procesar</button>
+                    </div>
             </form>
         </div>
     </div>

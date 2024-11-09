@@ -18,7 +18,7 @@ if (isset($_POST["accion"])) {
             $modelo->set_nombre($_POST['nombre']);
             $modelo->set_direccion($_POST['direccion']);
             $modelo->set_representante($_POST['representante']);
-            $modelo->set_rif($_POST['rif']);
+            $modelo->set_rif($_POST['tipo_rif'] . "-" . $_POST['rif']);
             $modelo->set_ambito($_POST['ambito']);
 
             if ($accion == "insertar") {

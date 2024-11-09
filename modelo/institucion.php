@@ -134,7 +134,15 @@ class Institucion extends BaseDatos
 
     public function consultar()
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla}");
+        $stmt = $this->conexion()->query(
+            "SELECT
+                {$this->tabla}.*,
+                director.nombre AS nombre_director
+            FROM
+                {$this->tabla}
+            LEFT JOIN
+                director ON {$this->tabla}.cedula_director = director.cedula"
+        );
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }

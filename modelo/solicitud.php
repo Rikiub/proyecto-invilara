@@ -282,7 +282,7 @@ class Solicitud extends BaseDatos
     public function generarPDF()
     {
         $dompdf = new Dompdf();
-        $ocultar_acciones = true;
+        $reporte = true;
 
         // Generar HTML
         $datos = $this->consultar();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 05, 2024 at 05:35 AM
+-- Generation Time: Nov 09, 2024 at 05:11 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -119,7 +119,8 @@ CREATE TABLE `comunidad` (
 
 INSERT INTO `comunidad` (`id`, `id_parroquia`, `tipo`, `nombre`, `direccion`, `representante`, `rif`, `ambito`) VALUES
 (1, 37, 'Organización comunal', 'Sindicato Único De Telecomunicaciones Del Estadio Anzoátegui', 'Urb. 7', 'Leonardo Torres', 'C-34743', 'Sindicato'),
-(2, 37, 'Comuna', 'Parque Oeste', 'Calle 7 y Calle 9', 'Carlos Villegas', '36', 'Parque nacional');
+(2, 37, 'Comuna', 'Parque Oeste', 'Calle 7 y Calle 9', 'Carlos Villegas', '36', 'Parque nacional'),
+(23, 37, 'Comuna', 'Asfasgas', 'asgaasf', 'asfa', 'C-3634', 'asasg');
 
 -- --------------------------------------------------------
 
@@ -477,7 +478,7 @@ ALTER TABLE `asignacion`
 -- AUTO_INCREMENT for table `comunidad`
 --
 ALTER TABLE `comunidad`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `gerencia`

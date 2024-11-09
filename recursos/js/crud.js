@@ -74,6 +74,30 @@ for (const form of [form_edicion, form_eliminacion]) {
 	});
 }
 
+// Solo permitir presionar la tecla una vez, no presionada.
+/*
+let teclaPresionada = false;
+for (const input of Array.from(form_edicion.elements)) {
+	if (input.type !== "tel") {
+		input.addEventListener("keydown", (event) => {
+			if (event.key.length === 1 && !teclaPresionada) {
+				teclaPresionada = true;
+				event.preventDefault();
+				input.value += event.key;
+			} else if (event.key === "Backspace") {
+				teclaPresionada = false;
+			} else {
+				event.preventDefault();
+			}
+		});
+
+		input.addEventListener("keyup", () => {
+			teclaPresionada = false;
+		});
+	}
+}
+*/
+
 // Ayudantes
 
 /** Desactivar los `input` con el atributo `data-id` para evitar que sean editados. */

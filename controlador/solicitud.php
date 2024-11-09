@@ -31,17 +31,17 @@ switch ($tipo_vista) {
         $id_estado = "1";
         break;
     case "ejecucion":
-        $titulo_vista = "En programación y ejecución";
+        $titulo_vista = "Por asignar";
         $id_estado = "2";
         break;
     case "cerrado":
-        $titulo_vista = "Asignadas y cerradas";
+        $titulo_vista = "Por cerrar";
         $id_estado = "3";
         break;
     case "reporte":
         $titulo_vista = "Reporte";
         $id_estado = null;
-        $ocultar_acciones = true;
+        $reporte = true;
         break;
 }
 $modelo->set_estado($id_estado);
@@ -57,19 +57,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             # Extraer HTML
             ob_start();
             require_once "vista/componentes/encabezado_dompdf.php";
+            $header = ob_get_clean();
+
+            ob_start();
+            $reporte = true;
             require_once "controlador/" . $tipo . ".php";
             $html = ob_get_clean();
 
             # Limpiar HTML
-            /*
             $dom = new DOMDocument();
-            $dom->loadHTML($html);
+            $dom->loadHTML($html, LIBXML_NOWARNING | LIBXML_NOERROR);
             $elemento = $dom->getElementById("tabla-contenedor");
             $html = $dom->saveHTML($elemento);
-            */
+
+            $html = $header . $html;
 
             // Generar PDF
-            $dompdf->loadHtml(html_entity_decode($html));
+            $dompdf->loadHtml($html);
             $dompdf->setPaper("A4", "landscape");
             $dompdf->render();
             $dompdf->stream("reporte_invilara.pdf", array("Attachment" => 0));
