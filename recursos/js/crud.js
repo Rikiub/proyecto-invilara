@@ -65,6 +65,19 @@ crud.addEventListener("click", (event) => {
 	}
 });
 
+window.onload = () => {
+	$.ajax({
+		method: "post",
+		data: { accion: "consultar" },
+		dataType: "json",
+		success: (res) => {
+			for (const data of res) {
+				tabla.row.add(data).draw(false);
+			}
+		},
+	});
+};
+
 // Controlador de formularios.
 for (const form of [form_edicion, form_eliminacion]) {
 	form.addEventListener("submit", (event) => {
@@ -73,30 +86,6 @@ for (const form of [form_edicion, form_eliminacion]) {
 		envioAjax(datos);
 	});
 }
-
-// Solo permitir presionar la tecla una vez, no presionada.
-/*
-let teclaPresionada = false;
-for (const input of Array.from(form_edicion.elements)) {
-	if (input.type !== "tel") {
-		input.addEventListener("keydown", (event) => {
-			if (event.key.length === 1 && !teclaPresionada) {
-				teclaPresionada = true;
-				event.preventDefault();
-				input.value += event.key;
-			} else if (event.key === "Backspace") {
-				teclaPresionada = false;
-			} else {
-				event.preventDefault();
-			}
-		});
-
-		input.addEventListener("keyup", () => {
-			teclaPresionada = false;
-		});
-	}
-}
-*/
 
 // Ayudantes
 
@@ -128,6 +117,16 @@ function actualizar_fecha_input() {
 	}
 }
 
+function crearTabla(row_id, columns) {
+	return new DataTable("#tabla-contenedor", {
+		responsive: true,
+		fixedHeader: true,
+		select: { style: "single" },
+		rowId: row_id,
+		columns: columns,
+	});
+}
+
 /** Envio Ajax al controlador utilizando jQuery.
  * Debe pasar un objeto `FormData` como argumento.
  **/
@@ -153,9 +152,6 @@ function envioAjax(formData) {
 
 			// Ocultar modal.
 			modal_edicion.hide();
-
-			// Reiniciar pagina y obtener datos actualizados.
-			window.location.reload();
 		},
 	});
 }

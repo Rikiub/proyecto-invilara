@@ -10,6 +10,10 @@ if (isset($_POST["accion"])) {
     try {
         if ($accion == "reporte") {
             $modelo->generarPDF();
+        } elseif ($accion == "consultar") {
+            $datos = $modelo->consultar();
+            echo json_encode($datos);
+            exit;
         } else {
             if ($accion == "eliminar") {
                 $modelo->eliminar();
