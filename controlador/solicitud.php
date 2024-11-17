@@ -1,8 +1,5 @@
 <?php
 
-require_once "librerias/dompdf/autoload.inc.php";
-use Dompdf\Dompdf;
-
 require_once "modelo/solicitud.php";
 $modelo = new Solicitud();
 
@@ -57,43 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id = $_POST["id"] ?? null;
         $modelo->set_id($id);
 
-        $tipo_reporte = $_POST["tipo_repote"] ?? null;
-        if ($tipo_reporte) {
-            $dompdf = new Dompdf();
-
-            # Extraer HTML
-            ob_start();
-            require_once "vista/componentes/encabezado_dompdf.php";
-            $header = ob_get_clean();
-
-            ob_start();
-            $reporte = true;
-            require_once "controlador/" . $tipo_reporte . ".php";
-            $html = ob_get_clean();
-
-            # Limpiar HTML
-            $dom = new DOMDocument();
-            $dom->loadHTML($html, LIBXML_NOWARNING | LIBXML_NOERROR);
-            $elemento = $dom->getElementById("tabla-contenedor");
-            $html = $dom->saveHTML($elemento);
-
-            $html = $header . $html;
-
-            // Generar PDF
-            $dompdf->loadHtml($html);
-            $dompdf->setPaper("A4", "landscape");
-            $dompdf->render();
-            $dompdf->stream("reporte_invilara.pdf", array("Attachment" => 0));
-
-            exit;
-        }
-
         $res["mensaje"] = "Exito";
 
         switch ($accion) {
-            case "reportar":
-                $modelo->generarPDF();
-                break;
             case "consultar":
                 if ($id) {
                     $datos = $modelo->obtenerPorId();
@@ -113,10 +76,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $modelo->set_id_institucion($_POST['id_institucion']);
                 }
 
-                $modelo->set_id_gerencia(isset($_POST['id_gerencia']) ? $_POST['id_gerencia'] : null);
+                $modelo->set_id_gerencia($_POST['id_gerencia'] ?? null);
                 $modelo->set_id_comunidad($_POST['id_comunidad']);
                 $modelo->set_fecha($_POST['fecha']);
-                $modelo->set_id_institucion_remitente($_POST['id_remitente']);
                 $modelo->set_problematica($_POST['problematica']);
 
                 if ($accion == "insertar") {

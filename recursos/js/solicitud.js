@@ -35,7 +35,7 @@ if (TIPO_VISTA !== "programado") {
 	if (TIPO_VISTA === "ejecucion") {
 		titulo = "Asignar";
 	} else if (TIPO_VISTA === "cerrado") {
-		titulo = "Cerrando";
+		titulo = "Cerrar";
 	} else if (TIPO_VISTA === "reporte") {
 		BOTON_MODIFICAR.remove();
 	}

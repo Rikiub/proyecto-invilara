@@ -21,10 +21,6 @@
                 <th>Fecha</th>
                 <th>Estatus</th>
                 <th>Problematica</th>
-
-                <?php if (!isset($reporte)): ?>
-                    <th>Acciones</th>
-                <?php endif ?>
             </tr>
         </thead>
 
@@ -54,23 +50,6 @@
                     <td><?php echo date("d/m/Y", strtotime($d["fecha"])); ?></td>
                     <td><?php echo $d["nombre_estado"]; ?></td>
                     <td><?php echo $d["problematica"]; ?></td>
-
-                    <td>
-                        <div class="btn-group-vertical">
-                            <?php if (!isset($reporte)): ?>
-                                <?php if ($tipo_vista == "programado"): ?>
-                                    <button class="btn btn-warning" value="modificar">Modificar</button>
-                                <?php elseif ($tipo_vista == "ejecucion"): ?>
-                                    <button class="btn btn-warning" value="modificar">Asignar</button>
-                                <?php elseif ($tipo_vista == "cerrado"): ?>
-                                    <button class="btn btn-warning" value="modificar">Cerrar</button>
-                                <?php endif ?>
-
-                                <button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
-                                    data-bs-target="#modal-eliminacion">Eliminar</button>
-                            <?php endif ?>
-                        </div>
-                    </td>
                 </tr>
             <?php endforeach ?>
         </tbody>

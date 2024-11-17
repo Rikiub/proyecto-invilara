@@ -16,7 +16,6 @@ class Solicitud extends BaseDatos
     private $id_gerencia;
     private $fecha;
     private $estado;
-    private $id_institucion_remitente;
     private $problematica;
     private $tipo_solicitud;
 
@@ -48,10 +47,6 @@ class Solicitud extends BaseDatos
     public function set_estado($valor)
     {
         $this->estado = $valor;
-    }
-    public function set_id_institucion_remitente($valor)
-    {
-        $this->id_institucion_remitente = $valor;
     }
     public function set_problematica($valor)
     {
@@ -238,26 +233,21 @@ class Solicitud extends BaseDatos
         return $datos;
     }
 
-    public function generarPDF()
-    {
-        $dompdf = new Dompdf();
-        $reporte = true;
+    public function consultarFiltrado(
+        $nro_control = null,
+        $nombre_gerencia = null,
+        $cedula_solicitante = null,
+        $nombre_institucion = null,
+        $nombre_comunidad = null,
+        $fecha = null,
+        $estado = null
+    ) {
+        $where = "WHERE {$this->tabla}.id LIKE '{$nro_control}' AND gerencia.nombre LIKE '{$nombre_gerencia}' ";
+        $query = $this->getSqlConsulta() . $where;
 
-        // Generar HTML
-        $datos = $this->consultar();
-        $tipo_solicitud = $this->tipo_solicitud;
-        $tipo_vista = "programado";
-
-        ob_start();
-        require_once "vista/componentes/encabezado_dompdf.php";
-        require_once "vista/componentes/tabla_solicitud.php";
-        $html = ob_get_clean();
-
-        // Generar PDF
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper("A4", "landscape");
-        $dompdf->render();
-        $dompdf->stream("reporte_invilara.pdf", array("Attachment" => 0));
+        $stmt = $this->conexion()->query($query);
+        $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $datos;
     }
 
     public function obtenerPorId()

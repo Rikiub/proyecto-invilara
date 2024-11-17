@@ -71,26 +71,28 @@
                             <input class="form-control" type="text" name="representante" minlength="3" maxlength="30"
                                 required>
                         </label>
-                        <label class="form-label col fw-semibold">Correo
-                            <input class="form-control" placeholder="Direcciones @ validas" type="email" name="correo"
-                                minlength="3" maxlength="70" required>
-                        </label>
 
                         <label class="form-label col fw-semibold">Teléfono
-                            <select id="telefono_codigo" class="form-select" style="width: 50%;" required>
-                                <option selected hidden disabled>Formato</option>
-                                <option value="0412">0412</option>
-                                <option value="0414">0414</option>
-                                <option value="0416">0416</option>
-                                <option value="0424">0424</option>
-                                <option value="0426">0426</option>
-                            </select>
+                            <div class="input-group">
+                                <select id="telefono_codigo" class="form-select w-25">
+                                    <option value="0412">0412</option>
+                                    <option value="0414">0414</option>
+                                    <option value="0416">0416</option>
+                                    <option value="0424">0424</option>
+                                    <option value="0426">0426</option>
+                                </select>
 
-                            <input id="telefono" class="form-control" type="tel" name="telefono" placeholder=""
-                                minlength="12" maxlength="12" title="Debe ser un número válido" required />
+                                <input id="telefono" class="form-control w-75" type="tel" name="telefono" minlength="12"
+                                    maxlength="12" title="Debe ser un número válido" required />
+                            </div>
                         </label>
 
                         <div class="row">
+                            <label class="form-label col fw-semibold">Correo
+                                <input class="form-control" placeholder="Direcciones @ validas" type="email"
+                                    name="correo" minlength="3" maxlength="70" required>
+                            </label>
+
                             <label class="form-label col fw-semibold">Dirección
                                 <input class="form-control" placeholder="Direccion de la Comunidad" type="text"
                                     name="direccion" minlength="5" maxlength="250" required />

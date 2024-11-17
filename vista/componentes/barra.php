@@ -5,7 +5,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <aside class="offcanvas offcanvas-start inv-gradient" tabindex="-1" id="barra-lateral">
+            <aside class="offcanvas offcanvas-start inv-gradient w-25" tabindex="-1" id="barra-lateral">
                 <header class="offcanvas-header">
                     <h5 class="offcanvas-title">Menu</h5>
                     <button class="btn-close" data-bs-dismiss="offcanvas"></button>
@@ -80,21 +80,20 @@
                             <div class="list-group list-group-flush">
                                 <a class="list-group-item list-group-item-action bg-body-tertiary"
                                     href="?pagina=solicitud&vista=programado">
-                                    Solicitudes Programadas
+                                    En programación
                                 </a>
 
                                 <a class="list-group-item list-group-item-action bg-body-tertiary"
                                     href="?pagina=solicitud&vista=ejecucion">
-                                    Solicitudes Asignadas
+                                    Por asignar
                                 </a>
 
                                 <a class="list-group-item list-group-item-action bg-body-tertiary"
                                     href="?pagina=solicitud&vista=cerrado">
-                                    Solicitudes Cerradas
+                                    Por cerrar
                                 </a>
 
-                                <a class="list-group-item list-group-item-action bg-body-tertiary"
-                                    href="?pagina=solicitud&vista=reporte">
+                                <a class="list-group-item list-group-item-action bg-body-tertiary" href="?pagina=reporte">
                                     Reporte
                                 </a>
                             </div>
