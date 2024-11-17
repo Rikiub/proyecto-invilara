@@ -1,11 +1,6 @@
-<!--
-Vean la etiqueta <a> y noten el atributo el "href".
-A la hora de agregar nuevas paginas, asignen la dirección de su controlador con "?pagina=<nombre_controlador>"
--->
-
 <nav class="navbar fixed-top inv-gradient">
     <div class="container-fluid mx-2">
-        <?php if ($rol == "usuario"): ?>
+        <?php if ($rol == "1" || $rol == "2"): ?>
             <button class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#barra-lateral">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -26,6 +21,16 @@ A la hora de agregar nuevas paginas, asignen la dirección de su controlador con
                             Cerrar sesión
                         </a>
                     </article>
+
+                    <?php if ($rol == "2"): ?>
+                        <hr>
+
+                        <article class="list-group">
+                            <a class="list-group-item list-group-item-action bg-body-tertiary" href="?pagina=usuario">
+                                Administrar usuarios
+                            </a>
+                        </article>
+                    <?php endif ?>
 
                     <hr>
 
