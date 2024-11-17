@@ -7,12 +7,16 @@ $modelo = new Usuario();
 $error = null;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $modelo->set_cedula($_POST["cedula"]);
+    $cedula = $_POST["cedula"];
+
+    $modelo->set_cedula($cedula);
     $modelo->set_contrasena($_POST["contrasena"]);
 
     if ($modelo->iniciarSesion()) {
         session_start();
-        $_SESSION["rol"] = "usuario";
+
+        $user = $modelo->obtenerUsuario();
+        $_SESSION["rol"] = $user["rol"];
 
         header("Location: ?pagina=principal");
         exit;

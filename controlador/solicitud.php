@@ -167,7 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Datos principales
     $datos = $modelo->consultar();
-    $estados = $modelo->consultar_estados();
+    $estados = $modelo->consultarEstados();
 
     // Cargar vista
     require_once "vista/solicitud.php";

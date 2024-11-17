@@ -1,9 +1,10 @@
 // Formularios
-const FORM_EDICION = document.getElementById("form-edicion");
-const FORM_ELIMINACION = document.getElementById("form-eliminacion");
+export const FORM_EDICION = document.getElementById("form-edicion");
 
 // Botones
+export const BOTON_INSERTAR = document.getElementById("boton-insertar");
 export const BOTON_MODIFICAR = document.getElementById("boton-modificar");
+export const BOTON_ELIMINAR = document.getElementById("boton-eliminar");
 
 // Sintaxis basada en su propia documentación: https://getbootstrap.com/docs/5.3/components/modal/#via-javascript
 const MODAL_EDICION = new bootstrap.Modal("#modal-edicion");
@@ -31,7 +32,7 @@ export function iniciarCrud(rowId, columns) {
 	};
 
 	// Registro
-	document.getElementById("boton-insertar").addEventListener("click", () => {
+	BOTON_INSERTAR.addEventListener("click", () => {
 		cambiarTituloModal("Registrando");
 		ACCION = "insertar";
 
@@ -43,7 +44,7 @@ export function iniciarCrud(rowId, columns) {
 	});
 
 	// Modificación
-	document.getElementById("boton-modificar").addEventListener("click", () => {
+	BOTON_MODIFICAR.addEventListener("click", () => {
 		cambiarTituloModal("Registrando");
 		ACCION = "modificar";
 
@@ -67,21 +68,23 @@ export function iniciarCrud(rowId, columns) {
 	});
 
 	// Eliminacion
-	document.getElementById("boton-eliminar").addEventListener("click", () => {
+	BOTON_ELIMINAR.addEventListener("click", () => {
 		MODAL_ELIMINACION.show();
 	});
 
-	FORM_ELIMINACION.addEventListener("submit", (event) => {
-		event.preventDefault();
+	document
+		.getElementById("form-eliminacion")
+		.addEventListener("submit", (event) => {
+			event.preventDefault();
 
-		const row = TABLA.row(".selected");
-		const id = row.id();
+			const row = TABLA.row(".selected");
+			const id = row.id();
 
-		envioAjax("eliminar", { id: id }, () => {
-			row.remove().draw(false);
-			MODAL_ELIMINACION.hide();
+			envioAjax("eliminar", { id: id }, () => {
+				row.remove().draw(false);
+				MODAL_ELIMINACION.hide();
+			});
 		});
-	});
 
 	// Formulario
 	FORM_EDICION.addEventListener("submit", (event) => {

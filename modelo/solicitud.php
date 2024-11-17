@@ -205,7 +205,7 @@ class Solicitud extends BaseDatos
         );
     }
 
-    public function consultar_estados()
+    public function consultarEstados()
     {
         $stmt = $this->conexion()->query(
             "SELECT
@@ -232,7 +232,7 @@ class Solicitud extends BaseDatos
                 break;
         }
 
-        $query = $this->getSqlConsulta() . $filtro . " ORDER BY id_estado DESC";
+        $query = $this->getSqlConsulta() . " WHERE tipo_solicitud='{$this->tipo_solicitud}' " . $filtro . " ORDER BY id_estado DESC";
 
         $stmt = $this->conexion()->query($query);
         $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -298,8 +298,6 @@ class Solicitud extends BaseDatos
                     institucion ON {$this->tabla}.id_institucion = institucion.id
                 LEFT JOIN
                     gerencia ON asignacion.id_gerencia = gerencia.id
-                WHERE
-                    tipo_solicitud='{$this->tipo_solicitud}'
                 ";
     }
 

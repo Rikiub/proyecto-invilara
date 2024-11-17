@@ -22,9 +22,9 @@ class Usuario extends BaseDatos
     public function iniciarSesion()
     {
         if ($this->cedula && $this->contrasena) {
-            $user = $this->obtenerUno($this->cedula);
+            $user = $this->obtenerUsuario();
 
-            if ($user && $user[0]["contrasena"] == $this->contrasena) {
+            if ($user && $user["contrasena"] == $this->contrasena) {
                 return true;
             }
         }
@@ -34,7 +34,7 @@ class Usuario extends BaseDatos
 
     public function insertar()
     {
-        if (!empty($this->obtenerUno($this->cedula))) {
+        if ($this->obtenerUsuario()) {
             throw new Exception("Ya existe");
         }
 
@@ -46,19 +46,20 @@ class Usuario extends BaseDatos
         );
     }
 
-    public function modificar($cedula)
+    public function modificar()
     {
         throw new Exception("'modificar' no ha sido implementado.");
     }
 
-    public function eliminar($cedula)
+    public function eliminar()
     {
-        if (empty($this->obtenerUno($this->cedula))) {
+        if (!$this->obtenerUsuario()) {
             throw new Exception("No existe");
         }
 
         $this->conexion()->query(
-            "DELETE FROM {$this->tabla}
+            "DELETE FROM
+                {$this->tabla}
             WHERE
                 cedula = '{$this->cedula}'"
         );
@@ -67,21 +68,24 @@ class Usuario extends BaseDatos
     public function consultar()
     {
         $stmt = $this->conexion()->query(
-            "SELECT * FROM {$this->tabla}"
+            "SELECT *
+            FROM {$this->tabla}"
         );
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function obtenerUno($cedula)
+    public function obtenerUsuario()
     {
         $stmt = $this->conexion()->query(
-            "SELECT * FROM {$this->tabla}
+            "SELECT *
+            FROM
+                {$this->tabla}
             WHERE
                 cedula = '{$this->cedula}'"
         );
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
 

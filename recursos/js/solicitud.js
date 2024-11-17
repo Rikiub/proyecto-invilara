@@ -1,4 +1,4 @@
-import { iniciarCrud } from "./crud_dt.js";
+import { iniciarCrud, FORM_EDICION, BOTON_INSERTAR } from "./crud_dt.js";
 
 iniciarCrud("id", [
 	{ title: "Nº Control", data: "id" },
@@ -10,6 +10,11 @@ iniciarCrud("id", [
 	{ title: "Estado", data: "nombre_estado" },
 	{ title: "Problematica", data: "problematica" },
 ]);
+
+BOTON_INSERTAR.addEventListener("click", () => {
+	const fecha = new Date().toISOString().split("T")[0];
+	FORM_EDICION.fecha.value = fecha;
+});
 
 function cambiarTipoSolicitud(tipo) {
 	const url = new URL(window.location.href);
