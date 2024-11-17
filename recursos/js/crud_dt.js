@@ -2,6 +2,9 @@
 const FORM_EDICION = document.getElementById("form-edicion");
 const FORM_ELIMINACION = document.getElementById("form-eliminacion");
 
+// Botones
+export const BOTON_MODIFICAR = document.getElementById("boton-modificar");
+
 // Sintaxis basada en su propia documentación: https://getbootstrap.com/docs/5.3/components/modal/#via-javascript
 const MODAL_EDICION = new bootstrap.Modal("#modal-edicion");
 const MODAL_ELIMINACION = new bootstrap.Modal("#modal-eliminacion");
@@ -22,6 +25,7 @@ export function iniciarCrud(rowId, columns) {
 
 		// Consulta
 		envioAjax("consultar", {}, (res) => {
+			console.log("Consulta: ", res);
 			TABLA.rows.add(res).draw(false);
 		});
 	};

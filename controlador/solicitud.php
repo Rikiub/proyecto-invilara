@@ -49,9 +49,16 @@ $modelo->set_estado($id_estado);
 // Procesar POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        if (isset($_POST["tipo_reporte"])) {
-            $tipo = $_POST["tipo_reporte"];
+        $accion = $_POST["accion"] ?? null;
+        if (!$accion) {
+            throw new Exception("Se necesita especificar una acción.");
+        }
 
+        $id = $_POST["id"] ?? null;
+        $modelo->set_id($id);
+
+        $tipo_reporte = $_POST["tipo_repote"] ?? null;
+        if ($tipo_reporte) {
             $dompdf = new Dompdf();
 
             # Extraer HTML
@@ -61,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             ob_start();
             $reporte = true;
-            require_once "controlador/" . $tipo . ".php";
+            require_once "controlador/" . $tipo_reporte . ".php";
             $html = ob_get_clean();
 
             # Limpiar HTML
@@ -81,20 +88,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         }
 
-        if (isset($_POST["accion"])) {
-            $accion = $_POST["accion"];
-        } else {
-            throw new Exception("Se necesita especificar una acción.");
-        }
+        $res["mensaje"] = "Exito";
 
-        if ($accion == "reportar") {
-            $modelo->generarPDF();
-        } else {
-            $modelo->set_id($_POST['id']);
+        switch ($accion) {
+            case "reportar":
+                $modelo->generarPDF();
+                break;
+            case "consultar":
+                if ($id) {
+                    $datos = $modelo->obtenerPorId();
+                } else {
+                    $datos = $modelo->consultar();
+                }
 
-            if ($accion == "eliminar") {
+                $res = $datos;
+                break;
+            case "eliminar":
                 $modelo->eliminar();
-            } else {
+                break;
+            case "insertar" || "modificar":
                 if ($modelo->esGeneral()) {
                     $modelo->set_cedula_solicitante($_POST['cedula_solicitante']);
                 } elseif ($modelo->esInstitucional()) {
@@ -108,54 +120,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $modelo->set_problematica($_POST['problematica']);
 
                 if ($accion == "insertar") {
-                    $modelo->insertar();
+                    $id = $modelo->insertar();
+                    $res["id"] = $id;
                 } elseif ($accion == "modificar") {
                     $modelo->modificar();
                 }
-            }
 
-            $res["exito"] = "Procesado con exito";
-            echo json_encode($res);
+                break;
+            default:
+                throw new Exception("Acción no valida.");
         }
-    } catch (Exception $err) {
-        $res["error"] = $err->getMessage();
+
         echo json_encode($res);
+    } catch (Exception $err) {
+        $res["mensaje"] = $err->getMessage();
+
+        echo json_encode($res);
+        http_response_code(500);
     }
+} else {
+    // Datos
+    require_once "modelo/gerencia.php";
+    $m = new Gerencia();
 
-    exit;
+    $gerencias = $m->consultar();
+
+    require_once "modelo/institucion.php";
+    $m = new Institucion();
+
+    $instituciones = $m->consultar();
+
+    require_once "modelo/solicitante.php";
+    $m = new Solicitante();
+
+    $solicitantes = $m->consultar();
+
+    require_once "modelo/comunidad.php";
+    $m = new Comunidad();
+
+    $comunidades = $m->consultar();
+
+    require_once "modelo/parroquia.php";
+    $m = new Parroquia();
+
+    $parroquias = $m->consultar();
+
+    // Datos principales
+    $datos = $modelo->consultar();
+    $estados = $modelo->consultar_estados();
+
+    // Cargar vista
+    require_once "vista/solicitud.php";
 }
-
-// Datos
-require_once "modelo/gerencia.php";
-$m = new Gerencia();
-
-$gerencias = $m->consultar();
-
-require_once "modelo/institucion.php";
-$m = new Institucion();
-
-$instituciones = $m->consultar();
-
-require_once "modelo/solicitante.php";
-$m = new Solicitante();
-
-$solicitantes = $m->consultar();
-
-require_once "modelo/comunidad.php";
-$m = new Comunidad();
-
-$comunidades = $m->consultar();
-
-require_once "modelo/parroquia.php";
-$m = new Parroquia();
-
-$parroquias = $m->consultar();
-
-// Datos principales
-$datos = $modelo->consultar();
-$estados = $modelo->consultar_estados();
-
-// Cargar vista
-require_once "vista/solicitud.php";
 
 ?>

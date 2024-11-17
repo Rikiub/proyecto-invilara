@@ -10,7 +10,6 @@
                     <th>Institución</th>
                 <?php endif ?>
 
-                <th>Remitente</th>
                 <th>Comunidad</th>
                 <th>Municipio</th>
                 <th>Parroquia</th>
@@ -40,7 +39,6 @@
                         <td><?php echo $d["nombre_institucion"]; ?></td>
                     <?php endif ?>
 
-                    <td><?php echo $d["nombre_remitente"]; ?></td>
                     <td><?php echo $d["nombre_comunidad"]; ?></td>
                     <td><?php echo $d["nombre_municipio"]; ?></td>
                     <td><?php echo $d["nombre_parroquia"]; ?></td>

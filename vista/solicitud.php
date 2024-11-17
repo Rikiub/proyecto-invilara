@@ -1,7 +1,7 @@
 <?php require_once "vista/componentes/encabezado.php"; ?>
 <?php require_once "vista/componentes/barra.php"; ?>
 
-<main class="container" id="crud">
+<main class="container">
 	<h1>
 		<span class="text-muted">Solicitudes</span>
 		>
@@ -12,12 +12,14 @@
 
 	<hr>
 
-	<div class="d-flex justify-content-between">
-		<div>
-			<?php if ($tipo_vista == "programado"): ?>
-				<button class="btn btn-primary my-3 me-3" value="insertar">Registrar</button>
-			<?php endif ?>
+	<div class="d-flex justify-content-between" id="crud-botones">
+		<div class="btn-group" role="group">
+			<button id="boton-insertar" value="insertar" class="btn btn-success my-3">Registrar</button>
+			<button id="boton-modificar" value="modificar" class="btn btn-warning my-3 desactivable">Modificar</button>
+			<button id="boton-eliminar" value="eliminar" class="btn btn-danger my-3 desactivable">Eliminar</button>
+		</div>
 
+		<div>
 			<label>
 				<select class="form-select my-2 fw-medium" id="tipo-solicitud">
 					<option disabled hidden selected>Tipo de solicitud</option>
@@ -27,39 +29,47 @@
 					<option value="3">Institucional</option>
 				</select>
 			</label>
-		</div>
 
-		<?php if ($tipo_vista == "reporte"): ?>
-			<div class="dropdown">
-				<button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown">
-					Generar Reporte
-				</button>
+			<?php if ($tipo_vista == "reporte"): ?>
+				<div class="dropdown">
+					<button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown">
+						Generar Reporte
+					</button>
 
-				<form method="post">
-					<ul class="dropdown-menu" id="reportes">
-						<li><button class="dropdown-item" name="tipo_reporte" value="solicitud">Solicitud Actual</button>
-						</li>
-						<li><button class="dropdown-item" name="tipo_reporte" value="municipio">Municipios</button></li>
-						<li><button class="dropdown-item" name="tipo_reporte" value="parroquia">Parroquias</button></li>
-						<li><button class="dropdown-item" name="tipo_reporte" value="solicitante">Solicitantes</button></li>
-						<li><button class="dropdown-item" name="tipo_reporte" value="comunidad">Comunidades</button></li>
-						<li><button class="dropdown-item" name="tipo_reporte" value="institucion">Instituciones</button>
-						</li>
-						<li><button class="dropdown-item" name="tipo_reporte" value="gerencia">Gerencias</button></li>
-						<li><button class="dropdown-item" name="tipo_reporte" value="gerente">Gerentes</button></li>
-						<li><button class="dropdown-item" name="tipo_reporte" value="director">Directores</button></li>
-					</ul>
+					<form method="post">
+						<ul class="dropdown-menu" id="reportes">
+							<li><button class="dropdown-item" name="tipo_reporte" value="solicitud">Solicitud
+									Actual</button>
+							</li>
+							<li><button class="dropdown-item" name="tipo_reporte" value="municipio">Municipios</button></li>
+							<li><button class="dropdown-item" name="tipo_reporte" value="parroquia">Parroquias</button></li>
+							<li><button class="dropdown-item" name="tipo_reporte" value="solicitante">Solicitantes</button>
+							</li>
+							<li><button class="dropdown-item" name="tipo_reporte" value="comunidad">Comunidades</button>
+							</li>
+							<li><button class="dropdown-item" name="tipo_reporte" value="institucion">Instituciones</button>
+							</li>
+							<li><button class="dropdown-item" name="tipo_reporte" value="gerencia">Gerencias</button></li>
+							<li><button class="dropdown-item" name="tipo_reporte" value="gerente">Gerentes</button></li>
+							<li><button class="dropdown-item" name="tipo_reporte" value="director">Directores</button></li>
+						</ul>
+					</form>
+				</div>
+			<?php else: ?>
+				<form method="POST">
+					<button class="btn btn-danger my-3 me-3" name="accion" value="reportar" type="submit">Generar
+						Reporte</button>
 				</form>
-			</div>
-		<?php else: ?>
-			<form method="POST">
-				<button class="btn btn-danger my-3 me-3" name="accion" value="reportar" type="submit">Generar
-					Reporte</button>
-			</form>
-		<?php endif ?>
+			<?php endif ?>
+		</div>
 	</div>
 
-	<?php require_once "vista/componentes/tabla_solicitud.php"; ?>
+	<div class="my-3">
+		<table class="table table-hover" id="tabla-contenedor">
+			<thead></thead>
+			<tbody class="table-group-divider"></tbody>
+		</table>
+	</div>
 </main>
 
 <?php require_once "vista/componentes/modal_eliminar.php"; ?>
@@ -178,5 +188,4 @@
 	</div>
 </div>
 
-<script src="recursos/js/crud.js"></script>
-<script src="recursos/js/solicitud.js"></script>
+<script type="module" src="recursos/js/solicitud.js"></script>
