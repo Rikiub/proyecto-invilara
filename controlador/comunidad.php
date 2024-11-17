@@ -4,46 +4,67 @@ require_once "modelo/comunidad.php";
 
 $modelo = new Comunidad();
 
-if (isset($_POST["accion"])) {
-    $accion = $_POST["accion"];
-
-    $modelo->set_id($_POST['id']);
-
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        if ($accion == "eliminar") {
-            $modelo->eliminar();
-        } else {
-            $modelo->set_id_parroquia($_POST['id_parroquia']);
-            $modelo->set_tipo($_POST['tipo']);
-            $modelo->set_nombre($_POST['nombre']);
-            $modelo->set_direccion($_POST['direccion']);
-            $modelo->set_representante($_POST['representante']);
-            $modelo->set_rif($_POST['tipo_rif'] . "-" . $_POST['rif']);
-            $modelo->set_ambito($_POST['ambito']);
-
-            if ($accion == "insertar") {
-                $modelo->insertar();
-            } elseif ($accion == "modificar") {
-                $modelo->modificar();
-            }
+        $accion = $_POST["accion"] ?? null;
+        if (!$accion) {
+            throw new Exception("Se necesita especificar una acción.");
         }
 
-        $res["exito"] = "Procesado con exito";
+        $id = $_POST["id"] ?? null;
+        $modelo->set_id($id);
+
+        $res["mensaje"] = "Exito";
+
+        switch ($accion) {
+            case "consultar":
+                if ($id) {
+                    $datos = $modelo->obtenerPorId();
+                } else {
+                    $datos = $modelo->consultar();
+                }
+
+                $res = $datos;
+                break;
+            case "eliminar":
+                $modelo->eliminar();
+                break;
+            case "insertar" || "modificar":
+                $modelo->set_id_parroquia($_POST['id_parroquia']);
+                $modelo->set_tipo($_POST['tipo']);
+                $modelo->set_nombre($_POST['nombre']);
+                $modelo->set_direccion($_POST['direccion']);
+                $modelo->set_representante($_POST['representante']);
+                $modelo->set_rif($_POST['tipo_rif'] . "-" . $_POST['rif']);
+                $modelo->set_ambito($_POST['ambito']);
+
+                if ($accion == "insertar") {
+                    $id = $modelo->insertar();
+                    $res["id"] = $id;
+                } elseif ($accion == "modificar") {
+                    $modelo->modificar();
+                }
+
+                break;
+            default:
+                throw new Exception("Acción no valida.");
+        }
+
         echo json_encode($res);
     } catch (Exception $err) {
-        $res["error"] = $err->getMessage();
+        $res["mensaje"] = $err->getMessage();
+
         echo json_encode($res);
+        http_response_code(500);
     }
+} else {
+    require_once "modelo/parroquia.php";
+    $m = new Parroquia();
 
-    exit;
+    $parroquias = $m->consultar();
+
+    $datos = $modelo->consultar();
+    require_once "vista/comunidad.php";
 }
-
-require_once "modelo/parroquia.php";
-$m = new Parroquia();
-
-$parroquias = $m->consultar();
-
-$datos = $modelo->consultar();
-require_once "vista/comunidad.php";
 
 ?>

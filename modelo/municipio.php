@@ -2,9 +2,6 @@
 
 require_once "modelo/base_datos.php";
 
-require_once "librerias/dompdf/autoload.inc.php";
-use Dompdf\Dompdf;
-
 class Municipio extends BaseDatos
 {
     private $tabla = "municipio";
@@ -34,15 +31,11 @@ class Municipio extends BaseDatos
 
     public function insertar()
     {
-        if ($this->obtenerPorId($this->id)) {
-            throw new Exception("Ya existe");
-        }
+        $this->validarIdNoExiste();
+        $this->validarNoDuplicado();
 
-        if ($this->obtenerPorNombre($this->nombre)) {
-            throw new Exception("Ya existe un dato con este nombre.");
-        }
-
-        $this->conexion()->query(
+        $pdo = $this->conexion();
+        $pdo->query(
             "INSERT INTO {$this->tabla} (
 				nombre
 			)
@@ -50,23 +43,20 @@ class Municipio extends BaseDatos
 				'{$this->nombre}'
 			)"
         );
+        $id = $pdo->lastInsertId();
+
+        return $id;
     }
 
     public function modificar()
     {
-        if (!$this->obtenerPorId($this->id)) {
-            throw new Exception("Ya existe");
-        }
-
-        if ($this->obtenerPorNombre($this->nombre)) {
-            throw new Exception("Ya existe un dato con este nombre.");
-        }
+        $this->validarIdExiste();
+        $this->validarNoDuplicado();
 
         $this->conexion()->query(
             "UPDATE {$this->tabla} SET 
 				id = '{$this->id}',
 				nombre = '{$this->nombre}'
-		
 			WHERE
 				id = '{$this->id}'
 			"
@@ -75,60 +65,65 @@ class Municipio extends BaseDatos
 
     public function eliminar()
     {
-        if (empty($this->obtenerPorId($this->id))) {
-            throw new Exception("No existe");
-        }
+        $this->validarIdExiste();
 
         $this->conexion()->query(
-            "DELETE FROM {$this->tabla}
+            "DELETE FROM
+                {$this->tabla}
 			WHERE
 				id = '{$this->id}'
 			"
         );
     }
 
-    public function generarPDF()
-    {
-        $dompdf = new Dompdf();
-
-        // Generar HTML
-        $datos = $this->consultar();
-
-        ob_start();
-        require_once "vista/componentes/encabezado_dompdf.php";
-        require_once "vista/componentes/tabla_solicitud.php";
-        $html = ob_get_clean();
-
-        // Generar PDF
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper("A4", "landscape");
-        $dompdf->render();
-        $dompdf->stream("reporte_invilara.pdf", array("Attachment" => 0));
-    }
-
     public function consultar()
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} ORDER BY nombre ASC");
+        $stmt = $this->conexion()->query(
+            "SELECT *
+            FROM {$this->tabla}
+            ORDER BY nombre ASC"
+        );
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function obtenerPorNombre($nombre)
+    public function obtenerPorId()
     {
-        $stmt = $this->conexion()->prepare("SELECT * FROM {$this->tabla} WHERE nombre = ?");
-        $stmt->execute([$nombre]);
+        $stmt = $this->conexion()->prepare("SELECT * FROM {$this->tabla} WHERE id = ?");
+        $stmt->execute([$this->id]);
 
-        $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $fila = $stmt->fetch(PDO::FETCH_ASSOC);
         return $fila;
     }
 
-    public function obtenerPorId($id)
+    public function obtenerPorNombre()
     {
-        $stmt = $this->conexion()->prepare("SELECT * FROM {$this->tabla} WHERE id = ?");
-        $stmt->execute([$id]);
+        $stmt = $this->conexion()->prepare("SELECT * FROM {$this->tabla} WHERE nombre = ?");
+        $stmt->execute([$this->nombre]);
 
-        $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $fila = $stmt->fetch(PDO::FETCH_ASSOC);
         return $fila;
+    }
+
+    private function validarNoDuplicado()
+    {
+        if ($this->obtenerPorNombre()) {
+            throw new Exception("Ya existe un dato con este nombre.");
+        }
+    }
+
+    private function validarIdExiste()
+    {
+        if (!$this->obtenerPorId()) {
+            throw new Exception("ID {$this->id} no existe");
+        }
+    }
+
+    private function validarIdNoExiste()
+    {
+        if ($this->obtenerPorId()) {
+            throw new Exception("ID {$this->id} ya existe.");
+        }
     }
 }
 

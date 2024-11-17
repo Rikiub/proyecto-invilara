@@ -1,122 +1,153 @@
-// CRUD
-const crud = document.getElementById("crud");
-
 // Formularios
-const form_edicion = document.getElementById("form-edicion");
-const form_eliminacion = document.getElementById("form-eliminacion");
+const FORM_EDICION = document.getElementById("form-edicion");
+const FORM_ELIMINACION = document.getElementById("form-eliminacion");
 
-// Modales Bootstrap
 // Sintaxis basada en su propia documentación: https://getbootstrap.com/docs/5.3/components/modal/#via-javascript
-const modal_edicion = new bootstrap.Modal("#modal-edicion");
-const modal_eliminacion = new bootstrap.Modal("#modal-eliminacion");
+const MODAL_EDICION = new bootstrap.Modal("#modal-edicion");
+const MODAL_ELIMINACION = new bootstrap.Modal("#modal-eliminacion");
 
-// Controlador de botones.
-crud.addEventListener("click", (event) => {
-	if (event.target.tagName === "BUTTON") {
-		const accion = event.target.value;
+export function iniciarCrud(rowId, columns) {
+	// Tabla
+	const TABLA = crearTabla(rowId, columns);
+	let ACCION;
 
-		if (accion === "insertar") {
-			// Reiniciar formulario
-			form_edicion.reset();
+	window.onload = () => {
+		// Controlador de botones
+		desactivarBotones(true);
 
-			desactivar_input(false);
-			actualizar_fecha_input();
-			modal_edicion.show();
-		} else if (accion === "modificar") {
-			// Desde la ubicación del boton, obtener <tr> más cercano.
-			// Luego extraer una lista de todos sus <td>.
-			const td_lista = event.target.closest("tr").querySelectorAll("td");
+		TABLA.on("select deselect", () => {
+			const selecciones = TABLA.rows({ selected: true }).count();
+			desactivarBotones(selecciones === 0);
+		});
 
-			// Iterar sobre todos los <td> y copiar su valor al formulario.
-			for (const [index, td] of td_lista.entries()) {
-				el = form_edicion[index];
+		// Consulta
+		envioAjax("consultar", {}, (res) => {
+			TABLA.rows.add(res).draw(false);
+		});
+	};
 
-				if (el.tagName === "SELECT") {
-					// Fijar posición del <select>
-					for (let i = 0; i < el.options.length; i++) {
-						if (el.options[i].text === td.textContent) {
-							el.selectedIndex = i;
-							break;
-						}
+	// Registro
+	document.getElementById("boton-insertar").addEventListener("click", () => {
+		cambiarTituloModal("Registrando");
+		ACCION = "insertar";
+
+		desactivarInput(false);
+
+		FORM_EDICION.reset();
+		MODAL_EDICION.show();
+	});
+
+	// Modificación
+	document.getElementById("boton-modificar").addEventListener("click", () => {
+		cambiarTituloModal("Registrando");
+		ACCION = "modificar";
+
+		desactivarInput(true);
+
+		const row = TABLA.row(".selected");
+
+		if (row.selected()) {
+			const id = row.id();
+
+			envioAjax("consultar", { id: id }, (datos) => {
+				for (const key of Object.keys(datos)) {
+					if (key in FORM_EDICION) {
+						FORM_EDICION[key].value = datos[key];
 					}
-				} else if (el.type === "date") {
-					// Fijar fecha.
-					const [dia, mes, año] = td.textContent.split("/");
-					el.value = `${año}-${mes}-${dia}`;
-				} else {
-					el.value = td.textContent;
 				}
-			}
+			});
 
-			desactivar_input(true);
-			actualizar_fecha_input();
-			modal_edicion.show();
-		} else if (accion === "eliminar") {
-			// Desde la ubicación del boton, obtener <tr> más cercano.
-			// Luego extraer su ID principal desde el primer <td> que encuentre.
-			const id = event.target.closest("tr").querySelector("td").textContent;
+			MODAL_EDICION.show();
+		}
+	});
 
-			// Cambiar valor del formulario de eliminación con el nuevo ID a eliminar.
-			form_eliminacion.id.value = id;
+	// Eliminacion
+	document.getElementById("boton-eliminar").addEventListener("click", () => {
+		MODAL_ELIMINACION.show();
+	});
+
+	FORM_ELIMINACION.addEventListener("submit", (event) => {
+		event.preventDefault();
+
+		const row = TABLA.row(".selected");
+		const id = row.id();
+
+		envioAjax("eliminar", { id: id }, () => {
+			row.remove().draw(false);
+			MODAL_ELIMINACION.hide();
+		});
+	});
+
+	// Formulario
+	FORM_EDICION.addEventListener("submit", (event) => {
+		event.preventDefault();
+
+		const data = formToObject(event.currentTarget);
+		let ejecutar = () => null;
+
+		if (ACCION === "insertar") {
+			ejecutar = (res) => {
+				data.id = res[rowId];
+				TABLA.row.add(data).draw(false);
+				MODAL_EDICION.hide();
+			};
+		} else if (ACCION === "modificar") {
+			ejecutar = () => {
+				TABLA.row(".selected").data(data).draw(false);
+				MODAL_EDICION.hide();
+			};
+		} else {
+			throw new Error("Acción no valida.");
 		}
 
-		// Actualizar acción del formulario.
-		form_edicion.accion.value = accion;
-	}
-});
-
-window.onload = () => {
-	$.ajax({
-		method: "post",
-		data: { accion: "consultar" },
-		dataType: "json",
-		success: (res) => {
-			for (const data of res) {
-				tabla.row.add(data).draw(false);
-			}
-		},
-	});
-};
-
-// Controlador de formularios.
-for (const form of [form_edicion, form_eliminacion]) {
-	form.addEventListener("submit", (event) => {
-		event.preventDefault();
-		const datos = new FormData(form);
-		envioAjax(datos);
+		envioAjax(ACCION, data, ejecutar);
 	});
 }
 
-// Ayudantes
+export function capitalizarTexto(texto) {
+	const formato = texto
+		.split(" ")
+		.map((palabra) => {
+			return palabra[0].toUpperCase() + palabra.slice(1);
+		})
+		.join(" ");
+	return formato;
+}
+
+/* Desactivar botones */
+function desactivarBotones(bool) {
+	for (const btn of document.querySelectorAll("button.desactivable")) {
+		btn.disabled = bool;
+	}
+}
+
+function cambiarTituloModal(titulo) {
+	const elemento = document.getElementById("modal-title");
+	elemento.textContent = titulo;
+}
 
 /** Desactivar los `input` con el atributo `data-id` para evitar que sean editados. */
-function desactivar_input(bool) {
-	const lista = form_edicion.querySelectorAll("input[data-id]");
+function desactivarInput(bool) {
+	const lista = document.querySelectorAll("input[data-id]");
 
-	if (bool) {
-		for (const input of lista) {
-			input.readOnly = true;
+	for (const input of lista) {
+		input.readOnly = bool;
+
+		if (bool) {
 			input.classList.add("bg-secondary-subtle");
-		}
-	} else if (!bool) {
-		for (const input of lista) {
-			input.readOnly = false;
+		} else {
 			input.classList.remove("bg-secondary-subtle");
 		}
 	}
 }
 
-function actualizar_fecha_input() {
-	const lista = form_edicion.querySelectorAll("input[data-actualizar-fecha]");
-
-	for (const input of lista) {
-		if (input.type === "date") {
-			fecha = new Date().toISOString().split("T")[0];
-			input.value = fecha;
-		}
-	}
+/* Convertido formulario HTML en objeto JavaScript */
+function formToObject(element) {
+	const data = Object.fromEntries(new FormData(element));
+	return data;
 }
 
+/* Crear DataTablet */
 function crearTabla(row_id, columns) {
 	return new DataTable("#tabla-contenedor", {
 		responsive: true,
@@ -127,31 +158,17 @@ function crearTabla(row_id, columns) {
 	});
 }
 
-/** Envio Ajax al controlador utilizando jQuery.
- * Debe pasar un objeto `FormData` como argumento.
- **/
-function envioAjax(formData) {
+/** Envio Ajax al controlador. */
+function envioAjax(accion, datos, success) {
 	$.ajax({
 		method: "post",
-		data: formData,
+		data: { ...datos, accion: accion },
 		dataType: "json",
-		processData: false,
-		contentType: false,
-		async: true,
-		success: (res) => {
-			if (res.error) {
-				// Mostrar error en pantalla.
-				const msg = `ERROR: ${res.error}`;
-				alert(msg);
-
-				// Mostrar en consola.
-				throw res.error;
-			}
-
-			console.log("Procesado con exito");
-
-			// Ocultar modal.
-			modal_edicion.hide();
+		success: success,
+		error: (res) => {
+			const text = res.responseJSON.mensaje;
+			console.log(text);
+			alert(text);
 		},
 	});
 }

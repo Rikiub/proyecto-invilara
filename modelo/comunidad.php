@@ -81,11 +81,11 @@ class Comunidad extends BaseDatos
 
     public function insertar()
     {
-        if (!empty($this->obtenerUno($this->nombre))) {
-            throw new Exception("Ya existe");
-        }
+        $this->validarIdNoExiste();
+        $this->validarNoDuplicado();
 
-        $this->conexion()->query(
+        $pdo = $this->conexion();
+        $pdo->query(
             "INSERT INTO {$this->tabla} (
                 tipo,
                 id_parroquia,
@@ -105,13 +105,16 @@ class Comunidad extends BaseDatos
                 '{$this->ambito}'
 			)"
         );
+        $id = $pdo->lastInsertId();
+
+        return $id;
     }
+
 
     public function modificar()
     {
-        if (empty($this->obtenerUno($this->id))) {
-            throw new Exception("No existe");
-        }
+        $this->validarIdExiste();
+        $this->validarNoDuplicado();
 
         $this->conexion()->query(
             "UPDATE {$this->tabla} SET 
@@ -129,14 +132,14 @@ class Comunidad extends BaseDatos
         );
     }
 
+
     public function eliminar()
     {
-        if (empty($this->obtenerUno($this->id))) {
-            throw new Exception("No existe");
-        }
+        $this->validarIdExiste();
 
         $this->conexion()->query(
-            "DELETE FROM {$this->tabla}
+            "DELETE FROM
+                {$this->tabla}
 			WHERE
 				id = '{$this->id}'
 			"
@@ -158,10 +161,42 @@ class Comunidad extends BaseDatos
         return $result;
     }
 
-    public function obtenerUno($id)
+    public function obtenerPorNombre()
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE id='$id'");
-        $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->conexion()->prepare("SELECT * FROM {$this->tabla} WHERE nombre = ?");
+        $stmt->execute([$this->nombre]);
+
+        $fila = $stmt->fetch(PDO::FETCH_ASSOC);
         return $fila;
+    }
+
+    public function obtenerPorId()
+    {
+        $stmt = $this->conexion()->prepare("SELECT * FROM {$this->tabla} WHERE id = ?");
+        $stmt->execute([$this->id]);
+
+        $fila = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $fila;
+    }
+
+    private function validarNoDuplicado()
+    {
+        if ($this->obtenerPorNombre()) {
+            throw new Exception("Ya existe un dato con este nombre.");
+        }
+    }
+
+    private function validarIdExiste()
+    {
+        if (!$this->obtenerPorId()) {
+            throw new Exception("ID {$this->id} no existe");
+        }
+    }
+
+    private function validarIdNoExiste()
+    {
+        if ($this->obtenerPorId()) {
+            throw new Exception("ID {$this->id} ya existe.");
+        }
     }
 }

@@ -19,7 +19,7 @@
     <link rel="icon" href="recursos/img/favicon.png">
     <link rel="stylesheet" href="recursos/css/styles.css">
 
-    <title><?php echo isset($titulo) ? $titulo : "Proyecto INVILARA" ?></title>
+    <title><?php echo $TITULO ?? "Proyecto INVILARA" ?></title>
 </head>
 
-<body data-bs-theme="light">
+<body>

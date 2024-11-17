@@ -1,17 +1,15 @@
 <?php require_once "vista/componentes/encabezado.php"; ?>
 <?php require_once "vista/componentes/barra.php"; ?>
 
-<main class="container" id="crud">
+<main class="container">
     <h1>Municipios</h1>
 
-    <div class="d-flex justify-content-between">
-        <button class="btn btn-primary my-3" id="boton-insertar" value="insertar">Registrar</button>
-        <button class="btn btn-danger my-3" id="boton-eliminar" value="eliminar">Eliminar</button>
-
-        <form method="POST">
-            <button class="btn btn-danger my-3 me-3" name="accion" value="reportar" type="submit">Generar
-                Reporte</button>
-        </form>
+    <div class="d-flex justify-content-between" id="crud-botones">
+        <div class="btn-group" role="group">
+            <button id="boton-insertar" value="insertar" class="btn btn-success my-3">Registrar</button>
+            <button id="boton-modificar" value="modificar" class="btn btn-warning my-3 desactivable">Modificar</button>
+            <button id="boton-eliminar" value="eliminar" class="btn btn-danger my-3 desactivable">Eliminar</button>
+        </div>
     </div>
 
     <div class="my-3">
@@ -29,7 +27,7 @@
     <div class="modal-dialog">
         <div class="modal-content p-3">
             <div class="modal-header">
-                <h5 class="modal-title">Edición</h5>
+                <h5 id="modal-title" class="modal-title">Edición</h5>
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
@@ -44,7 +42,6 @@
                 </div>
 
                 <div class="modal-footer my-4">
-                    <input type="hidden" name="accion">
                     <button class="btn btn-primary px-5 py-2" type="submit">Procesar</button>
                 </div>
             </form>
@@ -52,4 +49,4 @@
     </div>
 </div>
 
-<script src="recursos/js/municipio.js"></script>
+<script type="module" src="recursos/js/municipio.js"></script>
