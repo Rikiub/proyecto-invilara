@@ -36,8 +36,8 @@
 
                 <div class="row">
                     <label class="form-label col fw-semibold">Nombre
-                        <input class="form-control" type="text" name="nombre" minlength="3" maxlength="50"
-                            pattern="[A-Za-zÀ-ý ]+" required />
+                        <input class="form-control" placeholder="Nombre de la comunidad" type="text" name="nombre"
+                            minlength="3" maxlength="50" pattern="[A-Za-zÀ-ý ]+" required />
                     </label>
                 </div>
 
@@ -46,8 +46,8 @@
                         <select class="form-select" name="tipo" required>
                             <option disabled selected hidden>Seleccione una opcion</option>
                             <option>Organización comunal</option>
-                            <option>Comuna</option>
                             <option>Consejo Comunal</option>
+                            <option>Comuna</option>
                             <option>UBCH</option>
                         </select>
                     </label>
@@ -60,8 +60,9 @@
                                 <option>E</option>
                             </select>
 
-                            <input class="form-control" type="text" name="rif" pattern="[0-9]{7,8}-[0-9]{1}"
-                                placeholder="CGJV-12345678-9" title="Formato: C-12345678-9" required>
+                            <input id="rif" class="form-control" type="text" name="rif" minlength="10" maxlength="10"
+                                pattern="[0-9]{7,8}-[0-9]{1}" placeholder="CVE-12345678-9" title="Formato: C-12345678-9"
+                                required>
                         </div>
                     </label>
 
@@ -70,21 +71,41 @@
                             <input class="form-control" type="text" name="representante" minlength="3" maxlength="30"
                                 required>
                         </label>
-
-                        <label class="form-label col fw-semibold">Dirección
-                            <input class="form-control" type="text" name="direccion" minlength="5" maxlength="250"
-                                required />
+                        <label class="form-label col fw-semibold">Correo
+                            <input class="form-control" placeholder="Direcciones @ validas" type="email" name="correo"
+                                minlength="3" maxlength="70" required>
                         </label>
 
-                        <label class="form-label col fw-semibold">Parroquia
-                            <select class="form-select" name="id_parroquia" required>
-                                <?php foreach ($parroquias as $d): ?>
-                                    <option value=<?php echo $d["id"] ?>>
-                                        <?php echo $d["nombre"] ?>
-                                    </option>
-                                <?php endforeach ?>
+                        <label class="form-label col fw-semibold">Teléfono
+                            <select id="codigo" class="form-select" style="width: 50%;" required
+                                onchange="autofillPhoneNumber()">
+                                <option value="">código</option>
+                                <option value="0412">0412</option>
+                                <option value="0414">0414</option>
+                                <option value="0416">0416</option>
+                                <option value="0424">0424</option>
+                                <option value="0426">0426</option>
                             </select>
+                            <input id="telefono" class="form-control" type="tel" name="telefono" placeholder=""
+                                minlength="12" maxlength="12" title="Debe ser un número válido" required />
                         </label>
+
+                        <div class="row">
+                            <label class="form-label col fw-semibold">Dirección
+                                <input class="form-control" placeholder="Direccion de la Comunidad" type="text"
+                                    name="direccion" minlength="5" maxlength="250" required />
+                            </label>
+
+                            <label class="form-label col fw-semibold">Parroquia
+                                <select class="form-select" name="id_parroquia" required>
+                                    <?php foreach ($parroquias as $d): ?>
+                                        <option value=<?php echo $d["id"] ?>>
+                                            <?php echo $d["nombre"] ?>
+                                        </option>
+                                    <?php endforeach ?>
+                                </select>
+                            </label>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -95,6 +116,7 @@
                     </div>
 
                     <div class="modal-footer my-4">
+                        <input type="hidden" name="accion">
                         <button class="btn btn-primary px-5 py-2" type="submit">Procesar</button>
                     </div>
             </form>

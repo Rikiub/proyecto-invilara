@@ -83,6 +83,7 @@ export function iniciarCrud(rowId, columns) {
 		event.preventDefault();
 
 		const data = formToObject(event.currentTarget);
+		console.log(data);
 		let ejecutar = () => null;
 
 		if (ACCION === "insertar") {

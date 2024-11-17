@@ -34,6 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $modelo->set_tipo($_POST['tipo']);
                 $modelo->set_nombre($_POST['nombre']);
                 $modelo->set_direccion($_POST['direccion']);
+                $modelo->set_correo($_POST['correo']);
+                $modelo->set_telefono($_POST['telefono']);
                 $modelo->set_representante($_POST['representante']);
                 $modelo->set_rif($_POST['tipo_rif'] . "-" . $_POST['rif']);
                 $modelo->set_ambito($_POST['ambito']);

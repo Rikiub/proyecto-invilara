@@ -10,6 +10,8 @@ class Comunidad extends BaseDatos
     private $id;
     private $id_parroquia;
     private $nombre;
+    private $correo;
+    private $telefono;
     private $direccion;
     private $representante;
     private $rif;
@@ -39,6 +41,14 @@ class Comunidad extends BaseDatos
     public function set_representante($valor)
     {
         $this->representante = $valor;
+    }
+    public function set_correo($valor)
+    {
+        $this->correo = $valor;
+    }
+    public function set_telefono($valor)
+    {
+        $this->telefono = $valor;
     }
     public function set_rif($valor)
     {
@@ -91,6 +101,8 @@ class Comunidad extends BaseDatos
                 id_parroquia,
 				nombre,
 				direccion,
+                correo,
+                telefono,
 				representante,
                 rif,
                 ambito
@@ -100,6 +112,8 @@ class Comunidad extends BaseDatos
                 '{$this->id_parroquia}',
 				'{$this->nombre}',
 				'{$this->direccion}',
+                '{$this->correo}',
+                '{$this->telefono}',
                 '{$this->representante}',
                 '{$this->rif}',
                 '{$this->ambito}'
@@ -109,7 +123,6 @@ class Comunidad extends BaseDatos
 
         return $id;
     }
-
 
     public function modificar()
     {
@@ -123,6 +136,8 @@ class Comunidad extends BaseDatos
 				tipo = '{$this->tipo}',
 				nombre = '{$this->nombre}',
 				direccion = '{$this->direccion}',
+                correo = '{$this->correo}',
+                telefono = '{$this->telefono}',
                 representante = '{$this->representante}',
                 rif = '{$this->rif}',
                 ambito = '{$this->ambito}'
