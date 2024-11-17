@@ -91,7 +91,6 @@ class Comunidad extends BaseDatos
 
     public function insertar()
     {
-        $this->validarIdNoExiste();
         $this->validarNoDuplicado();
 
         $pdo = $this->conexion();
@@ -127,7 +126,6 @@ class Comunidad extends BaseDatos
     public function modificar()
     {
         $this->validarIdExiste();
-        $this->validarNoDuplicado();
 
         $this->conexion()->query(
             "UPDATE {$this->tabla} SET 
@@ -147,7 +145,6 @@ class Comunidad extends BaseDatos
         );
     }
 
-
     public function eliminar()
     {
         $this->validarIdExiste();
@@ -163,22 +160,14 @@ class Comunidad extends BaseDatos
 
     public function consultar()
     {
-        $stmt = $this->conexion()->query(
-            "SELECT
-                {$this->tabla}.*,
-                parroquia.nombre AS nombre_parroquia
-            FROM
-                {$this->tabla}
-            LEFT JOIN
-                parroquia ON {$this->tabla}.id_parroquia = parroquia.id"
-        );
+        $stmt = $this->conexion()->query($this->getSqlConsulta());
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
     public function obtenerPorNombre()
     {
-        $stmt = $this->conexion()->prepare("SELECT * FROM {$this->tabla} WHERE nombre = ?");
+        $stmt = $this->conexion()->prepare($this->getSqlConsulta() . "WHERE {$this->tabla}.nombre = ?");
         $stmt->execute([$this->nombre]);
 
         $fila = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -187,11 +176,23 @@ class Comunidad extends BaseDatos
 
     public function obtenerPorId()
     {
-        $stmt = $this->conexion()->prepare("SELECT * FROM {$this->tabla} WHERE id = ?");
+        $stmt = $this->conexion()->prepare($this->getSqlConsulta() . "WHERE {$this->tabla}.id = ?");
         $stmt->execute([$this->id]);
 
         $fila = $stmt->fetch(PDO::FETCH_ASSOC);
         return $fila;
+    }
+
+    private function getSqlConsulta()
+    {
+        return "SELECT
+                    {$this->tabla}.*,
+                    parroquia.nombre AS nombre_parroquia
+                FROM
+                    {$this->tabla}
+                LEFT JOIN
+                    parroquia ON {$this->tabla}.id_parroquia = parroquia.id
+                ";
     }
 
     private function validarNoDuplicado()

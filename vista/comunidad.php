@@ -54,7 +54,7 @@
 
                     <label class="form-label col fw-semibold">RIF
                         <div class="input-group">
-                            <select data-ignorar class="form-select" name="tipo_rif" required>
+                            <select class="form-select" name="tipo_rif" required>
                                 <option>C</option>
                                 <option>V</option>
                                 <option>E</option>
@@ -77,15 +77,15 @@
                         </label>
 
                         <label class="form-label col fw-semibold">Teléfono
-                            <select id="codigo" class="form-select" style="width: 50%;" required
-                                onchange="autofillPhoneNumber()">
-                                <option value="">código</option>
+                            <select id="telefono_codigo" class="form-select" style="width: 50%;" required>
+                                <option selected hidden disabled>Formato</option>
                                 <option value="0412">0412</option>
                                 <option value="0414">0414</option>
                                 <option value="0416">0416</option>
                                 <option value="0424">0424</option>
                                 <option value="0426">0426</option>
                             </select>
+
                             <input id="telefono" class="form-control" type="tel" name="telefono" placeholder=""
                                 minlength="12" maxlength="12" title="Debe ser un número válido" required />
                         </label>

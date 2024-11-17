@@ -31,6 +31,7 @@ export function iniciarCrud(rowId, columns) {
 		cambiarTituloModal("Registrando");
 		ACCION = "insertar";
 
+		TABLA.row(".selected").deselect();
 		desactivarInput(false);
 
 		FORM_EDICION.reset();
@@ -82,26 +83,32 @@ export function iniciarCrud(rowId, columns) {
 	FORM_EDICION.addEventListener("submit", (event) => {
 		event.preventDefault();
 
-		const data = formToObject(event.currentTarget);
-		console.log(data);
-		let ejecutar = () => null;
+		let success = () => null;
 
 		if (ACCION === "insertar") {
-			ejecutar = (res) => {
-				data.id = res[rowId];
-				TABLA.row.add(data).draw(false);
+			success = (res) => {
+				envioAjax("consultar", { id: res.id }, (res) => {
+					TABLA.row.add(res).draw(false);
+				});
+
 				MODAL_EDICION.hide();
 			};
 		} else if (ACCION === "modificar") {
-			ejecutar = () => {
-				TABLA.row(".selected").data(data).draw(false);
+			success = () => {
+				const id = TABLA.row(".selected").id();
+
+				envioAjax("consultar", { id: id }, (res) => {
+					TABLA.row(".selected").data(res).draw(false);
+				});
+
 				MODAL_EDICION.hide();
 			};
 		} else {
 			throw new Error("Acción no valida.");
 		}
 
-		envioAjax(ACCION, data, ejecutar);
+		const formulario = formToObject(event.currentTarget);
+		envioAjax(ACCION, formulario, success);
 	});
 }
 
