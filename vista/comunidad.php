@@ -27,7 +27,7 @@
     <div class="modal-dialog">
         <div class="modal-content p-3">
             <div class="modal-header">
-                <h5 id="modal-title" class="modal-title">Edición</h5>
+                <h5 id="modal-title" id="modal-title" class="modal-title">Edición</h5>
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 

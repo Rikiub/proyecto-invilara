@@ -22,4 +22,4 @@
     <title><?php echo $TITULO ?? "Proyecto INVILARA" ?></title>
 </head>
 
-<body>
+<body data-bs-theme="light">
