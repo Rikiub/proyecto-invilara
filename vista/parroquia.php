@@ -1,43 +1,21 @@
 <?php require_once "vista/componentes/encabezado.php"; ?>
 <?php require_once "vista/componentes/barra.php"; ?>
 
-<main class="container" id="crud">
+<main class="container">
     <h1>Parroquias</h1>
 
-    <button class="btn btn-primary my-3" value="insertar">Registrar</button>
+    <div class="d-flex justify-content-between" id="crud-botones">
+        <div class="btn-group" role="group">
+            <button id="boton-insertar" value="insertar" class="btn btn-success my-3">Registrar</button>
+            <button id="boton-modificar" value="modificar" class="btn btn-warning my-3 desactivable">Modificar</button>
+            <button id="boton-eliminar" value="eliminar" class="btn btn-danger my-3 desactivable">Eliminar</button>
+        </div>
+    </div>
 
-    <div class="table-responsive" id="tabla-contenedor">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Parroquia</th>
-                    <th>Municipio</th>
-
-                    <?php if (!isset($reporte)): ?>
-                        <th id="botones-accion">Acciones</th>
-                    <?php endif ?>
-                </tr>
-            </thead>
-
-            <tbody class="table-group-divider">
-                <?php foreach ($datos as $d): ?>
-                    <tr>
-                        <td class="d-none" data-id><?php echo $d["id"] ?></td>
-                        <td><?php echo $d["nombre"] ?></td>
-                        <td><?php echo $d["nombre_municipio"] ?></td>
-
-                        <?php if (!isset($reporte)): ?>
-                            <td id="botones-accion">
-                                <div class="btn-group-vertical">
-                                    <button class="btn btn-warning" value="modificar">Modificar</button>
-                                    <button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-eliminacion">Eliminar</button>
-                                </div>
-                            </td>
-                        <?php endif ?>
-                    </tr>
-                <?php endforeach ?>
-            </tbody>
+    <div class="my-3">
+        <table class="table table-hover" id="tabla-contenedor">
+            <thead></thead>
+            <tbody class="table-group-divider"></tbody>
         </table>
     </div>
 </main>
@@ -74,7 +52,6 @@
                 </div>
 
                 <div class="modal-footer my-4">
-                    <input type="hidden" name="accion">
                     <button class="btn btn-primary px-5 py-2" type="submit">Procesar</button>
                 </div>
             </form>
@@ -82,4 +59,4 @@
     </div>
 </div>
 
-<script src="recursos/js/crud.js"></script>
+<script type="module" src="recursos/js/parroquia.js"></script>

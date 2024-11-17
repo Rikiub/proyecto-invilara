@@ -12,13 +12,13 @@ $modelo->set_tipo_solicitud($tipo_solicitud);
 
 switch ($tipo_solicitud) {
     case "1":
-        $nombre_solicitud = "Generales";
+        $titulo_solicitud = "Generales";
         break;
     case "2":
-        $nombre_solicitud = "1x10";
+        $titulo_solicitud = "1x10";
         break;
     case "3":
-        $nombre_solicitud = "Institucionales";
+        $titulo_solicitud = "Institucionales";
         break;
 }
 

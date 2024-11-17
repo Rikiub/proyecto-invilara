@@ -1,13 +1,15 @@
 <?php require_once "vista/componentes/encabezado.php"; ?>
 <?php require_once "vista/componentes/barra.php"; ?>
 
+<div id="titulo-solicitud" class="d-none"><?php echo $titulo_solicitud ?></div>
+
 <main class="container">
 	<h1>
 		<span class="text-muted">Solicitudes</span>
-		>
-		<span><?php echo $nombre_solicitud; ?></span>
-		>
-		<span class="fw-bold"><?php echo $titulo_vista; ?></span>
+		<span>></span>
+		<span><?php echo $titulo_solicitud; ?></span>
+		<span>></span>
+		<span class="fw-bold text-nowrap"><?php echo $titulo_vista; ?></span>
 	</h1>
 
 	<hr>
@@ -56,14 +58,30 @@
 					<label class="form-label col fw-semibold">Nº Control
 						<input data-id class="form-control" type="text" name="id" required />
 					</label>
+
+					<?php if ($tipo_vista != "programado"): ?>
+						<label class="form-label col fw-semibold">Gerencia
+							<select
+								class="form-select <?php echo ($tipo_vista == "cerrado" ? "bg-secondary-subtle" : "") ?>"
+								name="id_gerencia" required>
+								<?php foreach ($gerencias as $d): ?>
+									<option value="<?php echo $d["id"] ?>" <?php echo ($tipo_vista == "cerrado" ? "disabled" : "") ?>>
+										<?php echo $d["nombre"] ?>
+									</option>
+								<?php endforeach ?>
+							</select>
+						</label>
+					<?php endif ?>
 				</div>
 
 				<div class="row">
 					<?php if ($tipo_solicitud == "1" || $tipo_solicitud == "2"): ?>
 						<label class="form-label col fw-semibold">Cedula solicitante
-							<select class="form-select" name="cedula_solicitante" required <?php echo ($tipo_vista != "programado" ? "readonly" : "") ?>>
+							<select
+								class="form-select <?php echo ($tipo_vista != "programado" ? "bg-secondary-subtle" : "") ?>"
+								name="cedula_solicitante" required>
 								<?php foreach ($solicitantes as $d): ?>
-									<option value=<?php echo $d["cedula"] ?>>
+									<option value="<?php echo $d["cedula"] ?>" <?php echo ($tipo_vista != "programado" ? "disabled" : "") ?>>
 										<?php echo $d["cedula"]; ?>
 									</option>
 								<?php endforeach ?>
@@ -72,9 +90,11 @@
 
 					<?php elseif ($tipo_solicitud == "3"): ?>
 						<label class="form-label col fw-semibold">Institución
-							<select class="form-select" name="id_institucion" required <?php echo ($tipo_vista != "programado" ? "readonly" : "") ?>>
+							<select
+								class="form-select <?php echo ($tipo_vista != "programado" ? "bg-secondary-subtle" : "") ?>"
+								name="id_institucion" required>
 								<?php foreach ($instituciones as $d): ?>
-									<option value=<?php echo $d["id"] ?>>
+									<option value="<?php echo $d["id"] ?>" <?php echo ($tipo_vista != "programado" ? "disabled" : "") ?>>
 										<?php echo $d["nombre"] ?>
 									</option>
 								<?php endforeach ?>
@@ -83,20 +103,12 @@
 
 					<?php endif ?>
 
-					<label class="form-label col fw-semibold">Remitente
-						<select class="form-select" name="id_remitente" required>
-							<?php foreach ($instituciones as $d): ?>
-								<option value="<?php echo $d["id"] ?>">
-									<?php echo $d["nombre"] ?>
-								</option>
-							<?php endforeach ?>
-						</select>
-					</label>
-
 					<label class="form-label col fw-semibold">Comunidad
-						<select class="form-select" name="id_comunidad" required>
+						<select
+							class="form-select <?php echo ($tipo_vista != "programado" ? "bg-secondary-subtle" : "") ?>"
+							name="id_comunidad" required>
 							<?php foreach ($comunidades as $d): ?>
-								<option value="<?php echo $d["id"] ?>">
+								<option value="<?php echo $d["id"] ?>" <?php echo ($tipo_vista != "programado" ? "disabled" : "") ?>>
 									<?php echo $d["nombre"] ?>
 								</option>
 							<?php endforeach ?>
@@ -104,33 +116,15 @@
 					</label>
 				</div>
 
-				<input type="hidden">
-				<input type="hidden">
-
-				<?php if ($tipo_vista != "programado"): ?>
-					<div class="row">
-						<label class="form-label col fw-semibold">Gerencia
-							<select class="form-select" name="id_gerencia" required>
-								<?php foreach ($gerencias as $d): ?>
-									<option value=<?php echo $d["id"] ?>>
-										<?php echo $d["nombre"] ?>
-									</option>
-								<?php endforeach ?>
-							</select>
-						</label>
-					</div>
-				<?php endif ?>
-
 				<div class="row">
 					<label class="form-label col fw-semibold">Fecha actual
-						<input data-actualizar-fecha class="form-control bg-secondary-subtle" type="date" name="fecha"
-							readonly required />
+						<input class="form-control bg-secondary-subtle" type="date" name="fecha" readonly required />
 					</label>
 
 					<label class="form-label col fw-semibold">Estado
-						<select class="form-select bg-secondary-subtle" name="estado" required <?php echo ($tipo_vista != "programado" ? "readonly" : "") ?>>
+						<select class="form-select bg-secondary-subtle" name="estado" required>
 							<?php foreach ($estados as $d): ?>
-								<option value=<?php echo $d["id"] ?> 	<?php echo ($id_estado != $d["id"] ? "disabled" : "") ?>>
+								<option value="<?php echo $d["id"] ?>" <?php echo ($id_estado != $d["id"] ? "disabled" : "") ?>>
 									<?php echo $d["nombre"] ?>
 								</option>
 							<?php endforeach ?>
@@ -140,7 +134,9 @@
 
 				<div class="row">
 					<label class="form-label col fw-semibold">Problematica
-						<textarea class="form-control" name="problematica" required <?php echo ($tipo_vista != "programado" ? "readonly" : "") ?>></textarea>
+						<textarea
+							class="form-control <?php echo ($tipo_vista != "programado" ? "bg-secondary-subtle" : "") ?>"
+							name="problematica" required <?php echo ($tipo_vista != "programado" ? "readonly" : "") ?>></textarea>
 					</label>
 				</div>
 

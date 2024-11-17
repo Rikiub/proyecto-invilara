@@ -15,21 +15,19 @@ export function iniciarCrud(rowId, columns) {
 	const TABLA = crearTabla(rowId, columns);
 	let ACCION;
 
-	window.onload = () => {
-		// Controlador de botones
-		desactivarBotones(true);
+	// Controlador de botones
+	desactivarBotones(true);
 
-		TABLA.on("select deselect", () => {
-			const selecciones = TABLA.rows({ selected: true }).count();
-			desactivarBotones(selecciones === 0);
-		});
+	TABLA.on("select deselect", () => {
+		const selecciones = TABLA.rows({ selected: true }).count();
+		desactivarBotones(selecciones === 0);
+	});
 
-		// Consulta
-		envioAjax("consultar", {}, (res) => {
-			console.log("Consulta: ", res);
-			TABLA.rows.add(res).draw(false);
-		});
-	};
+	// Consulta
+	envioAjax("consultar", {}, (res) => {
+		console.log("Consulta: ", res);
+		TABLA.rows.add(res).draw(false);
+	});
 
 	// Registro
 	BOTON_INSERTAR.addEventListener("click", () => {
@@ -45,7 +43,7 @@ export function iniciarCrud(rowId, columns) {
 
 	// Modificación
 	BOTON_MODIFICAR.addEventListener("click", () => {
-		cambiarTituloModal("Registrando");
+		cambiarTituloModal("Modificando");
 		ACCION = "modificar";
 
 		desactivarInput(true);
@@ -129,16 +127,16 @@ export function capitalizarTexto(texto) {
 	return formato;
 }
 
+export function cambiarTituloModal(titulo) {
+	const elemento = document.getElementById("modal-title");
+	elemento.textContent = titulo;
+}
+
 /* Desactivar botones */
 function desactivarBotones(bool) {
 	for (const btn of document.querySelectorAll("button.desactivable")) {
 		btn.disabled = bool;
 	}
-}
-
-function cambiarTituloModal(titulo) {
-	const elemento = document.getElementById("modal-title");
-	elemento.textContent = titulo;
 }
 
 /** Desactivar los `input` con el atributo `data-id` para evitar que sean editados. */

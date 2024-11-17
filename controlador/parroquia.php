@@ -1,46 +1,68 @@
 <?php
 
 require_once "modelo/parroquia.php";
-require_once "modelo/municipio.php";
 
 $modelo = new Parroquia();
-$municipio = new Municipio();
 
-if (isset($_POST["accion"])) {
-    $accion = $_POST["accion"];
-
-    $modelo->set_id($_POST['id']);
-
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        if ($accion == "eliminar") {
-            $modelo->eliminar();
-        } else {
-            $modelo->set_id($_POST["id"]);
-            $modelo->set_nombre($_POST["nombre"]);
-            $modelo->set_id_municipio($_POST["id_municipio"]);
-
-            if ($accion == "insertar") {
-                $modelo->insertar();
-            } elseif ($accion == "modificar") {
-                $modelo->modificar();
-            }
+        $accion = $_POST["accion"] ?? null;
+        if (!$accion) {
+            throw new Exception("Se necesita especificar una acción.");
         }
 
-        $res["exito"] = "Procesado con exito";
+        $id = $_POST["id"] ?? null;
+        $modelo->set_id($id);
+
+        $res["mensaje"] = "Exito";
+
+        switch ($accion) {
+            case "consultar":
+                if ($id) {
+                    $datos = $modelo->obtenerPorId();
+                } else {
+                    $datos = $modelo->consultar();
+                }
+
+                $res = $datos;
+                break;
+            case "eliminar":
+                $modelo->eliminar();
+                break;
+            case "insertar" || "modificar":
+                $modelo->set_id($_POST["id"]);
+                $modelo->set_nombre($_POST["nombre"]);
+                $modelo->set_id_municipio($_POST["id_municipio"]);
+
+                if ($accion == "insertar") {
+                    $id = $modelo->insertar();
+                    $res["id"] = $id;
+                } elseif ($accion == "modificar") {
+                    $modelo->modificar();
+                }
+
+                break;
+            default:
+                throw new Exception("Acción no valida.");
+        }
+
         echo json_encode($res);
     } catch (Exception $err) {
-        $res["error"] = $err->getMessage();
+        $res["mensaje"] = $err->getMessage();
+
         echo json_encode($res);
+        http_response_code(500);
     }
+} else {
+    require_once "modelo/municipio.php";
+    $m = new Municipio();
+    $municipios = $m->consultar();
 
-    exit;
+    // Preparar datos a mostrar
+    $datos = $modelo->consultar();
+
+    // Cargar vista
+    require_once "vista/parroquia.php";
 }
-
-// Preparar datos a mostrar
-$datos = $modelo->consultar();
-$municipios = $municipio->consultar();
-
-// Cargar vista
-require_once "vista/parroquia.php";
 
 ?>

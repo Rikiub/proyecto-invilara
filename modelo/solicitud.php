@@ -152,7 +152,6 @@ class Solicitud extends BaseDatos
         );
         $stmt->execute([
             $this->id_gerencia,
-            $this->id_institucion_remitente,
             $this->estado,
 
             $solicitud["id_asignacion"],
@@ -225,7 +224,7 @@ class Solicitud extends BaseDatos
                 $filtro = "AND id_estado='1'";
                 break;
             case "2":
-                $filtro = "AND id_estado='1' OR id_estado='2'";
+                $filtro = "AND id_estado='1'";
                 break;
             case "3":
                 $filtro = "AND id_estado='2'";
@@ -274,6 +273,7 @@ class Solicitud extends BaseDatos
     {
         return "SELECT
                     {$this->tabla}.*,
+                    solicitante.nombre AS nombre_solicitante,
                     asignacion.id_gerencia,
                     tipo_estado.id AS id_estado,
                     tipo_estado.nombre AS nombre_estado,
@@ -284,6 +284,8 @@ class Solicitud extends BaseDatos
                     gerencia.nombre AS nombre_gerencia
                 FROM
                     {$this->tabla}
+                LEFT JOIN
+                    solicitante ON {$this->tabla}.cedula_solicitante = solicitante.cedula
                 LEFT JOIN
                     comunidad ON {$this->tabla}.id_comunidad = comunidad.id
                 LEFT JOIN

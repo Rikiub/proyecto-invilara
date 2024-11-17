@@ -40,16 +40,12 @@ class Parroquia extends BaseDatos
         return $this->id_municipio;
     }
 
-
     public function insertar()
     {
-        $consulta = $this->obtenerPorNombre($this->nombre);
+        $this->validarNoDuplicado();
 
-        if ($consulta) {
-            throw new Exception("Ya hay un dato con este nombre, por favor inserte otro nombre.");
-        }
-
-        $this->conexion()->query(
+        $pdo = $this->conexion();
+        $pdo->query(
             "INSERT INTO {$this->tabla} (
                 nombre,
                 id_municipio
@@ -59,19 +55,14 @@ class Parroquia extends BaseDatos
                 '{$this->id_municipio}'
             )"
         );
+        $id = $pdo->lastInsertId();
+
+        return $id;
     }
 
     public function modificar()
     {
-        $consulta = $this->obtenerPorId($this->id);
-        if (!$consulta) {
-            throw new Exception("No existe");
-        }
-
-        $consulta = $this->obtenerPorNombre($this->nombre);
-        if ($consulta) {
-            throw new Exception("Ya hay un dato con este nombre.");
-        }
+        $this->validarIdExiste();
 
         $this->conexion()->query(
             "UPDATE {$this->tabla} SET 
@@ -82,17 +73,15 @@ class Parroquia extends BaseDatos
 				id = '{$this->id}'
 			"
         );
-
     }
 
     public function eliminar()
     {
-        if (!$this->obtenerPorId($this->id)) {
-            throw new Exception("No existe");
-        }
+        $this->validarIdExiste();
 
         $this->conexion()->query(
-            "DELETE FROM {$this->tabla}
+            "DELETE FROM
+                {$this->tabla}
 			WHERE
 				id = '{$this->id}'
 			"
@@ -102,49 +91,61 @@ class Parroquia extends BaseDatos
     public function consultar()
     {
         $stmt = $this->conexion()->query(
-            "SELECT
-                {$this->tabla}.*,
-                municipio.nombre AS nombre_municipio
-            FROM
-                {$this->tabla}
-            LEFT JOIN
-                municipio ON {$this->tabla}.id_municipio = municipio.id
-            ORDER BY municipio.nombre ASC"
+            $this->getSqlConsulta() . "ORDER BY municipio.nombre ASC"
         );
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function obtenerPorId($id)
+    public function obtenerPorNombre()
     {
-        $stmt = $this->conexion()->prepare(
-            "SELECT *
-            FROM
-                {$this->tabla}
-            WHERE id = ?"
-        );
-        $stmt->execute([$id]);
+        $stmt = $this->conexion()->prepare($this->getSqlConsulta() . "WHERE {$this->tabla}.nombre = ?");
+        $stmt->execute([$this->nombre]);
 
-        $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $fila = $stmt->fetch(PDO::FETCH_ASSOC);
         return $fila;
     }
 
-    public function obtenerPorNombre($nombre)
+    public function obtenerPorId()
     {
-        $stmt = $this->conexion()->prepare(
-            "SELECT
-                {$this->tabla}.*,
-                municipio.nombre AS nombre_municipio
-            FROM
-                {$this->tabla}
-            LEFT JOIN
-                municipio ON {$this->tabla}.id_municipio = municipio.id
-            WHERE {$this->tabla}.nombre = ?"
-        );
-        $stmt->execute([$nombre]);
+        $stmt = $this->conexion()->prepare($this->getSqlConsulta() . "WHERE {$this->tabla}.id = ?");
+        $stmt->execute([$this->id]);
 
-        $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $fila = $stmt->fetch(PDO::FETCH_ASSOC);
         return $fila;
+    }
+
+    private function getSqlConsulta()
+    {
+        return "SELECT
+                    {$this->tabla}.*,
+                    municipio.nombre AS nombre_municipio
+                FROM
+                    {$this->tabla}
+                LEFT JOIN
+                    municipio ON {$this->tabla}.id_municipio = municipio.id
+                ";
+    }
+
+    private function validarNoDuplicado()
+    {
+        if ($this->obtenerPorNombre()) {
+            throw new Exception("Ya existe un dato con este nombre.");
+        }
+    }
+
+    private function validarIdExiste()
+    {
+        if (!$this->obtenerPorId()) {
+            throw new Exception("ID {$this->id} no existe");
+        }
+    }
+
+    private function validarIdNoExiste()
+    {
+        if ($this->obtenerPorId()) {
+            throw new Exception("ID {$this->id} ya existe.");
+        }
     }
 }
 
