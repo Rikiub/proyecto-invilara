@@ -235,10 +235,10 @@ class Solicitud extends BaseDatos
 
     public function consultarFiltrado(
         $nro_control = null,
-        $nombre_gerencia = null,
+        $id_gerencia = null,
         $cedula_solicitante = null,
-        $nombre_institucion = null,
-        $nombre_comunidad = null,
+        $id_institucion = null,
+        $id_comunidad = null,
         $fecha_inicio = null,
         $fecha_fin = null,
         $estado = null
@@ -248,17 +248,17 @@ class Solicitud extends BaseDatos
         if ($nro_control) {
             $where .= " AND {$this->tabla}.id LIKE '%{$nro_control}%'";
         }
-        if ($nombre_gerencia) {
-            $where .= " AND gerencia.nombre LIKE '%{$nombre_gerencia}%'";
+        if ($id_gerencia) {
+            $where .= " AND gerencia.id LIKE '%{$id_gerencia}%'";
         }
         if ($cedula_solicitante) {
             $where .= " AND solicitante.cedula LIKE '%{$cedula_solicitante}%'";
         }
-        if ($nombre_institucion) {
-            $where .= " AND institucion.nombre LIKE '%{$nombre_institucion}%'";
+        if ($id_institucion) {
+            $where .= " AND institucion.id LIKE '%{$id_institucion}%'";
         }
-        if ($nombre_comunidad) {
-            $where .= " AND comunidad.nombre LIKE '%{$nombre_comunidad}%'";
+        if ($id_comunidad) {
+            $where .= " AND comunidad.id LIKE '%{$id_comunidad}%'";
         }
         if ($fecha_inicio && $fecha_fin) {
             $where .= " AND {$this->tabla}.fecha BETWEEN '{$fecha_inicio}' AND '{$fecha_fin}'";

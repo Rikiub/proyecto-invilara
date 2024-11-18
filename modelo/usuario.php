@@ -27,7 +27,7 @@ class Usuario extends BaseDatos
     public function iniciarSesion()
     {
         if ($this->cedula && $this->contrasena) {
-            $user = $this->obtenerUsuario($this->cedula);
+            $user = $this->obtenerUsuario();
 
             if ($user && $user["contrasena"] == $this->contrasena) {
                 return true;
@@ -95,9 +95,9 @@ class Usuario extends BaseDatos
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function obtenerUsuario($cedula)
+    public function obtenerUsuario()
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE cedula='$cedula'");
+        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE cedula='{$this->cedula}'");
         $fila = $stmt->fetch(PDO::FETCH_ASSOC);
         return $fila;
     }
