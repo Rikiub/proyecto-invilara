@@ -1,4 +1,4 @@
-import { iniciarCrud, capitalizarTexto } from "./crud_dt.js";
+import { iniciarCrud, envioAjax, capitalizarTexto } from "./crud_dt.js";
 
 iniciarCrud("id", [
 	{ title: "Nombre", data: "nombre", render: capitalizarTexto },
@@ -11,6 +11,25 @@ iniciarCrud("id", [
 	{ title: "Teléfono", data: "telefono" },
 	{ title: "Ambito", data: "ambito" },
 ]);
+
+const municipio_select = document.getElementById("municipio_select");
+const parroquia_select = document.getElementById("parroquia_select");
+
+municipio_select.addEventListener("change", (event) => {
+	const id = event.target.value;
+
+	envioAjax(
+		"consultar",
+		{ id_municipio: id },
+		(res) => {
+			const options = res
+				.map((item) => `<option value="${item.id}">${item.nombre}</option>`)
+				.join("");
+			parroquia_select.innerHTML = options;
+		},
+		"?pagina=parroquia",
+	);
+});
 
 // Validaciones
 document.getElementById("telefono_codigo").addEventListener("change", () => {

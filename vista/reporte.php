@@ -2,47 +2,88 @@
 <?php require_once "vista/componentes/barra.php"; ?>
 
 <main class="container">
-    <article class="card p-5">
-        <h1>Reporte</h1>
+    <article class="card p-5 w-75 m-auto">
+        <hgroup class="text-center mb-3">
+            <h2>Reporte de solicitudes</h2>
+            <p class="text-muted">Seleccione los datos que quiera filtrar</p>
+        </hgroup>
 
         <form method="post">
             <div class="row">
                 <label class="form-label col fw-semibold">Nº Control
-                    <input class="form-control" type="text" name="id" />
-                </label>
-
-                <label class="form-label col fw-semibold">Gerencia
-                    <input class="form-control" name="id_gerencia" type="text">
-                </label>
-            </div>
-
-            <div class="row">
-                <label class="form-label col fw-semibold">Cedula solicitante
-                    <input class="form-control" name="cedula_solicitante" type="text">
-                </label>
-
-                <label class="form-label col fw-semibold">Institución
-                    <input class="form-control" name="id_institucion" type="text">
-                </label>
-
-                <label class="form-label col fw-semibold">Comunidad
-                    <input class="form-control" name="id_comunidad" type="text">
-                </label>
-            </div>
-
-            <div class="row">
-                <label class="form-label col fw-semibold">Fecha
-                    <input class="form-control" type="date" name="fecha" />
+                    <input class="form-control" type="text" name="id" placeholder="Todos" />
                 </label>
 
                 <label class="form-label col fw-semibold">Estado
                     <select class="form-select" name="estado">
+                        <option value="" selected>Todos</option>
+
+                        <hr>
+
                         <?php foreach ($estados as $d): ?>
                             <option value="<?php echo $d["id"] ?>">
                                 <?php echo $d["nombre"] ?>
                             </option>
                         <?php endforeach ?>
                     </select>
+                </label>
+
+                <label class="form-label col fw-semibold">Gerencia
+                    <select class="form-select" name="gerencia">
+                        <option value="" selected>Todos</option>
+
+                        <hr>
+
+                        <?php foreach ($gerencias as $d): ?>
+                            <option value="<?php echo $d["id"] ?>">
+                                <?php echo $d["nombre"] ?>
+                            </option>
+                        <?php endforeach ?>
+                    </select>
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="form-label col fw-semibold">Cedula solicitante
+                    <input class="form-control" name="cedula_solicitante" type="text" placeholder="Todos">
+                </label>
+
+                <label class="form-label col fw-semibold">Institución
+                    <select class="form-select" name="institucion">
+                        <option value="" selected>Todos</option>
+
+                        <hr>
+
+                        <?php foreach ($instituciones as $d): ?>
+                            <option value="<?php echo $d["id"] ?>">
+                                <?php echo $d["nombre"] ?>
+                            </option>
+                        <?php endforeach ?>
+                    </select>
+                </label>
+
+                <label class="form-label col fw-semibold">Comunidad
+                    <select class="form-select" name="comunidad">
+                        <option value="" selected>Todos</option>
+
+                        <hr>
+
+                        <?php foreach ($comunidades as $d): ?>
+                            <option value="<?php echo $d["id"] ?>">
+                                <?php echo $d["nombre"] ?>
+                            </option>
+                        <?php endforeach ?>
+                    </select>
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="form-label col fw-semibold">Fecha inicial
+                    <input class="form-control" type="date" name="fecha_inicio" />
+                </label>
+
+                <label class="form-label col fw-semibold">Fecha final
+                    <input class="form-control" type="date" name="fecha_fin" />
                 </label>
             </div>
 

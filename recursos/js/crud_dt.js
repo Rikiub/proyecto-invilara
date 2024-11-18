@@ -172,9 +172,10 @@ function crearTabla(row_id, columns) {
 }
 
 /** Envio Ajax al controlador. */
-function envioAjax(accion, datos, success) {
+export function envioAjax(accion, datos, success, url = "") {
 	$.ajax({
 		method: "post",
+		url: url,
 		data: { ...datos, accion: accion },
 		dataType: "json",
 		success: success,

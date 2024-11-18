@@ -239,10 +239,34 @@ class Solicitud extends BaseDatos
         $cedula_solicitante = null,
         $nombre_institucion = null,
         $nombre_comunidad = null,
-        $fecha = null,
+        $fecha_inicio = null,
+        $fecha_fin = null,
         $estado = null
     ) {
-        $where = "WHERE {$this->tabla}.id LIKE '{$nro_control}' AND gerencia.nombre LIKE '{$nombre_gerencia}' ";
+        $where = "WHERE 1=1";
+
+        if ($nro_control) {
+            $where .= " AND {$this->tabla}.id LIKE '%{$nro_control}%'";
+        }
+        if ($nombre_gerencia) {
+            $where .= " AND gerencia.nombre LIKE '%{$nombre_gerencia}%'";
+        }
+        if ($cedula_solicitante) {
+            $where .= " AND solicitante.cedula LIKE '%{$cedula_solicitante}%'";
+        }
+        if ($nombre_institucion) {
+            $where .= " AND institucion.nombre LIKE '%{$nombre_institucion}%'";
+        }
+        if ($nombre_comunidad) {
+            $where .= " AND comunidad.nombre LIKE '%{$nombre_comunidad}%'";
+        }
+        if ($fecha_inicio && $fecha_fin) {
+            $where .= " AND {$this->tabla}.fecha BETWEEN '{$fecha_inicio}' AND '{$fecha_fin}'";
+        }
+        if ($estado) {
+            $where .= " AND tipo_estado.nombre LIKE '%{$estado}%'";
+        }
+
         $query = $this->getSqlConsulta() . $where;
 
         $stmt = $this->conexion()->query($query);

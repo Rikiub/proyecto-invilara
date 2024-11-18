@@ -14,12 +14,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id = $_POST["id"] ?? null;
         $modelo->set_id($id);
 
+        $municipio = $_POST["id_municipio"] ?? null;
+        $modelo->set_id_municipio($municipio);
+
         $res["mensaje"] = "Exito";
 
         switch ($accion) {
             case "consultar":
                 if ($id) {
                     $datos = $modelo->obtenerPorId();
+                } elseif ($municipio) {
+                    $datos = $modelo->consultarPorMunicipio();
                 } else {
                     $datos = $modelo->consultar();
                 }
@@ -32,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             case "insertar" || "modificar":
                 $modelo->set_id($_POST["id"]);
                 $modelo->set_nombre($_POST["nombre"]);
-                $modelo->set_id_municipio($_POST["id_municipio"]);
 
                 if ($accion == "insertar") {
                     $id = $modelo->insertar();

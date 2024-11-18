@@ -60,10 +60,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         http_response_code(500);
     }
 } else {
-    require_once "modelo/parroquia.php";
-    $m = new Parroquia();
-
-    $parroquias = $m->consultar();
+    require_once "modelo/municipio.php";
+    $m = new Municipio();
+    $municipios = $m->consultar();
 
     $datos = $modelo->consultar();
     require_once "vista/comunidad.php";

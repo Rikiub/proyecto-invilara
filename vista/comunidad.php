@@ -54,7 +54,7 @@
 
                     <label class="form-label col fw-semibold">RIF
                         <div class="input-group">
-                            <select class="form-select" name="tipo_rif" required>
+                            <select class="input-group-text" name="tipo_rif" required>
                                 <option>C</option>
                                 <option>V</option>
                                 <option>E</option>
@@ -74,7 +74,7 @@
 
                         <label class="form-label col fw-semibold">Teléfono
                             <div class="input-group">
-                                <select id="telefono_codigo" class="form-select w-25">
+                                <select id="telefono_codigo" class="input-group-text">
                                     <option value="0412">0412</option>
                                     <option value="0414">0414</option>
                                     <option value="0416">0416</option>
@@ -82,32 +82,44 @@
                                     <option value="0426">0426</option>
                                 </select>
 
-                                <input id="telefono" class="form-control w-75" type="tel" name="telefono" minlength="12"
+                                <input id="telefono" class="form-control" type="tel" name="telefono" minlength="12"
                                     maxlength="12" title="Debe ser un número válido" required />
                             </div>
                         </label>
+                    </div>
 
-                        <div class="row">
-                            <label class="form-label col fw-semibold">Correo
-                                <input class="form-control" placeholder="Direcciones @ validas" type="email"
-                                    name="correo" minlength="3" maxlength="70" required>
-                            </label>
+                    <div class="row">
+                        <label class="form-label col fw-semibold">Correo
+                            <input class="form-control" placeholder="Direcciones @ validas" type="email" name="correo"
+                                minlength="3" maxlength="70" required>
+                        </label>
 
-                            <label class="form-label col fw-semibold">Dirección
-                                <input class="form-control" placeholder="Direccion de la Comunidad" type="text"
-                                    name="direccion" minlength="5" maxlength="250" required />
-                            </label>
+                        <label class="form-label col fw-semibold">Dirección
+                            <input class="form-control" placeholder="Direccion de la Comunidad" type="text"
+                                name="direccion" minlength="5" maxlength="250" required />
+                        </label>
+                    </div>
 
-                            <label class="form-label col fw-semibold">Parroquia
-                                <select class="form-select" name="id_parroquia" required>
+                    <div class="row">
+                        <label class="form-label col fw-semibold">Parroquia
+                            <div class="input-group">
+                                <select class="input-group-text" id="municipio_select" required>
+                                    <?php foreach ($municipios as $d): ?>
+                                        <option value=<?php echo $d["id"] ?>>
+                                            <?php echo $d["nombre"] ?>
+                                        </option>
+                                    <?php endforeach ?>
+                                </select>
+
+                                <select class="form-select" id="parroquia_select" name="id_parroquia" required>
                                     <?php foreach ($parroquias as $d): ?>
                                         <option value=<?php echo $d["id"] ?>>
                                             <?php echo $d["nombre"] ?>
                                         </option>
                                     <?php endforeach ?>
                                 </select>
-                            </label>
-                        </div>
+                            </div>
+                        </label>
                     </div>
 
                     <div class="row">

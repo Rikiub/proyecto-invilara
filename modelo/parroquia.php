@@ -97,6 +97,15 @@ class Parroquia extends BaseDatos
         return $result;
     }
 
+    public function consultarPorMunicipio()
+    {
+        $stmt = $this->conexion()->query(
+            $this->getSqlConsulta() . "WHERE municipio.id = '{$this->id_municipio}'" . " ORDER BY municipio.nombre ASC"
+        );
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function obtenerPorNombre()
     {
         $stmt = $this->conexion()->prepare($this->getSqlConsulta() . "WHERE {$this->tabla}.nombre = ?");
