@@ -12,12 +12,10 @@
         </div>
     </div>
 
-    <div class="my-3">
-        <table class="table table-hover" id="tabla-contenedor">
-            <thead></thead>
-            <tbody class="table-group-divider"></tbody>
-        </table>
-    </div>
+    <table class="table table-hover" id="tabla-contenedor">
+        <thead></thead>
+        <tbody class="table-group-divider"></tbody>
+    </table>
 </main>
 
 <?php require_once "vista/componentes/modal_eliminar.php"; ?>
@@ -36,8 +34,8 @@
 
                 <div class="row">
                     <label class="form-label col fw-semibold">Nombre
-                        <input class="form-control" placeholder="Nombre de la comunidad" type="text" name="nombre"
-                            minlength="3" maxlength="50" pattern="[A-Za-zÀ-ý ]+" required />
+                        <input class="form-control" type="text" name="nombre" minlength="3" maxlength="50"
+                            pattern="[A-Za-zÀ-ý ]+" required />
                     </label>
                 </div>
 
@@ -61,78 +59,69 @@
                             </select>
 
                             <input id="rif" class="form-control" type="text" name="rif" minlength="10" maxlength="10"
-                                pattern="[0-9]{7,8}-[0-9]{1}" placeholder="CVE-12345678-9" title="Formato: C-12345678-9"
-                                required>
+                                pattern="[0-9]{7,8}-[0-9]{1}" title="Formato: C-12345678-9" required>
                         </div>
                     </label>
+                </div>
 
-                    <div class="row">
-                        <label class="form-label col fw-semibold">Representante
-                            <input class="form-control" type="text" name="representante" minlength="3" maxlength="30"
-                                required>
-                        </label>
+                <div class="row">
+                    <label class="form-label col fw-semibold">Representante
+                        <input class="form-control" type="text" name="representante" minlength="3" maxlength="30"
+                            required>
+                    </label>
 
-                        <label class="form-label col fw-semibold">Teléfono
-                            <div class="input-group">
-                                <select id="telefono_codigo" class="input-group-text">
-                                    <option value="0412">0412</option>
-                                    <option value="0414">0414</option>
-                                    <option value="0416">0416</option>
-                                    <option value="0424">0424</option>
-                                    <option value="0426">0426</option>
-                                </select>
+                    <label class="form-label col fw-semibold">Teléfono
+                        <div class="input-group">
+                            <select id="telefono_codigo" class="input-group-text">
+                                <option value="0412">0412</option>
+                                <option value="0414">0414</option>
+                                <option value="0416">0416</option>
+                                <option value="0424">0424</option>
+                                <option value="0426">0426</option>
+                            </select>
 
-                                <input id="telefono" class="form-control" type="tel" name="telefono" minlength="12"
-                                    maxlength="12" title="Debe ser un número válido" required />
-                            </div>
-                        </label>
-                    </div>
+                            <input id="telefono" name="telefono" class="form-control" type="tel" minlength="12"
+                                maxlength="12" title="Debe ser un número válido" required />
+                        </div>
+                    </label>
+                </div>
 
-                    <div class="row">
-                        <label class="form-label col fw-semibold">Correo
-                            <input class="form-control" placeholder="Direcciones @ validas" type="email" name="correo"
-                                minlength="3" maxlength="70" required>
-                        </label>
+                <div class="row">
+                    <label class="form-label col fw-semibold">Correo
+                        <input class="form-control" type="email" name="correo" minlength="3" maxlength="70" required>
+                    </label>
 
-                        <label class="form-label col fw-semibold">Dirección
-                            <input class="form-control" placeholder="Direccion de la Comunidad" type="text"
-                                name="direccion" minlength="5" maxlength="250" required />
-                        </label>
-                    </div>
+                    <label class="form-label col fw-semibold">Dirección
+                        <input class="form-control" type="text" name="direccion" minlength="5" maxlength="100"
+                            required />
+                    </label>
+                </div>
 
-                    <div class="row">
-                        <label class="form-label col fw-semibold">Parroquia
-                            <div class="input-group">
-                                <select class="input-group-text" id="municipio_select" required>
-                                    <?php foreach ($municipios as $d): ?>
-                                        <option value=<?php echo $d["id"] ?>>
-                                            <?php echo $d["nombre"] ?>
-                                        </option>
-                                    <?php endforeach ?>
-                                </select>
+                <div class="row">
+                    <label class="form-label col fw-semibold">Municipio
+                        <select class="form-select input-group-text" id="municipio_select" required>
+                            <?php foreach ($municipios as $d): ?>
+                                <option value=<?php echo $d["id"] ?>>
+                                    <?php echo $d["nombre"] ?>
+                                </option>
+                            <?php endforeach ?>
+                        </select>
+                    </label>
 
-                                <select class="form-select" id="parroquia_select" name="id_parroquia" required>
-                                    <?php foreach ($parroquias as $d): ?>
-                                        <option value=<?php echo $d["id"] ?>>
-                                            <?php echo $d["nombre"] ?>
-                                        </option>
-                                    <?php endforeach ?>
-                                </select>
-                            </div>
-                        </label>
-                    </div>
+                    <label class="form-label col fw-semibold">Parroquia
+                        <select class="form-select" id="parroquia_select" name="id_parroquia" required></select>
+                    </label>
+                </div>
 
-                    <div class="row">
-                        <label class="form-label col fw-semibold">Ambito
-                            <input class="form-control" type="text" name="ambito" minlength="3" maxlength="100"
-                                required>
-                        </label>
-                    </div>
+                <div class="row">
+                    <label class="form-label col fw-semibold">Ambito
+                        <input class="form-control" type="text" name="ambito" minlength="3" maxlength="50" required>
+                    </label>
+                </div>
 
-                    <div class="modal-footer my-4">
-                        <input type="hidden" name="accion">
-                        <button class="btn btn-primary px-5 py-2" type="submit">Procesar</button>
-                    </div>
+                <div class="modal-footer my-4">
+                    <button class="btn btn-primary px-5 py-2" type="submit">Procesar</button>
+                </div>
             </form>
         </div>
     </div>

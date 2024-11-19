@@ -31,7 +31,6 @@ class Municipio extends BaseDatos
 
     public function insertar()
     {
-        $this->validarIdNoExiste();
         $this->validarNoDuplicado();
 
         $pdo = $this->conexion();
@@ -51,7 +50,6 @@ class Municipio extends BaseDatos
     public function modificar()
     {
         $this->validarIdExiste();
-        $this->validarNoDuplicado();
 
         $this->conexion()->query(
             "UPDATE {$this->tabla} SET 

@@ -1,46 +1,21 @@
 <?php require_once "vista/componentes/encabezado.php"; ?>
 <?php require_once "vista/componentes/barra.php"; ?>
 
-<main class="container" id="crud">
+<main class="container">
     <h1>Gerencias</h1>
 
-    <button class="btn btn-primary my-3" value="insertar">Registrar</button>
-
-    <div class="table-responsive" id="tabla-contenedor">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Cedula del gerente</th>
-                    <th>Dirección</th>
-
-                    <?php if (!isset($reporte)): ?>
-                        <th id="botones-accion">Acciones</th>
-                    <?php endif ?>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-                <?php foreach ($datos as $d): ?>
-                    <tr>
-                        <td class="d-none"><?php echo $d["id"] ?></td>
-                        <td><?php echo $d["nombre"] ?></td>
-                        <td><?php echo $d["cedula_gerente"] ?></td>
-                        <td><?php echo $d["direccion"] ?></td>
-
-                        <?php if (!isset($reporte)): ?>
-                            <td id="botones-accion">
-                                <div class="btn-group-vertical">
-                                    <button class="btn btn-warning" value="modificar">Modificar</button>
-                                    <button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-eliminacion">Eliminar</button>
-                                </div>
-                            </td>
-                        <?php endif ?>
-                    </tr>
-                <?php endforeach ?>
-            </tbody>
-        </table>
+    <div class="d-flex justify-content-between" id="crud-botones">
+        <div class="btn-group" role="group">
+            <button id="boton-insertar" value="insertar" class="btn btn-success my-3">Registrar</button>
+            <button id="boton-modificar" value="modificar" class="btn btn-warning my-3 desactivable">Modificar</button>
+            <button id="boton-eliminar" value="eliminar" class="btn btn-danger my-3 desactivable">Eliminar</button>
+        </div>
     </div>
+
+    <table class="table table-hover" id="tabla-contenedor">
+        <thead></thead>
+        <tbody class="table-group-divider"></tbody>
+    </table>
 </main>
 
 <?php require_once "vista/componentes/modal_eliminar.php"; ?>
@@ -66,7 +41,7 @@
                         <select class="form-select" name="cedula_gerente" required>
                             <?php foreach ($gerentes as $d): ?>
                                 <option value=<?php echo $d["cedula"] ?>>
-                                    <?php echo $d["cedula"] . " - " . $d["nombre"] ?>
+                                    <?php echo $d["cedula"] ?>
                                 </option>
                             <?php endforeach ?>
                         </select>
@@ -81,11 +56,11 @@
                 </div>
 
                 <div class="modal-footer my-4">
-                    <input type="hidden" name="accion">
                     <button class="btn btn-primary px-5 py-2" type="submit">Procesar</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<script src="recursos/js/crud.js"></script>
+
+<script type="module" src="recursos/js/gerencia.js"></script>

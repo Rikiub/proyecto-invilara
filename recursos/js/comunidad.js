@@ -1,4 +1,11 @@
-import { iniciarCrud, envioAjax, capitalizarTexto } from "./crud_dt.js";
+import {
+	iniciarCrud,
+	envioAjax,
+	capitalizarTexto,
+	BOTON_INSERTAR,
+	BOTON_MODIFICAR,
+	FORM_EDICION,
+} from "./crud_dt.js";
 
 iniciarCrud("id", [
 	{ title: "Nombre", data: "nombre", render: capitalizarTexto },
@@ -12,23 +19,68 @@ iniciarCrud("id", [
 	{ title: "Ambito", data: "ambito" },
 ]);
 
+// Actualizar select parroquias
 const municipio_select = document.getElementById("municipio_select");
 const parroquia_select = document.getElementById("parroquia_select");
 
 municipio_select.addEventListener("change", (event) => {
-	const id = event.target.value;
+	const id = event.currentTarget.value;
+	actualizarParroquias(id);
+});
 
+for (const boton of [BOTON_INSERTAR, BOTON_MODIFICAR]) {
+	boton.addEventListener("click", () => {
+		setTimeout(() => {
+			const id = FORM_EDICION.id.value;
+
+			if (id) {
+				envioAjax("consultar", { id: id }, (comunidad) => {
+					envioAjax(
+						"consultar",
+						{ id: comunidad.id_parroquia },
+						(parroquia) => {
+							municipio_select.value = parroquia.id_municipio;
+							actualizarParroquias(municipio_select.value, parroquia.id);
+						},
+						"?pagina=parroquia",
+					);
+				});
+			} else {
+				actualizarParroquias(municipio_select.value);
+			}
+		}, 100);
+	});
+}
+
+function actualizarParroquias(id_municipio, id_parroquia) {
 	envioAjax(
 		"consultar",
-		{ id_municipio: id },
+		{ id_municipio: id_municipio },
 		(res) => {
 			const options = res
-				.map((item) => `<option value="${item.id}">${item.nombre}</option>`)
+				.map(
+					(parroquia) =>
+						`<option ${parroquia.id === id_parroquia ? "selected" : ""} value="${parroquia.id}">${parroquia.nombre}</option>`,
+				)
 				.join("");
 			parroquia_select.innerHTML = options;
 		},
 		"?pagina=parroquia",
 	);
+}
+
+// Validar RIF
+BOTON_MODIFICAR.addEventListener("click", () => {
+	const tipo_rif = FORM_EDICION.tipo_rif;
+	const rif = FORM_EDICION.rif;
+
+	setTimeout(() => {
+		const prefix = rif.value.charAt(0);
+		const nuevo_rif = rif.value.slice(2);
+
+		tipo_rif.value = prefix;
+		rif.value = nuevo_rif;
+	}, 100);
 });
 
 // Validaciones

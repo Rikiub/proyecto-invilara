@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="row">
-                    <label class="form-label col fw-semibold">Cedula solicitante
+                    <label class="form-label col fw-semibold">Rol
                         <select class="form-select" name="rol" required>
                             <option value="1">Usuario</option>
                             <option value="2">Administrador</option>

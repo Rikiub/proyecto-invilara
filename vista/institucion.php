@@ -1,48 +1,21 @@
 <?php require_once "vista/componentes/encabezado.php"; ?>
 <?php require_once "vista/componentes/barra.php"; ?>
 
-<main class="container" id="crud">
+<main class="container">
 	<h1>Instituciones</h1>
 
-	<button class="btn btn-primary my-3" value="insertar">Registrar</button>
-
-	<div class="table-responsive" id="tabla-contenedor">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>Nombre</th>
-					<th>Nombre del director</th>
-					<th>Cedula del director</th>
-					<th>Dirección</th>
-					<th>Correo</th>
-					<th>Teléfono</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-
-			<tbody class="table-group-divider">
-				<?php foreach ($datos as $d): ?>
-					<tr>
-						<td class="d-none"><?php echo $d["id"] ?></td>
-						<td><?php echo $d["nombre"] ?></td>
-						<td><?php echo $d["nombre_director"] ?></td>
-						<td><?php echo $d["cedula_director"] ?></td>
-						<td><?php echo $d["direccion"] ?></td>
-						<td><?php echo $d["correo"] ?></td>
-						<td><?php echo $d["telefono"] ?></td>
-
-						<td>
-							<div class="btn-group-vertical">
-								<button class="btn btn-warning" value="modificar">Modificar</button>
-								<button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
-									data-bs-target="#modal-eliminacion">Eliminar</button>
-							</div>
-						</td>
-					</tr>
-				<?php endforeach ?>
-			</tbody>
-		</table>
+	<div class="d-flex justify-content-between" id="crud-botones">
+		<div class="btn-group" role="group">
+			<button id="boton-insertar" value="insertar" class="btn btn-success my-3">Registrar</button>
+			<button id="boton-modificar" value="modificar" class="btn btn-warning my-3 desactivable">Modificar</button>
+			<button id="boton-eliminar" value="eliminar" class="btn btn-danger my-3 desactivable">Eliminar</button>
+		</div>
 	</div>
+
+	<table class="table table-hover" id="tabla-contenedor">
+		<thead></thead>
+		<tbody class="table-group-divider"></tbody>
+	</table>
 </main>
 
 <?php require_once "vista/componentes/modal_eliminar.php"; ?>
@@ -64,8 +37,6 @@
 						<input id="nombre" class="form-control" type="text" name="nombre" minlength="3" maxlength="50"
 							pattern="[A-Za-zÀ-ý ]+" title="Solo se aceptan letras" required />
 					</label>
-
-					<input type="hidden">
 
 					<label class="form-label col fw-semibold">Cedula del director
 						<select class="form-select" name="cedula_director" required>
@@ -94,11 +65,9 @@
 							placeholder="Ej: 0412, 0416 o 0426" minlength="12" maxlength="12"
 							title=" Debe ser un número válido" required />
 					</label>
-					</label>
 				</div>
 
 				<div class="modal-footer my-4">
-					<input type="hidden" name="accion">
 					<button class="btn btn-primary px-5 py-2" type="submit">Procesar</button>
 				</div>
 			</form>
@@ -106,5 +75,4 @@
 	</div>
 </div>
 
-<script src="recursos/js/crud.js"></script>
-<script src="recursos/js/institucion.js"></script>
+<script type="module" src="recursos/js/institucion.js"></script>

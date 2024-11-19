@@ -10,9 +10,9 @@ export const BOTON_ELIMINAR = document.getElementById("boton-eliminar");
 const MODAL_EDICION = new bootstrap.Modal("#modal-edicion");
 const MODAL_ELIMINACION = new bootstrap.Modal("#modal-eliminacion");
 
-export function iniciarCrud(rowId, columns) {
+export function iniciarCrud(rowId, columns, options = {}) {
 	// Tabla
-	const TABLA = crearTabla(rowId, columns);
+	const TABLA = crearTabla(rowId, columns, options);
 	let ACCION;
 
 	// Controlador de botones
@@ -161,13 +161,14 @@ function formToObject(element) {
 }
 
 /* Crear DataTablet */
-function crearTabla(row_id, columns) {
+function crearTabla(row_id, columns, options = {}) {
 	return new DataTable("#tabla-contenedor", {
 		responsive: true,
 		fixedHeader: true,
 		select: { style: "single" },
 		rowId: row_id,
 		columns: columns,
+		...options,
 	});
 }
 

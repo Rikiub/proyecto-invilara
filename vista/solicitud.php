@@ -34,12 +34,10 @@
 		</div>
 	</div>
 
-	<div class="my-3">
-		<table class="table table-hover" id="tabla-contenedor">
-			<thead></thead>
-			<tbody class="table-group-divider"></tbody>
-		</table>
-	</div>
+	<table class="table table-hover" id="tabla-contenedor">
+		<thead></thead>
+		<tbody class="table-group-divider"></tbody>
+	</table>
 </main>
 
 <?php require_once "vista/componentes/modal_eliminar.php"; ?>

@@ -67,15 +67,10 @@ class Institucion extends BaseDatos
 
     public function insertar()
     {
-        if (!empty($this->obtenerUno($this->id))) {
-            throw new Exception("Ya existe.");
-        }
+        $this->validarNoDuplicado();
 
-        if (empty($this->obtenerDirector($this->cedula_director))) {
-            throw new Exception("El director con la cedula seleccionada no existe.");
-        }
-
-        $this->conexion()->query(
+        $pdo = $this->conexion();
+        $pdo->query(
             "INSERT INTO {$this->tabla} (
                 cedula_director,
                 nombre,
@@ -91,17 +86,14 @@ class Institucion extends BaseDatos
                 '{$this->direccion}'
 			)"
         );
+        $id = $pdo->lastInsertId();
+
+        return $id;
     }
 
     public function modificar()
     {
-        if (empty($this->obtenerUno($this->id))) {
-            throw new Exception("No existe");
-        }
-
-        if (empty($this->obtenerDirector($this->cedula_director))) {
-            throw new Exception("El director con la cedula seleccionada no existe.");
-        }
+        $this->validarIdExiste();
 
         $this->conexion()->query(
             "UPDATE {$this->tabla} SET 
@@ -115,17 +107,15 @@ class Institucion extends BaseDatos
 				id = '{$this->id}'
 			"
         );
-
     }
 
     public function eliminar()
     {
-        if (empty($this->obtenerUno($this->id))) {
-            throw new Exception("No existe");
-        }
+        $this->validarIdExiste();
 
         $this->conexion()->query(
-            "DELETE FROM {$this->tabla}
+            "DELETE FROM
+                {$this->tabla}
 			WHERE
 				id = '{$this->id}'
 			"
@@ -134,31 +124,60 @@ class Institucion extends BaseDatos
 
     public function consultar()
     {
-        $stmt = $this->conexion()->query(
-            "SELECT
-                {$this->tabla}.*,
-                director.nombre AS nombre_director
-            FROM
-                {$this->tabla}
-            LEFT JOIN
-                director ON {$this->tabla}.cedula_director = director.cedula"
-        );
+        $stmt = $this->conexion()->query($this->getSqlConsulta() . "ORDER BY nombre ASC");
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function obtenerUno($id)
+    public function obtenerPorId()
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE id='$id'");
-        $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->conexion()->prepare($this->getSqlConsulta() . "WHERE id = ?");
+        $stmt->execute([$this->id]);
+
+        $fila = $stmt->fetch(PDO::FETCH_ASSOC);
         return $fila;
     }
 
-    public function obtenerDirector($cedula)
+    private function getSqlConsulta()
     {
-        $stmt = $this->conexion()->query("SELECT * FROM director WHERE cedula='$cedula'");
-        $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return "SELECT
+                    {$this->tabla}.*,
+                    director.nombre AS nombre_director
+                FROM
+                    {$this->tabla}
+                LEFT JOIN
+                    director ON {$this->tabla}.cedula_director = director.cedula
+                ";
+    }
+
+    public function obtenerPorNombre()
+    {
+        $stmt = $this->conexion()->prepare("SELECT * FROM {$this->tabla} WHERE nombre = ?");
+        $stmt->execute([$this->nombre]);
+
+        $fila = $stmt->fetch(PDO::FETCH_ASSOC);
         return $fila;
+    }
+
+    private function validarNoDuplicado()
+    {
+        if ($this->obtenerPorNombre()) {
+            throw new Exception("Ya existe un dato con este nombre.");
+        }
+    }
+
+    private function validarIdExiste()
+    {
+        if (!$this->obtenerPorId()) {
+            throw new Exception("ID {$this->id} no existe");
+        }
+    }
+
+    private function validarIdNoExiste()
+    {
+        if ($this->obtenerPorId()) {
+            throw new Exception("ID {$this->id} ya existe.");
+        }
     }
 }
 

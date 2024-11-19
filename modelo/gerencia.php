@@ -47,17 +47,12 @@ class Gerencia extends BaseDatos
         return $this->direccion;
     }
 
-    function insertar()
+    public function insertar()
     {
-        if (!empty($this->buscarID($this->id))) {
-            throw new Exception("Ya existe");
-        }
+        $this->validarNoDuplicado();
 
-        if (empty($this->buscarGerente($this->cedula_gerente))) {
-            throw new Exception("El gerente con la cedula proporcionada no existe.");
-        }
-
-        $this->conexion()->query(
+        $pdo = $this->conexion();
+        $pdo->query(
             "INSERT INTO {$this->tabla} (
 				nombre,
 				cedula_gerente,
@@ -69,17 +64,14 @@ class Gerencia extends BaseDatos
                 '{$this->direccion}'
 			)"
         );
+        $id = $pdo->lastInsertId();
+
+        return $id;
     }
 
-    function modificar()
+    public function modificar()
     {
-        if (empty($this->buscarID($this->id))) {
-            throw new Exception("No existe");
-        }
-
-        if (empty($this->buscarGerente($this->cedula_gerente))) {
-            throw new Exception("El gerente con la cedula proporcionada no existe.");
-        }
+        $this->validarIdExiste();
 
         $this->conexion()->query(
             "UPDATE {$this->tabla} SET 
@@ -91,17 +83,15 @@ class Gerencia extends BaseDatos
 				id = '{$this->id}'
 			"
         );
-
     }
 
-    function eliminar()
+    public function eliminar()
     {
-        if (empty($this->buscarID($this->id))) {
-            throw new Exception("No existe");
-        }
+        $this->validarIdExiste();
 
         $this->conexion()->query(
-            "DELETE FROM {$this->tabla}
+            "DELETE FROM
+                {$this->tabla}
 			WHERE
 				id = '{$this->id}'
 			"
@@ -110,23 +100,60 @@ class Gerencia extends BaseDatos
 
     public function consultar()
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla}");
+        $stmt = $this->conexion()->query($this->getSqlConsulta());
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    function buscarID($id)
+    public function obtenerPorNombre()
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE id='$id'");
-        $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->conexion()->prepare($this->getSqlConsulta() . "WHERE {$this->tabla}.nombre = ?");
+        $stmt->execute([$this->nombre]);
+
+        $fila = $stmt->fetch(PDO::FETCH_ASSOC);
         return $fila;
     }
 
-    function buscarGerente($cedula)
+    public function obtenerPorId()
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE cedula_gerente='$cedula'");
-        $fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->conexion()->prepare($this->getSqlConsulta() . "WHERE {$this->tabla}.id = ?");
+        $stmt->execute([$this->id]);
+
+        $fila = $stmt->fetch(PDO::FETCH_ASSOC);
         return $fila;
+    }
+
+    private function getSqlConsulta()
+    {
+        return "SELECT
+                    {$this->tabla}.*,
+                    gerente.nombre AS nombre_gerente
+                FROM
+                    {$this->tabla}
+                LEFT JOIN
+                    gerente ON {$this->tabla}.cedula_gerente = gerente.cedula
+                ";
+    }
+
+    private function validarNoDuplicado()
+    {
+        if ($this->obtenerPorNombre()) {
+            throw new Exception("Ya existe un dato con este nombre.");
+        }
+    }
+
+    private function validarIdExiste()
+    {
+        if (!$this->obtenerPorId()) {
+            throw new Exception("ID {$this->id} no existe");
+        }
+    }
+
+    private function validarIdNoExiste()
+    {
+        if ($this->obtenerPorId()) {
+            throw new Exception("ID {$this->id} ya existe.");
+        }
     }
 }
 

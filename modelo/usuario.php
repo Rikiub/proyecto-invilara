@@ -39,7 +39,7 @@ class Usuario extends BaseDatos
 
     public function insertar()
     {
-        if ($this->obtenerUsuario($this->cedula)) {
+        if ($this->obtenerUsuario()) {
             throw new Exception("Ya existe");
         }
 
@@ -56,7 +56,7 @@ class Usuario extends BaseDatos
 
     public function modificar()
     {
-        if (!$this->obtenerUsuario($this->cedula)) {
+        if (!$this->obtenerUsuario()) {
             throw new Exception("El solicitante con la cedula proporcionada no existe.");
         }
 
@@ -73,7 +73,7 @@ class Usuario extends BaseDatos
 
     public function eliminar()
     {
-        if (!$this->obtenerUsuario($this->cedula)) {
+        if (!$this->obtenerUsuario()) {
             throw new Exception("No existe");
         }
 
