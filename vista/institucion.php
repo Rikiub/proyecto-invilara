@@ -42,7 +42,7 @@
 						<select class="form-select" name="cedula_director" required>
 							<?php foreach ($directores as $d): ?>
 								<option value=<?php echo $d["cedula"] ?>>
-									<?php echo $d["cedula"] ?>
+									<?php echo $d["cedula"] ." - ". $d["nombre"] ?>
 								</option>
 							<?php endforeach ?>
 						</select>

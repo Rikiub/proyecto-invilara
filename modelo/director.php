@@ -60,11 +60,10 @@ class Director extends BaseDatos
 
 	public function insertar()
 	{
-		if (!empty($this->obtenerUno($this->cedula))) {
-			throw new Exception("Ya existe");
-		}
+		$this->validarIdNoExiste();
 
-		$this->conexion()->query(
+		$pdo = $this->conexion();
+		$pdo->query(
 			"INSERT INTO {$this->tabla} (
 				cedula,
 				nombre,
@@ -80,13 +79,13 @@ class Director extends BaseDatos
 				'{$this->direccion}'
 			)"
 		);
+
+		return $this->cedula;
 	}
 
 	public function modificar()
 	{
-		if (empty($this->obtenerUno($this->cedula))) {
-			throw new Exception("No existe");
-		}
+		$this->validarIdExiste();
 
 		$this->conexion()->query(
 			"UPDATE {$this->tabla} SET 
@@ -103,12 +102,11 @@ class Director extends BaseDatos
 
 	public function eliminar()
 	{
-		if (empty($this->obtenerUno($this->cedula))) {
-			throw new Exception("No existe");
-		}
+		$this->validarIdExiste();
 
 		$this->conexion()->query(
-			"DELETE FROM {$this->tabla}
+			"DELETE FROM
+                {$this->tabla}
 			WHERE
 				cedula = '{$this->cedula}'
 			"
@@ -117,16 +115,52 @@ class Director extends BaseDatos
 
 	public function consultar()
 	{
-		$stmt = $this->conexion()->query("SELECT * FROM {$this->tabla}");
+		$stmt = $this->conexion()->query(
+			"SELECT *
+            FROM {$this->tabla}
+            ORDER BY nombre ASC"
+		);
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $result;
 	}
 
-	public function obtenerUno($cedula)
+	public function obtenerPorId()
 	{
-		$stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE cedula='$cedula'");
-		$fila = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$stmt = $this->conexion()->prepare("SELECT * FROM {$this->tabla} WHERE cedula = ?");
+		$stmt->execute([$this->cedula]);
+
+		$fila = $stmt->fetch(PDO::FETCH_ASSOC);
 		return $fila;
+	}
+
+	public function obtenerPorNombre()
+	{
+		$stmt = $this->conexion()->prepare("SELECT * FROM {$this->tabla} WHERE nombre = ?");
+		$stmt->execute([$this->nombre]);
+
+		$fila = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $fila;
+	}
+
+	private function validarNoDuplicado()
+	{
+		if ($this->obtenerPorNombre()) {
+			throw new Exception("Ya existe un dato con este nombre.");
+		}
+	}
+
+	private function validarIdExiste()
+	{
+		if (!$this->obtenerPorId()) {
+			throw new Exception("ID {$this->cedula} no existe");
+		}
+	}
+
+	private function validarIdNoExiste()
+	{
+		if ($this->obtenerPorId()) {
+			throw new Exception("La cedula  {$this->cedula} ya existe.");
+		}
 	}
 }
 

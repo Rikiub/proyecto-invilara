@@ -41,7 +41,7 @@
                         <select class="form-select" name="cedula_gerente" required>
                             <?php foreach ($gerentes as $d): ?>
                                 <option value=<?php echo $d["cedula"] ?>>
-                                    <?php echo $d["cedula"] ?>
+                                    <?php echo $d["cedula"] ." - ". $d["nombre"] ?>
                                 </option>
                             <?php endforeach ?>
                         </select>
