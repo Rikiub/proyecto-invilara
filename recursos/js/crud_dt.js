@@ -10,9 +10,12 @@ export const BOTON_ELIMINAR = document.getElementById("boton-eliminar");
 const MODAL_EDICION = new bootstrap.Modal("#modal-edicion");
 const MODAL_ELIMINACION = new bootstrap.Modal("#modal-eliminacion");
 
+// Interno
+export let TABLA;
+
 export function iniciarCrud(rowId, columns, options = {}) {
 	// Tabla
-	const TABLA = crearTabla(rowId, columns, options);
+	TABLA = crearTabla(rowId, columns, options);
 	let ACCION;
 
 	// Controlador de botones
@@ -168,6 +171,22 @@ function crearTabla(row_id, columns, options = {}) {
 		select: { style: "single" },
 		rowId: row_id,
 		columns: columns,
+		language: {
+			emptyTable: "No hay datos disponibles para mostrar",
+			info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+			infoEmpty: "Mostrando 0 a 0 de 0 entradas",
+			infoFiltered: "(filtrados desde _MAX_ entradas totales)",
+			search: "Buscar:",
+			lengthMenu: "Mostrando _MENU_ entradas",
+			zeroRecords: "No se encontraron coincidencias",
+			loadingRecords: "Cargando...",
+			paginate: {
+				first: "Primero",
+				last: "Ultimo",
+				next: "Siguiente",
+				previous: "Anterior",
+			},
+		},
 		...options,
 	});
 }

@@ -127,8 +127,7 @@ class Solicitud extends BaseDatos
             $this->tipo_solicitud
         ]);
 
-        $id = $pdo->lastInsertId();
-        return $id;
+        return $this->id;
     }
 
     public function modificar()

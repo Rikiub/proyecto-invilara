@@ -63,7 +63,7 @@
 								class="form-select <?php echo ($tipo_vista == "cerrado" ? "bg-secondary-subtle" : "") ?>"
 								name="id_gerencia" required>
 								<?php foreach ($gerencias as $d): ?>
-									<option value="<?php echo $d["id"] ?>" <?php echo ($tipo_vista == "cerrado" ? "disabled" : "") ?>>
+									<option value="<?php echo $d["id"] ?>">
 										<?php echo $d["nombre"] ?>
 									</option>
 								<?php endforeach ?>
@@ -79,7 +79,7 @@
 								class="form-select <?php echo ($tipo_vista != "programado" ? "bg-secondary-subtle" : "") ?>"
 								name="cedula_solicitante" required>
 								<?php foreach ($solicitantes as $d): ?>
-									<option value="<?php echo $d["cedula"] ?>" <?php echo ($tipo_vista != "programado" ? "disabled" : "") ?>>
+									<option value="<?php echo $d["cedula"] ?>">
 										<?php echo $d["cedula"]; ?>
 									</option>
 								<?php endforeach ?>
@@ -92,7 +92,7 @@
 								class="form-select <?php echo ($tipo_vista != "programado" ? "bg-secondary-subtle" : "") ?>"
 								name="id_institucion" required>
 								<?php foreach ($instituciones as $d): ?>
-									<option value="<?php echo $d["id"] ?>" <?php echo ($tipo_vista != "programado" ? "disabled" : "") ?>>
+									<option value="<?php echo $d["id"] ?>">
 										<?php echo $d["nombre"] ?>
 									</option>
 								<?php endforeach ?>
@@ -106,7 +106,7 @@
 							class="form-select <?php echo ($tipo_vista != "programado" ? "bg-secondary-subtle" : "") ?>"
 							name="id_comunidad" required>
 							<?php foreach ($comunidades as $d): ?>
-								<option value="<?php echo $d["id"] ?>" <?php echo ($tipo_vista != "programado" ? "disabled" : "") ?>>
+								<option value="<?php echo $d["id"] ?>">
 									<?php echo $d["nombre"] ?>
 								</option>
 							<?php endforeach ?>
@@ -122,7 +122,7 @@
 					<label class="form-label col fw-semibold">Estado
 						<select class="form-select bg-secondary-subtle" name="estado" required>
 							<?php foreach ($estados as $d): ?>
-								<option value="<?php echo $d["id"] ?>" <?php echo ($id_estado != $d["id"] ? "disabled" : "") ?>>
+								<option value="<?php echo $d["id"] ?>">
 									<?php echo $d["nombre"] ?>
 								</option>
 							<?php endforeach ?>
