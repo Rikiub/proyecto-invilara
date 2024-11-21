@@ -105,17 +105,17 @@
             <a class="btn btn-primary" href="?pagina=inicio_sesion">Iniciar Sesión</a>
         <?php endif ?>
 
-
         <div class="navbar-brand">
-            <button type="button" class="btn btn-danger">¿Ayuda?</button>
-            INVILARA
+            <button type="button" id="boton-manual" class="btn btn-info">¿Ayuda?</button>
+            <span class="ms-2">INVILARA</span>
             <img src="recursos/img/invilara-logo.png" alt="Logo" class="mx-2" width="30px">
         </div>
     </div>
 </nav>
+
 <script>
-    document.querySelector('.btn-danger').addEventListener('click', function () {
-        var pdfURL = 'recursos/manual/manual.pdf';
+    document.getElementById("boton-manual").addEventListener('click', () => {
+        var pdfURL = 'recursos/manual.pdf';
         var pdfWindow = window.open(pdfURL, '_blank');
         pdfWindow.focus();
     });

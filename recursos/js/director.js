@@ -16,7 +16,7 @@ function soloLetras(event) {
 	// Obtener el código del carácter presionado
 	var charCode = event.which ? event.which : event.keyCode;
 	// Permitir solo letras (mayúsculas y minúsculas), espacios y la tecla de retroceso
-	var regex = /[a-zA-Z\s]/;
+	const regex = /^[\p{L}\s]+$/u;
 
 	if (!regex.test(String.fromCharCode(charCode)) && charCode !== 8) {
 		alert("Solo puedes ingresar letras en el campo ' nombre '");
@@ -61,8 +61,3 @@ function validarCorreo() {
 		// Si el correo es válido, puedes realizar acciones adicionales, como habilitar un botón de envío
 	}
 }
-// telefono
-document.getElementById("telefono_codigo").addEventListener("change", () => {
-	const tipo = document.getElementById("telefono_codigo").value;
-	document.getElementById("telefono").value = `${tipo}-`;
-});

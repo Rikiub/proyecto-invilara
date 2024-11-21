@@ -31,39 +31,22 @@
 
 			<form id="form-edicion" class="modal-body">
 				<div class="row">
-					<label class="form-label col fw-semibold">
-						Cedula
+					<label class="form-label col fw-semibold">Cedula
 						<input id="cedula" data-id class="form-control" type="text" pattern="\d*" inputmode="numeric"
 							name="cedula" required />
 					</label>
-					<label class="form-label col fw-semibold">
-						Nombre
+					<label class="form-label col fw-semibold">Nombre
 						<input id="nombre" class="form-control" type="text" name="nombre" minlength="3" maxlength="50"
 							required /></label>
 				</div>
 
 				<div class="row">
-
-
-					<label class="form-label col fw-semibold">
-						Correo
+					<label class="form-label col fw-semibold">Correo
 						<input id="correo" class="form-control" type="email" name="correo" required />
-
 					</label>
 
 					<label class="form-label col fw-semibold">Teléfono
-						<div class="input-group">
-							<select id="telefono_codigo" class="input-group-text">
-								<option value="0412">0412</option>
-								<option value="0414">0414</option>
-								<option value="0416">0416</option>
-								<option value="0424">0424</option>
-								<option value="0426">0426</option>
-							</select>
-
-							<input id="telefono" name="telefono" class="form-control" type="tel" minlength="7"
-								maxlength="7" title="Debe ser un número válido" required />
-						</div>
+						<?php require_once "vista/componentes/input_telefono.php" ?>
 					</label>
 				</div>
 

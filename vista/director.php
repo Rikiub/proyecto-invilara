@@ -49,19 +49,7 @@
 					</label>
 
 					<label class="form-label col fw-semibold">Teléfono
-						<div class="input-group">
-							<select id="telefono_codigo" class="input-group-text">
-								<option value="" disabled selected>Formato</option>
-								<option value="0412">0412</option>
-								<option value="0414">0414</option>
-								<option value="0416">0416</option>
-								<option value="0424">0424</option>
-								<option value="0426">0426</option>
-							</select>
-
-							<input id="telefono" name="telefono" class="form-control" type="tel" minlength="12"
-								maxlength="12" title="Debe ser un número válido" required />
-						</div>
+						<?php require_once "vista/componentes/input_telefono.php" ?>
 					</label>
 				</div>
 
