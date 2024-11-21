@@ -128,7 +128,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $parroquias = $m->consultar();
 
     // Datos principales
-    $datos = $modelo->consultar();
     $estados = $modelo->consultarEstados();
 
     // Cargar vista

@@ -78,8 +78,9 @@ class Solicitud extends BaseDatos
 
     public function insertar()
     {
-        $pdo = $this->conexion();
+        $this->validarIdNoExiste();
 
+        $pdo = $this->conexion();
         $stmt = $pdo->prepare(
             "INSERT INTO `asignacion` (
                 `id_gerencia`,
@@ -211,15 +212,18 @@ class Solicitud extends BaseDatos
     {
         $filtro = "";
         switch ($this->estado) {
-            case "1" || "2":
-                $filtro = "AND id_estado='1'";
+            case "1":
+                $filtro = "AND id_estado=1";
+                break;
+            case "2":
+                $filtro = "AND id_estado=1";
                 break;
             case "3":
-                $filtro = "AND id_estado='2'";
+                $filtro = "AND id_estado=2";
                 break;
         }
 
-        $query = $this->getSqlConsulta() . " WHERE tipo_solicitud='{$this->tipo_solicitud}' " . $filtro . " ORDER BY id_estado DESC";
+        $query = $this->getSqlConsulta() . "WHERE tipo_solicitud='{$this->tipo_solicitud}' " . $filtro . " ORDER BY id_estado DESC";
 
         $stmt = $this->conexion()->query($query);
         $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -289,7 +293,7 @@ class Solicitud extends BaseDatos
         return "SELECT
                     {$this->tabla}.*,
                     solicitante.nombre AS nombre_solicitante,
-                    asignacion.id_gerencia,
+                    asignacion.id_gerencia AS id_gerencia,
                     tipo_estado.id AS id_estado,
                     tipo_estado.nombre AS nombre_estado,
                     comunidad.nombre AS nombre_comunidad,
@@ -349,7 +353,7 @@ class Solicitud extends BaseDatos
     private function validarIdNoExiste()
     {
         if ($this->obtenerPorId()) {
-            throw new Exception("ID {$this->id} ya existe.");
+            throw new Exception("La solicitud con el NROº Control '{$this->id}' ya existe, por favor utilice otro.");
         }
     }
 }

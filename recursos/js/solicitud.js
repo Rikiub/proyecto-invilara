@@ -105,8 +105,6 @@ if (TIPO_VISTA !== "programado") {
 		titulo = "Asignar";
 	} else if (TIPO_VISTA === "cerrado") {
 		titulo = "Cerrar";
-	} else if (TIPO_VISTA === "reporte") {
-		BOTON_MODIFICAR.remove();
 	}
 
 	BOTON_MODIFICAR.textContent = titulo;
@@ -125,7 +123,9 @@ BOTON_INSERTAR.addEventListener("click", () => {
 // Eliminar al modificar
 FORM_EDICION.addEventListener("submit", () => {
 	if (TIPO_VISTA !== "programado") {
-		TABLA.row(".selected").remove().draw(false);
+		setTimeout(() => {
+			TABLA.row(".selected").remove().draw(false);
+		}, 200);
 	}
 });
 
