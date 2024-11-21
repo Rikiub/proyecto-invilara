@@ -2,9 +2,6 @@
 
 require_once "modelo/base_datos.php";
 
-require_once "librerias/dompdf/autoload.inc.php";
-use Dompdf\Dompdf;
-
 class Solicitud extends BaseDatos
 {
     private $tabla = "solicitud";
@@ -214,10 +211,7 @@ class Solicitud extends BaseDatos
     {
         $filtro = "";
         switch ($this->estado) {
-            case "1":
-                $filtro = "AND id_estado='1'";
-                break;
-            case "2":
+            case "1" || "2":
                 $filtro = "AND id_estado='1'";
                 break;
             case "3":
@@ -240,7 +234,9 @@ class Solicitud extends BaseDatos
         $id_comunidad = null,
         $fecha_inicio = null,
         $fecha_fin = null,
-        $estado = null
+        $estado = null,
+        $tipo_solicitud = null,
+        $id_parroquia = null
     ) {
         $where = "WHERE 1=1";
 
@@ -248,25 +244,31 @@ class Solicitud extends BaseDatos
             $where .= " AND {$this->tabla}.id LIKE '%{$nro_control}%'";
         }
         if ($id_gerencia) {
-            $where .= " AND gerencia.id LIKE '%{$id_gerencia}%'";
+            $where .= " AND gerencia.id = '{$id_gerencia}'";
         }
         if ($cedula_solicitante) {
             $where .= " AND solicitante.cedula LIKE '%{$cedula_solicitante}%'";
         }
         if ($id_institucion) {
-            $where .= " AND institucion.id LIKE '%{$id_institucion}%'";
+            $where .= " AND institucion.id = '{$id_institucion}'";
         }
         if ($id_comunidad) {
-            $where .= " AND comunidad.id LIKE '%{$id_comunidad}%'";
+            $where .= " AND comunidad.id = '{$id_comunidad}'";
         }
         if ($fecha_inicio && $fecha_fin) {
             $where .= " AND {$this->tabla}.fecha BETWEEN '{$fecha_inicio}' AND '{$fecha_fin}'";
         }
         if ($estado) {
-            $where .= " AND tipo_estado.nombre LIKE '%{$estado}%'";
+            $where .= " AND tipo_estado.id = '{$estado}'";
+        }
+        if ($tipo_solicitud) {
+            $where .= " AND {$this->tabla}.tipo_solicitud = '{$tipo_solicitud}'";
+        }
+        if ($id_parroquia) {
+            $where .= " AND parroquia.id = '{$id_parroquia}'";
         }
 
-        $query = $this->getSqlConsulta() . $where;
+        $query = $this->getSqlConsulta() . $where . " ORDER BY id_estado ASC";
 
         $stmt = $this->conexion()->query($query);
         $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);

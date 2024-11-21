@@ -1,48 +1,21 @@
 <?php require_once "vista/componentes/encabezado.php"; ?>
 <?php require_once "vista/componentes/barra.php"; ?>
 
-<main class="container" id="crud">
+<main class="container">
     <h1>Usuarios</h1>
 
-    <div class="d-flex justify-content-between">
-        <button class="btn btn-primary my-3" value="insertar">Registrar</button>
+    <div class="d-flex justify-content-between" id="crud-botones">
+        <div class="btn-group" role="group">
+            <button id="boton-insertar" value="insertar" class="btn btn-success my-3">Registrar</button>
+            <button id="boton-modificar" value="modificar" class="btn btn-warning my-3 desactivable">Modificar</button>
+            <button id="boton-eliminar" value="eliminar" class="btn btn-danger my-3 desactivable">Eliminar</button>
+        </div>
     </div>
 
-    <div class="table-responsive" id="tabla-contenedor">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Cedula</th>
-                    <th>Contraseña</th>
-                    <th>Rol</th>
-
-                    <?php if (!isset($reporte)): ?>
-                        <th id="botones-accion">Acciones</th>
-                    <?php endif ?>
-                </tr>
-            </thead>
-
-            <tbody class="table-group-divider">
-                <?php foreach ($datos as $d): ?>
-                    <tr>
-                        <td> <?php echo $d["cedula"]; ?> </td>
-                        <td> <?php echo $d["contrasena"]; ?> </td>
-                        <td> <?php echo $d["rol"]; ?> </td>
-
-                        <?php if (!isset($reporte)): ?>
-                            <td id="botones-accion">
-                                <div class="btn-group-vertical">
-                                    <button class="btn btn-warning" value="modificar">Modificar</button>
-                                    <button class="btn btn-danger" value="eliminar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-eliminacion">Eliminar</button>
-                                </div>
-                            </td>
-                        <?php endif ?>
-                    </tr>
-                <?php endforeach ?>
-            </tbody>
-        </table>
-    </div>
+    <table class="table table-hover" id="tabla-contenedor">
+        <thead></thead>
+        <tbody class="table-group-divider"></tbody>
+    </table>
 </main>
 
 <?php require_once "vista/componentes/modal_eliminar.php"; ?>
@@ -58,16 +31,14 @@
 
             <form id="form-edicion" class="modal-body">
                 <div class="row">
-                    <label class="form-label col fw-semibold">
-                        Cedula
+                    <label class="form-label col fw-semibold">Cedula
                         <input data-id class="form-control" type="text" pattern="\d*" inputmode="numeric" minlength="7"
                             maxlength="8" name="cedula" required />
                     </label>
                 </div>
 
                 <div class="row">
-                    <label class="form-label col fw-semibold">
-                        Contraseña
+                    <label class="form-label col fw-semibold">Contraseña
                         <input class="form-control" type="password" name="contrasena" minlength="3" maxlength="50"
                             required />
                     </label>
@@ -83,7 +54,6 @@
                 </div>
 
                 <div class="modal-footer my-4">
-                    <input type="hidden" name="accion">
                     <button class="btn btn-primary px-5 py-2" type="submit">Procesar</button>
                 </div>
             </form>
@@ -91,4 +61,4 @@
     </div>
 </div>
 
-<script src="recursos/js/crud.js"></script>
+<script type="module" src="recursos/js/usuario.js"></script>

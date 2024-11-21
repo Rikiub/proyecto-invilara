@@ -120,7 +120,7 @@
 					</label>
 
 					<label class="form-label col fw-semibold">Estado
-						<select class="form-select bg-secondary-subtle" name="estado" required>
+						<select class="form-select bg-secondary-subtle" name="estado" id="estado" required>
 							<?php foreach ($estados as $d): ?>
 								<option value="<?php echo $d["id"] ?>">
 									<?php echo $d["nombre"] ?>

@@ -27,7 +27,7 @@ class Usuario extends BaseDatos
     public function iniciarSesion()
     {
         if ($this->cedula && $this->contrasena) {
-            $user = $this->obtenerUsuario();
+            $user = $this->obtenerPorId();
 
             if ($user && $user["contrasena"] == $this->contrasena) {
                 return true;
@@ -39,11 +39,10 @@ class Usuario extends BaseDatos
 
     public function insertar()
     {
-        if ($this->obtenerUsuario()) {
-            throw new Exception("Ya existe");
-        }
+        $this->validarIdNoExiste();
 
-        $stmt = $this->conexion()->prepare(
+        $pdo = $this->conexion();
+        $stmt = $pdo->prepare(
             "INSERT INTO {$this->tabla} (
                 cedula,
                 contrasena,
@@ -52,13 +51,13 @@ class Usuario extends BaseDatos
             VALUES (?, ?, ?)"
         );
         $stmt->execute([$this->cedula, $this->contrasena, $this->rol]);
+
+        return $this->cedula;
     }
 
     public function modificar()
     {
-        if (!$this->obtenerUsuario()) {
-            throw new Exception("El solicitante con la cedula proporcionada no existe.");
-        }
+        $this->validarIdExiste();
 
         $this->conexion()->query(
             "UPDATE {$this->tabla} SET 
@@ -73,33 +72,45 @@ class Usuario extends BaseDatos
 
     public function eliminar()
     {
-        if (!$this->obtenerUsuario()) {
-            throw new Exception("No existe");
-        }
+        $this->validarIdExiste();
 
         $this->conexion()->query(
             "DELETE FROM
                 {$this->tabla}
-            WHERE
-                cedula = '{$this->cedula}'"
+			WHERE
+				id = '{$this->cedula}'
+			"
         );
     }
 
     public function consultar()
     {
-        $stmt = $this->conexion()->query(
-            "SELECT *
-            FROM {$this->tabla}"
-        );
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla}");
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 
-    public function obtenerUsuario()
+    public function obtenerPorId()
     {
-        $stmt = $this->conexion()->query("SELECT * FROM {$this->tabla} WHERE cedula='{$this->cedula}'");
+        $stmt = $this->conexion()->prepare("SELECT * FROM {$this->tabla} WHERE cedula = ?");
+        $stmt->execute([$this->cedula]);
+
         $fila = $stmt->fetch(PDO::FETCH_ASSOC);
         return $fila;
+    }
+
+    private function validarIdExiste()
+    {
+        if (!$this->obtenerPorId()) {
+            throw new Exception("ID {$this->cedula} no existe");
+        }
+    }
+
+    private function validarIdNoExiste()
+    {
+        if ($this->obtenerPorId()) {
+            throw new Exception("ID {$this->cedula} ya existe.");
+        }
     }
 }
 

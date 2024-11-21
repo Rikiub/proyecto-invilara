@@ -42,7 +42,7 @@
 						<select class="form-select" name="cedula_director" required>
 							<?php foreach ($directores as $d): ?>
 								<option value=<?php echo $d["cedula"] ?>>
-									<?php echo $d["cedula"] ." - ". $d["nombre"] ?>
+									<?php echo $d["cedula"] . " - " . $d["nombre"] ?>
 								</option>
 							<?php endforeach ?>
 						</select>
@@ -59,11 +59,19 @@
 					<label class="form-label col fw-semibold">Correo
 						<input id="correo" class="form-control" type="email" name="correo" required />
 					</label>
-
 					<label class="form-label col fw-semibold">Teléfono
-						<input id="telefono" class="form-control" type="tel" name="telefono"
-							placeholder="Ej: 0412, 0416 o 0426" minlength="12" maxlength="12"
-							title=" Debe ser un número válido" required />
+						<div class="input-group">
+							<select id="telefono_codigo" class="input-group-text">
+								<option value="0412">0412</option>
+								<option value="0414">0414</option>
+								<option value="0416">0416</option>
+								<option value="0424">0424</option>
+								<option value="0426">0426</option>
+							</select>
+
+							<input id="telefono" name="telefono" class="form-control" type="tel" minlength="12"
+								maxlength="12" title="Debe ser un número válido" required />
+						</div>
 					</label>
 				</div>
 

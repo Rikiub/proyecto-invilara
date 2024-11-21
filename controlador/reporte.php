@@ -18,7 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_POST['comunidad'],
         $_POST['fecha_inicio'],
         $_POST["fecha_fin"],
-        null
+        $_POST["estado"],
+        $_POST["tipo_solicitud"],
+        $_POST["id_parroquia"],
     );
 
     // Generar HTML

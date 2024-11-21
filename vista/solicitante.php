@@ -33,27 +33,37 @@
 				<div class="row">
 					<label class="form-label col fw-semibold">
 						Cedula
-						<input data-id class="form-control" type="text" pattern="\d*" inputmode="numeric" minlength="7"
-							maxlength="8" name="cedula" required />
+						<input id="cedula" data-id class="form-control" type="text" pattern="\d*" inputmode="numeric"
+							minlength="7" maxlength="8" name="cedula" required />
+					</label>
+
+
+					<label class="form-label col fw-semibold">
+						Nombre
+						<input id="nombre" class="form-control" type="text" name="nombre" minlength="3" maxlength="50"
+							pattern="[A-Za-zÀ-ý ]+" title="Solo se aceptan letras" required />
 					</label>
 				</div>
 
 				<div class="row">
 					<label class="form-label col fw-semibold">
-						Nombre
-						<input class="form-control" type="text" name="nombre" minlength="3" maxlength="50"
-							pattern="[A-Za-zÀ-ý ]+" title="Solo se aceptan letras" required />
-					</label>
-
-					<label class="form-label col fw-semibold">
 						Correo
-						<input class="form-control" type="email" name="correo" required />
+						<input id="correo" class="form-control" type="email" name="correo" required />
 					</label>
 
-					<label class="form-label col fw-semibold">
-						Teléfono
-						<input class="form-control" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-							title="Ejemplo: 412-337-1891" name="telefono" required />
+					<label class="form-label col fw-semibold">Teléfono
+						<div class="input-group">
+							<select id="telefono_codigo" class="input-group-text">
+								<option value="0412">0412</option>
+								<option value="0414">0414</option>
+								<option value="0416">0416</option>
+								<option value="0424">0424</option>
+								<option value="0426">0426</option>
+							</select>
+
+							<input id="telefono" name="telefono" class="form-control" type="tel" minlength="12"
+								maxlength="12" title="Debe ser un número válido" required />
+						</div>
 					</label>
 				</div>
 

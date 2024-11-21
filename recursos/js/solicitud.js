@@ -45,6 +45,16 @@ if (TIPO_SOLICITUD === "1" || TIPO_SOLICITUD === "2") {
 
 if (TIPO_VISTA === "programado") {
 	TABLA.column(5).visible(false);
+
+	// Fijar estado
+	const estado = document.getElementById("estado");
+	estado.value = 1;
+
+	for (const option of estado.options) {
+		if (option.value !== estado.value) {
+			option.disabled = true;
+		}
+	}
 } else {
 	BOTON_MODIFICAR.addEventListener("click", () => {
 		// Habilitar opciones otra vez
@@ -62,12 +72,18 @@ if (TIPO_VISTA === "programado") {
 		setTimeout(() => {
 			for (const input of FORM_EDICION.elements) {
 				if (input.tagName === "SELECT") {
-					const value = input.value;
+					if (input.name === "estado") {
+						if (TIPO_VISTA === "ejecucion") {
+							input.value = 2;
+						} else if (TIPO_VISTA === "cerrado") {
+							input.value = 3;
+						}
+					}
 
 					if (input.name === "id_gerencia" && TIPO_VISTA === "ejecucion") {
 					} else {
 						for (const option of input.options) {
-							if (option.value !== value) {
+							if (option.value !== input.value) {
 								option.disabled = true;
 							}
 						}
@@ -104,6 +120,13 @@ if (TIPO_VISTA !== "programado") {
 BOTON_INSERTAR.addEventListener("click", () => {
 	const fecha = new Date().toISOString().split("T")[0];
 	FORM_EDICION.fecha.value = fecha;
+});
+
+// Eliminar al modificar
+FORM_EDICION.addEventListener("submit", () => {
+	if (TIPO_VISTA !== "programado") {
+		TABLA.row(".selected").remove().draw(false);
+	}
 });
 
 // Selector de solicitudes

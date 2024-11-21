@@ -6,10 +6,6 @@ export const BOTON_INSERTAR = document.getElementById("boton-insertar");
 export const BOTON_MODIFICAR = document.getElementById("boton-modificar");
 export const BOTON_ELIMINAR = document.getElementById("boton-eliminar");
 
-// Sintaxis basada en su propia documentación: https://getbootstrap.com/docs/5.3/components/modal/#via-javascript
-const MODAL_EDICION = new bootstrap.Modal("#modal-edicion");
-const MODAL_ELIMINACION = new bootstrap.Modal("#modal-eliminacion");
-
 // Interno
 export let TABLA;
 
@@ -17,6 +13,11 @@ export function iniciarCrud(rowId, columns, options = {}) {
 	// Tabla
 	TABLA = crearTabla(rowId, columns, options);
 	let ACCION;
+
+	// Modales
+	// Sintaxis basada en su propia documentación: https://getbootstrap.com/docs/5.3/components/modal/#via-javascript
+	const MODAL_EDICION = new bootstrap.Modal("#modal-edicion");
+	const MODAL_ELIMINACION = new bootstrap.Modal("#modal-eliminacion");
 
 	// Controlador de botones
 	desactivarBotones(true);
@@ -60,6 +61,7 @@ export function iniciarCrud(rowId, columns, options = {}) {
 				for (const key of Object.keys(datos)) {
 					if (key in FORM_EDICION) {
 						FORM_EDICION[key].value = datos[key];
+						FORM_EDICION[key].dispatchEvent(new Event("change"));
 					}
 				}
 			});
@@ -200,7 +202,14 @@ export function envioAjax(accion, datos, success, url = "") {
 		dataType: "json",
 		success: success,
 		error: (res) => {
-			const text = res.responseJSON.mensaje;
+			let text;
+
+			if (res.responseJSON) {
+				text = res.responseJSON.mensaje;
+			} else {
+				text = "El servidor devolvio un error.";
+			}
+
 			console.log(text);
 			alert(text);
 		},
