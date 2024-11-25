@@ -80,7 +80,7 @@
 								name="cedula_solicitante" required>
 								<?php foreach ($solicitantes as $d): ?>
 									<option value="<?php echo $d["cedula"] ?>">
-										<?php echo $d["cedula"]; ?>
+										<?php echo $d["cedula"] . " - " . $d["nombre"]; ?>
 									</option>
 								<?php endforeach ?>
 							</select>

@@ -32,7 +32,7 @@
             <form id="form-edicion" class="modal-body">
                 <div class="row">
                     <label class="form-label col fw-semibold">Cedula
-                        <input data-id class="form-control" type="text" pattern="\d*" inputmode="numeric" minlength="7"
+                        <input data-id class="form-control" type="text" pattern="\d*" inputmode="numeric" minlength="8"
                             maxlength="8" name="cedula" required />
                     </label>
                 </div>

@@ -15,7 +15,7 @@
             <div class="row">
                 <label class="form-label">Cedula
                     <input class="form-control" type="text" pattern="\d*" inputmode="numeric" name="cedula"
-                        title="Solo se permiten numeros" required>
+                        minlength="8" maxlength="8" title="Solo se permiten numeros" required>
                 </label>
             </div>
 

@@ -78,7 +78,7 @@ class Usuario extends BaseDatos
             "DELETE FROM
                 {$this->tabla}
 			WHERE
-				id = '{$this->cedula}'
+				cedula = '{$this->cedula}'
 			"
         );
     }
