@@ -6,15 +6,15 @@ $modelo = new Parroquia();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        $accion = $_POST["accion"] ?? null;
+        $accion = isset($_POST["accion"]) ? $_POST["accion"] : null;
         if (!$accion) {
             throw new Exception("Se necesita especificar una acción.");
         }
 
-        $id = $_POST["id"] ?? null;
+        $id = isset($_POST["id"]) ? $_POST["id"] : null;
         $modelo->set_id($id);
 
-        $municipio = $_POST["id_municipio"] ?? null;
+        $municipio = isset($_POST["id_municipio"]) ? $_POST["id_municipio"] : null;
         $modelo->set_id_municipio($municipio);
 
         $res["mensaje"] = "Exito";

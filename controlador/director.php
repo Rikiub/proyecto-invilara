@@ -6,12 +6,12 @@ $modelo = new Director();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	try {
-		$accion = $_POST["accion"] ?? null;
+		$accion = isset($_POST["accion"]) ? $_POST["accion"] : null;
 		if (!$accion) {
 			throw new Exception("Se necesita especificar una acción.");
 		}
 
-		$id = $_POST["cedula"] ?? $_POST["id"] ?? null;
+		$id = isset($_POST["cedula"]) ? $_POST["id"] : isset($_POST["id"]) && $_POST["id"];
 		$modelo->set_cedula($id);
 
 		$res["mensaje"] = "Exito";

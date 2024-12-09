@@ -46,12 +46,12 @@ $modelo->set_estado($id_estado);
 // Procesar POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        $accion = $_POST["accion"] ?? null;
+        $accion = isset($_POST["accion"]) ? $_POST["accion"] : null;
         if (!$accion) {
             throw new Exception("Se necesita especificar una acción.");
         }
 
-        $id = $_POST["id"] ?? null;
+        $id = isset($_POST["id"]) ? $_POST["id"] : null;
         $modelo->set_id($id);
 
         $res["mensaje"] = "Exito";
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $modelo->set_id_institucion($_POST['id_institucion']);
                 }
 
-                $modelo->set_id_gerencia($_POST['id_gerencia'] ?? null);
+                $modelo->set_id_gerencia(isset($_POST['id_gerencia']) ? $_POST['id_gerencia'] : null);
                 $modelo->set_id_comunidad($_POST['id_comunidad']);
                 $modelo->set_fecha($_POST['fecha']);
                 $modelo->set_problematica($_POST['problematica']);
