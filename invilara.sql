@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Nov 18, 2024 at 12:50 AM
--- Server version: 8.0.30
--- PHP Version: 8.1.10
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 21-03-2025 a las 21:08:17
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,23 +18,23 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `invilara`
+-- Base de datos: `invilara`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asignacion`
+-- Estructura de tabla para la tabla `asignacion`
 --
 
 CREATE TABLE `asignacion` (
-  `id` int NOT NULL,
-  `id_gerencia` int DEFAULT NULL,
-  `id_estado` int DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `id_gerencia` int(11) DEFAULT NULL,
+  `id_estado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `asignacion`
+-- Volcado de datos para la tabla `asignacion`
 --
 
 INSERT INTO `asignacion` (`id`, `id_gerencia`, `id_estado`) VALUES
@@ -96,51 +96,57 @@ INSERT INTO `asignacion` (`id`, `id_gerencia`, `id_estado`) VALUES
 (115, 1, 2),
 (116, NULL, 1),
 (117, NULL, 3),
-(118, NULL, 1);
+(118, NULL, 1),
+(119, 1, 3),
+(120, 1, 3),
+(121, 21, 3),
+(122, 21, 3),
+(123, 21, 3),
+(124, 1, 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comunidad`
+-- Estructura de tabla para la tabla `comunidad`
 --
 
 CREATE TABLE `comunidad` (
-  `id` int NOT NULL,
-  `id_parroquia` int DEFAULT NULL,
-  `tipo` varchar(30) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `nombre` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `direccion` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `representante` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `correo` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `telefono` varchar(14) COLLATE utf8mb4_general_ci NOT NULL,
-  `rif` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `ambito` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `id_parroquia` int(11) DEFAULT NULL,
+  `tipo` varchar(30) DEFAULT NULL,
+  `nombre` varchar(200) DEFAULT NULL,
+  `direccion` varchar(200) DEFAULT NULL,
+  `representante` varchar(100) DEFAULT NULL,
+  `correo` varchar(50) NOT NULL,
+  `telefono` varchar(14) NOT NULL,
+  `rif` varchar(20) DEFAULT NULL,
+  `ambito` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `comunidad`
+-- Volcado de datos para la tabla `comunidad`
 --
 
 INSERT INTO `comunidad` (`id`, `id_parroquia`, `tipo`, `nombre`, `direccion`, `representante`, `correo`, `telefono`, `rif`, `ambito`) VALUES
 (42, 38, 'Organización comunal', 'Parque Baradida', 'Carrera 7, calle 7', 'Carlos Mujicaz', 'hola@gmail.com', '325233263346', 'C-64364346-3', 'Es un parque.'),
-(43, 37, 'UBCH', 'Urbanización Nueva Paz', 'asfasfasfas', 'asgasgsagas', 'hola@gmail.com', '0414-3262362', 'E-36363266-5', 'ssagsgsag');
+(43, 37, 'UBCH', 'Urbanización Nueva Paz', 'Caracas', 'Yeah', 'hola@gmail.com', '0414-3262362', 'E-36363266-5', 'Venezuela');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `director`
+-- Estructura de tabla para la tabla `director`
 --
 
 CREATE TABLE `director` (
-  `cedula` int NOT NULL,
-  `direccion` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `nombre` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `telefono` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `correo` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `cedula` int(11) NOT NULL,
+  `direccion` varchar(200) DEFAULT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `correo` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `director`
+-- Volcado de datos para la tabla `director`
 --
 
 INSERT INTO `director` (`cedula`, `direccion`, `nombre`, `telefono`, `correo`) VALUES
@@ -151,18 +157,18 @@ INSERT INTO `director` (`cedula`, `direccion`, `nombre`, `telefono`, `correo`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gerencia`
+-- Estructura de tabla para la tabla `gerencia`
 --
 
 CREATE TABLE `gerencia` (
-  `id` int NOT NULL,
-  `cedula_gerente` int DEFAULT NULL,
-  `nombre` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `direccion` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `cedula_gerente` int(11) DEFAULT NULL,
+  `nombre` varchar(200) DEFAULT NULL,
+  `direccion` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `gerencia`
+-- Volcado de datos para la tabla `gerencia`
 --
 
 INSERT INTO `gerencia` (`id`, `cedula_gerente`, `nombre`, `direccion`) VALUES
@@ -172,19 +178,19 @@ INSERT INTO `gerencia` (`id`, `cedula_gerente`, `nombre`, `direccion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gerente`
+-- Estructura de tabla para la tabla `gerente`
 --
 
 CREATE TABLE `gerente` (
-  `cedula` int NOT NULL,
-  `telefono` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `correo` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `direccion` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `cedula` int(11) NOT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `correo` varchar(50) DEFAULT NULL,
+  `direccion` varchar(200) DEFAULT NULL,
+  `nombre` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `gerente`
+-- Volcado de datos para la tabla `gerente`
 --
 
 INSERT INTO `gerente` (`cedula`, `telefono`, `correo`, `direccion`, `nombre`) VALUES
@@ -193,39 +199,40 @@ INSERT INTO `gerente` (`cedula`, `telefono`, `correo`, `direccion`, `nombre`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `institucion`
+-- Estructura de tabla para la tabla `institucion`
 --
 
 CREATE TABLE `institucion` (
-  `id` int NOT NULL,
-  `cedula_director` int DEFAULT NULL,
-  `nombre` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `correo` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `telefono` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `direccion` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `cedula_director` int(11) DEFAULT NULL,
+  `nombre` varchar(200) DEFAULT NULL,
+  `correo` varchar(50) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `direccion` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `institucion`
+-- Volcado de datos para la tabla `institucion`
 --
 
 INSERT INTO `institucion` (`id`, `cedula_director`, `nombre`, `correo`, `telefono`, `direccion`) VALUES
 (1, 11222333, 'Bellas Artes', 'hola@gmail.com', '412-134-4364', 'Caracas'),
-(20, 30528058, 'Escuela', 'chua@gmail.com', '0426-7955615', 'morrocoy mi casa chuaaa');
+(20, 30528058, 'Escuela', 'chua@gmail.com', '0426-7955615', 'morrocoy mi casa chuaaa'),
+(21, 11222333, 'Roberto ', 'hola@gmail.com', '0414-3626231', 'asfasfgsa');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `municipio`
+-- Estructura de tabla para la tabla `municipio`
 --
 
 CREATE TABLE `municipio` (
-  `id` int NOT NULL,
-  `nombre` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `municipio`
+-- Volcado de datos para la tabla `municipio`
 --
 
 INSERT INTO `municipio` (`id`, `nombre`) VALUES
@@ -242,17 +249,17 @@ INSERT INTO `municipio` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parroquia`
+-- Estructura de tabla para la tabla `parroquia`
 --
 
 CREATE TABLE `parroquia` (
-  `id` int NOT NULL,
-  `id_municipio` int DEFAULT NULL,
-  `nombre` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `id_municipio` int(11) DEFAULT NULL,
+  `nombre` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `parroquia`
+-- Volcado de datos para la tabla `parroquia`
 --
 
 INSERT INTO `parroquia` (`id`, `id_municipio`, `nombre`) VALUES
@@ -268,19 +275,19 @@ INSERT INTO `parroquia` (`id`, `id_municipio`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `solicitante`
+-- Estructura de tabla para la tabla `solicitante`
 --
 
 CREATE TABLE `solicitante` (
-  `cedula` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `correo` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `telefono` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `direccion` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `cedula` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `correo` varchar(50) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `direccion` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `solicitante`
+-- Volcado de datos para la tabla `solicitante`
 --
 
 INSERT INTO `solicitante` (`cedula`, `nombre`, `correo`, `telefono`, `direccion`) VALUES
@@ -291,48 +298,45 @@ INSERT INTO `solicitante` (`cedula`, `nombre`, `correo`, `telefono`, `direccion`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `solicitud`
+-- Estructura de tabla para la tabla `solicitud`
 --
 
 CREATE TABLE `solicitud` (
-  `id` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
-  `id_comunidad` int DEFAULT NULL,
-  `id_asignacion` int DEFAULT NULL,
-  `id_institucion` int DEFAULT NULL,
-  `cedula_solicitante` int DEFAULT NULL,
-  `tipo_solicitud` int DEFAULT NULL,
+  `id` varchar(30) NOT NULL,
+  `id_comunidad` int(11) DEFAULT NULL,
+  `id_asignacion` int(11) DEFAULT NULL,
+  `id_institucion` int(11) DEFAULT NULL,
+  `cedula_solicitante` int(11) DEFAULT NULL,
+  `tipo_solicitud` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
-  `problematica` varchar(300) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `problematica` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `solicitud`
+-- Volcado de datos para la tabla `solicitud`
 --
 
 INSERT INTO `solicitud` (`id`, `id_comunidad`, `id_asignacion`, `id_institucion`, `cedula_solicitante`, `tipo_solicitud`, `fecha`, `problematica`) VALUES
-('78-po', NULL, 117, NULL, NULL, 1, '2019-12-07', 'Hay un problema :)'),
-('AD-347', NULL, 109, 1, 11985184, 3, '2024-11-04', 'XD'),
-('ASD-545754', NULL, 110, NULL, 11985184, 1, '2024-11-04', 'D'),
-('h67632sd', 43, 116, 1, NULL, 3, '2019-12-07', 'LENTES'),
-('INST-1251', NULL, 115, 1, 11985184, 1, '2024-11-05', 'Problema.'),
 ('LO-12464', 43, 113, NULL, 11985184, 1, '2024-11-04', 'Hay un problema.'),
-('LO-34634', NULL, 111, NULL, 12239200, 3, '2024-11-04', 'Hay un problema.'),
 ('LS-7523', 43, 89, NULL, 11985184, 2, '2024-10-16', 'Hay un problema.'),
-('XES-0909', NULL, 114, NULL, 11985184, 1, '2024-11-05', 'Hay un problema.');
+('SFA-236322623', 43, 119, 20, NULL, 3, '2025-03-21', 'Hola'),
+('TEST-123', 43, 122, NULL, 11985184, 1, '2025-03-21', 'Problema'),
+('TEST-5656', 42, 124, NULL, 12239200, 2, '2025-03-21', 'Problema'),
+('TEST-789', 42, 123, 20, NULL, 3, '2025-03-21', 'Problema');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipo_estado`
+-- Estructura de tabla para la tabla `tipo_estado`
 --
 
 CREATE TABLE `tipo_estado` (
-  `id` int NOT NULL,
-  `nombre` varchar(30) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `nombre` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tipo_estado`
+-- Volcado de datos para la tabla `tipo_estado`
 --
 
 INSERT INTO `tipo_estado` (`id`, `nombre`) VALUES
@@ -343,16 +347,16 @@ INSERT INTO `tipo_estado` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipo_solicitud`
+-- Estructura de tabla para la tabla `tipo_solicitud`
 --
 
 CREATE TABLE `tipo_solicitud` (
-  `id` int NOT NULL,
-  `nombre` varchar(30) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `nombre` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tipo_solicitud`
+-- Volcado de datos para la tabla `tipo_solicitud`
 --
 
 INSERT INTO `tipo_solicitud` (`id`, `nombre`) VALUES
@@ -363,29 +367,29 @@ INSERT INTO `tipo_solicitud` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuario`
+-- Estructura de tabla para la tabla `usuario`
 --
 
 CREATE TABLE `usuario` (
-  `cedula` int NOT NULL,
-  `contrasena` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `rol` int DEFAULT NULL
+  `cedula` int(11) NOT NULL,
+  `contrasena` varchar(100) DEFAULT NULL,
+  `rol` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`cedula`, `contrasena`, `rol`) VALUES
-(1, '  1  ', 2),
-(2222222, '222', 1);
+(11111111, '11111111', 2),
+(22222222, '22222222', 1);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `asignacion`
+-- Indices de la tabla `asignacion`
 --
 ALTER TABLE `asignacion`
   ADD PRIMARY KEY (`id`),
@@ -393,59 +397,59 @@ ALTER TABLE `asignacion`
   ADD KEY `asignacion_tipo_estado_FK` (`id_estado`);
 
 --
--- Indexes for table `comunidad`
+-- Indices de la tabla `comunidad`
 --
 ALTER TABLE `comunidad`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD KEY `comunidad_parroquia_FK` (`id_parroquia`);
 
 --
--- Indexes for table `director`
+-- Indices de la tabla `director`
 --
 ALTER TABLE `director`
   ADD PRIMARY KEY (`cedula`);
 
 --
--- Indexes for table `gerencia`
+-- Indices de la tabla `gerencia`
 --
 ALTER TABLE `gerencia`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD KEY `gerencia_gerente_FK` (`cedula_gerente`);
 
 --
--- Indexes for table `gerente`
+-- Indices de la tabla `gerente`
 --
 ALTER TABLE `gerente`
   ADD PRIMARY KEY (`cedula`);
 
 --
--- Indexes for table `institucion`
+-- Indices de la tabla `institucion`
 --
 ALTER TABLE `institucion`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD KEY `institucion_director_FK` (`cedula_director`);
 
 --
--- Indexes for table `municipio`
+-- Indices de la tabla `municipio`
 --
 ALTER TABLE `municipio`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `parroquia`
+-- Indices de la tabla `parroquia`
 --
 ALTER TABLE `parroquia`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD KEY `parroquia_municipio_FK` (`id_municipio`);
 
 --
--- Indexes for table `solicitante`
+-- Indices de la tabla `solicitante`
 --
 ALTER TABLE `solicitante`
   ADD PRIMARY KEY (`cedula`);
 
 --
--- Indexes for table `solicitud`
+-- Indices de la tabla `solicitud`
 --
 ALTER TABLE `solicitud`
   ADD PRIMARY KEY (`id`),
@@ -456,106 +460,106 @@ ALTER TABLE `solicitud`
   ADD KEY `solicitud_tipo_solicitud_FK` (`tipo_solicitud`);
 
 --
--- Indexes for table `tipo_estado`
+-- Indices de la tabla `tipo_estado`
 --
 ALTER TABLE `tipo_estado`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tipo_solicitud`
+-- Indices de la tabla `tipo_solicitud`
 --
 ALTER TABLE `tipo_solicitud`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `usuario`
+-- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`cedula`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `asignacion`
+-- AUTO_INCREMENT de la tabla `asignacion`
 --
 ALTER TABLE `asignacion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
--- AUTO_INCREMENT for table `comunidad`
+-- AUTO_INCREMENT de la tabla `comunidad`
 --
 ALTER TABLE `comunidad`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
--- AUTO_INCREMENT for table `gerencia`
+-- AUTO_INCREMENT de la tabla `gerencia`
 --
 ALTER TABLE `gerencia`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `institucion`
+-- AUTO_INCREMENT de la tabla `institucion`
 --
 ALTER TABLE `institucion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `municipio`
+-- AUTO_INCREMENT de la tabla `municipio`
 --
 ALTER TABLE `municipio`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
--- AUTO_INCREMENT for table `parroquia`
+-- AUTO_INCREMENT de la tabla `parroquia`
 --
 ALTER TABLE `parroquia`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT for table `tipo_solicitud`
+-- AUTO_INCREMENT de la tabla `tipo_solicitud`
 --
 ALTER TABLE `tipo_solicitud`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `asignacion`
+-- Filtros para la tabla `asignacion`
 --
 ALTER TABLE `asignacion`
   ADD CONSTRAINT `asignacion_gerencia_FK` FOREIGN KEY (`id_gerencia`) REFERENCES `gerencia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `asignacion_tipo_estado_FK` FOREIGN KEY (`id_estado`) REFERENCES `tipo_estado` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `comunidad`
+-- Filtros para la tabla `comunidad`
 --
 ALTER TABLE `comunidad`
   ADD CONSTRAINT `comunidad_parroquia_FK` FOREIGN KEY (`id_parroquia`) REFERENCES `parroquia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `gerencia`
+-- Filtros para la tabla `gerencia`
 --
 ALTER TABLE `gerencia`
   ADD CONSTRAINT `gerencia_gerente_FK` FOREIGN KEY (`cedula_gerente`) REFERENCES `gerente` (`cedula`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `institucion`
+-- Filtros para la tabla `institucion`
 --
 ALTER TABLE `institucion`
   ADD CONSTRAINT `institucion_director_FK` FOREIGN KEY (`cedula_director`) REFERENCES `director` (`cedula`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `parroquia`
+-- Filtros para la tabla `parroquia`
 --
 ALTER TABLE `parroquia`
   ADD CONSTRAINT `parroquia_municipio_FK` FOREIGN KEY (`id_municipio`) REFERENCES `municipio` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `solicitud`
+-- Filtros para la tabla `solicitud`
 --
 ALTER TABLE `solicitud`
   ADD CONSTRAINT `solicitud_asignacion_FK` FOREIGN KEY (`id_asignacion`) REFERENCES `asignacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,

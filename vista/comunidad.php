@@ -42,7 +42,6 @@
                 <div class="row">
                     <label class="form-label col fw-semibold">Tipo
                         <select class="form-select" name="tipo" required>
-                            <option disabled selected hidden>Seleccione una opcion</option>
                             <option>Organización comunal</option>
                             <option>Consejo Comunal</option>
                             <option>Comuna</option>

@@ -84,11 +84,6 @@ BOTON_MODIFICAR.addEventListener("click", () => {
 });
 
 // Validaciones
-document.getElementById("telefono_codigo").addEventListener("change", () => {
-	const tipo = document.getElementById("telefono_codigo").value;
-	document.getElementById("telefono").value = `${tipo}-`;
-});
-
 document.getElementById("rif").addEventListener("input", (event) => {
 	const input = event.target;
 

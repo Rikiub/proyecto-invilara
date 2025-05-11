@@ -1,4 +1,4 @@
-import { iniciarCrud, capitalizarTexto, envioAjax } from "./crud_dt.js";
+import { iniciarCrud, capitalizarTexto } from "./crud_dt.js";
 
 iniciarCrud("id", [
 	{ title: "Nombre", data: "nombre", render: capitalizarTexto },
@@ -23,10 +23,3 @@ iniciarCrud("id", [
 		data: "telefono",
 	},
 ]);
-
-// telefono
-document.getElementById("telefono_codigo").addEventListener("change", () => {
-	const tipo = document.getElementById("telefono_codigo").value;
-	document.getElementById("telefono").value = `${tipo}-`;
-});
-

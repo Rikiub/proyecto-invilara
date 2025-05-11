@@ -126,7 +126,9 @@ export function capitalizarTexto(texto) {
 	const formato = texto
 		.split(" ")
 		.map((palabra) => {
-			return palabra[0].toUpperCase() + palabra.slice(1);
+			if (palabra) {
+				return palabra[0].toUpperCase() + palabra.slice(1);
+			}
 		})
 		.join(" ");
 	return formato;

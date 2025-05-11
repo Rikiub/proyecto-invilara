@@ -33,7 +33,7 @@
 				<div class="row">
 					<label class="form-label col fw-semibold">Cedula
 						<input id="cedula" data-id class="form-control" type="text" pattern="\d*" inputmode="numeric"
-							name="cedula" required />
+							name="cedula" minlength="7" maxlength="8" required />
 					</label>
 					<label class="form-label col fw-semibold">Nombre
 						<input id="nombre" class="form-control" type="text" name="nombre" minlength="3" maxlength="50"

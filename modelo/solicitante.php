@@ -142,6 +142,10 @@ class Solicitante extends BaseDatos
 
 	private function validarNoDuplicado()
 	{
+		if ($this->obtenerPorId()) {
+			throw new Exception("La cedula {$this->cedula} ya existe.");
+		}
+
 		if ($this->obtenerPorNombre()) {
 			throw new Exception("Ya existe un dato con este nombre.");
 		}

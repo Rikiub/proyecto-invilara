@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Generar PDF
     $dompdf->loadHtml($html);
-    $dompdf->setPaper("A4", "landscape");
+    $dompdf->setPaper("b4", "landscape");
     $dompdf->render();
     $dompdf->stream("reporte_invilara.pdf", array("Attachment" => 0));
 } else {

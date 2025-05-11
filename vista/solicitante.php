@@ -37,7 +37,6 @@
 							minlength="7" maxlength="8" name="cedula" required />
 					</label>
 
-
 					<label class="form-label col fw-semibold">
 						Nombre
 						<input id="nombre" class="form-control" type="text" name="nombre" minlength="3" maxlength="50"

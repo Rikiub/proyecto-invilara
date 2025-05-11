@@ -102,14 +102,14 @@ class Usuario extends BaseDatos
     private function validarIdExiste()
     {
         if (!$this->obtenerPorId()) {
-            throw new Exception("ID {$this->cedula} no existe");
+            throw new Exception("La cedula {$this->cedula} no existe");
         }
     }
 
     private function validarIdNoExiste()
     {
         if ($this->obtenerPorId()) {
-            throw new Exception("ID {$this->cedula} ya existe.");
+            throw new Exception("La cedula {$this->cedula} ya existe.");
         }
     }
 }
